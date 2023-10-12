@@ -1,0 +1,199 @@
+"""
+-*- coding: utf-8 -*-
+
+@Author : Ricardo_PING
+@Time : 2023/10/12 20:01
+@File : NGCF.py
+@function :
+"""
+import numpy as np
+import torch
+import torch.nn.functional as F
+from torch.nn import Parameter
+from torch_geometric.nn.conv import MessagePassing
+import torch.nn as nn
+from torch_geometric.utils import degree
+
+from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
+
+
+class NGCFConv(MessagePassing):
+    def __init__(self, in_channels, out_channels, aggr='add', **kwargs):
+        super(NGCFConv, self).__init__(aggr='add', **kwargs)
+        self.aggr = aggr
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+
+        self.W1 = nn.Linear(in_channels, out_channels, bias=False)
+        self.W2 = nn.Linear(in_channels, out_channels, bias=False)
+        self.leaky_relu = nn.LeakyReLU(0.2)
+
+        # Weight initialization
+        nn.init.xavier_uniform_(self.W1.weight)
+        nn.init.xavier_uniform_(self.W2.weight)
+
+    def forward(self, x, edge_index):
+        edge_index = edge_index.long()
+        row, col = edge_index
+
+        # Compute normalization coefficient
+        deg = degree(row, x.size(0), dtype=x.dtype)
+        deg_inv_sqrt = deg.pow(-0.5)
+        norm = deg_inv_sqrt[row] * deg_inv_sqrt[col]
+
+        return self.propagate(edge_index, x=x, norm=norm, x_i=x[row], x_j=x[col])
+
+    def message(self, x_j, x_i, norm):
+        # Compute messages using the equations you provided
+        x1 = self.W1(x_j)
+        x2 = self.W2(x_j * x_i)  # Here we consider the interaction between user and item embeddings
+        out = x1 + x2
+
+        # Apply normalization
+        out = norm.view(-1, 1) * out
+
+        return out
+
+    def update(self, aggr_out):
+        # Apply activation function (leaky relu)
+        aggr_out = self.leaky_relu(aggr_out)
+
+        return aggr_out
+
+
+class NGCF(nn.Module):
+    def __init__(self, edge_index, num_user, num_item, aggr_mode,
+                 user_item_dict, reg_weight, dim_E, device, dropout):
+        super(NGCF, self).__init__()
+        # 传入的参数
+        self.result = None
+        self.device = device
+        self.num_user = num_user
+        self.num_item = num_item
+        self.aggr_mode = aggr_mode
+        self.user_item_dict = user_item_dict
+        self.reg_weight = reg_weight
+        self.dim_embedding = dim_E
+        self.message_dropout = dropout
+        self.node_dropout = dropout
+        # 转置并设置为无向图
+        self.edge_index = torch.tensor(edge_index).t().contiguous().to(self.device)  # [2, 188381]
+        self.edge_index = torch.cat((self.edge_index, self.edge_index[[1, 0]]), dim=1)  # [2, 376762]
+
+        # 自定义嵌入和参数
+        self.user_embedding = nn.Embedding(num_user, dim_E)
+        self.item_embedding = nn.Embedding(num_item, dim_E)
+        nn.init.xavier_uniform_(self.user_embedding.weight)
+        nn.init.xavier_uniform_(self.item_embedding.weight)
+
+        # 定义图卷积层
+        self.conv_embed_1 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
+        self.conv_embed_2 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
+        self.conv_embed_3 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
+
+    def forward(self):
+        x = torch.cat((self.user_embedding.weight, self.item_embedding.weight), dim=0)
+        x1 = self.conv_embed_1(x, self.edge_index)
+        x2 = self.conv_embed_2(x1, self.edge_index)
+        x3 = self.conv_embed_3(x2, self.edge_index)
+
+        # 平均
+        self.result = (x1 + x2 + x3) / 3
+
+        return self.result
+
+    def bpr_loss(self, users, pos_items, neg_items, embeddings):
+        # 获取用户、正向和负向项目的嵌入
+        user_embeddings = embeddings[users]
+        pos_item_embeddings = embeddings[self.num_user + pos_items]
+        neg_item_embeddings = embeddings[self.num_user + neg_items]
+
+        # 计算正向和负向项目的分数
+        pos_scores = torch.sum(user_embeddings * pos_item_embeddings, dim=1)
+        neg_scores = torch.sum(user_embeddings * neg_item_embeddings, dim=1)
+
+        # 计算 BPR 损失
+        loss = -torch.mean(torch.log(torch.sigmoid(pos_scores - neg_scores) + 1e-5))
+
+        return loss
+
+    def regularization_loss(self, users, pos_items, neg_items, embeddings):
+        # 计算正则化损失
+        user_embeddings = embeddings[users]
+        pos_item_embeddings = embeddings[self.num_user + pos_items]
+        neg_item_embeddings = embeddings[self.num_user + neg_items]
+        reg_loss = self.reg_weight * (
+                    torch.mean(user_embeddings ** 2) + torch.mean(pos_item_embeddings ** 2) + torch.mean(
+                neg_item_embeddings ** 2))
+
+        return reg_loss
+
+    def loss(self, users, pos_items, neg_items):
+        pos_items = pos_items - self.num_user
+        neg_items = neg_items - self.num_user
+        users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
+
+        embeddings = self.forward()
+
+        # 计算 BPR 损失和正则化损失
+        bpr_loss = self.bpr_loss(users, pos_items, neg_items, embeddings)
+        reg_loss = self.regularization_loss(users, pos_items, neg_items, embeddings)
+        total_loss = bpr_loss + reg_loss
+
+        return total_loss
+
+    def gene_ranklist(self, topk=50):
+        # step需要小于用户数量才能达到分批的效果不然会报错
+        # 用户嵌入和项目嵌入
+        user_tensor = self.result[:self.num_user].cpu()
+        item_tensor = self.result[self.num_user:self.num_user + self.num_item].cpu()
+
+        # 不同阶段的评估（例如训练、验证和测试）
+        all_index_of_rank_list = torch.LongTensor([])
+
+        # 生成评分矩阵
+        score_matrix = torch.matmul(user_tensor, item_tensor.t())
+
+        # 将历史交互设置为极小值
+        for row, col in self.user_item_dict.items():
+            col = torch.LongTensor(list(col)) - self.num_user
+            score_matrix[row][col] = 1e-6
+
+        # 选出每个用户的 top-k 个物品
+        _, index_of_rank_list_train = torch.topk(score_matrix, topk)
+        # 总的top-k列表
+        all_index_of_rank_list = torch.cat(
+            (all_index_of_rank_list, index_of_rank_list_train.cpu() + self.num_user),
+            dim=0)
+
+        # 返回三个推荐列表
+        return all_index_of_rank_list
+
+    def gene_metrics(self, val_data, rank_list, k_list):
+        # 初始化存储评估指标的字典
+        metrics = {k: {'precision': 0, 'recall': 0, 'ndcg': 0, 'hit_rate': 0, 'map': 0} for k in k_list}
+
+        for data in val_data:
+            user = data[0]
+            pos_items = data[1:]
+            ranked_items = rank_list[user].tolist()
+
+            # 对每个 k 值计算评估指标
+            for k in k_list:
+                metrics[k]['precision'] += precision_at_k(ranked_items, pos_items, k)
+                metrics[k]['recall'] += recall_at_k(ranked_items, pos_items, k)
+                metrics[k]['ndcg'] += ndcg_at_k(ranked_items, pos_items, k)
+                metrics[k]['hit_rate'] += hit_rate_at_k(ranked_items, pos_items, k)
+                metrics[k]['map'] += map_at_k(ranked_items, pos_items, k)
+
+        num_users = len(val_data)
+
+        # 计算评估指标的平均值
+        for k in k_list:
+            metrics[k]['precision'] /= num_users
+            metrics[k]['recall'] /= num_users
+            metrics[k]['ndcg'] /= num_users
+            metrics[k]['hit_rate'] /= num_users
+            metrics[k]['map'] /= num_users
+
+        return metrics
