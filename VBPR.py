@@ -91,7 +91,7 @@ class VBPR(nn.Module):
         # 预测用户对正样本物品和负样本物品的评分得分
         positive_scores, negative_scores = self.forward(users, pos_items, neg_items)
         # 计算BPR Loss
-        bpr_loss = -torch.mean(torch.log(torch.sigmoid(positive_scores - negative_scores)))
+        bpr_loss = -torch.mean(torch.log(torch.sigmoid(positive_scores - negative_scores) + 1e-5))
 
         # 计算BPR嵌入向量的L2正则化损失
         reg_loss = (self.user_embedding(users) ** 2).mean() + \

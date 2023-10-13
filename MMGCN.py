@@ -77,13 +77,6 @@ class GCN(torch.nn.Module):
         self.g_layer3 = nn.Linear(self.dim_id + self.dim_id, self.dim_id) if self.concate else nn.Linear(self.dim_id,
                                                                                                          self.dim_id)
 
-        # self.conv_embed_4 = BasicGCN(self.dim_id, self.dim_id, aggr=self.aggr_mode)
-        # nn.init.xavier_normal_(self.conv_embed_4.lin.weight)
-        # self.linear_layer4 = nn.Linear(self.dim_id, self.dim_id)
-        # nn.init.xavier_normal_(self.linear_layer4.weight)
-        # self.g_layer4 = nn.Linear(self.dim_id + self.dim_id, self.dim_id) if self.concate else nn.Linear(self.dim_id,
-        #                                                                                                  self.dim_id)
-
     def forward(self, features, id_embedding):
         temp_features = self.MLP(features) if self.dim_latent else features
 
@@ -107,12 +100,6 @@ class GCN(torch.nn.Module):
             self.linear_layer3(x))  # equation 5
         x = F.leaky_relu(self.g_layer3(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
             self.g_layer3(h) + u_hat)
-
-        # h = F.leaky_relu(self.conv_embed_4(x, self.edge_index))  # equation 1
-        # u_hat = F.leaky_relu(self.linear_layer4(x)) + id_embedding if self.has_id else F.leaky_relu(
-        #     self.linear_layer4(x))  # equation 5
-        # x = F.leaky_relu(self.g_layer4(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
-        #     self.g_layer4(h) + u_hat)
 
         return x
 

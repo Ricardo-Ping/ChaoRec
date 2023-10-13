@@ -1,4 +1,5 @@
 from BPR import BPRMF
+from LightGCN import LightGCN
 from NGCF import NGCF
 from VBPR import VBPR
 from arg_parser import parse_args
@@ -9,6 +10,7 @@ import Dataset
 from torch.utils.data import DataLoader
 from MMGCN import MMGCN
 from train_and_evaluate import train_and_evaluate
+from torchsummary import summary
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s', datefmt='%a %d %b %Y %H:%M:%S')
 
@@ -31,6 +33,7 @@ if __name__ == '__main__':
     epochs = args.num_epoch
     feature_embedding = args.feature_embed
     dropout = args.dropout
+    layer = args.layer
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = Dataset.data_load(
         args.data_path)
@@ -48,8 +51,17 @@ if __name__ == '__main__':
         model = VBPR(num_user, num_item, v_feat, dim_E, user_item_dict, device, weight_decay, feature_embedding)
     elif args.Model == 'NGCF':
         model = NGCF(train_data, num_user, num_item, aggr_mode,
-                     user_item_dict, weight_decay, dim_E, device, dropout)
+                     user_item_dict, weight_decay, dim_E, device, dropout, layer)
+    elif args.Model == 'LightGCN':
+        model = LightGCN(train_data, num_user, num_item, aggr_mode,
+                     user_item_dict, weight_decay, dim_E, device, dropout, layer)
     model.to(device)
+    for name, param in model.named_parameters():
+        print(f"Parameter name: {name}")
+        print(f"Parameter shape: {param.shape}")
+        print(f"Parameter requires_grad: {param.requires_grad}")
+        # print(f"Parameter data:\n{param.data}")
+        print("=" * 30)
 
     # 定义优化器
     optimizer = torch.optim.Adam([{'params': model.parameters(), 'lr': learning_rate}])

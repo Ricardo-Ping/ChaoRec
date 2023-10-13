@@ -2,10 +2,11 @@
 -*- coding: utf-8 -*-
 
 @Author : Ricardo_PING
-@Time : 2023/10/12 20:01
-@File : NGCF.py
+@Time : 2023/10/13 17:04
+@File : LightGCN.py
 @function :
 """
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -17,9 +18,9 @@ from torch_geometric.utils import degree, dropout_adj, add_self_loops
 from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
 
 
-class NGCFConv(MessagePassing):
+class LightGCNConv(MessagePassing):
     def __init__(self, in_channels, out_channels, isdrop, dropout, aggr='add', **kwargs):
-        super(NGCFConv, self).__init__(aggr='add', **kwargs)
+        super(LightGCNConv, self).__init__(aggr='add', **kwargs)
         self.drop = isdrop
         self.message_dropout = dropout
         self.node_dropout = dropout
@@ -27,29 +28,16 @@ class NGCFConv(MessagePassing):
         self.in_channels = in_channels
         self.out_channels = out_channels
 
-        self.W1 = nn.Linear(in_channels, out_channels, bias=False)
-        self.W2 = nn.Linear(in_channels, out_channels, bias=False)
-        self.leaky_relu = nn.LeakyReLU(0.2)
-
-        # Weight initialization
-        nn.init.xavier_uniform_(self.W1.weight)
-        nn.init.xavier_uniform_(self.W2.weight)
-
     def forward(self, x, edge_index):
 
         # 丢弃消息
         if self.drop == "message" or self.drop == "all" and self.message_dropout > 0:
             edge_index, _ = dropout_adj(edge_index, p=self.message_dropout)
 
-        # 丢弃节点
-        # if (self.drop == "node" or self.drop == "all") and self.node_dropout > 0:
-        #     mess_dropout_mask = nn.Dropout(self.node_dropout)
-        #     x = mess_dropout_mask(x)
-
         edge_index = edge_index.long()
 
         # 添加自循环
-        edge_index, _ = add_self_loops(edge_index, num_nodes=x.size(0))
+        # edge_index, _ = add_self_loops(edge_index, num_nodes=x.size(0))
         row, col = edge_index
 
         # Compute normalization coefficient
@@ -61,31 +49,25 @@ class NGCFConv(MessagePassing):
 
     def message(self, x_j, x_i, norm):
 
-        # 对 x_j 进行丢弃操作
+        # 对 x_j 进行节点丢弃操作
         if self.drop == "node" and self.message_dropout > 0:
             dropout_layer = nn.Dropout(self.message_dropout)
             x_j = dropout_layer(x_j)
 
-        x1 = self.W1(x_j)
-        x2 = self.W2(x_j * x_i)
-        out = x1 + x2
-
         # Apply normalization
-        out = norm.view(-1, 1) * out
+        out = norm.view(-1, 1) * x_j
 
         return out
 
     def update(self, aggr_out):
-        # Apply activation function (leaky relu)
-        aggr_out = self.leaky_relu(aggr_out)
 
         return aggr_out
 
 
-class NGCF(nn.Module):
+class LightGCN(nn.Module):
     def __init__(self, edge_index, num_user, num_item, aggr_mode,
                  user_item_dict, reg_weight, dim_E, device, dropout, n_layers):
-        super(NGCF, self).__init__()
+        super(LightGCN, self).__init__()
         # 传入的参数
         self.result = None
         self.device = device
@@ -97,7 +79,8 @@ class NGCF(nn.Module):
         self.dim_embedding = dim_E
         self.message_dropout = dropout
         self.node_dropout = dropout
-        self.drop = 'all'  # "message" , "node", "None", "all"
+        # LightGCN中不引用丢弃
+        self.drop = 'None'  # "message" , "node", "None", "all"
         # 转置并设置为无向图
         self.edge_index = torch.tensor(edge_index).t().contiguous().to(self.device)  # [2, 188381]
         self.edge_index = torch.cat((self.edge_index, self.edge_index[[1, 0]]), dim=1)  # [2, 376762]
@@ -109,29 +92,28 @@ class NGCF(nn.Module):
         nn.init.xavier_uniform_(self.item_embedding.weight)
 
         # 定义图卷积层
-        # self.conv_embed_1 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
-        # self.conv_embed_2 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
-        # self.conv_embed_3 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
-        # 定义图卷积层
-        self.conv_layers = nn.ModuleList([NGCFConv(self.dim_embedding, self.dim_embedding, self.drop, self.message_dropout, aggr=self.aggr_mode)
+        self.conv_layers = nn.ModuleList([LightGCNConv(self.dim_embedding, self.dim_embedding, self.drop, self.message_dropout, aggr=self.aggr_mode)
                                           for _ in range(n_layers)])
 
     def forward(self):
         embs = []
         x = torch.cat((self.user_embedding.weight, self.item_embedding.weight), dim=0)
-        embs.append(x)  # 第0层
-
-        # 丢弃节点
-        # if self.drop == "node" or self.drop == "all" and self.node_dropout > 0:
-        #     drop_mask = (torch.rand(x.size(0)) < self.node_dropout).float().to(x.device)
-        #     x = x * drop_mask.unsqueeze(1)
+        embs.append(x)  # 第 0 层
 
         for conv in self.conv_layers:
             x = conv(x, self.edge_index)
             embs.append(x)
 
-        # 平均
-        self.result = torch.sum(torch.stack(embs, dim=0), dim=0)
+        # 计算权重
+        num_layers = len(embs)
+        weights = [1.0 / num_layers] * num_layers
+
+        # 对每层的嵌入应用权重并相加
+        final_embeddings = torch.zeros_like(embs[0])
+        for i in range(num_layers):
+            final_embeddings += weights[i] * embs[i]
+
+        self.result = final_embeddings
 
         return self.result
 

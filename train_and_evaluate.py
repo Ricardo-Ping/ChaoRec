@@ -31,21 +31,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss
-    elif args.Model == "BPR":
-        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
-            optimizer.zero_grad()
-            loss = model.loss(users, pos_items, neg_items)
-            loss.backward()
-            optimizer.step()
-            sum_loss += loss.item()
-    elif args.Model == "VBPR":
-        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
-            optimizer.zero_grad()
-            loss = model.loss(users, pos_items, neg_items)
-            loss.backward()
-            optimizer.step()
-            sum_loss += loss.item()
-    elif args.Model == "NGCF":
+    elif args.Model == "BPR" or "VBPR" or "NGCF" or "LightGCN":
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
