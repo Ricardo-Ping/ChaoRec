@@ -68,7 +68,7 @@ class TrainingDataset(Dataset):
             if neg_item not in self.user_item_dict[user]:
                 break
         # (tensor([0, 0]), tensor([769, 328]))
-        if self.model_name == 'MMGCN':
+        if self.model_name == 'MMGCN' or 'GRCN':
             return torch.LongTensor([user, user]), torch.LongTensor([pos_item, neg_item])
         else:
             return [int(user), int(pos_item), int(neg_item)]

@@ -24,13 +24,13 @@ topk = args.topk
 def train(model, train_loader, optimizer):
     model.train()
     sum_loss = 0.0
-    if args.Model == "MMGCN":
+    if args.Model == "MMGCN" or "GRCN":
         for user_tensor, item_tensor in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(user_tensor, item_tensor)
             loss.backward()
             optimizer.step()
-            sum_loss += loss
+            sum_loss += loss.item()
     elif args.Model == "BPR" or "VBPR" or "NGCF" or "LightGCN":
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()

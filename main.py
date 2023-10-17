@@ -1,4 +1,5 @@
 from BPR import BPRMF
+from GRCN import GRCN
 from LightGCN import LightGCN
 from NGCF import NGCF
 from VBPR import VBPR
@@ -55,6 +56,9 @@ if __name__ == '__main__':
     elif args.Model == 'LightGCN':
         model = LightGCN(train_data, num_user, num_item, aggr_mode,
                      user_item_dict, weight_decay, dim_E, device, dropout, layer)
+    elif args.Model == 'GRCN':
+        model = GRCN(num_user, num_item, train_data, user_item_dict, weight_decay, v_feat, t_feat,
+                     dim_E, feature_embedding, dropout, device, aggr_mode)
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")

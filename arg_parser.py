@@ -12,7 +12,7 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='VBPR', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='GRCN', help='Model name')
     parser.add_argument('--data_path', nargs='?', default='yelp', help='Input data path.')
     # 超参数选择
     parser.add_argument('--lr', type=float, nargs='+', default=1e-3, help='Learning rates')
