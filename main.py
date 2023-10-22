@@ -1,17 +1,17 @@
-from BPR import BPRMF
-from GRCN import GRCN
-from LightGCN import LightGCN
-from NGCF import NGCF
-from VBPR import VBPR
+from Model.BPR import BPRMF
+from Model.DGCF import DGCF
+from Model.GRCN import GRCN
+from Model.LightGCN import LightGCN
+from Model.NGCF import NGCF
+from Model.VBPR import VBPR
 from arg_parser import parse_args
 from utils import setup_seed, gpu, get_local_time
 import torch
 import logging
-import Dataset
+import dataload
 from torch.utils.data import DataLoader
-from MMGCN import MMGCN
+from Model.MMGCN import MMGCN
 from train_and_evaluate import train_and_evaluate
-from torchsummary import summary
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s', datefmt='%a %d %b %Y %H:%M:%S')
 
@@ -35,10 +35,13 @@ if __name__ == '__main__':
     feature_embedding = args.feature_embed
     dropout = args.dropout
     layer = args.layer
+    corDecay = args.corDecay
+    n_factors = args.n_factors
+    n_iterations = args.n_iterations
     # 加载训练数据
-    train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = Dataset.data_load(
+    train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
         args.data_path)
-    train_dataset = Dataset.TrainingDataset(num_user, num_item, user_item_dict, train_data)
+    train_dataset = dataload.TrainingDataset(num_user, num_item, user_item_dict, train_data)
     train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=num_workers)
 
     # 定义模型
@@ -59,6 +62,9 @@ if __name__ == '__main__':
     elif args.Model == 'GRCN':
         model = GRCN(num_user, num_item, train_data, user_item_dict, weight_decay, v_feat, t_feat,
                      dim_E, feature_embedding, dropout, device, aggr_mode)
+    elif args.Model == 'DGCF':
+        model = DGCF(num_user, num_item, train_data, user_item_dict, weight_decay, corDecay, n_factors, n_iterations,
+                     layer, dim_E, device, aggr_mode)
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")

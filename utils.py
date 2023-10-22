@@ -68,3 +68,32 @@ class EarlyStopping:
             self.best_score = score
             self.best_metrics = metrics
             self.counter = 0
+
+
+# 计算两组嵌入向量之间的距离相关性
+def distance_correlation(X1, X2, device):
+    def _create_centered_distance(X):
+        r = torch.sum(torch.square(X), 1, keepdim=True)
+        D = torch.sqrt(torch.maximum(r - 2 * torch.matmul(X, X.transpose(1, 0)) + r.transpose(1, 0),
+                                     torch.tensor([0.0]).to(device)) + 1e-8)
+        D = D - torch.mean(D, dim=0, keepdim=True) - torch.mean(D, dim=1, keepdim=True) + torch.mean(D)
+        return D
+
+    def _create_distance_covariance(D1, D2):
+        n_samples = torch.tensor(D1.shape[0], dtype=torch.float32).to(device)
+        dcov = torch.sqrt(
+            torch.maximum(torch.sum(D1 * D2) / (n_samples * n_samples), torch.tensor([0.0]).to(device)) + 1e-8)
+        return dcov
+
+    X1 = X1.to(device)
+    X2 = X2.to(device)
+    D1 = _create_centered_distance(X1)
+    D2 = _create_centered_distance(X2)
+
+    dcov_12 = _create_distance_covariance(D1, D2)
+    dcov_11 = _create_distance_covariance(D1, D1)
+    dcov_22 = _create_distance_covariance(D2, D2)
+
+    dcor = dcov_12 / (torch.sqrt(torch.max(dcov_11 * dcov_22, torch.tensor([0.0]).to(device))) + 1e-10)
+    dcor = dcor.squeeze()  # 将形状为 [1] 的张量转换为标量
+    return dcor
