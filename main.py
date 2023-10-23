@@ -1,6 +1,7 @@
 from Model.BPR import BPRMF
 from Model.DGCF import DGCF
 from Model.GRCN import GRCN
+from Model.LATTICE import LATTICE
 from Model.LightGCN import LightGCN
 from Model.NGCF import NGCF
 from Model.VBPR import VBPR
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     dim_E = args.dim_E
     learning_rate = args.lr
     epochs = args.num_epoch
-    feature_embedding = args.feature_embed
+    feature_embedding = args.feature_embed # 特征嵌入
     dropout = args.dropout
     layer = args.layer
     corDecay = args.corDecay
@@ -65,6 +66,9 @@ if __name__ == '__main__':
     elif args.Model == 'DGCF':
         model = DGCF(num_user, num_item, train_data, user_item_dict, weight_decay, corDecay, n_factors, n_iterations,
                      layer, dim_E, device, aggr_mode)
+    elif args.Model == 'LATTICE':
+        model = LATTICE(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, v_feat, t_feat,
+                     layer, device, aggr_mode)
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")

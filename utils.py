@@ -13,6 +13,8 @@ import numpy as np
 import random
 import logging
 
+from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -97,3 +99,34 @@ def distance_correlation(X1, X2, device):
     dcor = dcov_12 / (torch.sqrt(torch.max(dcov_11 * dcov_22, torch.tensor([0.0]).to(device))) + 1e-10)
     dcor = dcor.squeeze()  # 将形状为 [1] 的张量转换为标量
     return dcor
+
+
+# 生成评价指标
+def gene_metrics(val_data, rank_list, k_list):
+    # 初始化存储评估指标的字典
+    metrics = {k: {'precision': 0, 'recall': 0, 'ndcg': 0, 'hit_rate': 0, 'map': 0} for k in k_list}
+
+    for data in val_data:
+        user = data[0]
+        pos_items = data[1:]
+        ranked_items = rank_list[user].tolist()
+
+        # 对每个 k 值计算评估指标
+        for k in k_list:
+            metrics[k]['precision'] += precision_at_k(ranked_items, pos_items, k)
+            metrics[k]['recall'] += recall_at_k(ranked_items, pos_items, k)
+            metrics[k]['ndcg'] += ndcg_at_k(ranked_items, pos_items, k)
+            metrics[k]['hit_rate'] += hit_rate_at_k(ranked_items, pos_items, k)
+            metrics[k]['map'] += map_at_k(ranked_items, pos_items, k)
+
+    num_users = len(val_data)
+
+    # 计算评估指标的平均值
+    for k in k_list:
+        metrics[k]['precision'] /= num_users
+        metrics[k]['recall'] /= num_users
+        metrics[k]['ndcg'] /= num_users
+        metrics[k]['hit_rate'] /= num_users
+        metrics[k]['map'] /= num_users
+
+    return metrics

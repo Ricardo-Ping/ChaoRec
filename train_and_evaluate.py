@@ -10,7 +10,7 @@ import time
 import logging
 import torch
 from tqdm import tqdm
-from utils import EarlyStopping
+from utils import EarlyStopping, gene_metrics
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s",
                     level=logging.INFO)
@@ -38,13 +38,22 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
+    elif args.Model in ["LATTICE"]:
+        build_item_graph = True
+        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
+            optimizer.zero_grad()
+            loss = model.loss(users, pos_items, neg_items, build_item_graph=build_item_graph)
+            build_item_graph = False
+            loss.backward()
+            optimizer.step()
+            sum_loss += loss.item()
     return sum_loss
 
 
 def evaluate(model, data, ranklist, topk):
     model.eval()
     with torch.no_grad():
-        metrics = model.gene_metrics(data, ranklist, topk)
+        metrics = gene_metrics(data, ranklist, topk)
     return metrics
 
 

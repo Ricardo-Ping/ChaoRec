@@ -68,8 +68,8 @@ class DGCF(torch.nn.Module):
         assert self.dim_E % self.n_factors == 0
 
         # 转置
-        self.edge_index_clone = torch.tensor(edge_index).t().contiguous().to(self.device)  # [2, 188381]
-        self.edge_index = torch.cat((self.edge_index_clone, self.edge_index_clone[[1, 0]]), dim=1)  # [2, 376762]
+        self.edge_index_clone = torch.tensor(edge_index).t().contiguous().to(self.device)
+        self.edge_index = torch.cat((self.edge_index_clone, self.edge_index_clone[[1, 0]]), dim=1)
 
         # 初始化得分矩阵 S 等式6 反映k个意图的分数
         self.S = torch.ones((self.n_factors, self.edge_index_clone.shape[1]), dtype=torch.float32).to(self.device)
@@ -236,32 +236,3 @@ class DGCF(torch.nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
-
-    def gene_metrics(self, val_data, rank_list, k_list):
-        # 初始化存储评估指标的字典
-        metrics = {k: {'precision': 0, 'recall': 0, 'ndcg': 0, 'hit_rate': 0, 'map': 0} for k in k_list}
-
-        for data in val_data:
-            user = data[0]
-            pos_items = data[1:]
-            ranked_items = rank_list[user].tolist()
-
-            # 对每个 k 值计算评估指标
-            for k in k_list:
-                metrics[k]['precision'] += precision_at_k(ranked_items, pos_items, k)
-                metrics[k]['recall'] += recall_at_k(ranked_items, pos_items, k)
-                metrics[k]['ndcg'] += ndcg_at_k(ranked_items, pos_items, k)
-                metrics[k]['hit_rate'] += hit_rate_at_k(ranked_items, pos_items, k)
-                metrics[k]['map'] += map_at_k(ranked_items, pos_items, k)
-
-        num_users = len(val_data)
-
-        # 计算评估指标的平均值
-        for k in k_list:
-            metrics[k]['precision'] /= num_users
-            metrics[k]['recall'] /= num_users
-            metrics[k]['ndcg'] /= num_users
-            metrics[k]['hit_rate'] /= num_users
-            metrics[k]['map'] /= num_users
-
-        return metrics
