@@ -57,3 +57,31 @@ class BasicGCN(MessagePassing):
 
     def __repr__(self):
         return '{}({},{})'.format(self.__class__.__name__, self.in_channels, self.out_channels)
+
+
+#  ================按照LightGCN的图卷积=======================
+class GCNConv(MessagePassing):
+    def __init__(self, in_channels, out_channels, aggr='add', **kwargs):
+        super(GCNConv, self).__init__(aggr='add', **kwargs)
+        self.aggr = aggr
+
+    def forward(self, x, edge_index):
+        edge_index = edge_index.long()
+
+        row, col = edge_index
+
+        # Compute normalization coefficient
+        deg = degree(row, x.size(0), dtype=x.dtype)
+        deg_inv_sqrt = deg.pow(-0.5)
+        norm = deg_inv_sqrt[row] * deg_inv_sqrt[col]
+
+        return self.propagate(edge_index, x=x, norm=norm)
+
+    def message(self, x_j, norm):
+        # Apply normalization
+        out = norm.view(-1, 1) * x_j
+
+        return out
+
+    def update(self, aggr_out):
+        return aggr_out
