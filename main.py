@@ -1,3 +1,4 @@
+from Model.BM3 import BM3
 from Model.BPR import BPRMF
 from Model.DGCF import DGCF
 from Model.DualGNN import DualGNN
@@ -71,7 +72,11 @@ if __name__ == '__main__':
         model = LATTICE(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, v_feat, t_feat,
                      layer, device, aggr_mode)
     elif args.Model == 'DualGNN':
-        model = DualGNN(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, dim_E, feature_embedding, weight_decay, device)
+        model = DualGNN(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, dim_E, feature_embedding,
+                        weight_decay, device)
+    elif args.Model == 'BM3':
+        model = BM3(num_user, num_item, train_data, user_item_dict, aggr_mode, v_feat, t_feat, weight_decay, dim_E,
+                    feature_embedding, dropout, layer, device)
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")

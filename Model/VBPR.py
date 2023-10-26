@@ -8,8 +8,6 @@
 """
 import torch
 import torch.nn as nn
-
-from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
 import os
 os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 

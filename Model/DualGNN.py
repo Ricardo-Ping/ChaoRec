@@ -12,18 +12,49 @@ import numpy as np
 import torch
 from torch import nn
 import torch.nn.functional as F
-from torch_geometric.utils import scatter
+from torch_geometric.nn import MessagePassing
+from torch_geometric.utils import degree, remove_self_loops
 
-from BasicGCN import GCNConv
 from arg_parser import parse_args
 
 args = parse_args()
 
 
+class Base_gcn(MessagePassing):
+    def __init__(self, in_channels, out_channels, normalize=True, bias=True, aggr='add', **kwargs):
+        super(Base_gcn, self).__init__(aggr=aggr, **kwargs)
+        self.aggr = aggr
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+
+    def forward(self, x, edge_index, size=None):
+        if size is None:
+            edge_index, _ = remove_self_loops(edge_index)
+        # edge_index, _ = add_self_loops(edge_index, num_nodes=x.size(0))
+        x = x.unsqueeze(-1) if x.dim() == 1 else x
+        return self.propagate(edge_index, size=(x.size(0), x.size(0)), x=x)
+
+    def message(self, x_j, edge_index, size):
+        if self.aggr == 'add':
+            # pdb.set_trace()
+            row, col = edge_index
+            deg = degree(row, size[0], dtype=x_j.dtype)
+            deg_inv_sqrt = deg.pow(-0.5)
+            norm = deg_inv_sqrt[row] * deg_inv_sqrt[col]
+            return norm.view(-1, 1) * x_j
+        return x_j
+
+    def update(self, aggr_out):
+        return aggr_out
+
+    def __repr(self):
+        return '{}({},{})'.format(self.__class__.__name__, self.in_channels, self.out_channels)
+
+
 # 单模态图卷积模块
 class GCN(torch.nn.Module):
     def __init__(self, num_user, num_item, dim_latent, feat_embed_dim, aggr_mode,
-                 device):
+                 device, feat_size):
         super(GCN, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
@@ -37,11 +68,11 @@ class GCN(torch.nn.Module):
             torch.empty(num_user, self.dim_feat, dtype=torch.float32, device=self.device, requires_grad=True))
         nn.init.xavier_normal_(self.preference)
 
-        self.MLP = nn.Linear(1024, 4 * self.dim_latent)
+        self.MLP = nn.Linear(feat_size, 4 * self.dim_latent)
         self.MLP_1 = nn.Linear(4 * self.dim_latent, self.dim_latent)
 
         # 图卷积
-        self.conv_embed_1 = GCNConv(self.dim_latent, self.dim_latent, aggr=self.aggr_mode)
+        self.conv_embed_1 = Base_gcn(self.dim_latent, self.dim_latent, aggr=self.aggr_mode)
 
     def forward(self, edge_index, features):
         # 将特征进行降维
@@ -80,7 +111,7 @@ class User_Graph_sample(torch.nn.Module):
 
 class DualGNN(torch.nn.Module):
     def __init__(self, v_feat, t_feat, edge_index, user_item_dict, num_user, num_item, aggr_mode,
-                dim_E, feature_embedding, reg_weight, device):
+                 dim_E, feature_embedding, reg_weight, device):
         super(DualGNN, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
@@ -120,9 +151,9 @@ class DualGNN(torch.nn.Module):
 
         # 创建单模态图卷积
         self.v_gcn = GCN(num_user, num_item, self.dim_latent, self.dim_feat, self.aggr_mode,
-                         self.device)
+                         self.device, v_feat.size(1))
         self.t_gcn = GCN(num_user, num_item, self.dim_latent, self.dim_feat, self.aggr_mode,
-                         self.device)
+                         self.device, t_feat.size(1))
 
         # 初始化用户图采样
         self.user_graph = User_Graph_sample(num_user, 'add', self.dim_latent)
@@ -136,11 +167,10 @@ class DualGNN(torch.nn.Module):
         dir_str = './Data/' + dataset
         self.user_graph_dict = np.load(os.path.join(dir_str, 'user_graph_dict.npy'),
                                        allow_pickle=True).item()
-        self.pre_epoch_processing()
 
     # 初始化权重
     def init_weight(self, num_entities):
-        weight = nn.Parameter(torch.randn(num_entities, 2, 1))
+        weight = nn.Parameter(torch.randn(num_entities, 2, 1), requires_grad=True)
         nn.init.xavier_normal_(weight)
         weight.data = F.softmax(weight.data, dim=1)
         return weight
@@ -286,13 +316,16 @@ class DualGNN(torch.nn.Module):
         self.user_weight_matrix = self.user_weight_matrix.to(self.device)
 
     def topk_sample(self, k):
+        # 保存每个用户的最多k个相邻用户的索引
         user_graph_index = []
         count_num = 0
-        user_weight_matrix = torch.zeros(len(self.user_graph_dict), k)
-        tasike = []
-        for i in range(k):
-            tasike.append(0)
-        for i in range(len(self.user_graph_dict)):
+        # 保存与每个用户的邻居相关的权重
+        # user_weight_matrix = torch.zeros(len(self.user_graph_dict), k)
+        user_weight_matrix = torch.zeros(self.num_user, k)
+        # 如果某个用户没有足够的邻居，这个列表将被用作占位符
+        tasike = [0] * k
+
+        for i in range(self.num_user):
             if len(self.user_graph_dict[i][0]) < k:
                 count_num += 1
                 if len(self.user_graph_dict[i][0]) == 0:
@@ -301,7 +334,6 @@ class DualGNN(torch.nn.Module):
                 user_graph_sample = self.user_graph_dict[i][0][:k]
                 user_graph_weight = self.user_graph_dict[i][1][:k]
                 while len(user_graph_sample) < k:
-                    # pdb.set_trace()
                     rand_index = np.random.randint(0, len(user_graph_sample))
                     user_graph_sample.append(user_graph_sample[rand_index])
                     user_graph_weight.append(user_graph_weight[rand_index])
@@ -311,7 +343,6 @@ class DualGNN(torch.nn.Module):
                     user_weight_matrix[i] = F.softmax(torch.tensor(user_graph_weight), dim=0)  # softmax
                 if self.user_aggr_mode == 'mean':
                     user_weight_matrix[i] = torch.ones(k) / k  # mean
-
                 continue
             user_graph_sample = self.user_graph_dict[i][0][:k]
             user_graph_weight = self.user_graph_dict[i][1][:k]
