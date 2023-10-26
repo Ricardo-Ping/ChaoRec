@@ -1,6 +1,7 @@
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
 from Model.DGCF import DGCF
+from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
 from Model.GRCN import GRCN
 from Model.LATTICE import LATTICE
@@ -77,6 +78,9 @@ if __name__ == '__main__':
     elif args.Model == 'BM3':
         model = BM3(num_user, num_item, train_data, user_item_dict, aggr_mode, v_feat, t_feat, weight_decay, dim_E,
                     feature_embedding, dropout, layer, device)
+    elif args.Model == 'DRAGON':
+        model = DRAGON(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, layer, dim_E, feature_embedding,
+                        weight_decay, device)
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")
