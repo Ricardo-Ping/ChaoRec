@@ -110,39 +110,6 @@ class User_Graph_sample(torch.nn.Module):
         return u_pre
 
 
-# 构建 K-最近邻（K-NN）的邻居关系，用于创建加权邻接矩阵。 等式2
-def build_knn_neighbourhood(adj, topk):
-    # 找到每行（每个节点）的 top-k 最大值和对应的索引
-    knn_val, knn_ind = torch.topk(adj, topk, dim=-1)
-    # 创建一个新的加权邻接矩阵，只保留每个节点的 top-k 邻居的权重，其他权重设为 0
-    weighted_adjacency_matrix = (torch.zeros_like(adj)).scatter_(-1, knn_ind, knn_val)
-    # # shape(num_item, num_item)，每一行只有 topk个非零元素，表示对应节点的 topk 个最近邻节点的连接权重
-    return weighted_adjacency_matrix
-
-
-# 计算归一化的 Laplacian 矩阵 等式3
-def compute_normalized_laplacian(adj):
-    # 计算每个节点的度（与其他节点的连接权重之和）
-    rowsum = torch.sum(adj, -1)
-    # 归一化
-    d_inv_sqrt = torch.pow(rowsum, -0.5)
-    d_inv_sqrt[torch.isinf(d_inv_sqrt)] = 0.
-    d_mat_inv_sqrt = torch.diagflat(d_inv_sqrt)
-    L_norm = torch.mm(torch.mm(d_mat_inv_sqrt, adj), d_mat_inv_sqrt)
-    return L_norm
-
-
-# 计算特征的相似性矩阵 等式1
-def build_sim(context):
-    # 传入的context是多模态嵌入
-    # 计算每个节点特征的 L2 范数，并将每个特征向量除以其 L2 范数，得到单位向量
-    context_norm = context.div(torch.norm(context, p=2, dim=-1, keepdim=True))
-    # 计算余弦相似度
-    sim = torch.mm(context_norm, context_norm.transpose(1, 0))
-    # shape(num_item, num_item)  相当于邻接矩阵
-    return sim
-
-
 class DRAGON(torch.nn.Module):
     def __init__(self, v_feat, t_feat, edge_index, user_item_dict, num_user, num_item, aggr_mode, n_layers,
                  dim_E, feature_embedding, reg_weight, device):
@@ -156,16 +123,14 @@ class DRAGON(torch.nn.Module):
         self.reg_weight = reg_weight
         self.user_item_dict = user_item_dict
         self.v_rep = None
-        self.a_rep = None
         self.t_rep = None
         self.device = device
         self.v_preference = None
-        self.a_preference = None
         self.t_preference = None
         self.dim_latent = dim_E
         self.dim_feat = feature_embedding
         self.user_aggr_mode = 'softmax'
-        self.n_layers = 2
+        self.n_layers = n_layers
         self.mm_image_weight = 0.5
 
         self.MLP_v = nn.Linear(self.dim_latent, self.dim_latent, bias=False)
@@ -188,10 +153,12 @@ class DRAGON(torch.nn.Module):
 
         # ======================异构图部分==============================
         # 创建单模态图卷积
-        self.v_gcn = GCN(num_user, num_item, self.dim_latent, self.dim_feat, self.aggr_mode,
-                         self.device, v_feat.size(1))
-        self.t_gcn = GCN(num_user, num_item, self.dim_latent, self.dim_feat, self.aggr_mode,
-                         self.device, t_feat.size(1))
+        if self.v_feat is not None:
+            self.v_gcn = GCN(num_user, num_item, self.dim_latent, self.dim_feat, self.aggr_mode,
+                             self.device, v_feat.size(1))
+        if self.t_feat is not None:
+            self.t_gcn = GCN(num_user, num_item, self.dim_latent, self.dim_feat, self.aggr_mode,
+                             self.device, t_feat.size(1))
 
         # ========================用户同构图============================
         # 初始化用户图采样
@@ -205,22 +172,23 @@ class DRAGON(torch.nn.Module):
 
         # =======================项目同构图===============================
         # 多模态嵌入
-        self.image_embedding = nn.Embedding.from_pretrained(v_feat, freeze=False)
-        self.text_embedding = nn.Embedding.from_pretrained(t_feat, freeze=False)
+        self.image_embedding = nn.Embedding.from_pretrained(self.v_feat, freeze=False)
+        self.text_embedding = nn.Embedding.from_pretrained(self.t_feat, freeze=False)
         # 初始化用于转换图像和文本特征的线性层。
-        self.image_trs = nn.Linear(v_feat.shape[1], self.dim_feat)
-        self.text_trs = nn.Linear(t_feat.shape[1], self.dim_feat)
+        self.image_trs = nn.Linear(self.v_feat.shape[1], self.dim_feat)
+        self.text_trs = nn.Linear(self.t_feat.shape[1], self.dim_feat)
 
         # 处理图像和文本邻接矩阵，基于初始的图像和文本嵌入权重
-        image_adj = build_sim(self.image_embedding.weight.detach())
-        image_adj = build_knn_neighbourhood(image_adj, topk=self.item_topk)
-        image_adj = compute_normalized_laplacian(image_adj)
-
-        text_adj = build_sim(self.text_embedding.weight.detach())
-        text_adj = build_knn_neighbourhood(text_adj, topk=self.item_topk)
-        text_adj = compute_normalized_laplacian(text_adj)
-
-        self.mm_adj = self.mm_image_weight * image_adj + (1.0 - self.mm_image_weight) * text_adj
+        if self.v_feat is not None:
+            indices, image_adj = self.get_knn_adj_mat(self.image_embedding.weight.detach())
+            self.mm_adj = image_adj
+        if self.t_feat is not None:
+            indices, text_adj = self.get_knn_adj_mat(self.text_embedding.weight.detach())
+            self.mm_adj = text_adj
+        if self.v_feat is not None and self.t_feat is not None:
+            self.mm_adj = self.mm_image_weight * image_adj + (1.0 - self.mm_image_weight) * text_adj
+            del text_adj
+            del image_adj
 
         # 最终的嵌入
         self.result = nn.Parameter(
@@ -232,6 +200,74 @@ class DRAGON(torch.nn.Module):
         nn.init.xavier_normal_(weight)
         weight.data = F.softmax(weight.data, dim=1)
         return weight
+
+    def get_knn_adj_mat(self, mm_embeddings):
+        context_norm = mm_embeddings.div(torch.norm(mm_embeddings, p=2, dim=-1, keepdim=True))
+        sim = torch.mm(context_norm, context_norm.transpose(1, 0))
+        _, knn_ind = torch.topk(sim, self.item_topk, dim=-1)
+        adj_size = sim.size()
+        del sim
+        # construct sparse adj
+        indices0 = torch.arange(knn_ind.shape[0]).to(self.device)
+        indices0 = torch.unsqueeze(indices0, 1)
+        indices0 = indices0.expand(-1, self.item_topk)
+        indices = torch.stack((torch.flatten(indices0), torch.flatten(knn_ind)), 0)
+        # norm
+        return indices, self.compute_normalized_laplacian(indices, adj_size)
+
+    def compute_normalized_laplacian(self, indices, adj_size):
+        adj = torch.sparse_coo_tensor(indices, torch.ones_like(indices[0]), adj_size)
+        row_sum = 1e-7 + torch.sparse.sum(adj, -1).to_dense()
+        r_inv_sqrt = torch.pow(row_sum, -0.5)
+        rows_inv_sqrt = r_inv_sqrt[indices[0]]
+        cols_inv_sqrt = r_inv_sqrt[indices[1]]
+        values = rows_inv_sqrt * cols_inv_sqrt
+        return torch.sparse_coo_tensor(indices, values, adj_size)
+
+    def pre_epoch_processing(self):
+        self.epoch_user_graph, self.user_weight_matrix = self.topk_sample(self.user_topk)
+        self.user_weight_matrix = self.user_weight_matrix.to(self.device)
+
+    def topk_sample(self, k):
+        # 保存每个用户的最多k个相邻用户的索引
+        user_graph_index = []
+        count_num = 0
+        # 保存与每个用户的邻居相关的权重
+        # user_weight_matrix = torch.zeros(len(self.user_graph_dict), k)
+        user_weight_matrix = torch.zeros(self.num_user, k)
+        # 如果某个用户没有足够的邻居，这个列表将被用作占位符
+        tasike = [0] * k
+
+        for i in range(self.num_user):
+            if len(self.user_graph_dict[i][0]) < k:
+                count_num += 1
+                if len(self.user_graph_dict[i][0]) == 0:
+                    user_graph_index.append(tasike)
+                    continue
+                user_graph_sample = self.user_graph_dict[i][0][:k]
+                user_graph_weight = self.user_graph_dict[i][1][:k]
+                while len(user_graph_sample) < k:
+                    rand_index = np.random.randint(0, len(user_graph_sample))
+                    user_graph_sample.append(user_graph_sample[rand_index])
+                    user_graph_weight.append(user_graph_weight[rand_index])
+                user_graph_index.append(user_graph_sample)
+
+                if self.user_aggr_mode == 'softmax':
+                    user_weight_matrix[i] = F.softmax(torch.tensor(user_graph_weight), dim=0)  # softmax
+                if self.user_aggr_mode == 'mean':
+                    user_weight_matrix[i] = torch.ones(k) / k  # mean
+                continue
+            user_graph_sample = self.user_graph_dict[i][0][:k]
+            user_graph_weight = self.user_graph_dict[i][1][:k]
+
+            if self.user_aggr_mode == 'softmax':
+                user_weight_matrix[i] = F.softmax(torch.tensor(user_graph_weight), dim=0)  # softmax
+            if self.user_aggr_mode == 'mean':
+                user_weight_matrix[i] = torch.ones(k) / k  # mean
+
+            user_graph_index.append(user_graph_sample)
+
+        return user_graph_index, user_weight_matrix
 
     def forward(self):
 
@@ -345,48 +381,3 @@ class DRAGON(torch.nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
-
-    def pre_epoch_processing(self):
-        self.epoch_user_graph, self.user_weight_matrix = self.topk_sample(self.user_topk)
-        self.user_weight_matrix = self.user_weight_matrix.to(self.device)
-
-    def topk_sample(self, k):
-        # 保存每个用户的最多k个相邻用户的索引
-        user_graph_index = []
-        count_num = 0
-        # 保存与每个用户的邻居相关的权重
-        # user_weight_matrix = torch.zeros(len(self.user_graph_dict), k)
-        user_weight_matrix = torch.zeros(self.num_user, k)
-        # 如果某个用户没有足够的邻居，这个列表将被用作占位符
-        tasike = [0] * k
-
-        for i in range(self.num_user):
-            if len(self.user_graph_dict[i][0]) < k:
-                count_num += 1
-                if len(self.user_graph_dict[i][0]) == 0:
-                    user_graph_index.append(tasike)
-                    continue
-                user_graph_sample = self.user_graph_dict[i][0][:k]
-                user_graph_weight = self.user_graph_dict[i][1][:k]
-                while len(user_graph_sample) < k:
-                    rand_index = np.random.randint(0, len(user_graph_sample))
-                    user_graph_sample.append(user_graph_sample[rand_index])
-                    user_graph_weight.append(user_graph_weight[rand_index])
-                user_graph_index.append(user_graph_sample)
-
-                if self.user_aggr_mode == 'softmax':
-                    user_weight_matrix[i] = F.softmax(torch.tensor(user_graph_weight), dim=0)  # softmax
-                if self.user_aggr_mode == 'mean':
-                    user_weight_matrix[i] = torch.ones(k) / k  # mean
-                continue
-            user_graph_sample = self.user_graph_dict[i][0][:k]
-            user_graph_weight = self.user_graph_dict[i][1][:k]
-
-            if self.user_aggr_mode == 'softmax':
-                user_weight_matrix[i] = F.softmax(torch.tensor(user_graph_weight), dim=0)  # softmax
-            if self.user_aggr_mode == 'mean':
-                user_weight_matrix[i] = torch.ones(k) / k  # mean
-
-            user_graph_index.append(user_graph_sample)
-
-        return user_graph_index, user_weight_matrix

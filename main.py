@@ -3,6 +3,7 @@ from Model.BPR import BPRMF
 from Model.DGCF import DGCF
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
+from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
 from Model.LATTICE import LATTICE
 from Model.LightGCN import LightGCN
@@ -81,6 +82,10 @@ if __name__ == '__main__':
     elif args.Model == 'DRAGON':
         model = DRAGON(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, layer, dim_E, feature_embedding,
                         weight_decay, device)
+    elif args.Model == 'FREEDOM':
+        model = FREEDOM(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, dropout,
+                        v_feat, t_feat, layer, device)
+
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")
