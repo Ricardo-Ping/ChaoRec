@@ -31,7 +31,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM"]:
+    elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec"]:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)

@@ -8,6 +8,7 @@ from Model.GRCN import GRCN
 from Model.LATTICE import LATTICE
 from Model.LightGCN import LightGCN
 from Model.NGCF import NGCF
+from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
 from arg_parser import parse_args
 from utils import setup_seed, gpu, get_local_time
@@ -85,6 +86,8 @@ if __name__ == '__main__':
     elif args.Model == 'FREEDOM':
         model = FREEDOM(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, dropout,
                         v_feat, t_feat, layer, device)
+    elif args.Model == 'SLMRec':
+        model = SLMRec(v_feat, t_feat, train_data, num_user, num_item, layer, user_item_dict, dim_E, device)
 
     model.to(device)
     for name, param in model.named_parameters():
