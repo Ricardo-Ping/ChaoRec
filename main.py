@@ -7,6 +7,7 @@ from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
 from Model.LATTICE import LATTICE
 from Model.LightGCN import LightGCN
+from Model.MGAT import MGAT
 from Model.NGCF import NGCF
 from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
@@ -88,6 +89,8 @@ if __name__ == '__main__':
                         v_feat, t_feat, layer, device)
     elif args.Model == 'SLMRec':
         model = SLMRec(v_feat, t_feat, train_data, num_user, num_item, layer, user_item_dict, dim_E, device)
+    elif args.Model == 'MGAT':
+        model = MGAT(v_feat, t_feat, train_data, num_user, num_item, user_item_dict, dim_E, weight_decay, device)
 
     model.to(device)
     for name, param in model.named_parameters():

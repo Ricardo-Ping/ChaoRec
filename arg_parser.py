@@ -19,7 +19,7 @@ def parse_args():
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
     parser.add_argument('--batch_size', type=int, default=1024, help='Batch size.')
     parser.add_argument('--aggr_mode', default='add', help='Aggregation mode.')
-    parser.add_argument('--weight_decay', type=float, nargs='+', default=1e-3, help='Weight decay.')
+    parser.add_argument('--weight_decay', type=float, nargs='+', default=1e-1, help='Weight decay.')
     parser.add_argument('--dim_E', type=int, default=64, help='Embedding dimension.')
     parser.add_argument('--num_epoch', type=int, default=1000, help='Epoch number.')
     parser.add_argument('--dropout', type=float, default=0.2, help='Dropout.')
