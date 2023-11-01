@@ -8,6 +8,7 @@ from Model.GRCN import GRCN
 from Model.LATTICE import LATTICE
 from Model.LightGCN import LightGCN
 from Model.MGAT import MGAT
+from Model.MICRO import MICRO
 from Model.NGCF import NGCF
 from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     dim_E = args.dim_E
     learning_rate = args.lr
     epochs = args.num_epoch
-    feature_embedding = args.feature_embed # 特征嵌入
+    feature_embedding = args.feature_embed  # 特征嵌入
     dropout = args.dropout
     layer = args.layer
     corDecay = args.corDecay
@@ -65,7 +66,7 @@ if __name__ == '__main__':
                      user_item_dict, weight_decay, dim_E, device, dropout, layer)
     elif args.Model == 'LightGCN':
         model = LightGCN(train_data, num_user, num_item, aggr_mode,
-                     user_item_dict, weight_decay, dim_E, device, dropout, layer)
+                         user_item_dict, weight_decay, dim_E, device, dropout, layer)
     elif args.Model == 'GRCN':
         model = GRCN(num_user, num_item, train_data, user_item_dict, weight_decay, v_feat, t_feat,
                      dim_E, feature_embedding, dropout, device, aggr_mode)
@@ -73,17 +74,20 @@ if __name__ == '__main__':
         model = DGCF(num_user, num_item, train_data, user_item_dict, weight_decay, corDecay, n_factors, n_iterations,
                      layer, dim_E, device, aggr_mode)
     elif args.Model == 'LATTICE':
-        model = LATTICE(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, v_feat, t_feat,
-                     layer, device, aggr_mode)
+        model = LATTICE(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, v_feat,
+                        t_feat,
+                        layer, device, aggr_mode)
     elif args.Model == 'DualGNN':
-        model = DualGNN(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, dim_E, feature_embedding,
+        model = DualGNN(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, dim_E,
+                        feature_embedding,
                         weight_decay, device)
     elif args.Model == 'BM3':
         model = BM3(num_user, num_item, train_data, user_item_dict, aggr_mode, v_feat, t_feat, weight_decay, dim_E,
                     feature_embedding, dropout, layer, device)
     elif args.Model == 'DRAGON':
-        model = DRAGON(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, layer, dim_E, feature_embedding,
-                        weight_decay, device)
+        model = DRAGON(v_feat, t_feat, train_data, user_item_dict, num_user, num_item, aggr_mode, layer, dim_E,
+                       feature_embedding,
+                       weight_decay, device)
     elif args.Model == 'FREEDOM':
         model = FREEDOM(num_user, num_item, train_data, user_item_dict, dim_E, feature_embedding, weight_decay, dropout,
                         v_feat, t_feat, layer, device)
@@ -91,7 +95,9 @@ if __name__ == '__main__':
         model = SLMRec(v_feat, t_feat, train_data, num_user, num_item, layer, user_item_dict, dim_E, device)
     elif args.Model == 'MGAT':
         model = MGAT(v_feat, t_feat, train_data, num_user, num_item, user_item_dict, dim_E, weight_decay, device)
-
+    elif args.Model == 'MICRO':
+        model = MICRO(num_user, num_item, train_data, user_item_dict, dim_E, v_feat, t_feat, layer, aggr_mode,
+                      weight_decay, device)
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")

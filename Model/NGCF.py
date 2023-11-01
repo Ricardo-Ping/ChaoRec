@@ -109,10 +109,6 @@ class NGCF(nn.Module):
         nn.init.xavier_uniform_(self.item_embedding.weight)
 
         # 定义图卷积层
-        # self.conv_embed_1 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
-        # self.conv_embed_2 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
-        # self.conv_embed_3 = NGCFConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
-        # 定义图卷积层
         self.conv_layers = nn.ModuleList([NGCFConv(self.dim_embedding, self.dim_embedding, self.drop, self.message_dropout, aggr=self.aggr_mode)
                                           for _ in range(n_layers)])
 
@@ -120,11 +116,6 @@ class NGCF(nn.Module):
         embs = []
         x = torch.cat((self.user_embedding.weight, self.item_embedding.weight), dim=0)
         embs.append(x)  # 第0层
-
-        # 丢弃节点
-        # if self.drop == "node" or self.drop == "all" and self.node_dropout > 0:
-        #     drop_mask = (torch.rand(x.size(0)) < self.node_dropout).float().to(x.device)
-        #     x = x * drop_mask.unsqueeze(1)
 
         for conv in self.conv_layers:
             x = conv(x, self.edge_index)

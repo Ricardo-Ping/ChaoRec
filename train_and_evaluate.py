@@ -38,7 +38,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ["LATTICE"]:
+    elif args.Model in ["LATTICE", "MICRO"]:
         build_item_graph = True
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
