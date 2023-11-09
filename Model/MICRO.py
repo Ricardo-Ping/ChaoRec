@@ -114,7 +114,7 @@ class MICRO(nn.Module):
         self.topk = 10
         self.sparse = True
         self.norm_type = 'sym'  # 对称归一化
-        self.tau = 0.1  # 温度系数
+        self.tau = 0.5  # 温度系数
         self.lambda_coeff = 0.9
         self.n_ii_layer = 2
         self.device = device

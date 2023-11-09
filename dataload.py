@@ -21,26 +21,24 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 def data_load(dataset, has_v=True, has_t=True):
     num_user = None
     num_item = None
-    v_feat = None
-    t_feat = None
-    train_data = None
-    val_data = None
-    test_data = None
-    user_item_dict = None
     dir_str = './Data/' + dataset
 
+    train_data = np.load(dir_str + '/train.npy', allow_pickle=True)  # (len of train, 2)
+    # 源代码中验证集和测试集是一个list
+    val_data = np.load(dir_str + '/val.npy', allow_pickle=True)
+    test_data = np.load(dir_str + '/test.npy', allow_pickle=True)
+    user_item_dict = np.load(dir_str + '/user_item_dict.npy', allow_pickle=True).item()
+    v_feat = np.load(dir_str + '/v_feat.npy', allow_pickle=True) if has_v else None
+    t_feat = np.load(dir_str + '/t_feat.npy', allow_pickle=True) if has_t else None
+    v_feat = torch.tensor(v_feat, dtype=torch.float).cuda() if has_v else None
+    t_feat = torch.tensor(t_feat, dtype=torch.float).cuda() if has_t else None
+
     if dataset == 'yelp':
-        train_data = np.load(dir_str + '/train.npy', allow_pickle=True)  # (len of train, 2)
-        # 源代码中验证集和测试集是一个list
-        val_data = np.load(dir_str + '/val.npy', allow_pickle=True)
-        test_data = np.load(dir_str + '/test.npy', allow_pickle=True)
-        user_item_dict = np.load(dir_str + '/user_item_dict.npy', allow_pickle=True).item()
-        v_feat = np.load(dir_str + '/v_feat.npy', allow_pickle=True) if has_v else None
-        t_feat = np.load(dir_str + '/t_feat.npy', allow_pickle=True) if has_t else None
-        v_feat = torch.tensor(v_feat, dtype=torch.float).cuda() if has_v else None
-        t_feat = torch.tensor(t_feat, dtype=torch.float).cuda() if has_t else None
         num_user = 28974
         num_item = 1922
+    if dataset == 'clothing':
+        num_user = 18072
+        num_item = 11384
 
     logging.info('==============加载数据集================')
     logging.info('The number of users: %d', num_user)

@@ -98,6 +98,7 @@ if __name__ == '__main__':
     elif args.Model == 'MICRO':
         model = MICRO(num_user, num_item, train_data, user_item_dict, dim_E, v_feat, t_feat, layer, aggr_mode,
                       weight_decay, device)
+
     model.to(device)
     for name, param in model.named_parameters():
         print(f"Parameter name: {name}")
