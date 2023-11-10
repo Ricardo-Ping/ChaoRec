@@ -3,7 +3,7 @@
 
 @Author : Ricardo_PING
 @Time : 2023/10/23 22:08
-@File : DualGNN.py
+@File : DualGNN.yaml.py
 @function :
 """
 import os
@@ -110,12 +110,12 @@ class User_Graph_sample(torch.nn.Module):
 
 
 class DualGNN(torch.nn.Module):
-    def __init__(self, v_feat, t_feat, edge_index, user_item_dict, num_user, num_item, aggr_mode,
-                 dim_E, feature_embedding, reg_weight, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, feature_embedding,
+                 reg_weight, uu_topk, aggr_mode, device):
         super(DualGNN, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
-        self.k = 40  # 用户-用户图的topk
+        self.k = uu_topk  # 用户-用户图的topk
         self.aggr_mode = aggr_mode
         self.construction = 'weighted_sum'  # 多模态信息聚合方法
         self.reg_weight = reg_weight

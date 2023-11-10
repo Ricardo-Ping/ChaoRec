@@ -12,8 +12,8 @@ import torch.nn.functional as F
 
 
 class FREEDOM(nn.Module):
-    def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, dim_feat, reg_weight, dropout, v_feat,
-                 t_feat, n_layers, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, dim_feat, reg_weight,
+                 dropout, n_layers, mm_layers, ii_topk, mm_image_weight, device):
         super(FREEDOM, self).__init__()
         self.result = None
         self.num_user = num_user
@@ -24,10 +24,10 @@ class FREEDOM(nn.Module):
         self.dim_feat = dim_feat
         self.reg_weight = reg_weight
         self.n_layers = n_layers  # 用户-项目交互图层数
-        self.mm_layers = 1  # 项目-项目多模态交互图层数
-        self.mm_image_weight = 0.5
+        self.mm_layers = mm_layers  # 项目-项目多模态交互图层数
+        self.mm_image_weight = mm_image_weight
         self.dropout = dropout  # Freedom的dropout率很高 0.9
-        self.knn_k = 10  # 项目-项目图的k个最近邻
+        self.knn_k = ii_topk  # 项目-项目图的k个最近邻
         self.v_feat = v_feat
         self.t_feat = t_feat
         self.device = device

@@ -14,8 +14,8 @@ from torch.nn.functional import cosine_similarity
 
 
 class BM3(nn.Module):
-    def __init__(self, num_user, num_item, edge_index, user_item_dict, aggr_mode, v_feat, t_feat,
-                 reg_weight, dim_E, feat_E, dropout, n_layers, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, feat_E,
+                 reg_weight, dropout, n_layers, cl_weight, aggr_mode, device):
         super(BM3, self).__init__()
         # 传入的参数
         self.result = None
@@ -27,7 +27,7 @@ class BM3(nn.Module):
         self.reg_weight = reg_weight
         self.dim_E = dim_E  # id嵌入维度
         self.feat_E = feat_E  # 特征嵌入维度
-        self.cl_weight = 2.0  # 对比损失权重
+        self.cl_weight = cl_weight  # 对比损失权重
         self.dropout = dropout
         self.n_layers = n_layers
 

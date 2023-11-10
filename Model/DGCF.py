@@ -47,8 +47,8 @@ class DGCFConv(MessagePassing):
 
 
 class DGCF(torch.nn.Module):
-    def __init__(self, num_user, num_item, edge_index, user_item_dict, reg_weight, corDecay,
-                 n_factors, n_iterations, n_layers, dim_E, device, aggr_mode):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, reg_weight, corDecay,
+                 n_factors, n_iterations, n_layers, aggr_mode, device):
         super(DGCF, self).__init__()
         self.result = None
         self.num_user = num_user

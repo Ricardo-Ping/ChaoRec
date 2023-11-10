@@ -141,11 +141,8 @@ class CGCN(torch.nn.Module):
 
 
 class GRCN(torch.nn.Module):
-    def __init__(self, num_user, num_item, edge_index, user_item_dict, reg_weight,
-                 v_feat, t_feat,
-                 dim_E, dim_C, dropout, device,
-                 aggr_mode, weight_mode='confid', fusion_mode='concat',
-                 num_routing=3,pruning='True'):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, dim_C, reg_weight,
+                 dropout, num_routing, aggr_mode, device, weight_mode='confid', fusion_mode='concat', pruning='True'):
         super(GRCN, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
@@ -252,7 +249,7 @@ class GRCN(torch.nn.Module):
         loss = -torch.mean(torch.log(torch.sigmoid(torch.matmul(score, self.weight))))
 
         reg_embedding_loss = (
-                    self.id_gcn.id_embedding[user_tensor] ** 2 + self.id_gcn.id_embedding[item_tensor] ** 2).mean()
+                self.id_gcn.id_embedding[user_tensor] ** 2 + self.id_gcn.id_embedding[item_tensor] ** 2).mean()
         reg_content_loss = torch.zeros(1).cuda()
         if self.v_feat is not None:
             reg_content_loss = reg_content_loss + (self.v_gcn.preference[user_tensor] ** 2).mean()
@@ -290,7 +287,7 @@ class GRCN(torch.nn.Module):
             for row, col in self.user_item_dict.items():
                 if start_index <= row < end_index:
                     row -= start_index
-                    col = torch.LongTensor(list(col))- self.num_user
+                    col = torch.LongTensor(list(col)) - self.num_user
                     score_matrix[row][col] = 1e-5
 
             # 选出每个用户的 top-k 个物品
@@ -309,4 +306,3 @@ class GRCN(torch.nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
-

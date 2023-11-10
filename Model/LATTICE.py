@@ -77,21 +77,21 @@ def build_sim(context):
 
 
 class LATTICE(nn.Module):
-    def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, feat_embed_dim, reg_weight, v_feat,
-                 t_feat, n_layers, device, aggr_mode):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, feat_embed_dim,
+                 reg_weight,  n_layers, mm_layers, ii_topk, aggr_mode, lambda_coeff, device):
         super(LATTICE, self).__init__()
         self.result = None
         self.num_user = num_user
         self.num_item = num_item
         self.dim_E = dim_E
         self.weight_size = [64, 64]  # [64,64]
-        self.n_ui_layers = len(self.weight_size)  # 2
+        # self.n_ui_layers = len(self.weight_size)  # 2
         self.weight_size = [self.dim_E] + self.weight_size
-        self.topk = 10  # 多模态图的topk
+        self.topk = ii_topk  # 多模态图的topk
         self.device = device
         self.feat_embed_dim = feat_embed_dim
-        self.lambda_coeff = 0.9  # 跳跃连接系数
-        self.mm_layers = 2  # 多模态图卷积层数
+        self.lambda_coeff = lambda_coeff  # 跳跃连接系数
+        self.mm_layers = mm_layers  # 多模态图卷积层数
         self.n_layers = n_layers  # 交互图卷积层数
         dropout_list = [0.1] * n_layers
         self.edge_index = edge_index

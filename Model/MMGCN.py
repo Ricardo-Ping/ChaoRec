@@ -105,11 +105,10 @@ class GCN(torch.nn.Module):
 
 
 class MMGCN(torch.nn.Module):
-    def __init__(self, v_feat, t_feat, edge_index, num_user, num_item, aggr_mode,
-                 concate, has_id, user_item_dict, reg_weight, dim_x, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_x, reg_weight, aggr_mode,
+                 concate, has_id, device):
         super(MMGCN, self).__init__()
         self.device = device
-        # self.batch_size = batch_size
         self.num_user = num_user
         self.num_item = num_item
         self.aggr_mode = aggr_mode

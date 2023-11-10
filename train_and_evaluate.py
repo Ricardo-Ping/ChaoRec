@@ -12,9 +12,6 @@ import torch
 from tqdm import tqdm
 from utils import EarlyStopping, gene_metrics
 
-logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s",
-                    level=logging.INFO)
-logger = logging.getLogger()
 from arg_parser import parse_args
 
 args = parse_args()
@@ -31,7 +28,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec", "MGAT"]:
+    elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN.yaml", "BM3", "DRAGON", "FREEDOM", "SLMRec", "MGAT"]:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -62,11 +59,11 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
     early_stopping = EarlyStopping(patience=20, verbose=True)
 
     for epoch in range(epochs):
-        if args.Model in ["DualGNN", "DRAGON", "FREEDOM"]:
+        if args.Model in ["DualGNN.yaml", "DRAGON", "FREEDOM"]:
             # 在每个epoch开始时，调用pre_epoch_processing方法
             model.pre_epoch_processing()
         loss = train(model, train_loader, optimizer)
-        logger.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
+        logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
         rank_list = model.gene_ranklist()
         val_metrics = evaluate(model, val_data, rank_list, topk)
         test_metrics = evaluate(model, test_data, rank_list, topk)
@@ -95,3 +92,5 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
     for k, metrics in best_metrics.items():
         metrics_strs = [f"{metric}: {value:.5f}" for metric, value in metrics.items()]
         logging.info(f"{k}: {' | '.join(metrics_strs)}")
+
+    return early_stopping.best_metrics

@@ -19,21 +19,13 @@ from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_a
 
 
 class LightGCNConv(MessagePassing):
-    def __init__(self, in_channels, out_channels, isdrop, dropout, aggr='add', **kwargs):
+    def __init__(self, in_channels, out_channels, aggr='add', **kwargs):
         super(LightGCNConv, self).__init__(aggr='add', **kwargs)
-        self.drop = isdrop
-        self.message_dropout = dropout
-        self.node_dropout = dropout
         self.aggr = aggr
         self.in_channels = in_channels
         self.out_channels = out_channels
 
     def forward(self, x, edge_index):
-
-        # 丢弃消息
-        if self.drop == "message" or self.drop == "all" and self.message_dropout > 0:
-            edge_index, _ = dropout_adj(edge_index, p=self.message_dropout)
-
         edge_index = edge_index.long()
 
         # 添加自循环
@@ -45,28 +37,18 @@ class LightGCNConv(MessagePassing):
         deg_inv_sqrt = deg.pow(-0.5)
         norm = deg_inv_sqrt[row] * deg_inv_sqrt[col]
 
-        return self.propagate(edge_index, x=x, norm=norm, x_i=x[row], x_j=x[col])
+        return self.propagate(edge_index, x=x, norm=norm)
 
-    def message(self, x_j, x_i, norm):
-
-        # 对 x_j 进行节点丢弃操作
-        if self.drop == "node" and self.message_dropout > 0:
-            dropout_layer = nn.Dropout(self.message_dropout)
-            x_j = dropout_layer(x_j)
-
-        # Apply normalization
-        out = norm.view(-1, 1) * x_j
-
-        return out
+    def message(self, x_j, norm):
+        return norm.view(-1, 1) * x_j
 
     def update(self, aggr_out):
-
         return aggr_out
 
 
 class LightGCN(nn.Module):
-    def __init__(self, edge_index, num_user, num_item, aggr_mode,
-                 user_item_dict, reg_weight, dim_E, device, dropout, n_layers):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, reg_weight, n_layers, aggr_mode,
+                 device):
         super(LightGCN, self).__init__()
         # 传入的参数
         self.result = None
@@ -77,10 +59,6 @@ class LightGCN(nn.Module):
         self.user_item_dict = user_item_dict
         self.reg_weight = reg_weight
         self.dim_embedding = dim_E
-        self.message_dropout = dropout
-        self.node_dropout = dropout
-        # LightGCN中不引用丢弃
-        self.drop = 'None'  # "message" , "node", "None", "all"
         # 转置并设置为无向图
         self.edge_index = torch.tensor(edge_index).t().contiguous().to(self.device)  # [2, 188381]
         self.edge_index = torch.cat((self.edge_index, self.edge_index[[1, 0]]), dim=1)  # [2, 376762]
@@ -92,7 +70,7 @@ class LightGCN(nn.Module):
         nn.init.xavier_uniform_(self.item_embedding.weight)
 
         # 定义图卷积层
-        self.conv_layers = nn.ModuleList([LightGCNConv(self.dim_embedding, self.dim_embedding, self.drop, self.message_dropout, aggr=self.aggr_mode)
+        self.conv_layers = nn.ModuleList([LightGCNConv(self.dim_embedding, self.dim_embedding, aggr=self.aggr_mode)
                                           for _ in range(n_layers)])
 
     def forward(self):
@@ -138,8 +116,8 @@ class LightGCN(nn.Module):
         pos_item_embeddings = embeddings[self.num_user + pos_items]
         neg_item_embeddings = embeddings[self.num_user + neg_items]
         reg_loss = self.reg_weight * (
-                    torch.mean(user_embeddings ** 2) + torch.mean(pos_item_embeddings ** 2) + torch.mean(
-                neg_item_embeddings ** 2))
+                torch.mean(user_embeddings ** 2) + torch.mean(pos_item_embeddings ** 2) + torch.mean(
+            neg_item_embeddings ** 2))
 
         return reg_loss
 
@@ -183,4 +161,3 @@ class LightGCN(nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
-

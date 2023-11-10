@@ -12,15 +12,16 @@ import torch.nn.functional as F
 
 
 class SLMRec(torch.nn.Module):
-    def __init__(self, v_feat, t_feat, edge_index, num_user, num_item, n_layers, user_item_dict, dim_E, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, n_layers, ssl_temp,
+                 ssl_alpha, device):
         super(SLMRec, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
         self.dim_E = dim_E
         self.n_layers = n_layers
-        self.ssl_temp = 0.1  # [0.1, 0.2, 0.5, 1.0]
+        self.ssl_temp = ssl_temp  # [0.1, 0.2, 0.5, 1.0]
         self.temp = 0.2
-        self.ssl_alpha = 0.01  # [0.01, 0.05, 0.1, 0.5, 1.0]
+        self.ssl_alpha = ssl_alpha  # [0.01, 0.05, 0.1, 0.5, 1.0]
         self.num_nodes = num_user + num_item
         self.ssl_task = "FAC"
         self.infonce_criterion = nn.CrossEntropyLoss()
@@ -166,7 +167,8 @@ class SLMRec(torch.nn.Module):
         users_emb = torch.nn.functional.normalize(users_emb, dim=1)
         pos_emb = torch.nn.functional.normalize(pos_emb, dim=1)
         logits = torch.mm(users_emb, pos_emb.T)
-        logits /= self.temp
+        logits /= self.ssl_temp
+        # logits /= self.temp
         labels = torch.tensor(list(range(users_emb.shape[0]))).to(self.device)
         main_loss = self.infonce_criterion(logits, labels)
         # ==============ssl_loss=======================

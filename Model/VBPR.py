@@ -14,8 +14,8 @@ os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 
 
 class VBPR(nn.Module):
-    def __init__(self, num_user, num_item, v_feat, embedding_dim, user_item_dict, device, weight_decay,
-                 feature_embedding):
+    def __init__(self, num_user, num_item, user_item_dict, v_feat, embedding_dim, feature_embedding, reg_weight,
+                 device):
         super(VBPR, self).__init__()
         self.result = None
         self.user_item_dict = user_item_dict
@@ -35,7 +35,7 @@ class VBPR(nn.Module):
         self.item_linear = nn.Linear(self.v_feat.shape[1], embedding_dim)
         nn.init.xavier_uniform_(self.item_linear.weight)
 
-        self.reg_weight = weight_decay  # 正则化系数
+        self.reg_weight = reg_weight  # 正则化系数
 
     def forward(self):
         visual_embeddings = self.item_linear(self.v_feat)

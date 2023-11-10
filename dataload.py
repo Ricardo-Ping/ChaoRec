@@ -15,7 +15,6 @@ from arg_parser import parse_args
 import logging
 
 args = parse_args()
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s', datefmt='%a %d %b %Y %H:%M:%S')
 
 
 def data_load(dataset, has_v=True, has_t=True):
@@ -39,10 +38,12 @@ def data_load(dataset, has_v=True, has_t=True):
     if dataset == 'clothing':
         num_user = 18072
         num_item = 11384
-
-    logging.info('==============加载数据集================')
-    logging.info('The number of users: %d', num_user)
-    logging.info('The number of items: %d', num_item)
+    if dataset == 'baby':
+        num_user = 12351
+        num_item = 4794
+    if dataset == 'sports':
+        num_user = 28940
+        num_item = 15207
 
     return train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat
 

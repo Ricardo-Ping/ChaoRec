@@ -150,7 +150,7 @@ class GNN(torch.nn.Module):
 
 
 class MGAT(torch.nn.Module):
-    def __init__(self, v_feat, t_feat, edge_index, num_user, num_item, user_item_dict, dim_E, reg_weight, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, reg_weight, device):
         super(MGAT, self).__init__()
         self.num_user = num_user
         self.num_item = num_item

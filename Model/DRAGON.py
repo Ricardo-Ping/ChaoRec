@@ -111,13 +111,13 @@ class User_Graph_sample(torch.nn.Module):
 
 
 class DRAGON(torch.nn.Module):
-    def __init__(self, v_feat, t_feat, edge_index, user_item_dict, num_user, num_item, aggr_mode, n_layers,
-                 dim_E, feature_embedding, reg_weight, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, feature_embedding,
+                 reg_weight, n_layers, ii_topk, uu_topk, mm_image_weight, aggr_mode, device):
         super(DRAGON, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
-        self.item_topk = 10  # topk
-        self.user_topk = 40  # topk
+        self.item_topk = ii_topk  # topk
+        self.user_topk = uu_topk  # topk
         self.aggr_mode = aggr_mode
         self.construction = 'cat'  # 多模态信息聚合方法
         self.reg_weight = reg_weight
@@ -131,7 +131,7 @@ class DRAGON(torch.nn.Module):
         self.dim_feat = feature_embedding
         self.user_aggr_mode = 'softmax'
         self.n_layers = n_layers
-        self.mm_image_weight = 0.5
+        self.mm_image_weight = mm_image_weight
 
         self.MLP_v = nn.Linear(self.dim_latent, self.dim_latent, bias=False)
         self.MLP_t = nn.Linear(self.dim_latent, self.dim_latent, bias=False)

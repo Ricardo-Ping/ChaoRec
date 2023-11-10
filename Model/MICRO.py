@@ -98,8 +98,8 @@ class GCNConv(MessagePassing):
 
 
 class MICRO(nn.Module):
-    def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, v_feat, t_feat, n_layer, aggr_mode,
-                 reg_weight, device):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E,  n_layer, reg_weight,
+                  ii_topk, mm_layers, ssl_temp, lambda_coeff, ssl_alpha, aggr_mode, device):
         super().__init__()
         self.text_adj = None
         self.image_adj = None
@@ -111,16 +111,16 @@ class MICRO(nn.Module):
         self.num_item = num_item
         self.dim_E = dim_E
         self.n_ui_layers = n_layer
-        self.topk = 10
+        self.topk = ii_topk
         self.sparse = True
         self.norm_type = 'sym'  # 对称归一化
-        self.tau = 0.5  # 温度系数
-        self.lambda_coeff = 0.9
-        self.n_ii_layer = 2
+        self.tau = ssl_temp  # 温度系数
+        self.lambda_coeff = lambda_coeff
+        self.n_ii_layer = mm_layers
         self.device = device
         self.user_item_dict = user_item_dict
         self.reg_weight = reg_weight
-        self.beta = 0.01
+        self.beta = ssl_alpha
 
         self.user_embedding = nn.Embedding(num_user, self.dim_E)
         self.item_embedding = nn.Embedding(num_item, self.dim_E)

@@ -15,7 +15,7 @@ import logging
 
 from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 
 # 设置随机种子
@@ -35,7 +35,7 @@ def gpu():
         # logging.info("Using GPU: %s", torch.cuda.get_device_name(0))
     else:
         device = torch.device("cpu")
-        logging.info("CUDA is not available, using CPU.")
+        # logging.info("CUDA is not available, using CPU.")
     return device
 
 

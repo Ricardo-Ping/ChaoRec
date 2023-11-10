@@ -83,8 +83,8 @@ class NGCFConv(MessagePassing):
 
 
 class NGCF(nn.Module):
-    def __init__(self, edge_index, num_user, num_item, aggr_mode,
-                 user_item_dict, reg_weight, dim_E, device, dropout, n_layers):
+    def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, reg_weight, dropout, n_layers, aggr_mode,
+                device):
         super(NGCF, self).__init__()
         # 传入的参数
         self.result = None

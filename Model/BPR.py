@@ -13,17 +13,17 @@ from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_a
 
 
 class BPRMF(nn.Module):
-    def __init__(self, num_user, num_item, embedding_dim, user_item_dict, device, weight_decay):
+    def __init__(self, num_user, num_item, user_item_dict, dim_E,  reg_weight, device):
         super(BPRMF, self).__init__()
         self.user_item_dict = user_item_dict
         self.num_user = num_user
         self.device = device
         self.item_bias = nn.Embedding(num_item, 1)  # 物品偏置项 b_i
         # 用户隐式向量 U_u
-        self.user_embedding = nn.Embedding(num_user, embedding_dim)
+        self.user_embedding = nn.Embedding(num_user, dim_E)
         # 物品隐式向量 V_i
-        self.item_embedding = nn.Embedding(num_item, embedding_dim)
-        self.reg_weight = weight_decay  # 正则化系数
+        self.item_embedding = nn.Embedding(num_item, dim_E)
+        self.reg_weight = reg_weight  # 正则化系数
 
         # 初始化权重
         nn.init.zeros_(self.item_bias.weight)
