@@ -7,6 +7,7 @@
 @function :
 """
 import datetime
+import os
 
 import torch
 import numpy as np
@@ -14,6 +15,7 @@ import random
 import logging
 
 from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
+
 
 # logging.basicConfig(level=logging.INFO)
 
@@ -24,7 +26,12 @@ def setup_seed(seed):
     torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
     random.seed(seed)
-    torch.backends.cudnn.deterministic = True
+    # torch.backends.cudnn.deterministic = True
+    # torch.use_deterministic_algorithms(True, warn_only=True)
+    # torch.backends.cudnn.enabled = False
+    # torch.backends.cudnn.benchmark = False
+    # os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
+    # os.environ['PYTHONHASHSEED'] = str(seed)
 
 
 # 设置是否使用GPU

@@ -3,6 +3,7 @@ from itertools import product
 
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
+from Model.DDRec import DDRec
 from Model.DGCF import DGCF
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
@@ -12,6 +13,7 @@ from Model.LATTICE import LATTICE
 from Model.LightGCN import LightGCN
 from Model.MGAT import MGAT
 from Model.MICRO import MICRO
+from Model.MMGCL import MMGCL
 from Model.NGCF import NGCF
 from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
@@ -23,7 +25,6 @@ import dataload
 from torch.utils.data import DataLoader
 from Model.MMGCN import MMGCN
 from train_and_evaluate import train_and_evaluate
-
 
 if __name__ == '__main__':
     # 输出参数信息
@@ -86,6 +87,8 @@ if __name__ == '__main__':
     lambda_coeff = args.lambda_coeff  # 跳跃连接系数
     ssl_temp = args.ssl_temp  # ssl的温度系数
     ssl_alpha = args.ssl_alpha  # ssl任务损失的系数
+    ae_weight = args.ae_weight  # 自动编码器损失的系数
+    threshold = args.threshold  # 去噪门控
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -138,8 +141,8 @@ if __name__ == '__main__':
                                        feature_embedding,
                                        args.reg_weight, args.n_layers, args.mm_layers, args.ii_topk, aggr_mode,
                                        args.lambda_coeff, device),
-            'DualGNN.yaml': lambda: DualGNN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                            feature_embedding, args.reg_weight, args.uu_topk, aggr_mode, device),
+            'DualGNN': lambda: DualGNN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                       feature_embedding, args.reg_weight, args.uu_topk, aggr_mode, device),
             'BM3': lambda: BM3(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, feature_embedding,
                                args.reg_weight, args.dropout, args.n_layers, args.cl_weight, aggr_mode, device),
             'DRAGON': lambda: DRAGON(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
@@ -148,13 +151,24 @@ if __name__ == '__main__':
             'FREEDOM': lambda: FREEDOM(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                        feature_embedding, args.reg_weight, args.dropout, args.n_layers, args.mm_layers,
                                        args.ii_topk, args.lambda_coeff, device),
-            'SLMRec': lambda: SLMRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.n_layers,
+            'SLMRec': lambda: SLMRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                     args.n_layers,
                                      args.ssl_temp, args.ssl_alpha, device),
             'MGAT': lambda: MGAT(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  device),
             'MICRO': lambda: MICRO(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.n_layers,
                                    args.reg_weight, args.ii_topk, args.mm_layers, args.ssl_temp, args.lambda_coeff,
                                    args.ssl_alpha, aggr_mode, device),
+            'MMGCL': lambda: MMGCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   feature_embedding,
+                                   args.reg_weight, args.n_layers, args.mm_layers, args.ssl_alpha, args.ssl_temp,
+                                   args.ae_weight,
+                                   aggr_mode, device),
+            'DDRec': lambda: DDRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   feature_embedding,
+                                   args.reg_weight, args.n_layers, args.mm_layers,
+                                   args.lambda_coeff, args.threshold,
+                                   aggr_mode, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

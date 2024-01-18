@@ -154,8 +154,8 @@ class MGAT(torch.nn.Module):
         super(MGAT, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
-        self.v_feat = v_feat
-        self.t_feat = t_feat
+        # self.v_feat = v_feat
+        # self.t_feat = t_feat
         self.dim_E = dim_E
         self.device = device
         self.user_item_dict = user_item_dict
@@ -165,6 +165,8 @@ class MGAT(torch.nn.Module):
         self.edge_index_clone = torch.tensor(edge_index).t().contiguous().to(self.device)
         self.edge_index = torch.cat((self.edge_index_clone, self.edge_index_clone[[1, 0]]), dim=1)
 
+        self.v_feat = v_feat.clone().detach().requires_grad_(True).to(self.device)
+        self.t_feat = t_feat.clone().detach().requires_grad_(True).to(self.device)
         self.v_gnn = GNN(self.v_feat, self.edge_index, num_user, num_item, dim_E, dim_latent=256)
         self.t_gnn = GNN(self.t_feat, self.edge_index, num_user, num_item, dim_E, dim_latent=100)
 

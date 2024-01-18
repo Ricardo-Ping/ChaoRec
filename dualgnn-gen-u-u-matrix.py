@@ -60,6 +60,14 @@ if __name__ == '__main__':
     num_user = None
     if dataset == 'yelp':
         num_user = 28974
+    elif dataset == 'clothing':
+        num_user = 18072
+    elif dataset == 'baby':
+        num_user = 12351
+    elif dataset == 'sports':
+        num_user = 28940
+    elif dataset == 'beauty':
+        num_user = 15482
     user_graph_matrix = gen_user_matrix(train_data, num_user)
 
     user_graph = user_graph_matrix

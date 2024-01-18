@@ -1,0 +1,29 @@
+Mon 08 Jan 2024 21:49:06 INFO ============Arguments==============
+Mon 08 Jan 2024 21:49:06 INFO Model: DDRec
+Mon 08 Jan 2024 21:49:06 INFO data_path: baby
+Mon 08 Jan 2024 21:49:06 INFO learning_rate: 0.001
+Mon 08 Jan 2024 21:49:06 INFO feature_embed: 64
+Mon 08 Jan 2024 21:49:06 INFO batch_size: 1024
+Mon 08 Jan 2024 21:49:06 INFO aggr_mode: add
+Mon 08 Jan 2024 21:49:06 INFO reg_weight: 0.001
+Mon 08 Jan 2024 21:49:06 INFO dim_E: 64
+Mon 08 Jan 2024 21:49:06 INFO num_epoch: 1000
+Mon 08 Jan 2024 21:49:06 INFO dropout: 0.2
+Mon 08 Jan 2024 21:49:06 INFO n_layers: 2
+Mon 08 Jan 2024 21:49:06 INFO corDecay: 0.001
+Mon 08 Jan 2024 21:49:06 INFO n_factors: 4
+Mon 08 Jan 2024 21:49:06 INFO n_iterations: 3
+Mon 08 Jan 2024 21:49:06 INFO cl_weight: 2.0
+Mon 08 Jan 2024 21:49:06 INFO mm_layers: 2
+Mon 08 Jan 2024 21:49:06 INFO ii_topk: 10
+Mon 08 Jan 2024 21:49:06 INFO uu_topk: 40
+Mon 08 Jan 2024 21:49:06 INFO lambda_coeff: 0.9
+Mon 08 Jan 2024 21:49:06 INFO ssl_temp: 0.9
+Mon 08 Jan 2024 21:49:06 INFO ssl_alpha: 0.9
+Mon 08 Jan 2024 21:49:06 INFO ae_weight: 0.1
+Mon 08 Jan 2024 21:49:06 INFO threshold: 0.1
+Mon 08 Jan 2024 21:49:06 INFO seed: 42
+Mon 08 Jan 2024 21:49:06 INFO num_workers: 1
+Mon 08 Jan 2024 21:49:06 INFO topk: [5, 10, 20]
+Mon 08 Jan 2024 21:49:06 INFO local time£ºJan-08-2024-21-49-06
+Mon 08 Jan 2024 21:49:07 INFO =========1/1: Parameters:{'learning_rate': 0.001, 'reg_weight': 0.001, 'mm_layers': 1, 'n_layers': 2, 'threshold': 0.1, 'lambda_coeff': 0.6}=========

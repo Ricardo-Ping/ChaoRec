@@ -44,6 +44,12 @@ def data_load(dataset, has_v=True, has_t=True):
     if dataset == 'sports':
         num_user = 28940
         num_item = 15207
+    if dataset == 'beauty':
+        num_user = 15482
+        num_item = 8643
+    if dataset == 'electronics':
+        num_user = 150179
+        num_item = 51901
 
     return train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat
 

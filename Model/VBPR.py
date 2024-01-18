@@ -22,23 +22,24 @@ class VBPR(nn.Module):
         self.num_user = num_user
         self.num_item = num_item
         self.device = device
-        self.visual_embedding = feature_embedding
+        self.visual_embedding = 64
         # =======================gamma==========================
         # 用户隐式向量 gamma_u
-        self.user_embedding = nn.Parameter(nn.init.xavier_uniform_(torch.empty(num_user, embedding_dim * 2)))
+        self.user_embedding = nn.Parameter(nn.init.xavier_uniform_(torch.empty(num_user, embedding_dim + self.visual_embedding)))
 
         # 物品隐式向量 gamma_i
         self.item_embedding = nn.Parameter(nn.init.xavier_uniform_(torch.empty(num_item, embedding_dim)))
 
         # 视觉特征
-        self.v_feat = v_feat
-        self.item_linear = nn.Linear(self.v_feat.shape[1], embedding_dim)
+        # 读入多模态特征
+        self.v_feat = nn.Embedding.from_pretrained(v_feat, freeze=False)
+        self.item_linear = nn.Linear(v_feat.shape[1], self.visual_embedding)
         nn.init.xavier_uniform_(self.item_linear.weight)
 
         self.reg_weight = reg_weight  # 正则化系数
 
     def forward(self):
-        visual_embeddings = self.item_linear(self.v_feat)
+        visual_embeddings = self.item_linear(self.v_feat.weight)
         item_embeddings = torch.cat((self.item_embedding, visual_embeddings), dim=-1)
 
         self.result = torch.cat((self.user_embedding, item_embeddings), dim=0)

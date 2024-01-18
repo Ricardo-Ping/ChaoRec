@@ -3,7 +3,7 @@
 
 @Author : Ricardo_PING
 @Time : 2023/10/23 22:08
-@File : DualGNN.yaml.py
+@File : DualGNN.py
 @function :
 """
 import os

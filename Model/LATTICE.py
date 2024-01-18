@@ -6,14 +6,11 @@
 @File : LATTICE.py
 @function :
 """
-import os.path
 import torch.nn.functional as F
 import torch
 import torch.nn as nn
 from torch_geometric.nn import MessagePassing
 from torch_geometric.utils import degree
-
-from metrics import precision_at_k, ndcg_at_k, hit_rate_at_k, recall_at_k, map_at_k
 
 
 class LATTICEGCNConv(MessagePassing):
@@ -78,7 +75,7 @@ def build_sim(context):
 
 class LATTICE(nn.Module):
     def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, feat_embed_dim,
-                 reg_weight,  n_layers, mm_layers, ii_topk, aggr_mode, lambda_coeff, device):
+                 reg_weight, n_layers, mm_layers, ii_topk, aggr_mode, lambda_coeff, device):
         super(LATTICE, self).__init__()
         self.result = None
         self.num_user = num_user
@@ -243,4 +240,3 @@ class LATTICE(nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
-

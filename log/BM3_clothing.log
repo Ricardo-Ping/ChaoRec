@@ -1,0 +1,29 @@
+Mon 25 Dec 2023 02:08:54 INFO ============Arguments==============
+Mon 25 Dec 2023 02:08:54 INFO Model: BM3
+Mon 25 Dec 2023 02:08:54 INFO data_path: clothing
+Mon 25 Dec 2023 02:08:54 INFO learning_rate: 0.001
+Mon 25 Dec 2023 02:08:54 INFO feature_embed: 64
+Mon 25 Dec 2023 02:08:54 INFO batch_size: 1024
+Mon 25 Dec 2023 02:08:54 INFO aggr_mode: add
+Mon 25 Dec 2023 02:08:54 INFO reg_weight: 0.001
+Mon 25 Dec 2023 02:08:54 INFO dim_E: 64
+Mon 25 Dec 2023 02:08:54 INFO num_epoch: 1000
+Mon 25 Dec 2023 02:08:54 INFO dropout: 0.2
+Mon 25 Dec 2023 02:08:54 INFO n_layers: 2
+Mon 25 Dec 2023 02:08:54 INFO corDecay: 0.001
+Mon 25 Dec 2023 02:08:54 INFO n_factors: 4
+Mon 25 Dec 2023 02:08:54 INFO n_iterations: 3
+Mon 25 Dec 2023 02:08:54 INFO cl_weight: 2.0
+Mon 25 Dec 2023 02:08:54 INFO mm_layers: 2
+Mon 25 Dec 2023 02:08:54 INFO ii_topk: 10
+Mon 25 Dec 2023 02:08:54 INFO uu_topk: 40
+Mon 25 Dec 2023 02:08:54 INFO lambda_coeff: 0.9
+Mon 25 Dec 2023 02:08:54 INFO ssl_temp: 0.9
+Mon 25 Dec 2023 02:08:54 INFO ssl_alpha: 0.9
+Mon 25 Dec 2023 02:08:54 INFO ae_weight: 0.1
+Mon 25 Dec 2023 02:08:54 INFO threshold: 0.1
+Mon 25 Dec 2023 02:08:54 INFO seed: 42
+Mon 25 Dec 2023 02:08:54 INFO num_workers: 1
+Mon 25 Dec 2023 02:08:54 INFO topk: [5, 10, 20]
+Mon 25 Dec 2023 02:08:54 INFO local time£ºDec-25-2023-02-08-54
+Mon 25 Dec 2023 02:08:54 INFO =========1/9: Parameters:{'n_layers': 3, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'dropout': 0.1, 'cl_weight': 2.0}=========
