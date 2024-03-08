@@ -11,10 +11,12 @@ from Model.DualGNN import DualGNN
 from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
 from Model.LATTICE import LATTICE
+from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
 from Model.MGAT import MGAT
 from Model.MICRO import MICRO
 from Model.MMGCL import MMGCL
+from Model.MacridVAE import MacridVAE
 from Model.MultVAE import MultVAE
 from Model.NCL import NCL
 from Model.NGCF import NGCF
@@ -181,6 +183,10 @@ if __name__ == '__main__':
                                        device),
             'NCL': lambda: NCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                aggr_mode, args.ssl_temp, args.ssl_alpha, device),
+            'MacridVAE': lambda: MacridVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                       device),
+            'LightGCL': lambda: LightGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                               args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
