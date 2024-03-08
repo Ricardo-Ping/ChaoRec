@@ -1,0 +1,38 @@
+Sun 03 Mar 2024 20:22:29 INFO ============Arguments==============
+Sun 03 Mar 2024 20:22:29 INFO Model: DGCF
+Sun 03 Mar 2024 20:22:29 INFO data_path: beauty
+Sun 03 Mar 2024 20:22:29 INFO learning_rate: 0.001
+Sun 03 Mar 2024 20:22:29 INFO feature_embed: 64
+Sun 03 Mar 2024 20:22:29 INFO batch_size: 1024
+Sun 03 Mar 2024 20:22:29 INFO aggr_mode: add
+Sun 03 Mar 2024 20:22:29 INFO reg_weight: 0.001
+Sun 03 Mar 2024 20:22:29 INFO dim_E: 64
+Sun 03 Mar 2024 20:22:29 INFO num_epoch: 1000
+Sun 03 Mar 2024 20:22:29 INFO dropout: 0.2
+Sun 03 Mar 2024 20:22:29 INFO n_layers: 2
+Sun 03 Mar 2024 20:22:29 INFO corDecay: 0.001
+Sun 03 Mar 2024 20:22:29 INFO n_factors: 4
+Sun 03 Mar 2024 20:22:29 INFO n_iterations: 3
+Sun 03 Mar 2024 20:22:29 INFO cl_weight: 2.0
+Sun 03 Mar 2024 20:22:29 INFO mm_layers: 2
+Sun 03 Mar 2024 20:22:29 INFO ii_topk: 10
+Sun 03 Mar 2024 20:22:29 INFO uu_topk: 40
+Sun 03 Mar 2024 20:22:29 INFO lambda_coeff: 0.9
+Sun 03 Mar 2024 20:22:29 INFO ssl_temp: 0.9
+Sun 03 Mar 2024 20:22:29 INFO ssl_alpha: 0.9
+Sun 03 Mar 2024 20:22:29 INFO ae_weight: 0.1
+Sun 03 Mar 2024 20:22:29 INFO threshold: 0.1
+Sun 03 Mar 2024 20:22:29 INFO seed: 42
+Sun 03 Mar 2024 20:22:29 INFO num_workers: 1
+Sun 03 Mar 2024 20:22:29 INFO topk: [5, 10, 20]
+Sun 03 Mar 2024 20:22:29 INFO local time£ºMar-03-2024-20-22-29
+Sun 03 Mar 2024 20:22:29 INFO =========1/48: Parameters:{'n_layers': 3, 'learning_rate': 0.01, 'reg_weight': 0.01, 'corDecay': 0.01, 'n_factors': 2, 'n_iterations': 1}=========
+Sun 03 Mar 2024 20:22:36 INFO Epoch 1, Loss: 30.31209
+Sun 03 Mar 2024 20:22:57 INFO Validation Metrics:
+Sun 03 Mar 2024 20:22:57 INFO 5: precision: 0.01031 | recall: 0.04459 | ndcg: 0.02898 | hit_rate: 0.04974 | map: 0.02286
+Sun 03 Mar 2024 20:22:57 INFO 10: precision: 0.00796 | recall: 0.06862 | ndcg: 0.03687 | hit_rate: 0.07467 | map: 0.02614
+Sun 03 Mar 2024 20:22:57 INFO 20: precision: 0.00580 | recall: 0.09947 | ndcg: 0.04488 | hit_rate: 0.10754 | map: 0.02835
+Sun 03 Mar 2024 20:22:57 INFO Test Metrics:
+Sun 03 Mar 2024 20:22:57 INFO 5: precision: 0.01750 | recall: 0.04709 | ndcg: 0.03583 | hit_rate: 0.07796 | map: 0.02593
+Sun 03 Mar 2024 20:22:57 INFO 10: precision: 0.01314 | recall: 0.06938 | ndcg: 0.04436 | hit_rate: 0.10935 | map: 0.02961
+Sun 03 Mar 2024 20:22:57 INFO 20: precision: 0.00977 | recall: 0.10298 | ndcg: 0.05441 | hit_rate: 0.15625 | map: 0.03247

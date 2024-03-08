@@ -127,7 +127,6 @@ class DDRec(nn.Module):
             visual_tensor = item_embedding * self.guide_image_trs(self.v_embedding)
             text_tensor = item_embedding * self.guide_text_trs(self.t_embedding)
 
-
         # =============项目-项目图========================
         # 对项目-项目图更新项目表示
         h = self.item_embedding.weight

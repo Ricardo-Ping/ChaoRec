@@ -28,7 +28,8 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec", "MGAT", 'MMGCL','DDRec']:
+    elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
+                        "MGAT",  'MMGCL', 'DDRec', 'DCMF', 'SGL', 'MultVAE']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -41,6 +42,15 @@ def train(model, train_loader, optimizer):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items, build_item_graph=build_item_graph)
             build_item_graph = False
+            loss.backward()
+            optimizer.step()
+            sum_loss += loss.item()
+    elif args.Model in ['NCL']:
+        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
+            optimizer.zero_grad()
+            # 执行聚类
+            model.e_step()
+            loss = model.loss(users, pos_items, neg_items)
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()

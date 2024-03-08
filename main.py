@@ -3,6 +3,7 @@ from itertools import product
 
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
+from Model.DCMF import DCMF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
 from Model.DRAGON import DRAGON
@@ -14,7 +15,10 @@ from Model.LightGCN import LightGCN
 from Model.MGAT import MGAT
 from Model.MICRO import MICRO
 from Model.MMGCL import MMGCL
+from Model.MultVAE import MultVAE
+from Model.NCL import NCL
 from Model.NGCF import NGCF
+from Model.SGL import SGL
 from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
 from arg_parser import parse_args, load_yaml_config
@@ -169,6 +173,14 @@ if __name__ == '__main__':
                                    args.reg_weight, args.n_layers, args.mm_layers,
                                    args.lambda_coeff, args.threshold,
                                    aggr_mode, device),
+            'DCMF': lambda: DCMF(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
+                                 args.corDecay, args.ssl_temp, args.n_factors, device),
+            'SGL': lambda: SGL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                               args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
+            'MultVAE': lambda: MultVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                       device),
+            'NCL': lambda: NCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
+                               aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

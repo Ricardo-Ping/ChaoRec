@@ -1,4 +1,4 @@
-learning_rate: [0.001]
+learning_rate: [0.01]
 reg_weight : [0.001]
 n_layers : [2]
 ssl_alpha : [0.001]
