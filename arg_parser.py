@@ -13,7 +13,7 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='LightGCL', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='HCCF', help='Model name')
     # 数据集：baby,clothing,sports,beauty,electronics
     parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
     # 超参数选择

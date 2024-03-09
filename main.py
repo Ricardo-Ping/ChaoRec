@@ -10,6 +10,7 @@ from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
 from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
+from Model.HCCF import HCCF
 from Model.LATTICE import LATTICE
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
@@ -184,9 +185,11 @@ if __name__ == '__main__':
             'NCL': lambda: NCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             'MacridVAE': lambda: MacridVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                                       device),
+                                           device),
             'LightGCL': lambda: LightGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                               args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
+                                         args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
+            'HCCF': lambda: HCCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                 args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
