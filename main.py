@@ -15,6 +15,7 @@ from Model.LATTICE import LATTICE
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
 from Model.MGAT import MGAT
+from Model.MGCL import MGCL
 from Model.MICRO import MICRO
 from Model.MMGCL import MMGCL
 from Model.MacridVAE import MacridVAE
@@ -190,6 +191,8 @@ if __name__ == '__main__':
                                          args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
             'HCCF': lambda: HCCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                  args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
+            'MGCL': lambda: MGCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
+                                 args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
