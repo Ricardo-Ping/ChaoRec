@@ -15,6 +15,7 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - SGL
 - NCL
 - LightGCL
+- HCCF
 
 目前的多模态推荐模型有：
 
@@ -29,5 +30,6 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - DRAGON
 - BM3
 - SLMRec
+- MGCL
 
 现有模型大部分按照原作者代码进行改写，如果发现有错误欢迎指正！
