@@ -30,14 +30,14 @@ def train(model, train_loader, optimizer):
             sum_loss += loss.item()
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT",  'MMGCL', 'DDRec', 'DCMF', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
-                        'MGCN']:
+                        'MGCN', 'POWERec']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ["LATTICE", "MICRO", "LATTICE_AE"]:
+    elif args.Model in ["LATTICE", "MICRO"]:
         build_item_graph = True
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
@@ -70,7 +70,7 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
     early_stopping = EarlyStopping(patience=20, verbose=True)
 
     for epoch in range(epochs):
-        if args.Model in ["DualGNN", "DRAGON", "FREEDOM"]:
+        if args.Model in ["DualGNN", "DRAGON", "FREEDOM", 'POWERec']:
             # 在每个epoch开始时，调用pre_epoch_processing方法
             model.pre_epoch_processing()
         loss = train(model, train_loader, optimizer)

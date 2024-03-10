@@ -23,6 +23,7 @@ from Model.MacridVAE import MacridVAE
 from Model.MultVAE import MultVAE
 from Model.NCL import NCL
 from Model.NGCF import NGCF
+from Model.POWERec import POWERec
 from Model.SGL import SGL
 from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
@@ -98,6 +99,8 @@ if __name__ == '__main__':
     ssl_alpha = args.ssl_alpha  # ssl任务损失的系数
     ae_weight = args.ae_weight  # 自动编码器损失的系数
     threshold = args.threshold  # 去噪门控
+    prompt_num = args.prompt_num
+    neg_weight = args.neg_weight
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -169,10 +172,8 @@ if __name__ == '__main__':
                                    args.reg_weight, args.ii_topk, args.mm_layers, args.ssl_temp, args.lambda_coeff,
                                    args.ssl_alpha, aggr_mode, device),
             'MMGCL': lambda: MMGCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                   feature_embedding,
-                                   args.reg_weight, args.n_layers, args.mm_layers, args.ssl_alpha, args.ssl_temp,
-                                   args.ae_weight,
-                                   aggr_mode, device),
+                                   args.reg_weight, args.n_layers, args.ssl_alpha, args.ssl_temp,
+                                   args.dropout, device),
             'DDRec': lambda: DDRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    feature_embedding,
                                    args.reg_weight, args.n_layers, args.mm_layers,
@@ -196,6 +197,9 @@ if __name__ == '__main__':
                                  args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             'MGCN': lambda: MGCN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
+            'POWERec': lambda: POWERec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                       args.reg_weight,
+                                       args.n_layers, args.prompt_num, args.neg_weight, args.dropout, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
