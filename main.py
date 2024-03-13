@@ -13,6 +13,7 @@ from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
 from Model.HCCF import HCCF
 from Model.LATTICE import LATTICE
+from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
 from Model.MGAT import MGAT
@@ -206,6 +207,8 @@ if __name__ == '__main__':
                                  args.corDecay, args.n_factors, device),
             'MVGAE': lambda: MVGAE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  args.n_layers, device),
+            'LayerGCN': lambda: LayerGCN(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                   args.n_layers, args.dropout, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
