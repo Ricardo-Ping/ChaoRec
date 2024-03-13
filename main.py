@@ -6,6 +6,7 @@ from Model.BPR import BPRMF
 from Model.DCMF import DCMF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
+from Model.DMRL import DMRL
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
 from Model.FREEDOM import FREEDOM
@@ -19,6 +20,7 @@ from Model.MGCL import MGCL
 from Model.MGCN import MGCN
 from Model.MICRO import MICRO
 from Model.MMGCL import MMGCL
+from Model.MVGAE import MVGAE
 from Model.MacridVAE import MacridVAE
 from Model.MultVAE import MultVAE
 from Model.NCL import NCL
@@ -200,6 +202,10 @@ if __name__ == '__main__':
             'POWERec': lambda: POWERec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                        args.reg_weight,
                                        args.n_layers, args.prompt_num, args.neg_weight, args.dropout, device),
+            'DMRL': lambda: DMRL(num_user, num_item, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
+                                 args.corDecay, args.n_factors, device),
+            'MVGAE': lambda: MVGAE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
+                                 args.n_layers, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

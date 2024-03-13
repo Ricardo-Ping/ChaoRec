@@ -151,8 +151,6 @@ class DDRec(nn.Module):
             # 计算余弦相似度
             user_embeddings = ego_embeddings[:self.num_user]
             item_embeddings = ego_embeddings[self.num_user:]
-            # sim_matrix = self.cosine_similarity(user_embeddings, item_embeddings)
-            # sim_matrix = 1 / (1 + torch.cdist(user_embeddings, item_embeddings, p=2))
             sim_matrix = torch.mm(user_embeddings, item_embeddings.t())
             # 过滤边
             filtered_edge_index = self.filter_edges(self.edge_index_clone, sim_matrix, threshold=self.threshold)
@@ -173,8 +171,6 @@ class DDRec(nn.Module):
             # # 计算余弦相似度
             user_embeddings = ego_embeddings[:self.num_user]
             item_embeddings = ego_embeddings[self.num_user:]
-            # sim_matrix = self.cosine_similarity(user_embeddings, item_embeddings)
-            # sim_matrix = 1 / (1 + torch.cdist(user_embeddings, item_embeddings, p=2))
             sim_matrix = torch.mm(user_embeddings, item_embeddings.t())
             # 过滤边
             filtered_edge_index = self.filter_edges(self.edge_index_clone, sim_matrix, threshold=self.threshold)
@@ -306,6 +302,8 @@ class DDRec(nn.Module):
 
         # 选出每个用户的 top-k 个物品
         _, index_of_rank_list_train = torch.topk(score_matrix, topk)
+        # index_of_rank_list_train_np = index_of_rank_list_train.cpu().numpy()
+        # np.save('without_soft_rank_list.npy', index_of_rank_list_train_np)
         # 总的top-k列表
         all_index_of_rank_list = torch.cat(
             (all_index_of_rank_list, index_of_rank_list_train.cpu() + self.num_user),

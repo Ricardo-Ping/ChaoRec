@@ -30,7 +30,7 @@ def train(model, train_loader, optimizer):
             sum_loss += loss.item()
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT",  'MMGCL', 'DDRec', 'DCMF', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
-                        'MGCN', 'POWERec']:
+                        'MGCN', 'POWERec', 'DMRL', 'MVGAE']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -75,7 +75,10 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
             model.pre_epoch_processing()
         loss = train(model, train_loader, optimizer)
         logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
-        rank_list = model.gene_ranklist()
+        if args.Model in ['DMRL']:
+            rank_list = model.gene_ranklist(train_loader)
+        else:
+            rank_list = model.gene_ranklist()
         val_metrics = evaluate(model, val_data, rank_list, topk)
         test_metrics = evaluate(model, test_data, rank_list, topk)
 
