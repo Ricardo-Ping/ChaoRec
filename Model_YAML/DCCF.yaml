@@ -1,0 +1,9 @@
+learning_rate: [0.001]
+reg_weight : [0.001]  # 0.0001
+ssl_alpha : [0.1]  # 0.001, 0.025, 0.1, 0.2
+ssl_temp : [1]
+n_intents : [64]  # 32, 64, 128, 256
+cen_reg : [0.001]  # 0.1
+n_layers : [1]  # 1,2,3
+
+hyper_parameters: ["n_layers","learning_rate", "reg_weight", "ssl_alpha", 'ssl_temp', 'cen_reg', 'n_intents']

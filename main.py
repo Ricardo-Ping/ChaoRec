@@ -3,6 +3,7 @@ from itertools import product
 
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
+from Model.DCCF import DCCF
 from Model.DCMF import DCMF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
@@ -104,6 +105,8 @@ if __name__ == '__main__':
     threshold = args.threshold  # 去噪门控
     prompt_num = args.prompt_num
     neg_weight = args.neg_weight
+    cen_reg = args.cen_reg  # DCCF的意图嵌入正则化
+    n_intents = args.n_intents  # DCCF的意图嵌入数量
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -205,10 +208,13 @@ if __name__ == '__main__':
                                        args.n_layers, args.prompt_num, args.neg_weight, args.dropout, device),
             'DMRL': lambda: DMRL(num_user, num_item, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  args.corDecay, args.n_factors, device),
-            'MVGAE': lambda: MVGAE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
-                                 args.n_layers, device),
+            'MVGAE': lambda: MVGAE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.reg_weight,
+                                   args.n_layers, device),
             'LayerGCN': lambda: LayerGCN(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                                   args.n_layers, args.dropout, device),
+                                         args.n_layers, args.dropout, device),
+            'DCCF': lambda: DCCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
+                                 args.ssl_temp, args.ssl_alpha, args.n_intents, args.cen_reg, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
