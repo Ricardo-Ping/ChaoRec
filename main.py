@@ -1,6 +1,7 @@
 import os
 from itertools import product
 
+from Model.AdaGCL import AdaGCL
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
 from Model.DCCF import DCCF
@@ -215,6 +216,8 @@ if __name__ == '__main__':
                                          args.n_layers, args.dropout, device),
             'DCCF': lambda: DCCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                  args.ssl_temp, args.ssl_alpha, args.n_intents, args.cen_reg, device),
+            'AdaGCL': lambda: AdaGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                     args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
