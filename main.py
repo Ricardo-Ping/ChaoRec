@@ -11,6 +11,7 @@ from Model.DGCF import DGCF
 from Model.DMRL import DMRL
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
+from Model.DualVAE import DualVAE
 from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
 from Model.HCCF import HCCF
@@ -218,6 +219,8 @@ if __name__ == '__main__':
                                  args.ssl_temp, args.ssl_alpha, args.n_intents, args.cen_reg, device),
             'AdaGCL': lambda: AdaGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                      args.n_layers, args.ssl_temp, args.ssl_alpha, device),
+            'DualVAE': lambda: DualVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                       args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

@@ -1,0 +1,5 @@
+learning_rate: [0.001]
+reg_weight : [0.5]  # kl
+ssl_alpha : [0.01]
+
+hyper_parameters: ["learning_rate", "reg_weight","ssl_alpha"]
