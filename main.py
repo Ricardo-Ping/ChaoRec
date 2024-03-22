@@ -19,6 +19,7 @@ from Model.LATTICE import LATTICE
 from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
+from Model.MCL import MCL
 from Model.MGAT import MGAT
 from Model.MGCL import MGCL
 from Model.MGCN import MGCN
@@ -221,6 +222,8 @@ if __name__ == '__main__':
                                      args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'DualVAE': lambda: DualVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.ssl_alpha, device),
+            'MCL': lambda: MCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
+                               args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

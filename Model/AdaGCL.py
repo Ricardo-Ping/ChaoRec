@@ -208,25 +208,84 @@ class AdaGCL(nn.Module):
 
         return view  # 返回新生成的视图
 
-    def loss(self, users, pos_items, neg_items):
+    # def loss(self, users, pos_items, neg_items):
+    #     pos_items = pos_items - self.num_user
+    #     neg_items = neg_items - self.num_user
+    #     users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
+    #
+    #     data = deepcopy(self.norm_adj_mat)
+    #     data1 = self.generator_generate(self.generator_1)
+    #
+    #     out1 = self.forward_graphcl(data1)
+    #     out2 = self.forward_graphcl_(self.generator_2)
+    #     loss = self.loss_graphcl(out1, out2, users, pos_items).mean() * self.ssl_alpha
+    #
+    #     _out1 = self.forward_graphcl(data1)
+    #     _out2 = self.forward_graphcl_(self.generator_2)
+    #     loss_ib = self.loss_graphcl(_out1, out1.detach(), users, pos_items) + self.loss_graphcl(_out2,
+    #                                                                                             out2.detach(),
+    #                                                                                             users, pos_items)
+    #     loss_ib = loss_ib.mean() * self.ib_reg
+    #
+    #     usrEmbeds, itmEmbeds = self.forward_gcn(data)
+    #     ancEmbeds = usrEmbeds[users]
+    #     posEmbeds = itmEmbeds[pos_items]
+    #     negEmbeds = itmEmbeds[neg_items]
+    #     # 计算BPR损失
+    #     pos_scores = torch.mul(ancEmbeds, posEmbeds).sum(dim=1)
+    #     neg_scores = torch.mul(ancEmbeds, negEmbeds).sum(dim=1)
+    #     bpr_loss = -torch.mean(torch.log(torch.sigmoid(pos_scores - neg_scores) + 1e-5))
+    #
+    #     u_ego_embeddings = self.uEmbeds[users]
+    #     pos_ego_embeddings = self.iEmbeds[pos_items]
+    #     neg_ego_embeddings = self.iEmbeds[neg_items]
+    #     reg_loss = self.reg_weight * (
+    #             torch.mean(u_ego_embeddings ** 2) + torch.mean(pos_ego_embeddings ** 2) + torch.mean(
+    #         neg_ego_embeddings ** 2))
+    #
+    #     loss_1 = self.generator_1(deepcopy(self.norm_adj_mat).to(self.device), users, pos_items, neg_items)
+    #     loss_2 = self.generator_2(users, pos_items, neg_items, self.ssl_temp)
+    #
+    #     total_loss = loss + loss_ib + bpr_loss + reg_loss + loss_1 + loss_2
+    #
+    #     return total_loss
+
+    def loss_1(self, users, pos_items, neg_items):
         pos_items = pos_items - self.num_user
         neg_items = neg_items - self.num_user
         users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
 
-        data = deepcopy(self.norm_adj_mat)
         data1 = self.generator_generate(self.generator_1)
 
         out1 = self.forward_graphcl(data1)
         out2 = self.forward_graphcl_(self.generator_2)
         loss = self.loss_graphcl(out1, out2, users, pos_items).mean() * self.ssl_alpha
 
+        return loss, out1, out2
+
+    def loss_2(self, users, pos_items, neg_items, out1, out2):
+        pos_items = pos_items - self.num_user
+        neg_items = neg_items - self.num_user
+        users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
+
+        data1 = self.generator_generate(self.generator_1)
+
         _out1 = self.forward_graphcl(data1)
         _out2 = self.forward_graphcl_(self.generator_2)
+
         loss_ib = self.loss_graphcl(_out1, out1.detach(), users, pos_items) + self.loss_graphcl(_out2,
                                                                                                 out2.detach(),
                                                                                                 users, pos_items)
         loss_ib = loss_ib.mean() * self.ib_reg
 
+        return loss_ib
+
+    def bpr_reg_loss(self, users, pos_items, neg_items):
+        pos_items = pos_items - self.num_user
+        neg_items = neg_items - self.num_user
+        users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
+
+        data = deepcopy(self.norm_adj_mat)
         usrEmbeds, itmEmbeds = self.forward_gcn(data)
         ancEmbeds = usrEmbeds[users]
         posEmbeds = itmEmbeds[pos_items]
@@ -243,12 +302,17 @@ class AdaGCL(nn.Module):
                 torch.mean(u_ego_embeddings ** 2) + torch.mean(pos_ego_embeddings ** 2) + torch.mean(
             neg_ego_embeddings ** 2))
 
+        return bpr_loss + reg_loss
+
+    def gen_loss(self, users, pos_items, neg_items):
+        pos_items = pos_items - self.num_user
+        neg_items = neg_items - self.num_user
+        users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
+
         loss_1 = self.generator_1(deepcopy(self.norm_adj_mat).to(self.device), users, pos_items, neg_items)
         loss_2 = self.generator_2(users, pos_items, neg_items, self.ssl_temp)
 
-        total_loss = loss + loss_ib + bpr_loss + reg_loss + loss_1 + loss_2
-
-        return total_loss
+        return loss_1 + loss_2
 
     def gene_ranklist(self, topk=50):
         # step需要小于用户数量才能达到分批的效果不然会报错

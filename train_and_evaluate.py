@@ -29,13 +29,39 @@ def train(model, train_loader, optimizer):
             optimizer.step()
             sum_loss += loss.item()
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
-                        "MGAT",  'MMGCL', 'DDRec', 'DCMF', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
-                        'MGCN', 'POWERec', 'DMRL', 'MVGAE', 'LayerGCN', 'DCCF', 'AdaGCL', 'DualVAE']:
+                        "MGAT", 'MMGCL', 'DDRec', 'DCMF', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
+                        'MGCN', 'POWERec', 'DMRL', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
             loss.backward()
             optimizer.step()
+            sum_loss += loss.item()
+    elif args.Model in ['AdaGCL']:
+        opt = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=0)
+        opt_gen_1 = torch.optim.Adam(model.generator_1.parameters(), lr=args.learning_rate, weight_decay=0)
+        opt_gen_2 = torch.optim.Adam(filter(lambda p: p.requires_grad, model.generator_2.parameters()),
+                                     lr=args.learning_rate, weight_decay=0, eps=0.001)
+        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
+            opt.zero_grad()
+            opt_gen_1.zero_grad()
+            opt_gen_2.zero_grad()
+            loss_1, out1, out2 = model.loss_1(users, pos_items, neg_items)
+            loss_1.backward()
+            opt.step()
+            opt.zero_grad()
+            loss_2 = model.loss_2(users, pos_items, neg_items, out1, out2)
+            loss_2.backward()
+            opt.step()
+            opt.zero_grad()
+            bpr_reg_loss = model.bpr_reg_loss(users, pos_items, neg_items)
+            bpr_reg_loss.backward()
+            gen_loss = model.gen_loss(users, pos_items, neg_items)
+            gen_loss.backward()
+            opt.step()
+            opt_gen_1.step()
+            opt_gen_2.step()
+            loss = loss_1 + loss_2 + bpr_reg_loss + gen_loss
             sum_loss += loss.item()
     elif args.Model in ["LATTICE", "MICRO"]:
         build_item_graph = True
@@ -46,7 +72,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ['NCL']:
+    elif args.Model in ['NCL', 'MCL']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             # 执行聚类
