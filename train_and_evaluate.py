@@ -30,7 +30,7 @@ def train(model, train_loader, optimizer):
             sum_loss += loss.item()
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT", 'MMGCL', 'DDRec', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
-                        'MGCN', 'POWERec', 'DMRL', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE']:
+                        'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -112,7 +112,7 @@ def train(model, train_loader, optimizer):
             opt_gen_1.step()
             opt_gen_2.step()
             opt_gen_3.step()
-            loss = loss_1 + loss_2 + bpr_reg_loss + gen_loss
+            loss = loss_1 + bpr_reg_loss + gen_loss
             sum_loss += loss.item()
     elif args.Model in ["LATTICE", "MICRO"]:
         build_item_graph = True
@@ -123,7 +123,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ['NCL', 'MCL']:
+    elif args.Model in ['NCL', 'VGCL']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             # 执行聚类

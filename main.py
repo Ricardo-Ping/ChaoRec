@@ -8,7 +8,6 @@ from Model.DCCF import DCCF
 from Model.DCMF import DCMF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
-from Model.DMRL import DMRL
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
@@ -19,7 +18,6 @@ from Model.LATTICE import LATTICE
 from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
-from Model.MCL import MCL
 from Model.MGAT import MGAT
 from Model.MGCL import MGCL
 from Model.MGCN import MGCN
@@ -35,6 +33,7 @@ from Model.POWERec import POWERec
 from Model.SGL import SGL
 from Model.SLMRec import SLMRec
 from Model.VBPR import VBPR
+from Model.VGCL import VGCL
 from arg_parser import parse_args, load_yaml_config
 from utils import setup_seed, gpu, get_local_time
 import torch
@@ -211,8 +210,6 @@ if __name__ == '__main__':
             'POWERec': lambda: POWERec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                        args.reg_weight,
                                        args.n_layers, args.prompt_num, args.neg_weight, args.dropout, device),
-            'DMRL': lambda: DMRL(num_user, num_item, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
-                                 args.corDecay, args.n_factors, device),
             'MVGAE': lambda: MVGAE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    args.reg_weight,
                                    args.n_layers, device),
@@ -224,10 +221,10 @@ if __name__ == '__main__':
                                      args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'DualVAE': lambda: DualVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.ssl_alpha, device),
-            'MCL': lambda: MCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
-                               args.n_layers, args.ssl_temp, args.ssl_alpha, device),
-            'MMSSL': lambda: MMSSL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
-                               args.ssl_alpha, args.ssl_temp, args.G_rate, device),
+            'MMSSL': lambda: MMSSL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.reg_weight, args.ssl_alpha, args.ssl_temp, args.G_rate, device),
+            'VGCL': lambda: VGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
+                                 args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
