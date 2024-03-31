@@ -32,8 +32,8 @@ class VGCL(nn.Module):
         # self.gamma = gamma  # γ参数，可能用于调节某种损失的权重
         self.temp_node = ssl_temp  # 节点级对比学习的温度参数 0.2
         self.temp_cluster = 0.7 * ssl_temp  # 簇级对比学习的温度参数 0.13
-        self.num_user_cluster = 200
-        self.num_item_cluster = 200
+        self.num_user_cluster = 50
+        self.num_item_cluster = 50
 
         # 初始化用户和项目嵌入
         self.user_embedding = nn.Embedding(num_embeddings=self.num_user, embedding_dim=self.dim_E)
@@ -96,8 +96,10 @@ class VGCL(nn.Module):
         return SparseL
 
     def e_step(self):
-        user_embeddings = self.user_embedding.weight.detach().cpu().numpy()
-        item_embeddings = self.item_embedding.weight.detach().cpu().numpy()
+        # user_embeddings = self.user_embedding.weight.detach().cpu().numpy()
+        # item_embeddings = self.item_embedding.weight.detach().cpu().numpy()
+        user_embeddings = self.user_emb.detach().cpu().numpy()
+        item_embeddings = self.item_emb.detach().cpu().numpy()
         self.user_centroids, self.user_2cluster = self.run_kmeans(user_embeddings, self.num_user_cluster)
         self.item_centroids, self.item_2cluster = self.run_kmeans(item_embeddings, self.num_item_cluster)
 
@@ -280,8 +282,6 @@ class VGCL(nn.Module):
         pos_items = pos_items - self.num_user
         neg_items = neg_items - self.num_user
         users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
-
-        self.forward()
 
         bpr_loss = self.bpr_loss(users, pos_items, neg_items)
         reg_loss = self.regularization_loss(users, pos_items, neg_items)

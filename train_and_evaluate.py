@@ -123,7 +123,7 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
-    elif args.Model in ['NCL', 'VGCL']:
+    elif args.Model in ['NCL']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             # 执行聚类
@@ -132,7 +132,18 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
+    elif args.Model in ['VGCL']:
+        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
+            optimizer.zero_grad()
+            # 执行聚类
+            model.forward()
+            model.e_step()
+            loss = model.loss(users, pos_items, neg_items)
+            loss.backward()
+            optimizer.step()
+            sum_loss += loss.item()
     return sum_loss
+
 
 
 def evaluate(model, data, ranklist, topk):
