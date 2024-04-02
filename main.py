@@ -35,6 +35,7 @@ from Model.SLMRec import SLMRec
 from Model.SimGCL import SimGCL
 from Model.VBPR import VBPR
 from Model.VGCL import VGCL
+from Model.XSimGCL import XSimGCL
 from arg_parser import parse_args, load_yaml_config
 from utils import setup_seed, gpu, get_local_time
 import torch
@@ -226,8 +227,11 @@ if __name__ == '__main__':
                                    args.reg_weight, args.ssl_alpha, args.ssl_temp, args.G_rate, device),
             'VGCL': lambda: VGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                  args.ssl_temp, args.ssl_alpha, device),
-            'SimGCL': lambda: SimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
-                                 args.ssl_temp, args.ssl_alpha, device),
+            'SimGCL': lambda: SimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                     args.n_layers,
+                                     args.ssl_temp, args.ssl_alpha, device),
+            'XSimGCL': lambda: XSimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                       args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

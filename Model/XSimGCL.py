@@ -2,8 +2,8 @@
 -*- coding: utf-8 -*-
 
 @Author : Ricardo_PING
-@Time : 2024/3/31 19:18
-@File : SimGCL.py
+@Time : 2024/4/2 20:57
+@File : XSimGCL.py
 @function :
 """
 import numpy as np
@@ -31,10 +31,10 @@ def InfoNCE(view1, view2, temperature: float, b_cos: bool = True):
     return -score.mean()
 
 
-class SimGCL(nn.Module):
+class XSimGCL(nn.Module):
     def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, reg_weight, n_layers, ssl_temp,
                  ssl_reg, device):
-        super(SimGCL, self).__init__()
+        super(XSimGCL, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
         self.edge_index = edge_index
@@ -46,7 +46,8 @@ class SimGCL(nn.Module):
         self.ssl_reg = ssl_reg
         self.device = device
 
-        self.eps = 0.1  # 嵌入的扰动强度
+        self.eps = 0.2  # 嵌入的扰动强度
+        self.layer_cl = 1  # 对比的层数
 
         adjusted_item_ids = edge_index[:, 1] - self.num_user
         # 创建COO格式的稀疏矩阵
@@ -104,23 +105,25 @@ class SimGCL(nn.Module):
         return SparseL
 
     def forward(self, perturbed=False):
-        # 将用户和物品的嵌入向量拼接成一个大的嵌入矩阵
         ego_embeddings = torch.cat([self.user_embedding.weight, self.item_embedding.weight], 0)
-        all_embeddings = []  # 用于存储每一层的嵌入
+        all_embeddings = []
+        all_embeddings_cl = ego_embeddings
         for k in range(self.n_layers):
-            # 使用归一化的邻接矩阵进行图卷积，更新嵌入
             ego_embeddings = torch.sparse.mm(self.sparse_norm_adj, ego_embeddings)
             if perturbed:
-                # 如果启用扰动，向嵌入中添加随机噪声
                 random_noise = torch.rand_like(ego_embeddings).cuda()
-                # 扰动是基于嵌入的符号和规范化的随机噪声的乘积
                 ego_embeddings += torch.sign(ego_embeddings) * F.normalize(random_noise, dim=-1) * self.eps
             all_embeddings.append(ego_embeddings)
-        # 将所有层的嵌入堆叠起来，然后计算平均值得到最终的嵌入
-        all_embeddings = torch.stack(all_embeddings, dim=1)
-        all_embeddings = torch.mean(all_embeddings, dim=1)
-        # 将合并的嵌入分割为用户嵌入和物品嵌入
-        user_all_embeddings, item_all_embeddings = torch.split(all_embeddings, [self.num_user, self.num_item])
+            if k == self.layer_cl - 1:
+                all_embeddings_cl = ego_embeddings
+        final_embeddings = torch.stack(all_embeddings, dim=1)
+        final_embeddings = torch.mean(final_embeddings, dim=1)
+        user_all_embeddings, item_all_embeddings = torch.split(final_embeddings,
+                                                               [self.num_user, self.num_item])
+        user_all_embeddings_cl, item_all_embeddings_cl = torch.split(all_embeddings_cl,
+                                                                     [self.num_user, self.num_item])
+        if perturbed:
+            return user_all_embeddings, item_all_embeddings, user_all_embeddings_cl, item_all_embeddings_cl
         return user_all_embeddings, item_all_embeddings
 
     def bpr_loss(self, users, pos_items, neg_items, user_emb, item_emb):
@@ -147,11 +150,10 @@ class SimGCL(nn.Module):
 
         return reg_loss
 
-    def cal_cl_loss(self, users, pos_items):
-        user_view_1, item_view_1 = self.forward(perturbed=True)
-        user_view_2, item_view_2 = self.forward(perturbed=True)
-        user_cl_loss = InfoNCE(user_view_1[users], user_view_2[users], self.ssl_temp)
-        item_cl_loss = InfoNCE(item_view_1[pos_items], item_view_2[pos_items], self.ssl_temp)
+    def cal_cl_loss(self, users, pos_items, user_view1,user_view2,item_view1,item_view2):
+
+        user_cl_loss = InfoNCE(user_view1[users], user_view2[users], self.ssl_temp)
+        item_cl_loss = InfoNCE(item_view1[pos_items], item_view2[pos_items], self.ssl_temp)
 
         return user_cl_loss + item_cl_loss
 
@@ -160,11 +162,11 @@ class SimGCL(nn.Module):
         neg_items = neg_items - self.num_user
         users, pos_items, neg_items = users.to(self.device), pos_items.to(self.device), neg_items.to(self.device)
 
-        self.user_emb, self.item_emb = self.forward()
+        rec_user_emb, rec_item_emb, cl_user_emb, cl_item_emb = self.forward(True)
 
-        bpr_loss = self.bpr_loss(users, pos_items, neg_items, self.user_emb, self.item_emb)
-        reg_loss = self.regularization_loss(users, pos_items, neg_items, self.user_emb, self.item_emb)
-        cl_loss = self.ssl_reg * self.cal_cl_loss(users, pos_items)
+        bpr_loss = self.bpr_loss(users, pos_items, neg_items, rec_user_emb, rec_item_emb)
+        reg_loss = self.regularization_loss(users, pos_items, neg_items, rec_user_emb, rec_item_emb)
+        cl_loss = self.ssl_reg * self.cal_cl_loss(users, pos_items, rec_user_emb, cl_user_emb, rec_item_emb, cl_item_emb)
 
         loss = bpr_loss + reg_loss + cl_loss
 
@@ -173,7 +175,8 @@ class SimGCL(nn.Module):
     def gene_ranklist(self, topk=50):
         # step需要小于用户数量才能达到分批的效果不然会报错
         # 用户嵌入和项目嵌入
-
+        with torch.no_grad():
+            self.user_emb, self.item_emb = self.forward()
         user_tensor = self.user_emb[:self.num_user].cpu()
         item_tensor = self.item_emb[:self.num_item].cpu()
 
@@ -197,4 +200,3 @@ class SimGCL(nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
-
