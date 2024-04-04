@@ -1,7 +1,0 @@
-learning_rate: [0.01]
-reg_weight : [0.1]
-corDecay : [0.1]
-n_factors : [4]
-ssl_temp : [0.1]
-
-hyper_parameters: ["learning_rate", "reg_weight", "corDecay", 'n_factors', 'ssl_temp']

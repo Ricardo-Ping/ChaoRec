@@ -30,7 +30,7 @@ def train(model, train_loader, optimizer):
             sum_loss += loss.item()
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT", 'MMGCL', 'DDRec', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
-                        'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE', 'SimGCL', 'XSimGCL']:
+                        'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE', 'SimGCL', 'XSimGCL', 'GraphAug']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -85,34 +85,6 @@ def train(model, train_loader, optimizer):
             opt_gen_1.step()
             opt_gen_2.step()
             loss = loss_1 + loss_2 + bpr_reg_loss + gen_loss
-            sum_loss += loss.item()
-    elif args.Model in ['DCMF']:
-        opt = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=0)
-        opt_gen_1 = torch.optim.Adam(model.generator_1.parameters(), lr=args.learning_rate, weight_decay=0)
-        opt_gen_2 = torch.optim.Adam(model.generator_2.parameters(), lr=args.learning_rate, weight_decay=0)
-        opt_gen_3 = torch.optim.Adam(model.generator_3.parameters(), lr=args.learning_rate, weight_decay=0)
-        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
-            opt.zero_grad()
-            opt_gen_1.zero_grad()
-            opt_gen_2.zero_grad()
-            opt_gen_3.zero_grad()
-            loss_1, out1, out2, out3 = model.loss_1(users, pos_items, neg_items)
-            loss_1.backward()
-            opt.step()
-            opt.zero_grad()
-            loss_2 = model.loss_2(users, pos_items, neg_items, out1, out2, out3)
-            loss_2.backward()
-            opt.step()
-            opt.zero_grad()
-            bpr_reg_loss = model.bpr_reg_loss(users, pos_items, neg_items)
-            bpr_reg_loss.backward()
-            gen_loss = model.gen_loss(users, pos_items, neg_items)
-            gen_loss.backward()
-            opt.step()
-            opt_gen_1.step()
-            opt_gen_2.step()
-            opt_gen_3.step()
-            loss = loss_1 + bpr_reg_loss + gen_loss
             sum_loss += loss.item()
     elif args.Model in ["LATTICE", "MICRO"]:
         build_item_graph = True

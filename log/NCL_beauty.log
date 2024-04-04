@@ -1,42 +1,34 @@
-Mon 18 Mar 2024 20:08:11 INFO ============Arguments==============
-Mon 18 Mar 2024 20:08:11 INFO Model: NCL
-Mon 18 Mar 2024 20:08:11 INFO data_path: beauty
-Mon 18 Mar 2024 20:08:11 INFO learning_rate: 0.001
-Mon 18 Mar 2024 20:08:11 INFO feature_embed: 64
-Mon 18 Mar 2024 20:08:11 INFO batch_size: 1024
-Mon 18 Mar 2024 20:08:11 INFO aggr_mode: add
-Mon 18 Mar 2024 20:08:11 INFO reg_weight: 0.001
-Mon 18 Mar 2024 20:08:11 INFO dim_E: 64
-Mon 18 Mar 2024 20:08:11 INFO num_epoch: 1000
-Mon 18 Mar 2024 20:08:11 INFO dropout: 0.2
-Mon 18 Mar 2024 20:08:11 INFO n_layers: 2
-Mon 18 Mar 2024 20:08:11 INFO corDecay: 0.001
-Mon 18 Mar 2024 20:08:11 INFO n_factors: 4
-Mon 18 Mar 2024 20:08:11 INFO n_iterations: 3
-Mon 18 Mar 2024 20:08:11 INFO cl_weight: 2.0
-Mon 18 Mar 2024 20:08:11 INFO mm_layers: 2
-Mon 18 Mar 2024 20:08:11 INFO ii_topk: 10
-Mon 18 Mar 2024 20:08:11 INFO uu_topk: 40
-Mon 18 Mar 2024 20:08:11 INFO lambda_coeff: 0.9
-Mon 18 Mar 2024 20:08:11 INFO ssl_temp: 0.9
-Mon 18 Mar 2024 20:08:11 INFO ssl_alpha: 0.9
-Mon 18 Mar 2024 20:08:11 INFO ae_weight: 0.1
-Mon 18 Mar 2024 20:08:11 INFO threshold: 0.1
-Mon 18 Mar 2024 20:08:11 INFO prompt_num: 0.1
-Mon 18 Mar 2024 20:08:11 INFO neg_weight: 0.1
-Mon 18 Mar 2024 20:08:11 INFO cen_reg: 0.005
-Mon 18 Mar 2024 20:08:11 INFO n_intents: 128
-Mon 18 Mar 2024 20:08:11 INFO seed: 42
-Mon 18 Mar 2024 20:08:11 INFO num_workers: 1
-Mon 18 Mar 2024 20:08:11 INFO topk: [5, 10, 20]
-Mon 18 Mar 2024 20:08:11 INFO local time£ºMar-18-2024-20-08-11
-Mon 18 Mar 2024 20:08:12 INFO =========1/1: Parameters:{'n_layers': 3, 'learning_rate': 0.001, 'reg_weight': 1e-05, 'ssl_alpha': 1e-05, 'ssl_temp': 0.05}=========
-Mon 18 Mar 2024 21:12:47 INFO Epoch 1, Loss: 64.22559
-Mon 18 Mar 2024 21:12:48 INFO Validation Metrics:
-Mon 18 Mar 2024 21:12:48 INFO 5: precision: 0.00056 | recall: 0.00275 | ndcg: 0.00177 | hit_rate: 0.00278 | map: 0.00144
-Mon 18 Mar 2024 21:12:48 INFO 10: precision: 0.00039 | recall: 0.00388 | ndcg: 0.00213 | hit_rate: 0.00394 | map: 0.00159
-Mon 18 Mar 2024 21:12:48 INFO 20: precision: 0.00032 | recall: 0.00625 | ndcg: 0.00274 | hit_rate: 0.00639 | map: 0.00176
-Mon 18 Mar 2024 21:12:48 INFO Test Metrics:
-Mon 18 Mar 2024 21:12:48 INFO 5: precision: 0.00084 | recall: 0.00263 | ndcg: 0.00204 | hit_rate: 0.00420 | map: 0.00154
-Mon 18 Mar 2024 21:12:48 INFO 10: precision: 0.00068 | recall: 0.00414 | ndcg: 0.00260 | hit_rate: 0.00672 | map: 0.00175
-Mon 18 Mar 2024 21:12:48 INFO 20: precision: 0.00054 | recall: 0.00661 | ndcg: 0.00331 | hit_rate: 0.01053 | map: 0.00192
+Sat 30 Mar 2024 21:16:36 INFO ============Arguments==============
+Sat 30 Mar 2024 21:16:36 INFO Model: NCL
+Sat 30 Mar 2024 21:16:36 INFO data_path: beauty
+Sat 30 Mar 2024 21:16:36 INFO learning_rate: 0.001
+Sat 30 Mar 2024 21:16:36 INFO feature_embed: 64
+Sat 30 Mar 2024 21:16:36 INFO batch_size: 1024
+Sat 30 Mar 2024 21:16:36 INFO aggr_mode: add
+Sat 30 Mar 2024 21:16:36 INFO reg_weight: 0.001
+Sat 30 Mar 2024 21:16:36 INFO dim_E: 64
+Sat 30 Mar 2024 21:16:36 INFO num_epoch: 1000
+Sat 30 Mar 2024 21:16:36 INFO dropout: 0.2
+Sat 30 Mar 2024 21:16:36 INFO n_layers: 2
+Sat 30 Mar 2024 21:16:36 INFO corDecay: 0.001
+Sat 30 Mar 2024 21:16:36 INFO n_factors: 4
+Sat 30 Mar 2024 21:16:36 INFO n_iterations: 3
+Sat 30 Mar 2024 21:16:36 INFO cl_weight: 2.0
+Sat 30 Mar 2024 21:16:36 INFO mm_layers: 2
+Sat 30 Mar 2024 21:16:36 INFO ii_topk: 10
+Sat 30 Mar 2024 21:16:36 INFO uu_topk: 40
+Sat 30 Mar 2024 21:16:36 INFO lambda_coeff: 0.9
+Sat 30 Mar 2024 21:16:36 INFO ssl_temp: 0.9
+Sat 30 Mar 2024 21:16:36 INFO ssl_alpha: 0.9
+Sat 30 Mar 2024 21:16:36 INFO ae_weight: 0.1
+Sat 30 Mar 2024 21:16:36 INFO threshold: 0.1
+Sat 30 Mar 2024 21:16:36 INFO prompt_num: 0.1
+Sat 30 Mar 2024 21:16:36 INFO neg_weight: 0.1
+Sat 30 Mar 2024 21:16:36 INFO cen_reg: 0.005
+Sat 30 Mar 2024 21:16:36 INFO n_intents: 128
+Sat 30 Mar 2024 21:16:36 INFO G_rate: 0.0001
+Sat 30 Mar 2024 21:16:36 INFO seed: 42
+Sat 30 Mar 2024 21:16:36 INFO num_workers: 1
+Sat 30 Mar 2024 21:16:36 INFO topk: [5, 10, 20]
+Sat 30 Mar 2024 21:16:36 INFO local time£ºMar-30-2024-21-16-36
+Sat 30 Mar 2024 21:16:36 INFO =========1/1: Parameters:{'n_layers': 3, 'learning_rate': 0.001, 'reg_weight': 1e-05, 'ssl_alpha': 1e-05, 'ssl_temp': 0.05}=========

@@ -5,7 +5,6 @@ from Model.AdaGCL import AdaGCL
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
 from Model.DCCF import DCCF
-from Model.DCMF import DCMF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
 from Model.DRAGON import DRAGON
@@ -13,6 +12,7 @@ from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
 from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
+from Model.GraphAug import GraphAug
 from Model.HCCF import HCCF
 from Model.LATTICE import LATTICE
 from Model.LayerGCN import LayerGCN
@@ -191,8 +191,6 @@ if __name__ == '__main__':
                                    args.reg_weight, args.n_layers, args.mm_layers,
                                    args.lambda_coeff, args.threshold,
                                    aggr_mode, device),
-            'DCMF': lambda: DCMF(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
-                                 args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'SGL': lambda: SGL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             'MultVAE': lambda: MultVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
@@ -232,6 +230,8 @@ if __name__ == '__main__':
                                      args.ssl_temp, args.ssl_alpha, device),
             'XSimGCL': lambda: XSimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.n_layers, args.ssl_temp, args.ssl_alpha, device),
+            'GraphAug': lambda: GraphAug(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
+                                 args.ssl_temp, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
