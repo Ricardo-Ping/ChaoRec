@@ -15,6 +15,7 @@ from Model.GRCN import GRCN
 from Model.GraphAug import GraphAug
 from Model.HCCF import HCCF
 from Model.LATTICE import LATTICE
+from Model.LGMRec import LGMRec
 from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
@@ -232,6 +233,8 @@ if __name__ == '__main__':
                                        args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'GraphAug': lambda: GraphAug(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                  args.ssl_temp, args.ssl_alpha, device),
+            'LGMRec': lambda: LGMRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.reg_weight, args.n_layers, args.ssl_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
