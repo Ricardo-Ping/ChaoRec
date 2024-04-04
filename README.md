@@ -43,5 +43,6 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - MMGCL(2022): Multi-modal Graph Contrastive Learning for Micro-video Recommendation
 - MVGAE(2022): Multi-Modal Variational Graph Auto-Encoder for Recommendation Systems
 - MMSSL(2023): Multi-Modal Self-Supervised Learning for Recommendation
+- LGMRec(2024): Local and Global Graph Learning for Multimodal Recommendation
 
 现有模型大部分按照原作者代码进行改写，如果发现有错误欢迎指正！
