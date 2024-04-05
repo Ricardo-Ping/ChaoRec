@@ -33,6 +33,7 @@ from Model.NGCF import NGCF
 from Model.POWERec import POWERec
 from Model.SGL import SGL
 from Model.SLMRec import SLMRec
+from Model.SelfCF import SelfCF
 from Model.SimGCL import SimGCL
 from Model.VBPR import VBPR
 from Model.VGCL import VGCL
@@ -235,6 +236,8 @@ if __name__ == '__main__':
                                  args.ssl_temp, args.ssl_alpha, device),
             'LGMRec': lambda: LGMRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    args.reg_weight, args.n_layers, args.ssl_alpha, device),
+            'SelfCF': lambda: SelfCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                     args.n_layers, args.dropout, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
