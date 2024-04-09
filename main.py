@@ -19,6 +19,7 @@ from Model.LGMRec import LGMRec
 from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
+from Model.MENTOR import MENTOR
 from Model.MGAT import MGAT
 from Model.MGCL import MGCL
 from Model.MGCN import MGCN
@@ -115,6 +116,9 @@ if __name__ == '__main__':
     cen_reg = args.cen_reg  # DCCF的意图嵌入正则化
     n_intents = args.n_intents  # DCCF的意图嵌入数量
     G_rate = args.G_rate  # MMSSL的生成器损失权重
+    align_weight = args.align_weight  # MENTOR的对齐损失权重
+    mask_weight_f = args.mask_weight_f  # MENTOR的特征掩码损失权重
+    mask_weight_g = args.mask_weight_g  # MENTOR的图掩码损失权重
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -238,6 +242,9 @@ if __name__ == '__main__':
                                    args.reg_weight, args.n_layers, args.ssl_alpha, device),
             'SelfCF': lambda: SelfCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                      args.n_layers, args.dropout, device),
+            'MENTOR': lambda: MENTOR(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                     args.mm_layers, args.reg_weight, args.ssl_temp, args.dropout, args.align_weight,
+                                     args.mask_weight_g, args.mask_weight_f, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

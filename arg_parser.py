@@ -13,7 +13,7 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='SelfCF', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='MENTOR', help='Model name')
     # 数据集：baby,clothing,sports,beauty,electronics
     parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
     # 超参数选择
@@ -43,6 +43,9 @@ def parse_args():
     parser.add_argument('--cen_reg', type=float, default=5e-3, help='intent regularization')
     parser.add_argument('--n_intents', type=int, default=128, help='Number of latent intents')
     parser.add_argument('--G_rate', type=int, default=0.0001, help='MMSSL')
+    parser.add_argument('--align_weight', type=int, default=0.1, help='MENTOR align_weight')
+    parser.add_argument('--mask_weight_f', type=int, default=1.5, help='MENTOR mask_weight_f')
+    parser.add_argument('--mask_weight_g', type=int, default=0.001, help='MENTOR mask_weight_g')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')

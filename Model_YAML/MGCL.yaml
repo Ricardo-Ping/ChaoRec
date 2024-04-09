@@ -1,7 +1,7 @@
 learning_rate: [0.01]
 reg_weight : [0.01]
-n_layers : [4]
-ssl_alpha : [0.01]
-ssl_temp : [0.1]
+n_layers : [3]
+ssl_alpha : [0.1]
+ssl_temp : [0.2]
 
 hyper_parameters: ["learning_rate", "ssl_alpha", "n_layers", 'ssl_temp', 'reg_weight']
