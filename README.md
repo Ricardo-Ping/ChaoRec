@@ -23,6 +23,7 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - SimGCL(2022): Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation
 - XSimGCL(2023): Towards Extremely Simple Graph Contrastive Learning for Recommendation
 - GraphAug(2024): Graph Augmentation for Recommendation
+- SelfCF(2023): A Simple Framework for Self-supervised Collaborative Filtering
 
 目前的多模态推荐模型有：
 
