@@ -1,4 +1,4 @@
-n_layers : [4]
+n_layers : [3]
 learning_rate: [0.001]
 reg_weight : [0.001]
 dropout : [0.1]  # 0.0, 0.1, 0.2

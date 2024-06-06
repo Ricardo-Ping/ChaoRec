@@ -1,9 +1,9 @@
 learning_rate: [0.001]
-reg_weight : [0.1,0.01,0.001]
-n_layers : [2]
+reg_weight : [0.001]
+n_layers : [1]
 mm_layers : [1]
 ii_topk : [10]
-dropout : [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
-lambda_coeff : [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
+dropout : [0.2]
+lambda_coeff : [0.2]
 # 0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9
 hyper_parameters: ["mm_layers", 'ii_topk', 'lambda_coeff', "dropout", "n_layers", "learning_rate", "reg_weight"]

@@ -6,6 +6,8 @@
 @File : GRCN.py
 @function :
 """
+import random
+
 import torch
 from torch_geometric.nn import MessagePassing
 from torch_geometric.utils import remove_self_loops, add_self_loops, softmax, dropout_adj

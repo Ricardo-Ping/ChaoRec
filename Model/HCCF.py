@@ -15,7 +15,7 @@ import scipy.sparse as sp
 
 class HCCF(nn.Module):
     def __init__(self, num_user, num_item, edge_index, user_item_dict, dim_E, reg_weight, n_layers, aggr_mode,
-                 ssl_alpha, ssl_temp, device):
+                 ssl_alpha, ssl_temp, keepRate, leaky, mult, device):
         super(HCCF, self).__init__()
         self.result = None
         self.num_user = num_user
@@ -30,9 +30,9 @@ class HCCF(nn.Module):
         self.ssl_alpha = ssl_alpha
         self.ssl_temp = ssl_temp
         self.hyperNum = 128
-        self.leaky = 0.5  # LeakyReLU
-        self.keepRate = 1.0
-        self.mult = 0.1  # 当数据集稀疏时
+        self.leaky = leaky  # LeakyReLU
+        self.keepRate = keepRate
+        self.mult = mult  # 当数据集稀疏时
 
         # 初始化用户和项目嵌入
         self.uEmbeds = nn.Parameter(nn.init.xavier_uniform_(torch.empty(self.num_user, self.dim_E)))

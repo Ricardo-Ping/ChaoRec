@@ -1,7 +1,8 @@
-learning_rate: [0.00055]
-reg_weight : [0.0001]  # [1e-5,1e-3,1e-2]
-ssl_alpha : [0.003]
-ssl_temp : [0.5]
+learning_rate: [0.001]  # 0.00055
+reg_weight : [0.00001]  # [1e-5,1e-3,1e-2]
+ssl_alpha : [0.001]
+ssl_temp : [0.2]
 G_rate : [0.0001]
+mm_layers : [2]
 
-hyper_parameters: ["G_rate","learning_rate", "reg_weight","ssl_alpha","ssl_temp"]
+hyper_parameters: ["G_rate","learning_rate", "reg_weight","ssl_alpha","ssl_temp", 'mm_layers']

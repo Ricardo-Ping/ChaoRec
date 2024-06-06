@@ -43,7 +43,7 @@ class LGMRec(nn.Module):
         self.n_ui_layers = n_layers  # 用户项目图层数
         self.n_hyper_layer = 1  # 超图层数
         self.hyper_num = 4  # 超边数
-        self.keep_rate = 0.3  # 保留率，用于Dropout
+        self.keep_rate = 0.2  # 保留率，用于Dropout
         self.tau = 0.2  # 用于Gumbel-Softmax的温度参数
         self.ssl_reg = ssl_alpha
         self.device = device

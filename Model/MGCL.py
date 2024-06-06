@@ -6,10 +6,12 @@
 @File : MGCL.py
 @function :
 """
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from BasicGCN import GCNConv
+from MAD import mad_value
 
 
 class MGCL(torch.nn.Module):

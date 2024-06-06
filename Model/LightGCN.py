@@ -90,7 +90,6 @@ class LightGCN(nn.Module):
         final_embeddings = torch.zeros_like(embs[0])
         for i in range(num_layers):
             final_embeddings += weights[i] * embs[i]
-
         self.result = final_embeddings
 
         return self.result

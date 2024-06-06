@@ -710,4 +710,5 @@ class DenoisingNet(nn.Module):
         reg_loss = calcRegLoss(self) * self.reg_weight  # 计算正则化损失
 
         lossl0 = self.lossl0(temperature) * self.lambda0  # 计算L0损失
+
         return bpr_loss + reg_loss + lossl0  # 返回总损失

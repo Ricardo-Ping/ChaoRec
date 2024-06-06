@@ -129,7 +129,8 @@ class BM3(nn.Module):
         reg_loss = self.reg_weight * (
                 torch.mean(u_online_ori ** 2) + torch.mean(i_online_ori ** 2))
 
-        total_loss = (loss_ui + loss_iu).mean() + reg_loss + self.cl_weight * (loss_t + loss_v + loss_tv + loss_vt).mean()
+        total_loss = (loss_ui + loss_iu).mean() + reg_loss + self.cl_weight * (
+                    loss_t + loss_v + loss_tv + loss_vt).mean()
 
         return total_loss
 

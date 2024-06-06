@@ -12,7 +12,7 @@ from torch import nn
 import torch.nn.functional as F
 import scipy.sparse as sp
 import random
-from torch_scatter import scatter
+
 
 
 class MMGCL(nn.Module):

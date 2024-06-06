@@ -14,6 +14,8 @@ import scipy.sparse as sp
 from torch import autograd
 from scipy.sparse import csr_matrix
 
+from MAD import mad_value
+
 
 # 鉴别器
 class Discriminator(nn.Module):
@@ -44,17 +46,17 @@ class Discriminator(nn.Module):
 
 class MMSSL(nn.Module):
     def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E,
-                 reg_weight, ssl_alpha, ssl_temp, G_rate, device):
+                 reg_weight, ssl_alpha, ssl_temp, G_rate, mmlayer, device):
         super(MMSSL, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
         self.dim_E = dim_E
-        self.weight_size = [64, 64]  # 权重尺寸列表，用于定义多层网络的每层大小
+        self.weight_size = [64] * mmlayer # 权重尺寸列表，用于定义多层网络的每层大小
         self.n_ui_layers = len(self.weight_size)
         # 在权重尺寸列表前面加上嵌入维度，用于网络的第一层输入
         self.weight_size = [self.dim_E] + self.weight_size
         self.device = device
-        self.mmlayer = 1
+        self.mmlayer = mmlayer
         self.user_item_dict = user_item_dict
         self.reg_weight = reg_weight  # [1e-5,1e-3,1e-2]
         self.tau = ssl_temp  # 0.5
@@ -288,6 +290,7 @@ class MMSSL(nn.Module):
         # 对图像和文本特征应用dropout和线性变换
         image_feats = image_item_feats = self.dropout(self.image_trans(self.image_feats))
         text_feats = text_item_feats = self.dropout(self.text_trans(self.text_feats))
+
         image_user_id = None
         text_user_id = None
         image_item_id = None

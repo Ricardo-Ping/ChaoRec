@@ -3,9 +3,10 @@
 
 @Author : Ricardo_PING
 @Time : 2023/11/14 19:01
-@File : MMGCL.py
+@File : DDRec.py
 @function :
 """
+import random
 import torch
 from torch import nn
 from BasicGCN import GCNConv
@@ -15,7 +16,7 @@ import numpy as np
 
 class DDRec(nn.Module):
     def __init__(self, num_user, num_item, edge_index, user_item_dict, v_feat, t_feat, dim_E, feat_E,
-                 reg_weight, n_layers, mm_layers, mm_image_weight, threshold, aggr_mode, device):
+                 reg_weight, n_layers, ssl_temp, ssl_alpha, threshold, aggr_mode, device):
         super(DDRec, self).__init__()
         self.final_i_g_embeddings = None
         self.i_g_embeddings = None
@@ -33,10 +34,12 @@ class DDRec(nn.Module):
         self.n_layers = n_layers
         self.aggr_mode = aggr_mode
         self.device = device
-        self.mm_layers = mm_layers
+        self.mm_layers = 1
         self.knn_k = 10
-        self.mm_image_weight = mm_image_weight
+        self.mm_image_weight = 0.5
         self.threshold = threshold
+        self.ssl_temp = ssl_temp
+        self.ssl_alpha = ssl_alpha
 
         # 转置并设置为无向图
         self.edge_index_clone = torch.tensor(edge_index).t().contiguous().to(self.device)
@@ -70,8 +73,6 @@ class DDRec(nn.Module):
         # 定义图卷积层
         self.conv_layers = nn.ModuleList([GCNConv(self.dim_E, self.dim_E, aggr=self.aggr_mode)
                                           for _ in range(n_layers)])
-        self.conv_layers_m = nn.ModuleList([GCNConv(self.dim_E, self.dim_E, aggr=self.aggr_mode)
-                                            for _ in range(mm_layers)])
 
         # --------------冻结项目图-------------------
         indices, image_adj = self.get_knn_adj_mat(self.image_embedding.weight.detach())
@@ -117,32 +118,11 @@ class DDRec(nn.Module):
         visual_tensor = self.v_embedding
         text_tensor = self.t_embedding
 
-        # visual_tensor_cpu = visual_tensor.detach().cpu().numpy()
-        # text_tensor_cpu = text_tensor.detach().cpu().numpy()
-        # np.save('noise_visual.npy', visual_tensor_cpu)
-        # np.save('noise_text.npy', text_tensor_cpu)
-
+        # soft denoise
         if self.final_i_g_embeddings is not None:
             item_embedding = self.final_i_g_embeddings.detach()
             visual_tensor = item_embedding * self.guide_image_trs(self.v_embedding)
             text_tensor = item_embedding * self.guide_text_trs(self.t_embedding)
-
-        # =============项目-项目图========================
-        # 对项目-项目图更新项目表示
-        h = self.item_embedding.weight
-        for i in range(self.mm_layers):
-            h = torch.sparse.mm(self.mm_adj, h)
-        h = F.normalize(h, p=2, dim=1)
-
-        h1 = self.v_embedding
-        for i in range(self.mm_layers):
-            h1 = torch.sparse.mm(self.image_adj, h1)
-        h1 = F.normalize(h1, p=2, dim=1)
-
-        h2 = self.t_embedding
-        for i in range(self.mm_layers):
-            h2 = torch.sparse.mm(self.text_adj, h2)
-        h2 = F.normalize(h2, p=2, dim=1)
 
         # =====================视觉模态卷积去噪===================
         ego_embeddings = torch.cat((self.user_embedding.weight, visual_tensor), dim=0)
@@ -156,19 +136,17 @@ class DDRec(nn.Module):
             filtered_edge_index = self.filter_edges(self.edge_index_clone, sim_matrix, threshold=self.threshold)
             filtered_edge_index = torch.cat((filtered_edge_index, filtered_edge_index[[1, 0]]), dim=1)
             ego_embeddings = conv(ego_embeddings, filtered_edge_index)
-            # ego_embeddings = conv(ego_embeddings, self.edge_index)
             all_embeddings_d += [ego_embeddings]
         all_embeddings_d = torch.stack(all_embeddings_d, dim=1)
         # 均值处理
         all_embeddings_d = all_embeddings_d.mean(dim=1, keepdim=False)
         self.u_v_embeddings, self.i_v_embeddings = torch.split(all_embeddings_d, [self.num_user, self.num_item], dim=0)
-        self.i_v_embeddings = self.i_v_embeddings + h1
 
         # =====================文本模态卷积去噪===================
         ego_embeddings = torch.cat((self.user_embedding.weight, text_tensor), dim=0)
         all_embeddings_d = [ego_embeddings]
         for conv in self.conv_layers:
-            # # 计算余弦相似度
+            # 计算余弦相似度
             user_embeddings = ego_embeddings[:self.num_user]
             item_embeddings = ego_embeddings[self.num_user:]
             sim_matrix = torch.mm(user_embeddings, item_embeddings.t())
@@ -176,13 +154,11 @@ class DDRec(nn.Module):
             filtered_edge_index = self.filter_edges(self.edge_index_clone, sim_matrix, threshold=self.threshold)
             filtered_edge_index = torch.cat((filtered_edge_index, filtered_edge_index[[1, 0]]), dim=1)
             ego_embeddings = conv(ego_embeddings, filtered_edge_index)
-            # ego_embeddings = conv(ego_embeddings, self.edge_index)
             all_embeddings_d += [ego_embeddings]
         all_embeddings_d = torch.stack(all_embeddings_d, dim=1)
         # 均值处理
         all_embeddings_d = all_embeddings_d.mean(dim=1, keepdim=False)
         self.u_t_embeddings, self.i_t_embeddings = torch.split(all_embeddings_d, [self.num_user, self.num_item], dim=0)
-        self.i_t_embeddings = self.i_t_embeddings + h2
 
         # =====================id模态卷积===================
         ego_embeddings = torch.cat((self.user_embedding.weight, self.item_embedding.weight), dim=0)
@@ -194,22 +170,33 @@ class DDRec(nn.Module):
         # 均值处理
         all_embeddings = all_embeddings.mean(dim=1, keepdim=False)
         self.u_g_embeddings, self.i_g_embeddings = torch.split(all_embeddings, [self.num_user, self.num_item], dim=0)
+
+        h = self.i_g_embeddings
+        for i in range(self.mm_layers):
+            h = torch.sparse.mm(self.mm_adj, h)
+        # h = F.normalize(h, p=2, dim=1)
         self.final_i_g_embeddings = self.i_g_embeddings + h
-        # self.final_i_g_embeddings = self.i_g_embeddings
+
+        h1 = self.i_v_embeddings
+        for i in range(self.mm_layers):
+            h1 = torch.sparse.mm(self.mm_adj, h1)
+        # h1 = F.normalize(h1, p=2, dim=1)
+        self.i_v_embeddings = self.i_v_embeddings + h1
+
+        h2 = self.i_t_embeddings
+        for i in range(self.mm_layers):
+            h2 = torch.sparse.mm(self.mm_adj, h2)
+        # h2 = F.normalize(h2, p=2, dim=1)
+        self.i_t_embeddings = self.i_t_embeddings + h2
 
         # 最终的用户和项目嵌入
         self.i = torch.cat((self.final_i_g_embeddings, self.i_v_embeddings, self.i_t_embeddings), dim=1)
         self.u = torch.cat((self.u_g_embeddings, self.u_v_embeddings, self.u_t_embeddings), dim=1)
 
+        # self.result = torch.cat((self.u_g_embeddings, self.final_i_g_embeddings), dim=0)
         self.result = torch.cat((self.u, self.i), dim=0)
 
         return self.result
-
-    def cosine_similarity(self, user_embeddings, item_embeddings):
-        # 计算余弦相似度
-        user_embeddings_norm = F.normalize(user_embeddings, p=2, dim=1)
-        item_embeddings_norm = F.normalize(item_embeddings, p=2, dim=1)
-        return torch.mm(user_embeddings_norm, item_embeddings_norm.t())
 
     def filter_edges(self, edge_index, sim_matrix, threshold):
         # 获得用户和项目的索引
@@ -221,11 +208,11 @@ class DDRec(nn.Module):
 
         return filtered_edges
 
-    def bpr_loss(self, users, pos_items, neg_items, embedding):
+    def bpr_loss(self, users, pos_items, neg_items, user_embedding, item_embedding):
         # 获取用户、正向和负向项目的嵌入
-        user_embeddings = embedding[users]
-        pos_item_embeddings = embedding[self.num_user + pos_items]
-        neg_item_embeddings = embedding[self.num_user + neg_items]
+        user_embeddings = user_embedding[users]
+        pos_item_embeddings = item_embedding[pos_items]
+        neg_item_embeddings = item_embedding[neg_items]
 
         # 计算正向和负向项目的分数
         pos_scores = torch.sum(user_embeddings * pos_item_embeddings, dim=1)
@@ -236,23 +223,20 @@ class DDRec(nn.Module):
 
         return bpr_loss
 
-    def adaptive_bpr_loss(self, users, pos_items, neg_items, embedding, xi=0.99):
-        # 获取用户、正样本和负样本的嵌入
+    def main_bpr_loss(self, users, pos_items, neg_items, embedding):
+        # 获取用户、正向和负向项目的嵌入
         user_embeddings = embedding[users]
-        pos_item_embeddings = embedding[self.num_user + pos_items]
-        neg_item_embeddings = embedding[self.num_user + neg_items]
+        pos_item_embeddings = embedding[pos_items + self.num_user]
+        neg_item_embeddings = embedding[neg_items + self.num_user]
 
-        # 计算正样本和负样本的分数
+        # 计算正向和负向项目的分数
         pos_scores = torch.sum(user_embeddings * pos_item_embeddings, dim=1)
         neg_scores = torch.sum(user_embeddings * neg_item_embeddings, dim=1)
 
-        # 计算自适应参数 delta
-        delta = 1 - torch.log(1 - torch.min(torch.sigmoid(neg_scores), torch.tensor(xi)))
+        # 计算 BPR 损失
+        bpr_loss = -torch.mean(torch.log(torch.sigmoid(pos_scores - neg_scores) + 1e-5))
 
-        # 计算自适应 BPR 损失
-        adaptive_loss = -torch.mean(torch.log(torch.sigmoid(pos_scores - delta * neg_scores) + 1e-5))
-
-        return adaptive_loss
+        return bpr_loss
 
     def regularization_loss(self, users, pos_items, neg_items, embedding):
         # 计算正则化损失
@@ -266,6 +250,18 @@ class DDRec(nn.Module):
 
         return reg_loss
 
+    def ssl_compute(self, embedded_s1, embedded_s2, users_or_pos_items):
+        s1 = embedded_s1[users_or_pos_items]
+        s2 = embedded_s2[users_or_pos_items]
+        normalized_embedded_s1 = F.normalize(s1, dim=1)
+        normalized_embedded_s2 = F.normalize(s2, dim=1)
+
+        pos_score = torch.sum(torch.mul(normalized_embedded_s1, normalized_embedded_s2), dim=1, keepdim=False)
+        all_score = torch.mm(normalized_embedded_s1, normalized_embedded_s2.t())
+        ssl_mi = -torch.log(torch.exp(pos_score / self.ssl_temp) / torch.exp(all_score / self.ssl_temp).sum(dim=1,
+                                                                                                           keepdim=False)).mean()
+        return ssl_mi
+
     def loss(self, users, pos_items, neg_items):
         pos_items = pos_items - self.num_user
         neg_items = neg_items - self.num_user
@@ -274,12 +270,21 @@ class DDRec(nn.Module):
         embedding = self.forward()
 
         # bpr损失
-        bpr_loss = self.bpr_loss(users, pos_items, neg_items, embedding)
+        bpr_loss = self.main_bpr_loss(users, pos_items, neg_items, embedding)
+
+        # cl
+        score_user_1 = self.ssl_compute(self.u_v_embeddings, self.u_g_embeddings, users)
+        score_user_2 = self.ssl_compute(self.u_t_embeddings, self.u_g_embeddings, users)
+
+        score_item_1 = self.ssl_compute(self.i_v_embeddings, self.final_i_g_embeddings, pos_items)
+        score_item_2 = self.ssl_compute(self.i_t_embeddings, self.final_i_g_embeddings, pos_items)
+
+        cl_loss = self.ssl_alpha * (score_user_1 + score_item_1 + score_user_2 + score_item_2)
 
         # 正则化损失
         reg_loss = self.regularization_loss(users, pos_items, neg_items, embedding)
 
-        total_loss = bpr_loss + reg_loss
+        total_loss = bpr_loss + reg_loss + cl_loss
 
         return total_loss
 
@@ -302,8 +307,6 @@ class DDRec(nn.Module):
 
         # 选出每个用户的 top-k 个物品
         _, index_of_rank_list_train = torch.topk(score_matrix, topk)
-        # index_of_rank_list_train_np = index_of_rank_list_train.cpu().numpy()
-        # np.save('without_soft_rank_list.npy', index_of_rank_list_train_np)
         # 总的top-k列表
         all_index_of_rank_list = torch.cat(
             (all_index_of_rank_list, index_of_rank_list_train.cpu() + self.num_user),

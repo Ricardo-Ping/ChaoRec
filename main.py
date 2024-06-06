@@ -48,6 +48,9 @@ from torch.utils.data import DataLoader
 from Model.MMGCN import MMGCN
 from train_and_evaluate import train_and_evaluate
 
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True
+
 if __name__ == '__main__':
     # 输出参数信息
     args = parse_args()
@@ -119,6 +122,9 @@ if __name__ == '__main__':
     align_weight = args.align_weight  # MENTOR的对齐损失权重
     mask_weight_f = args.mask_weight_f  # MENTOR的特征掩码损失权重
     mask_weight_g = args.mask_weight_g  # MENTOR的图掩码损失权重
+    leaky = args.leaky  # HCCf
+    keepRate = args.keepRate  # HCCf
+    mult = args.mult  # HCCF
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -194,8 +200,8 @@ if __name__ == '__main__':
                                    args.dropout, device),
             'DDRec': lambda: DDRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    feature_embedding,
-                                   args.reg_weight, args.n_layers, args.mm_layers,
-                                   args.lambda_coeff, args.threshold,
+                                   args.reg_weight, args.n_layers, args.ssl_temp,
+                                   args.ssl_alpha, args.threshold,
                                    aggr_mode, device),
             'SGL': lambda: SGL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
@@ -208,7 +214,8 @@ if __name__ == '__main__':
             'LightGCL': lambda: LightGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                          args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
             'HCCF': lambda: HCCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                                 args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, device),
+                                 args.n_layers, aggr_mode, args.ssl_alpha, args.ssl_temp, args.keepRate,
+                                 args.leaky, args.mult, device),
             'MGCL': lambda: MGCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             'MGCN': lambda: MGCN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
@@ -228,7 +235,7 @@ if __name__ == '__main__':
             'DualVAE': lambda: DualVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.ssl_alpha, device),
             'MMSSL': lambda: MMSSL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                   args.reg_weight, args.ssl_alpha, args.ssl_temp, args.G_rate, device),
+                                   args.reg_weight, args.ssl_alpha, args.ssl_temp, args.G_rate, args.mm_layers, device),
             'VGCL': lambda: VGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                  args.ssl_temp, args.ssl_alpha, device),
             'SimGCL': lambda: SimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,

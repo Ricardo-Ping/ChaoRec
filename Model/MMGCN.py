@@ -6,18 +6,13 @@
 @File : MMGCN.py
 @function :
 """
-import math
+import random
+
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.nn import Parameter
 from BasicGCN import BasicGCN
-from torch_geometric.utils import scatter
-from torch_geometric.nn.conv import MessagePassing
-from torch_geometric.nn.inits import uniform
-
-from metrics import precision_at_k, recall_at_k, ndcg_at_k, hit_rate_at_k, map_at_k
 from utils import gpu
 
 
@@ -77,29 +72,73 @@ class GCN(torch.nn.Module):
         self.g_layer3 = nn.Linear(self.dim_id + self.dim_id, self.dim_id) if self.concate else nn.Linear(self.dim_id,
                                                                                                          self.dim_id)
 
+        # self.conv_embed_4 = BasicGCN(self.dim_id, self.dim_id, aggr=self.aggr_mode)
+        # nn.init.xavier_normal_(self.conv_embed_4.lin.weight)
+        # self.linear_layer4 = nn.Linear(self.dim_id, self.dim_id)
+        # nn.init.xavier_normal_(self.linear_layer4.weight)
+        # self.g_layer4 = nn.Linear(self.dim_id + self.dim_id, self.dim_id) if self.concate else nn.Linear(self.dim_id,
+        #                                                                                                  self.dim_id)
+        #
+        # self.conv_embed_5 = BasicGCN(self.dim_id, self.dim_id, aggr=self.aggr_mode)
+        # nn.init.xavier_normal_(self.conv_embed_5.lin.weight)
+        # self.linear_layer5 = nn.Linear(self.dim_id, self.dim_id)
+        # nn.init.xavier_normal_(self.linear_layer5.weight)
+        # self.g_layer5 = nn.Linear(self.dim_id + self.dim_id, self.dim_id) if self.concate else nn.Linear(self.dim_id,
+        #                                                                                                  self.dim_id)
+        #
+        # self.conv_embed_6 = BasicGCN(self.dim_id, self.dim_id, aggr=self.aggr_mode)
+        # nn.init.xavier_normal_(self.conv_embed_6.lin.weight)
+        # self.linear_layer6 = nn.Linear(self.dim_id, self.dim_id)
+        # nn.init.xavier_normal_(self.linear_layer6.weight)
+        # self.g_layer6 = nn.Linear(self.dim_id + self.dim_id, self.dim_id) if self.concate else nn.Linear(self.dim_id,
+        #                                                                                                  self.dim_id)
+
     def forward(self, features, id_embedding):
         temp_features = self.MLP(features) if self.dim_latent else features
 
         x = torch.cat((self.preference, temp_features), dim=0)
         x = F.normalize(x).to(self.device)
-
+        # 第一层
         h = F.leaky_relu(self.conv_embed_1(x, self.edge_index))  # equation 1
         u_hat = F.leaky_relu(self.linear_layer1(x)) + id_embedding if self.has_id else F.leaky_relu(
             self.linear_layer1(x))  # equation 5
         x = F.leaky_relu(self.g_layer1(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
             self.g_layer1(h) + u_hat)
 
+        # 第二层
         h = F.leaky_relu(self.conv_embed_2(x, self.edge_index))  # equation 1
         u_hat = F.leaky_relu(self.linear_layer2(x)) + id_embedding if self.has_id else F.leaky_relu(
             self.linear_layer2(x))  # equation 5
         x = F.leaky_relu(self.g_layer2(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
             self.g_layer2(h) + u_hat)
 
+        # 第三层
         h = F.leaky_relu(self.conv_embed_3(x, self.edge_index))  # equation 1
         u_hat = F.leaky_relu(self.linear_layer3(x)) + id_embedding if self.has_id else F.leaky_relu(
             self.linear_layer3(x))  # equation 5
         x = F.leaky_relu(self.g_layer3(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
             self.g_layer3(h) + u_hat)
+
+        # # 第四层
+        # h = F.leaky_relu(self.conv_embed_4(x, self.edge_index))  # equation 1
+        # u_hat = F.leaky_relu(self.linear_layer4(x)) + id_embedding if self.has_id else F.leaky_relu(
+        #     self.linear_layer4(x))  # equation 5
+        # x = F.leaky_relu(self.g_layer4(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
+        #     self.g_layer4(h) + u_hat)
+        #
+        # # 第五层
+        # h = F.leaky_relu(self.conv_embed_5(x, self.edge_index))  # equation 1
+        # u_hat = F.leaky_relu(self.linear_layer5(x)) + id_embedding if self.has_id else F.leaky_relu(
+        #     self.linear_layer5(x))  # equation 5
+        # x = F.leaky_relu(self.g_layer5(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
+        #     self.g_layer5(h) + u_hat)
+
+        # # 第六层
+        # h = F.leaky_relu(self.conv_embed_6(x, self.edge_index))  # equation 1
+        # u_hat = F.leaky_relu(self.linear_layer6(x)) + id_embedding if self.has_id else F.leaky_relu(
+        #     self.linear_layer6(x))  # equation 5
+        # x = F.leaky_relu(self.g_layer6(torch.cat((h, u_hat), dim=1))) if self.concate else F.leaky_relu(
+        #     self.g_layer6(h) + u_hat)
 
         return x
 
@@ -121,7 +160,6 @@ class MMGCN(torch.nn.Module):
         self.edge_index = torch.tensor(edge_index).t().contiguous().to(self.device)
         self.edge_index = torch.cat((self.edge_index, self.edge_index[[1, 0]]), dim=1)
 
-        # self.v_feat = torch.tensor(v_feat, dtype=torch.float).to(self.device)
         self.v_feat = v_feat.clone().detach().requires_grad_(True).to(self.device)
         self.v_gcn = GCN(self.edge_index, num_user, num_item, self.v_feat.size(1), dim_x, self.aggr_mode,
                          self.concate, has_id=has_id, dim_latent=256)
@@ -184,7 +222,7 @@ class MMGCN(torch.nn.Module):
             for row, col in self.user_item_dict.items():
                 if start_index <= row < end_index:
                     row -= start_index
-                    col = torch.LongTensor(list(col))- self.num_user
+                    col = torch.LongTensor(list(col)) - self.num_user
                     score_matrix[row][col] = 1e-5
 
             # 选出每个用户的 top-k 个物品
