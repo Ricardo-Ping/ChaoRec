@@ -137,3 +137,14 @@ def gene_metrics(val_data, rank_list, k_list):
         metrics[k]['map'] /= num_users
 
     return metrics
+
+
+def convert_to_dict(data):
+    user_item_dict = {}
+    for entry in data:
+        user = entry[0]
+        items = entry[1:]  # 假设每个列表的第一个元素是用户ID，后续元素是物品ID
+        if user not in user_item_dict:
+            user_item_dict[user] = []
+        user_item_dict[user].extend(items)
+    return user_item_dict

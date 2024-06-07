@@ -289,7 +289,6 @@ class DDRec(nn.Module):
         return total_loss
 
     def gene_ranklist(self, topk=50):
-        # step需要小于用户数量才能达到分批的效果不然会报错
         # 用户嵌入和项目嵌入
         user_tensor = self.result[:self.num_user].cpu()
         item_tensor = self.result[self.num_user:self.num_user + self.num_item].cpu()

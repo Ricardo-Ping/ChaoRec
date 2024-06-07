@@ -62,6 +62,7 @@ class TrainingDataset(Dataset):
         self.user_item_dict = user_item_dict
         self.all_set = set(range(num_user, num_user + num_item))
         self.model_name = args.Model
+        self.src_len = 50
 
     def __len__(self):
         return len(self.edge_index)
@@ -75,5 +76,50 @@ class TrainingDataset(Dataset):
         # (tensor([0, 0]), tensor([769, 328]))
         if self.model_name in ["MMGCN", "GRCN"]:
             return torch.LongTensor([user, user]), torch.LongTensor([pos_item, neg_item])
+        elif self.model_name in ["LightGT"]:
+            temp = list(self.user_item_dict[user])
+            random.shuffle(temp)
+            if len(temp) > self.src_len:
+                mask = torch.ones(self.src_len + 1) == 0
+                temp = temp[:self.src_len]
+            else:
+                mask = torch.cat((torch.ones(len(temp) + 1), torch.zeros(self.src_len - len(temp)))) == 0
+                temp.extend([self.num_user for i in range(self.src_len - len(temp))])
+
+            user_item = torch.tensor(temp) - self.num_user
+            user_item = torch.cat((torch.tensor([-1]), user_item))
+
+            return [torch.LongTensor([user,user]), torch.LongTensor([pos_item, neg_item]), mask, user_item]
         else:
             return [int(user), int(pos_item), int(neg_item)]
+
+
+# --------------LightGT---------------------
+class EvalDataset(Dataset):
+    def __init__(self, num_user, num_item, user_item_dict):
+        self.num_user = num_user
+        self.num_item = num_item
+        self.user_item_dict = user_item_dict
+        self.all_set = set(range(num_user, num_user + num_item))
+        self.model_name = args.Model
+        self.src_len = 20
+
+    def __len__(self):
+        return self.num_user
+
+    def __getitem__(self, index):
+        user = index
+        temp = list(self.user_item_dict[user])
+        random.shuffle(temp)
+        if len(temp) > self.src_len:
+            mask = torch.ones(self.src_len + 1) == 0
+            temp = temp[:self.src_len]
+        else:
+            mask = torch.cat((torch.ones(len(temp) + 1), torch.zeros(self.src_len - len(temp)))) == 0
+            temp.extend([self.num_user for i in range(self.src_len - len(temp))])
+
+        user_item = torch.tensor(temp) - self.num_user
+        user_item = torch.cat((torch.tensor([-1]), user_item))
+
+        return torch.LongTensor([user]), user_item, mask
+

@@ -1,0 +1,67 @@
+Thu 06 Jun 2024 20:20:32 INFO ============Arguments==============
+Thu 06 Jun 2024 20:20:32 INFO Model: LightGT
+Thu 06 Jun 2024 20:20:32 INFO data_path: clothing
+Thu 06 Jun 2024 20:20:32 INFO learning_rate: 0.001
+Thu 06 Jun 2024 20:20:32 INFO feature_embed: 64
+Thu 06 Jun 2024 20:20:32 INFO batch_size: 1024
+Thu 06 Jun 2024 20:20:32 INFO aggr_mode: add
+Thu 06 Jun 2024 20:20:32 INFO reg_weight: 0.001
+Thu 06 Jun 2024 20:20:32 INFO dim_E: 64
+Thu 06 Jun 2024 20:20:32 INFO num_epoch: 1000
+Thu 06 Jun 2024 20:20:32 INFO dropout: 0.2
+Thu 06 Jun 2024 20:20:32 INFO n_layers: 2
+Thu 06 Jun 2024 20:20:32 INFO corDecay: 0.001
+Thu 06 Jun 2024 20:20:32 INFO n_factors: 4
+Thu 06 Jun 2024 20:20:32 INFO n_iterations: 3
+Thu 06 Jun 2024 20:20:32 INFO cl_weight: 2.0
+Thu 06 Jun 2024 20:20:32 INFO mm_layers: 2
+Thu 06 Jun 2024 20:20:32 INFO ii_topk: 10
+Thu 06 Jun 2024 20:20:32 INFO uu_topk: 40
+Thu 06 Jun 2024 20:20:32 INFO lambda_coeff: 0.9
+Thu 06 Jun 2024 20:20:32 INFO ssl_temp: 0.9
+Thu 06 Jun 2024 20:20:32 INFO ssl_alpha: 0.9
+Thu 06 Jun 2024 20:20:32 INFO ae_weight: 0.1
+Thu 06 Jun 2024 20:20:32 INFO threshold: 0.1
+Thu 06 Jun 2024 20:20:32 INFO prompt_num: 0.1
+Thu 06 Jun 2024 20:20:32 INFO neg_weight: 0.1
+Thu 06 Jun 2024 20:20:32 INFO cen_reg: 0.005
+Thu 06 Jun 2024 20:20:32 INFO n_intents: 128
+Thu 06 Jun 2024 20:20:32 INFO G_rate: 0.0001
+Thu 06 Jun 2024 20:20:32 INFO align_weight: 0.1
+Thu 06 Jun 2024 20:20:32 INFO mask_weight_f: 1.5
+Thu 06 Jun 2024 20:20:32 INFO mask_weight_g: 0.001
+Thu 06 Jun 2024 20:20:32 INFO leaky: 0.5
+Thu 06 Jun 2024 20:20:32 INFO keepRate: 1.0
+Thu 06 Jun 2024 20:20:32 INFO mult: 0.1
+Thu 06 Jun 2024 20:20:32 INFO seed: 42
+Thu 06 Jun 2024 20:20:32 INFO num_workers: 1
+Thu 06 Jun 2024 20:20:32 INFO topk: [5, 10, 20]
+Thu 06 Jun 2024 20:20:32 INFO local time£ºJun-06-2024-20-20-32
+Thu 06 Jun 2024 20:20:32 INFO =========1/1: Parameters:{'n_layers': 3, 'learning_rate': 0.001, 'reg_weight': 0.01}=========
+Thu 06 Jun 2024 20:20:48 INFO Epoch 1, Loss: 33.18353
+Thu 06 Jun 2024 20:20:58 INFO Validation Metrics:
+Thu 06 Jun 2024 20:20:58 INFO 5: precision: 0.00803 | recall: 0.03997 | ndcg: 0.02463 | hit_rate: 0.04017 | map: 0.01961
+Thu 06 Jun 2024 20:20:58 INFO 10: precision: 0.00700 | recall: 0.06961 | ndcg: 0.03414 | hit_rate: 0.06989 | map: 0.02347
+Thu 06 Jun 2024 20:20:58 INFO 20: precision: 0.00572 | recall: 0.11371 | ndcg: 0.04518 | hit_rate: 0.11432 | map: 0.02643
+Thu 06 Jun 2024 20:20:58 INFO Test Metrics:
+Thu 06 Jun 2024 20:20:58 INFO 5: precision: 0.00751 | recall: 0.02699 | ndcg: 0.01829 | hit_rate: 0.03724 | map: 0.01351
+Thu 06 Jun 2024 20:20:58 INFO 10: precision: 0.00637 | recall: 0.04500 | ndcg: 0.02460 | hit_rate: 0.06275 | map: 0.01587
+Thu 06 Jun 2024 20:20:58 INFO 20: precision: 0.00566 | recall: 0.08081 | ndcg: 0.03433 | hit_rate: 0.11106 | map: 0.01831
+Thu 06 Jun 2024 20:21:11 INFO Epoch 2, Loss: 22.98918
+Thu 06 Jun 2024 20:21:18 INFO Validation Metrics:
+Thu 06 Jun 2024 20:21:18 INFO 5: precision: 0.01382 | recall: 0.06880 | ndcg: 0.04512 | hit_rate: 0.06911 | map: 0.03735
+Thu 06 Jun 2024 20:21:18 INFO 10: precision: 0.01217 | recall: 0.12137 | ndcg: 0.06192 | hit_rate: 0.12174 | map: 0.04417
+Thu 06 Jun 2024 20:21:18 INFO 20: precision: 0.00967 | recall: 0.19254 | ndcg: 0.07986 | hit_rate: 0.19328 | map: 0.04905
+Thu 06 Jun 2024 20:21:18 INFO Test Metrics:
+Thu 06 Jun 2024 20:21:18 INFO 5: precision: 0.01214 | recall: 0.04542 | ndcg: 0.03103 | hit_rate: 0.05976 | map: 0.02358
+Thu 06 Jun 2024 20:21:18 INFO 10: precision: 0.01052 | recall: 0.07975 | ndcg: 0.04273 | hit_rate: 0.10353 | map: 0.02807
+Thu 06 Jun 2024 20:21:18 INFO 20: precision: 0.00878 | recall: 0.13156 | ndcg: 0.05676 | hit_rate: 0.17154 | map: 0.03165
+Thu 06 Jun 2024 20:21:31 INFO Epoch 3, Loss: 20.86548
+Thu 06 Jun 2024 20:21:38 INFO Validation Metrics:
+Thu 06 Jun 2024 20:21:38 INFO 5: precision: 0.01811 | recall: 0.09024 | ndcg: 0.05824 | hit_rate: 0.09053 | map: 0.04771
+Thu 06 Jun 2024 20:21:38 INFO 10: precision: 0.01455 | recall: 0.14498 | ndcg: 0.07588 | hit_rate: 0.14547 | map: 0.05494
+Thu 06 Jun 2024 20:21:38 INFO 20: precision: 0.01157 | recall: 0.23037 | ndcg: 0.09728 | hit_rate: 0.23119 | map: 0.06070
+Thu 06 Jun 2024 20:21:38 INFO Test Metrics:
+Thu 06 Jun 2024 20:21:38 INFO 5: precision: 0.01490 | recall: 0.05701 | ndcg: 0.03865 | hit_rate: 0.07371 | map: 0.02952
+Thu 06 Jun 2024 20:21:38 INFO 10: precision: 0.01217 | recall: 0.09216 | ndcg: 0.05083 | hit_rate: 0.11963 | map: 0.03423
+Thu 06 Jun 2024 20:21:38 INFO 20: precision: 0.01001 | recall: 0.15119 | ndcg: 0.06669 | hit_rate: 0.19433 | map: 0.03832

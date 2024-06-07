@@ -115,6 +115,13 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
+    elif args.Model in ["LightGT"]:
+        for users, items, mask, user_item in tqdm(train_loader, desc="Training"):
+            optimizer.zero_grad()
+            loss = model.loss(users, items, mask, user_item)
+            loss.backward(retain_graph=True)
+            optimizer.step()
+            sum_loss += loss.item()
     return sum_loss
 
 
@@ -125,7 +132,7 @@ def evaluate(model, data, ranklist, topk):
     return metrics
 
 
-def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs):
+def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader):
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
 
@@ -136,9 +143,14 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         loss = train(model, train_loader, optimizer)
         logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
 
-        rank_list = model.gene_ranklist()
-        val_metrics = evaluate(model, val_data, rank_list, topk)
-        test_metrics = evaluate(model, test_data, rank_list, topk)
+        if args.Model in ["LightGT"]:
+            rank_list = model.gene_ranklist(eval_dataloader)
+            val_metrics = evaluate(model, val_data, rank_list, topk)
+            test_metrics = evaluate(model, test_data, rank_list, topk)
+        else:
+            rank_list = model.gene_ranklist()
+            val_metrics = evaluate(model, val_data, rank_list, topk)
+            test_metrics = evaluate(model, test_data, rank_list, topk)
 
         # 输出验证集的评价指标
         logging.info('Validation Metrics:')

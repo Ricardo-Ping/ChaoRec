@@ -19,6 +19,7 @@ from Model.LGMRec import LGMRec
 from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
+from Model.LightGT import LightGT
 from Model.MENTOR import MENTOR
 from Model.MGAT import MGAT
 from Model.MGCL import MGCL
@@ -40,7 +41,7 @@ from Model.VBPR import VBPR
 from Model.VGCL import VGCL
 from Model.XSimGCL import XSimGCL
 from arg_parser import parse_args, load_yaml_config
-from utils import setup_seed, gpu, get_local_time
+from utils import setup_seed, gpu, get_local_time, convert_to_dict
 import torch
 import logging
 import dataload
@@ -131,6 +132,11 @@ if __name__ == '__main__':
         args.data_path)
     train_dataset = dataload.TrainingDataset(num_user, num_item, user_item_dict, train_data)
     train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=num_workers)
+
+    # ------------LightGT模型需要--------------------
+    eval_dataset = dataload.EvalDataset(num_user, num_item, user_item_dict)
+    eval_dataloader = DataLoader(eval_dataset, 2000, shuffle=False, num_workers=num_workers)
+    # ----------------------------------------------
 
     # 网格搜索
     hyper_ls = []
@@ -252,6 +258,8 @@ if __name__ == '__main__':
             'MENTOR': lambda: MENTOR(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                      args.mm_layers, args.reg_weight, args.ssl_temp, args.dropout, args.align_weight,
                                      args.mask_weight_g, args.mask_weight_f, device),
+            'LightGT': lambda: LightGT(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                     args.reg_weight, args.n_layers, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
@@ -268,7 +276,8 @@ if __name__ == '__main__':
         optimizer = torch.optim.Adam([{'params': model.parameters(), 'lr': args.learning_rate}])
 
         # 训练和评估
-        current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs)
+        current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+                                                  eval_dataloader)
 
         current_best_recall = current_best_metrics[20]['recall']
         if best_performance is None or current_best_recall > best_performance:
