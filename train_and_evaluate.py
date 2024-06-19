@@ -31,7 +31,7 @@ def train(model, train_loader, optimizer):
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT", 'MMGCL', 'DDRec', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
                         'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE', 'SimGCL', 'XSimGCL', 'GraphAug',
-                        'LGMRec', 'SelfCF', 'MENTOR']:
+                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF"]:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -120,6 +120,13 @@ def train(model, train_loader, optimizer):
             optimizer.zero_grad()
             loss = model.loss(users, items, mask, user_item)
             loss.backward(retain_graph=True)
+            optimizer.step()
+            sum_loss += loss.item()
+    elif args.Model in ['MCLN']:
+        for users, pos_items, neg_items, int_items in tqdm(train_loader, desc="Training"):
+            optimizer.zero_grad()
+            loss = model.loss(users, pos_items, neg_items, int_items)
+            loss.backward()
             optimizer.step()
             sum_loss += loss.item()
     return sum_loss

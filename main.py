@@ -10,6 +10,7 @@ from Model.DGCF import DGCF
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
+from Model.FKAN_GCF import FKAN_GCF
 from Model.FREEDOM import FREEDOM
 from Model.GRCN import GRCN
 from Model.GraphAug import GraphAug
@@ -20,6 +21,7 @@ from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
 from Model.LightGT import LightGT
+from Model.MCLN import MCLN
 from Model.MENTOR import MENTOR
 from Model.MGAT import MGAT
 from Model.MGCL import MGCL
@@ -126,6 +128,12 @@ if __name__ == '__main__':
     leaky = args.leaky  # HCCf
     keepRate = args.keepRate  # HCCf
     mult = args.mult  # HCCF
+    # FKAN_GCF
+    grid_size = args.grid_size
+    node_dropout = args.node_dropout
+    message_dropout = args.message_dropout
+    # MCLN
+    n_mca = args.n_mca
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -260,6 +268,10 @@ if __name__ == '__main__':
                                      args.mask_weight_g, args.mask_weight_f, device),
             'LightGT': lambda: LightGT(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                      args.reg_weight, args.n_layers, device),
+            'FKAN_GCF': lambda: FKAN_GCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                         args.n_layers, args.node_dropout, args.message_dropout, args.grid_size, device),
+            'MCLN': lambda: MCLN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                     args.reg_weight, args.n_layers, args.n_mca, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

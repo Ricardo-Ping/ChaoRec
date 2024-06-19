@@ -73,6 +73,12 @@ class TrainingDataset(Dataset):
             neg_item = random.sample(self.all_set, 1)[0]
             if neg_item not in self.user_item_dict[user]:
                 break
+        # --------------------MCLN-------------------
+        while True:
+            int_items = random.sample(self.all_set, 1)[0]
+            if int_items not in self.user_item_dict[user]:
+                break
+
         # (tensor([0, 0]), tensor([769, 328]))
         if self.model_name in ["MMGCN", "GRCN"]:
             return torch.LongTensor([user, user]), torch.LongTensor([pos_item, neg_item])
@@ -90,6 +96,8 @@ class TrainingDataset(Dataset):
             user_item = torch.cat((torch.tensor([-1]), user_item))
 
             return [torch.LongTensor([user,user]), torch.LongTensor([pos_item, neg_item]), mask, user_item]
+        elif self.model_name in ["MCLN"]:
+            return [int(user), int(pos_item), int(neg_item), int(int_items)]
         else:
             return [int(user), int(pos_item), int(neg_item)]
 
@@ -111,6 +119,17 @@ class EvalDataset(Dataset):
         user = index
         temp = list(self.user_item_dict[user])
         random.shuffle(temp)
+
+        while True:
+            neg_item = random.sample(self.all_set, 1)[0]
+            if neg_item not in self.user_item_dict[user]:
+                break
+            # --------------------MCLN-------------------
+        while True:
+            int_items = random.sample(self.all_set, 1)[0]
+            if int_items not in self.user_item_dict[user]:
+                break
+
         if len(temp) > self.src_len:
             mask = torch.ones(self.src_len + 1) == 0
             temp = temp[:self.src_len]

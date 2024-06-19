@@ -1,0 +1,62 @@
+Wed 19 Jun 2024 20:44:44 INFO ============Arguments==============
+Wed 19 Jun 2024 20:44:44 INFO Model: MCLN
+Wed 19 Jun 2024 20:44:44 INFO data_path: beauty
+Wed 19 Jun 2024 20:44:44 INFO learning_rate: 0.001
+Wed 19 Jun 2024 20:44:44 INFO feature_embed: 64
+Wed 19 Jun 2024 20:44:44 INFO batch_size: 1024
+Wed 19 Jun 2024 20:44:44 INFO aggr_mode: add
+Wed 19 Jun 2024 20:44:44 INFO reg_weight: 0.001
+Wed 19 Jun 2024 20:44:44 INFO dim_E: 64
+Wed 19 Jun 2024 20:44:44 INFO num_epoch: 1000
+Wed 19 Jun 2024 20:44:44 INFO dropout: 0.2
+Wed 19 Jun 2024 20:44:44 INFO n_layers: 2
+Wed 19 Jun 2024 20:44:44 INFO corDecay: 0.001
+Wed 19 Jun 2024 20:44:44 INFO n_factors: 4
+Wed 19 Jun 2024 20:44:44 INFO n_iterations: 3
+Wed 19 Jun 2024 20:44:44 INFO cl_weight: 2.0
+Wed 19 Jun 2024 20:44:44 INFO mm_layers: 2
+Wed 19 Jun 2024 20:44:44 INFO ii_topk: 10
+Wed 19 Jun 2024 20:44:44 INFO uu_topk: 40
+Wed 19 Jun 2024 20:44:44 INFO lambda_coeff: 0.9
+Wed 19 Jun 2024 20:44:44 INFO ssl_temp: 0.9
+Wed 19 Jun 2024 20:44:44 INFO ssl_alpha: 0.9
+Wed 19 Jun 2024 20:44:44 INFO ae_weight: 0.1
+Wed 19 Jun 2024 20:44:44 INFO threshold: 0.1
+Wed 19 Jun 2024 20:44:44 INFO prompt_num: 0.1
+Wed 19 Jun 2024 20:44:44 INFO neg_weight: 0.1
+Wed 19 Jun 2024 20:44:44 INFO cen_reg: 0.005
+Wed 19 Jun 2024 20:44:44 INFO n_intents: 128
+Wed 19 Jun 2024 20:44:44 INFO G_rate: 0.0001
+Wed 19 Jun 2024 20:44:44 INFO align_weight: 0.1
+Wed 19 Jun 2024 20:44:44 INFO mask_weight_f: 1.5
+Wed 19 Jun 2024 20:44:44 INFO mask_weight_g: 0.001
+Wed 19 Jun 2024 20:44:44 INFO leaky: 0.5
+Wed 19 Jun 2024 20:44:44 INFO keepRate: 1.0
+Wed 19 Jun 2024 20:44:44 INFO mult: 0.1
+Wed 19 Jun 2024 20:44:44 INFO grid_size: 1
+Wed 19 Jun 2024 20:44:44 INFO node_dropout: 0.1
+Wed 19 Jun 2024 20:44:44 INFO message_dropout: 0.1
+Wed 19 Jun 2024 20:44:44 INFO n_mca: 2
+Wed 19 Jun 2024 20:44:44 INFO seed: 42
+Wed 19 Jun 2024 20:44:44 INFO num_workers: 1
+Wed 19 Jun 2024 20:44:44 INFO topk: [5, 10, 20]
+Wed 19 Jun 2024 20:44:44 INFO local time£ºJun-19-2024-20-44-44
+Wed 19 Jun 2024 20:44:44 INFO =========1/1: Parameters:{'n_layers': 3, 'learning_rate': 0.001, 'reg_weight': 1e-07, 'n_mca': 4}=========
+Wed 19 Jun 2024 20:44:52 INFO Epoch 1, Loss: 206.62772
+Wed 19 Jun 2024 20:44:53 INFO Validation Metrics:
+Wed 19 Jun 2024 20:44:53 INFO 5: precision: 0.00019 | recall: 0.00074 | ndcg: 0.00045 | hit_rate: 0.00097 | map: 0.00032
+Wed 19 Jun 2024 20:44:53 INFO 10: precision: 0.00021 | recall: 0.00180 | ndcg: 0.00079 | hit_rate: 0.00213 | map: 0.00045
+Wed 19 Jun 2024 20:44:53 INFO 20: precision: 0.00017 | recall: 0.00274 | ndcg: 0.00104 | hit_rate: 0.00342 | map: 0.00051
+Wed 19 Jun 2024 20:44:53 INFO Test Metrics:
+Wed 19 Jun 2024 20:44:53 INFO 5: precision: 0.00035 | recall: 0.00089 | ndcg: 0.00060 | hit_rate: 0.00174 | map: 0.00037
+Wed 19 Jun 2024 20:44:53 INFO 10: precision: 0.00035 | recall: 0.00181 | ndcg: 0.00095 | hit_rate: 0.00349 | map: 0.00049
+Wed 19 Jun 2024 20:44:53 INFO 20: precision: 0.00035 | recall: 0.00367 | ndcg: 0.00150 | hit_rate: 0.00704 | map: 0.00061
+Wed 19 Jun 2024 20:45:01 INFO Epoch 2, Loss: 170.83697
+Wed 19 Jun 2024 20:45:02 INFO Validation Metrics:
+Wed 19 Jun 2024 20:45:02 INFO 5: precision: 0.00036 | recall: 0.00124 | ndcg: 0.00085 | hit_rate: 0.00181 | map: 0.00063
+Wed 19 Jun 2024 20:45:02 INFO 10: precision: 0.00034 | recall: 0.00257 | ndcg: 0.00129 | hit_rate: 0.00336 | map: 0.00081
+Wed 19 Jun 2024 20:45:02 INFO 20: precision: 0.00033 | recall: 0.00496 | ndcg: 0.00194 | hit_rate: 0.00639 | map: 0.00098
+Wed 19 Jun 2024 20:45:02 INFO Test Metrics:
+Wed 19 Jun 2024 20:45:02 INFO 5: precision: 0.00058 | recall: 0.00145 | ndcg: 0.00108 | hit_rate: 0.00291 | map: 0.00070
+Wed 19 Jun 2024 20:45:02 INFO 10: precision: 0.00054 | recall: 0.00271 | ndcg: 0.00156 | hit_rate: 0.00536 | map: 0.00087
+Wed 19 Jun 2024 20:45:02 INFO 20: precision: 0.00054 | recall: 0.00524 | ndcg: 0.00234 | hit_rate: 0.01046 | map: 0.00105
