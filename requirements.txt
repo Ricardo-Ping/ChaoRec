@@ -64,3 +64,5 @@ xz==5.4.6
 yaml==0.2.5
 zlib==1.2.13
 zstd==1.5.5
+
+torchdiffeq~=0.2.4

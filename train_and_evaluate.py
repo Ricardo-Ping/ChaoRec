@@ -31,7 +31,7 @@ def train(model, train_loader, optimizer):
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT", 'MMGCL', 'DDRec', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
                         'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE', 'SimGCL', 'XSimGCL', 'GraphAug',
-                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF"]:
+                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF", 'LightGODE']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -140,6 +140,7 @@ def evaluate(model, data, ranklist, topk):
 
 
 def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader):
+    model.train()
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
 
@@ -155,6 +156,7 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
             val_metrics = evaluate(model, val_data, rank_list, topk)
             test_metrics = evaluate(model, test_data, rank_list, topk)
         else:
+            model.eval()  # 设置为评估模式
             rank_list = model.gene_ranklist()
             val_metrics = evaluate(model, val_data, rank_list, topk)
             test_metrics = evaluate(model, test_data, rank_list, topk)

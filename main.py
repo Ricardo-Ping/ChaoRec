@@ -20,6 +20,7 @@ from Model.LGMRec import LGMRec
 from Model.LayerGCN import LayerGCN
 from Model.LightGCL import LightGCL
 from Model.LightGCN import LightGCN
+from Model.LightGODE import LightGODE
 from Model.LightGT import LightGT
 from Model.MCLN import MCLN
 from Model.MENTOR import MENTOR
@@ -134,6 +135,9 @@ if __name__ == '__main__':
     message_dropout = args.message_dropout
     # MCLN
     n_mca = args.n_mca
+    # LightGode
+    gamma = args.gamma
+    t = args.t
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -272,6 +276,8 @@ if __name__ == '__main__':
                                          args.n_layers, args.node_dropout, args.message_dropout, args.grid_size, device),
             'MCLN': lambda: MCLN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                      args.reg_weight, args.n_layers, args.n_mca, device),
+            'LightGODE': lambda: LightGODE(num_user, num_item, train_data, user_item_dict, dim_E,
+                                 args.gamma, args.t, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

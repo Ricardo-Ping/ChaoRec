@@ -13,9 +13,9 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='MCLN', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='LightGODE', help='Model name')
     # 数据集：baby,clothing,sports,beauty,electronics
-    parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='clothing', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
@@ -53,6 +53,8 @@ def parse_args():
     parser.add_argument('--node_dropout', type=float, default=0.1, help='FKAN_GCF node_dropout')
     parser.add_argument('--message_dropout', type=float, default=0.1, help='FKAN_GCF message_dropout')
     parser.add_argument('--n_mca', type=int, default=2, help='MCLN counterfactual layer.')
+    parser.add_argument('--gamma', type=float, default=0.5, help='LightGODE uniformity weight.')
+    parser.add_argument('--t', type=float, default=1.8, help='LightGODE time step.')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')
