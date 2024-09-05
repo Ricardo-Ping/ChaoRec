@@ -1,0 +1,900 @@
+Sat 17 Aug 2024 19:19:31 INFO ============Arguments==============
+Sat 17 Aug 2024 19:19:31 INFO Model: MMGCL
+Sat 17 Aug 2024 19:19:31 INFO data_path: beauty
+Sat 17 Aug 2024 19:19:31 INFO learning_rate: 0.001
+Sat 17 Aug 2024 19:19:31 INFO feature_embed: 64
+Sat 17 Aug 2024 19:19:31 INFO batch_size: 1024
+Sat 17 Aug 2024 19:19:31 INFO aggr_mode: add
+Sat 17 Aug 2024 19:19:31 INFO reg_weight: 0.001
+Sat 17 Aug 2024 19:19:31 INFO dim_E: 64
+Sat 17 Aug 2024 19:19:31 INFO num_epoch: 1000
+Sat 17 Aug 2024 19:19:31 INFO dropout: 0.2
+Sat 17 Aug 2024 19:19:31 INFO n_layers: 2
+Sat 17 Aug 2024 19:19:31 INFO corDecay: 0.001
+Sat 17 Aug 2024 19:19:31 INFO n_factors: 4
+Sat 17 Aug 2024 19:19:31 INFO n_iterations: 3
+Sat 17 Aug 2024 19:19:31 INFO cl_weight: 2.0
+Sat 17 Aug 2024 19:19:31 INFO mm_layers: 2
+Sat 17 Aug 2024 19:19:31 INFO ii_topk: 10
+Sat 17 Aug 2024 19:19:31 INFO uu_topk: 40
+Sat 17 Aug 2024 19:19:31 INFO lambda_coeff: 0.9
+Sat 17 Aug 2024 19:19:31 INFO ssl_temp: 0.9
+Sat 17 Aug 2024 19:19:31 INFO ssl_alpha: 0.9
+Sat 17 Aug 2024 19:19:31 INFO ae_weight: 0.1
+Sat 17 Aug 2024 19:19:31 INFO threshold: 0.1
+Sat 17 Aug 2024 19:19:31 INFO prompt_num: 0.1
+Sat 17 Aug 2024 19:19:31 INFO neg_weight: 0.1
+Sat 17 Aug 2024 19:19:31 INFO cen_reg: 0.005
+Sat 17 Aug 2024 19:19:31 INFO n_intents: 128
+Sat 17 Aug 2024 19:19:31 INFO G_rate: 0.0001
+Sat 17 Aug 2024 19:19:31 INFO align_weight: 0.1
+Sat 17 Aug 2024 19:19:31 INFO mask_weight_f: 1.5
+Sat 17 Aug 2024 19:19:31 INFO mask_weight_g: 0.001
+Sat 17 Aug 2024 19:19:31 INFO leaky: 0.5
+Sat 17 Aug 2024 19:19:31 INFO keepRate: 1.0
+Sat 17 Aug 2024 19:19:31 INFO mult: 0.1
+Sat 17 Aug 2024 19:19:31 INFO grid_size: 1
+Sat 17 Aug 2024 19:19:31 INFO node_dropout: 0.1
+Sat 17 Aug 2024 19:19:31 INFO message_dropout: 0.1
+Sat 17 Aug 2024 19:19:31 INFO n_mca: 2
+Sat 17 Aug 2024 19:19:31 INFO seed: 42
+Sat 17 Aug 2024 19:19:31 INFO num_workers: 1
+Sat 17 Aug 2024 19:19:31 INFO topk: [5, 10, 20]
+Sat 17 Aug 2024 19:19:31 INFO local time£ºAug-17-2024-19-19-31
+Sat 17 Aug 2024 19:19:31 INFO =========1/1: Parameters:{'learning_rate': 0.001, 'ssl_alpha': 0.5, 'ssl_temp': 0.2, 'reg_weight': 0.001, 'n_layers': 1, 'dropout': 0.1}=========
+Sat 17 Aug 2024 19:19:45 INFO Epoch 1, Loss: 624.03317
+Sat 17 Aug 2024 19:19:47 INFO Validation Metrics:
+Sat 17 Aug 2024 19:19:47 INFO 5: precision: 0.00902 | recall: 0.03774 | ndcg: 0.02488 | hit_rate: 0.04321 | map: 0.01954
+Sat 17 Aug 2024 19:19:47 INFO 10: precision: 0.00712 | recall: 0.05944 | ndcg: 0.03207 | hit_rate: 0.06621 | map: 0.02255
+Sat 17 Aug 2024 19:19:47 INFO 20: precision: 0.00530 | recall: 0.08736 | ndcg: 0.03943 | hit_rate: 0.09656 | map: 0.02460
+Sat 17 Aug 2024 19:19:47 INFO Test Metrics:
+Sat 17 Aug 2024 19:19:47 INFO 5: precision: 0.01519 | recall: 0.03868 | ndcg: 0.03008 | hit_rate: 0.06595 | map: 0.02169
+Sat 17 Aug 2024 19:19:47 INFO 10: precision: 0.01187 | recall: 0.05977 | ndcg: 0.03810 | hit_rate: 0.09811 | map: 0.02505
+Sat 17 Aug 2024 19:19:47 INFO 20: precision: 0.00884 | recall: 0.08929 | ndcg: 0.04701 | hit_rate: 0.14061 | map: 0.02754
+Sat 17 Aug 2024 19:20:01 INFO Epoch 2, Loss: 519.43970
+Sat 17 Aug 2024 19:20:02 INFO Validation Metrics:
+Sat 17 Aug 2024 19:20:02 INFO 5: precision: 0.01101 | recall: 0.04703 | ndcg: 0.03110 | hit_rate: 0.05316 | map: 0.02464
+Sat 17 Aug 2024 19:20:02 INFO 10: precision: 0.00892 | recall: 0.07573 | ndcg: 0.04057 | hit_rate: 0.08384 | map: 0.02856
+Sat 17 Aug 2024 19:20:02 INFO 20: precision: 0.00651 | recall: 0.10914 | ndcg: 0.04933 | hit_rate: 0.11917 | map: 0.03101
+Sat 17 Aug 2024 19:20:02 INFO Test Metrics:
+Sat 17 Aug 2024 19:20:02 INFO 5: precision: 0.01869 | recall: 0.04917 | ndcg: 0.03803 | hit_rate: 0.08197 | map: 0.02761
+Sat 17 Aug 2024 19:20:02 INFO 10: precision: 0.01453 | recall: 0.07518 | ndcg: 0.04790 | hit_rate: 0.12143 | map: 0.03168
+Sat 17 Aug 2024 19:20:02 INFO 20: precision: 0.01081 | recall: 0.11152 | ndcg: 0.05886 | hit_rate: 0.17155 | map: 0.03482
+Sat 17 Aug 2024 19:20:19 INFO Epoch 3, Loss: 483.98598
+Sat 17 Aug 2024 19:20:21 INFO Validation Metrics:
+Sat 17 Aug 2024 19:20:21 INFO 5: precision: 0.01179 | recall: 0.05059 | ndcg: 0.03339 | hit_rate: 0.05703 | map: 0.02647
+Sat 17 Aug 2024 19:20:21 INFO 10: precision: 0.00946 | recall: 0.08061 | ndcg: 0.04332 | hit_rate: 0.08914 | map: 0.03060
+Sat 17 Aug 2024 19:20:21 INFO 20: precision: 0.00689 | recall: 0.11594 | ndcg: 0.05259 | hit_rate: 0.12679 | map: 0.03319
+Sat 17 Aug 2024 19:20:21 INFO Test Metrics:
+Sat 17 Aug 2024 19:20:21 INFO 5: precision: 0.02014 | recall: 0.05331 | ndcg: 0.04144 | hit_rate: 0.08817 | map: 0.03029
+Sat 17 Aug 2024 19:20:21 INFO 10: precision: 0.01551 | recall: 0.08117 | ndcg: 0.05195 | hit_rate: 0.12951 | map: 0.03462
+Sat 17 Aug 2024 19:20:21 INFO 20: precision: 0.01148 | recall: 0.11885 | ndcg: 0.06334 | hit_rate: 0.18273 | map: 0.03785
+Sat 17 Aug 2024 19:20:36 INFO Epoch 4, Loss: 470.99405
+Sat 17 Aug 2024 19:20:37 INFO Validation Metrics:
+Sat 17 Aug 2024 19:20:37 INFO 5: precision: 0.01217 | recall: 0.05244 | ndcg: 0.03494 | hit_rate: 0.05878 | map: 0.02793
+Sat 17 Aug 2024 19:20:37 INFO 10: precision: 0.00972 | recall: 0.08309 | ndcg: 0.04505 | hit_rate: 0.09172 | map: 0.03211
+Sat 17 Aug 2024 19:20:37 INFO 20: precision: 0.00705 | recall: 0.11856 | ndcg: 0.05435 | hit_rate: 0.12951 | map: 0.03469
+Sat 17 Aug 2024 19:20:37 INFO Test Metrics:
+Sat 17 Aug 2024 19:20:37 INFO 5: precision: 0.02090 | recall: 0.05557 | ndcg: 0.04281 | hit_rate: 0.09198 | map: 0.03114
+Sat 17 Aug 2024 19:20:37 INFO 10: precision: 0.01595 | recall: 0.08347 | ndcg: 0.05335 | hit_rate: 0.13299 | map: 0.03551
+Sat 17 Aug 2024 19:20:37 INFO 20: precision: 0.01172 | recall: 0.12126 | ndcg: 0.06481 | hit_rate: 0.18673 | map: 0.03877
+Sat 17 Aug 2024 19:20:53 INFO Epoch 5, Loss: 463.06041
+Sat 17 Aug 2024 19:20:55 INFO Validation Metrics:
+Sat 17 Aug 2024 19:20:55 INFO 5: precision: 0.01245 | recall: 0.05366 | ndcg: 0.03534 | hit_rate: 0.06013 | map: 0.02803
+Sat 17 Aug 2024 19:20:55 INFO 10: precision: 0.00990 | recall: 0.08472 | ndcg: 0.04554 | hit_rate: 0.09340 | map: 0.03224
+Sat 17 Aug 2024 19:20:55 INFO 20: precision: 0.00717 | recall: 0.12038 | ndcg: 0.05490 | hit_rate: 0.13118 | map: 0.03484
+Sat 17 Aug 2024 19:20:55 INFO Test Metrics:
+Sat 17 Aug 2024 19:20:55 INFO 5: precision: 0.02099 | recall: 0.05572 | ndcg: 0.04327 | hit_rate: 0.09224 | map: 0.03158
+Sat 17 Aug 2024 19:20:55 INFO 10: precision: 0.01621 | recall: 0.08423 | ndcg: 0.05409 | hit_rate: 0.13512 | map: 0.03605
+Sat 17 Aug 2024 19:20:55 INFO 20: precision: 0.01190 | recall: 0.12352 | ndcg: 0.06590 | hit_rate: 0.19003 | map: 0.03941
+Sat 17 Aug 2024 19:21:10 INFO Epoch 6, Loss: 457.40849
+Sat 17 Aug 2024 19:21:11 INFO Validation Metrics:
+Sat 17 Aug 2024 19:21:11 INFO 5: precision: 0.01244 | recall: 0.05363 | ndcg: 0.03556 | hit_rate: 0.06020 | map: 0.02831
+Sat 17 Aug 2024 19:21:11 INFO 10: precision: 0.00982 | recall: 0.08399 | ndcg: 0.04558 | hit_rate: 0.09269 | map: 0.03247
+Sat 17 Aug 2024 19:21:11 INFO 20: precision: 0.00722 | recall: 0.12148 | ndcg: 0.05541 | hit_rate: 0.13248 | map: 0.03520
+Sat 17 Aug 2024 19:21:11 INFO Test Metrics:
+Sat 17 Aug 2024 19:21:11 INFO 5: precision: 0.02116 | recall: 0.05614 | ndcg: 0.04374 | hit_rate: 0.09321 | map: 0.03194
+Sat 17 Aug 2024 19:21:11 INFO 10: precision: 0.01616 | recall: 0.08437 | ndcg: 0.05445 | hit_rate: 0.13441 | map: 0.03646
+Sat 17 Aug 2024 19:21:11 INFO 20: precision: 0.01188 | recall: 0.12308 | ndcg: 0.06614 | hit_rate: 0.18906 | map: 0.03978
+Sat 17 Aug 2024 19:21:26 INFO Epoch 7, Loss: 452.38544
+Sat 17 Aug 2024 19:21:28 INFO Validation Metrics:
+Sat 17 Aug 2024 19:21:28 INFO 5: precision: 0.01243 | recall: 0.05369 | ndcg: 0.03524 | hit_rate: 0.06020 | map: 0.02788
+Sat 17 Aug 2024 19:21:28 INFO 10: precision: 0.00975 | recall: 0.08362 | ndcg: 0.04512 | hit_rate: 0.09224 | map: 0.03199
+Sat 17 Aug 2024 19:21:28 INFO 20: precision: 0.00723 | recall: 0.12191 | ndcg: 0.05517 | hit_rate: 0.13325 | map: 0.03478
+Sat 17 Aug 2024 19:21:28 INFO Test Metrics:
+Sat 17 Aug 2024 19:21:28 INFO 5: precision: 0.02102 | recall: 0.05577 | ndcg: 0.04345 | hit_rate: 0.09243 | map: 0.03173
+Sat 17 Aug 2024 19:21:28 INFO 10: precision: 0.01615 | recall: 0.08442 | ndcg: 0.05430 | hit_rate: 0.13500 | map: 0.03626
+Sat 17 Aug 2024 19:21:28 INFO 20: precision: 0.01188 | recall: 0.12349 | ndcg: 0.06602 | hit_rate: 0.18912 | map: 0.03957
+Sat 17 Aug 2024 19:21:42 INFO Epoch 8, Loss: 447.64228
+Sat 17 Aug 2024 19:21:44 INFO Validation Metrics:
+Sat 17 Aug 2024 19:21:44 INFO 5: precision: 0.01247 | recall: 0.05387 | ndcg: 0.03576 | hit_rate: 0.06033 | map: 0.02850
+Sat 17 Aug 2024 19:21:44 INFO 10: precision: 0.00955 | recall: 0.08195 | ndcg: 0.04505 | hit_rate: 0.09030 | map: 0.03240
+Sat 17 Aug 2024 19:21:44 INFO 20: precision: 0.00717 | recall: 0.12081 | ndcg: 0.05528 | hit_rate: 0.13209 | map: 0.03525
+Sat 17 Aug 2024 19:21:44 INFO Test Metrics:
+Sat 17 Aug 2024 19:21:44 INFO 5: precision: 0.02125 | recall: 0.05645 | ndcg: 0.04377 | hit_rate: 0.09366 | map: 0.03188
+Sat 17 Aug 2024 19:21:44 INFO 10: precision: 0.01604 | recall: 0.08378 | ndcg: 0.05413 | hit_rate: 0.13403 | map: 0.03623
+Sat 17 Aug 2024 19:21:44 INFO 20: precision: 0.01184 | recall: 0.12301 | ndcg: 0.06591 | hit_rate: 0.18893 | map: 0.03955
+Sat 17 Aug 2024 19:21:58 INFO Epoch 9, Loss: 442.50281
+Sat 17 Aug 2024 19:22:00 INFO Validation Metrics:
+Sat 17 Aug 2024 19:22:00 INFO 5: precision: 0.01245 | recall: 0.05396 | ndcg: 0.03557 | hit_rate: 0.06039 | map: 0.02822
+Sat 17 Aug 2024 19:22:00 INFO 10: precision: 0.00947 | recall: 0.08129 | ndcg: 0.04461 | hit_rate: 0.08965 | map: 0.03201
+Sat 17 Aug 2024 19:22:00 INFO 20: precision: 0.00713 | recall: 0.12005 | ndcg: 0.05485 | hit_rate: 0.13170 | map: 0.03487
+Sat 17 Aug 2024 19:22:00 INFO Test Metrics:
+Sat 17 Aug 2024 19:22:00 INFO 5: precision: 0.02104 | recall: 0.05577 | ndcg: 0.04319 | hit_rate: 0.09249 | map: 0.03143
+Sat 17 Aug 2024 19:22:00 INFO 10: precision: 0.01607 | recall: 0.08390 | ndcg: 0.05387 | hit_rate: 0.13461 | map: 0.03586
+Sat 17 Aug 2024 19:22:00 INFO 20: precision: 0.01170 | recall: 0.12111 | ndcg: 0.06510 | hit_rate: 0.18635 | map: 0.03907
+Sat 17 Aug 2024 19:22:15 INFO Epoch 10, Loss: 436.93556
+Sat 17 Aug 2024 19:22:16 INFO Validation Metrics:
+Sat 17 Aug 2024 19:22:16 INFO 5: precision: 0.01258 | recall: 0.05445 | ndcg: 0.03590 | hit_rate: 0.06091 | map: 0.02850
+Sat 17 Aug 2024 19:22:16 INFO 10: precision: 0.00959 | recall: 0.08218 | ndcg: 0.04503 | hit_rate: 0.09088 | map: 0.03229
+Sat 17 Aug 2024 19:22:16 INFO 20: precision: 0.00714 | recall: 0.12030 | ndcg: 0.05506 | hit_rate: 0.13177 | map: 0.03508
+Sat 17 Aug 2024 19:22:16 INFO Test Metrics:
+Sat 17 Aug 2024 19:22:16 INFO 5: precision: 0.02113 | recall: 0.05601 | ndcg: 0.04334 | hit_rate: 0.09288 | map: 0.03155
+Sat 17 Aug 2024 19:22:16 INFO 10: precision: 0.01611 | recall: 0.08393 | ndcg: 0.05398 | hit_rate: 0.13487 | map: 0.03599
+Sat 17 Aug 2024 19:22:16 INFO 20: precision: 0.01183 | recall: 0.12249 | ndcg: 0.06561 | hit_rate: 0.18802 | map: 0.03932
+Sat 17 Aug 2024 19:22:31 INFO Epoch 11, Loss: 430.45800
+Sat 17 Aug 2024 19:22:33 INFO Validation Metrics:
+Sat 17 Aug 2024 19:22:33 INFO 5: precision: 0.01279 | recall: 0.05541 | ndcg: 0.03672 | hit_rate: 0.06201 | map: 0.02926
+Sat 17 Aug 2024 19:22:33 INFO 10: precision: 0.00982 | recall: 0.08434 | ndcg: 0.04623 | hit_rate: 0.09308 | map: 0.03320
+Sat 17 Aug 2024 19:22:33 INFO 20: precision: 0.00723 | recall: 0.12156 | ndcg: 0.05606 | hit_rate: 0.13306 | map: 0.03596
+Sat 17 Aug 2024 19:22:33 INFO Test Metrics:
+Sat 17 Aug 2024 19:22:33 INFO 5: precision: 0.02164 | recall: 0.05738 | ndcg: 0.04438 | hit_rate: 0.09508 | map: 0.03231
+Sat 17 Aug 2024 19:22:33 INFO 10: precision: 0.01622 | recall: 0.08462 | ndcg: 0.05473 | hit_rate: 0.13545 | map: 0.03666
+Sat 17 Aug 2024 19:22:33 INFO 20: precision: 0.01206 | recall: 0.12518 | ndcg: 0.06693 | hit_rate: 0.19222 | map: 0.04011
+Sat 17 Aug 2024 19:22:47 INFO Epoch 12, Loss: 423.71469
+Sat 17 Aug 2024 19:22:49 INFO Validation Metrics:
+Sat 17 Aug 2024 19:22:49 INFO 5: precision: 0.01301 | recall: 0.05629 | ndcg: 0.03737 | hit_rate: 0.06298 | map: 0.02980
+Sat 17 Aug 2024 19:22:49 INFO 10: precision: 0.01008 | recall: 0.08656 | ndcg: 0.04736 | hit_rate: 0.09553 | map: 0.03397
+Sat 17 Aug 2024 19:22:49 INFO 20: precision: 0.00741 | recall: 0.12466 | ndcg: 0.05737 | hit_rate: 0.13635 | map: 0.03675
+Sat 17 Aug 2024 19:22:49 INFO Test Metrics:
+Sat 17 Aug 2024 19:22:49 INFO 5: precision: 0.02192 | recall: 0.05807 | ndcg: 0.04508 | hit_rate: 0.09618 | map: 0.03287
+Sat 17 Aug 2024 19:22:49 INFO 10: precision: 0.01670 | recall: 0.08741 | ndcg: 0.05615 | hit_rate: 0.13984 | map: 0.03747
+Sat 17 Aug 2024 19:22:49 INFO 20: precision: 0.01221 | recall: 0.12687 | ndcg: 0.06802 | hit_rate: 0.19410 | map: 0.04085
+Sat 17 Aug 2024 19:23:05 INFO Epoch 13, Loss: 416.52448
+Sat 17 Aug 2024 19:23:06 INFO Validation Metrics:
+Sat 17 Aug 2024 19:23:06 INFO 5: precision: 0.01333 | recall: 0.05772 | ndcg: 0.03812 | hit_rate: 0.06453 | map: 0.03030
+Sat 17 Aug 2024 19:23:06 INFO 10: precision: 0.01024 | recall: 0.08787 | ndcg: 0.04808 | hit_rate: 0.09708 | map: 0.03446
+Sat 17 Aug 2024 19:23:06 INFO 20: precision: 0.00752 | recall: 0.12632 | ndcg: 0.05819 | hit_rate: 0.13816 | map: 0.03728
+Sat 17 Aug 2024 19:23:06 INFO Test Metrics:
+Sat 17 Aug 2024 19:23:06 INFO 5: precision: 0.02225 | recall: 0.05898 | ndcg: 0.04592 | hit_rate: 0.09766 | map: 0.03358
+Sat 17 Aug 2024 19:23:06 INFO 10: precision: 0.01699 | recall: 0.08891 | ndcg: 0.05727 | hit_rate: 0.14197 | map: 0.03834
+Sat 17 Aug 2024 19:23:06 INFO 20: precision: 0.01233 | recall: 0.12795 | ndcg: 0.06903 | hit_rate: 0.19597 | map: 0.04168
+Sat 17 Aug 2024 19:23:22 INFO Epoch 14, Loss: 409.82283
+Sat 17 Aug 2024 19:23:24 INFO Validation Metrics:
+Sat 17 Aug 2024 19:23:24 INFO 5: precision: 0.01374 | recall: 0.05936 | ndcg: 0.03938 | hit_rate: 0.06646 | map: 0.03140
+Sat 17 Aug 2024 19:23:24 INFO 10: precision: 0.01051 | recall: 0.09010 | ndcg: 0.04950 | hit_rate: 0.09934 | map: 0.03561
+Sat 17 Aug 2024 19:23:24 INFO 20: precision: 0.00767 | recall: 0.12839 | ndcg: 0.05960 | hit_rate: 0.14061 | map: 0.03843
+Sat 17 Aug 2024 19:23:24 INFO Test Metrics:
+Sat 17 Aug 2024 19:23:24 INFO 5: precision: 0.02256 | recall: 0.05985 | ndcg: 0.04655 | hit_rate: 0.09915 | map: 0.03400
+Sat 17 Aug 2024 19:23:24 INFO 10: precision: 0.01731 | recall: 0.09063 | ndcg: 0.05828 | hit_rate: 0.14449 | map: 0.03894
+Sat 17 Aug 2024 19:23:24 INFO 20: precision: 0.01249 | recall: 0.12917 | ndcg: 0.06997 | hit_rate: 0.19823 | map: 0.04228
+Sat 17 Aug 2024 19:23:40 INFO Epoch 15, Loss: 403.37514
+Sat 17 Aug 2024 19:23:41 INFO Validation Metrics:
+Sat 17 Aug 2024 19:23:41 INFO 5: precision: 0.01398 | recall: 0.06033 | ndcg: 0.04003 | hit_rate: 0.06756 | map: 0.03193
+Sat 17 Aug 2024 19:23:41 INFO 10: precision: 0.01060 | recall: 0.09082 | ndcg: 0.05010 | hit_rate: 0.10012 | map: 0.03614
+Sat 17 Aug 2024 19:23:41 INFO 20: precision: 0.00776 | recall: 0.13038 | ndcg: 0.06051 | hit_rate: 0.14223 | map: 0.03905
+Sat 17 Aug 2024 19:23:41 INFO Test Metrics:
+Sat 17 Aug 2024 19:23:41 INFO 5: precision: 0.02301 | recall: 0.06107 | ndcg: 0.04760 | hit_rate: 0.10121 | map: 0.03482
+Sat 17 Aug 2024 19:23:41 INFO 10: precision: 0.01749 | recall: 0.09176 | ndcg: 0.05924 | hit_rate: 0.14604 | map: 0.03973
+Sat 17 Aug 2024 19:23:41 INFO 20: precision: 0.01268 | recall: 0.13154 | ndcg: 0.07127 | hit_rate: 0.20172 | map: 0.04316
+Sat 17 Aug 2024 19:23:57 INFO Epoch 16, Loss: 398.18537
+Sat 17 Aug 2024 19:23:59 INFO Validation Metrics:
+Sat 17 Aug 2024 19:23:59 INFO 5: precision: 0.01406 | recall: 0.06090 | ndcg: 0.04059 | hit_rate: 0.06801 | map: 0.03251
+Sat 17 Aug 2024 19:23:59 INFO 10: precision: 0.01067 | recall: 0.09132 | ndcg: 0.05066 | hit_rate: 0.10063 | map: 0.03671
+Sat 17 Aug 2024 19:23:59 INFO 20: precision: 0.00786 | recall: 0.13177 | ndcg: 0.06133 | hit_rate: 0.14378 | map: 0.03970
+Sat 17 Aug 2024 19:23:59 INFO Test Metrics:
+Sat 17 Aug 2024 19:23:59 INFO 5: precision: 0.02318 | recall: 0.06181 | ndcg: 0.04810 | hit_rate: 0.10167 | map: 0.03526
+Sat 17 Aug 2024 19:23:59 INFO 10: precision: 0.01771 | recall: 0.09311 | ndcg: 0.05998 | hit_rate: 0.14791 | map: 0.04022
+Sat 17 Aug 2024 19:23:59 INFO 20: precision: 0.01280 | recall: 0.13270 | ndcg: 0.07196 | hit_rate: 0.20385 | map: 0.04362
+Sat 17 Aug 2024 19:24:14 INFO Epoch 17, Loss: 393.79527
+Sat 17 Aug 2024 19:24:16 INFO Validation Metrics:
+Sat 17 Aug 2024 19:24:16 INFO 5: precision: 0.01404 | recall: 0.06081 | ndcg: 0.04050 | hit_rate: 0.06795 | map: 0.03239
+Sat 17 Aug 2024 19:24:16 INFO 10: precision: 0.01079 | recall: 0.09238 | ndcg: 0.05092 | hit_rate: 0.10192 | map: 0.03673
+Sat 17 Aug 2024 19:24:16 INFO 20: precision: 0.00794 | recall: 0.13301 | ndcg: 0.06162 | hit_rate: 0.14501 | map: 0.03972
+Sat 17 Aug 2024 19:24:16 INFO Test Metrics:
+Sat 17 Aug 2024 19:24:16 INFO 5: precision: 0.02330 | recall: 0.06209 | ndcg: 0.04842 | hit_rate: 0.10251 | map: 0.03551
+Sat 17 Aug 2024 19:24:16 INFO 10: precision: 0.01770 | recall: 0.09299 | ndcg: 0.06009 | hit_rate: 0.14804 | map: 0.04039
+Sat 17 Aug 2024 19:24:16 INFO 20: precision: 0.01278 | recall: 0.13246 | ndcg: 0.07207 | hit_rate: 0.20353 | map: 0.04381
+Sat 17 Aug 2024 19:24:31 INFO Epoch 18, Loss: 390.58402
+Sat 17 Aug 2024 19:24:32 INFO Validation Metrics:
+Sat 17 Aug 2024 19:24:32 INFO 5: precision: 0.01391 | recall: 0.06001 | ndcg: 0.04012 | hit_rate: 0.06724 | map: 0.03211
+Sat 17 Aug 2024 19:24:32 INFO 10: precision: 0.01090 | recall: 0.09332 | ndcg: 0.05110 | hit_rate: 0.10296 | map: 0.03668
+Sat 17 Aug 2024 19:24:32 INFO 20: precision: 0.00798 | recall: 0.13350 | ndcg: 0.06168 | hit_rate: 0.14559 | map: 0.03963
+Sat 17 Aug 2024 19:24:32 INFO Test Metrics:
+Sat 17 Aug 2024 19:24:32 INFO 5: precision: 0.02336 | recall: 0.06247 | ndcg: 0.04865 | hit_rate: 0.10251 | map: 0.03571
+Sat 17 Aug 2024 19:24:32 INFO 10: precision: 0.01774 | recall: 0.09326 | ndcg: 0.06033 | hit_rate: 0.14830 | map: 0.04060
+Sat 17 Aug 2024 19:24:32 INFO 20: precision: 0.01284 | recall: 0.13272 | ndcg: 0.07237 | hit_rate: 0.20417 | map: 0.04404
+Sat 17 Aug 2024 19:24:47 INFO Epoch 19, Loss: 388.21938
+Sat 17 Aug 2024 19:24:49 INFO Validation Metrics:
+Sat 17 Aug 2024 19:24:49 INFO 5: precision: 0.01403 | recall: 0.06037 | ndcg: 0.04040 | hit_rate: 0.06776 | map: 0.03237
+Sat 17 Aug 2024 19:24:49 INFO 10: precision: 0.01094 | recall: 0.09350 | ndcg: 0.05133 | hit_rate: 0.10348 | map: 0.03691
+Sat 17 Aug 2024 19:24:49 INFO 20: precision: 0.00801 | recall: 0.13366 | ndcg: 0.06193 | hit_rate: 0.14585 | map: 0.03989
+Sat 17 Aug 2024 19:24:49 INFO Test Metrics:
+Sat 17 Aug 2024 19:24:49 INFO 5: precision: 0.02341 | recall: 0.06285 | ndcg: 0.04881 | hit_rate: 0.10276 | map: 0.03585
+Sat 17 Aug 2024 19:24:49 INFO 10: precision: 0.01783 | recall: 0.09381 | ndcg: 0.06058 | hit_rate: 0.14933 | map: 0.04073
+Sat 17 Aug 2024 19:24:49 INFO 20: precision: 0.01291 | recall: 0.13373 | ndcg: 0.07274 | hit_rate: 0.20521 | map: 0.04423
+Sat 17 Aug 2024 19:25:04 INFO Epoch 20, Loss: 386.33986
+Sat 17 Aug 2024 19:25:06 INFO Validation Metrics:
+Sat 17 Aug 2024 19:25:06 INFO 5: precision: 0.01416 | recall: 0.06111 | ndcg: 0.04087 | hit_rate: 0.06840 | map: 0.03276
+Sat 17 Aug 2024 19:25:06 INFO 10: precision: 0.01097 | recall: 0.09422 | ndcg: 0.05174 | hit_rate: 0.10399 | map: 0.03725
+Sat 17 Aug 2024 19:25:06 INFO 20: precision: 0.00803 | recall: 0.13435 | ndcg: 0.06232 | hit_rate: 0.14617 | map: 0.04022
+Sat 17 Aug 2024 19:25:06 INFO Test Metrics:
+Sat 17 Aug 2024 19:25:06 INFO 5: precision: 0.02354 | recall: 0.06324 | ndcg: 0.04907 | hit_rate: 0.10335 | map: 0.03604
+Sat 17 Aug 2024 19:25:06 INFO 10: precision: 0.01789 | recall: 0.09417 | ndcg: 0.06082 | hit_rate: 0.14992 | map: 0.04091
+Sat 17 Aug 2024 19:25:06 INFO 20: precision: 0.01292 | recall: 0.13368 | ndcg: 0.07284 | hit_rate: 0.20508 | map: 0.04435
+Sat 17 Aug 2024 19:25:21 INFO Epoch 21, Loss: 385.09068
+Sat 17 Aug 2024 19:25:23 INFO Validation Metrics:
+Sat 17 Aug 2024 19:25:23 INFO 5: precision: 0.01415 | recall: 0.06100 | ndcg: 0.04085 | hit_rate: 0.06821 | map: 0.03276
+Sat 17 Aug 2024 19:25:23 INFO 10: precision: 0.01092 | recall: 0.09342 | ndcg: 0.05154 | hit_rate: 0.10322 | map: 0.03719
+Sat 17 Aug 2024 19:25:23 INFO 20: precision: 0.00809 | recall: 0.13529 | ndcg: 0.06252 | hit_rate: 0.14740 | map: 0.04025
+Sat 17 Aug 2024 19:25:23 INFO Test Metrics:
+Sat 17 Aug 2024 19:25:23 INFO 5: precision: 0.02363 | recall: 0.06350 | ndcg: 0.04926 | hit_rate: 0.10373 | map: 0.03618
+Sat 17 Aug 2024 19:25:23 INFO 10: precision: 0.01801 | recall: 0.09467 | ndcg: 0.06112 | hit_rate: 0.15095 | map: 0.04108
+Sat 17 Aug 2024 19:25:23 INFO 20: precision: 0.01288 | recall: 0.13335 | ndcg: 0.07287 | hit_rate: 0.20424 | map: 0.04447
+Sat 17 Aug 2024 19:25:38 INFO Epoch 22, Loss: 383.98209
+Sat 17 Aug 2024 19:25:40 INFO Validation Metrics:
+Sat 17 Aug 2024 19:25:40 INFO 5: precision: 0.01412 | recall: 0.06080 | ndcg: 0.04072 | hit_rate: 0.06801 | map: 0.03266
+Sat 17 Aug 2024 19:25:40 INFO 10: precision: 0.01098 | recall: 0.09378 | ndcg: 0.05162 | hit_rate: 0.10348 | map: 0.03719
+Sat 17 Aug 2024 19:25:40 INFO 20: precision: 0.00814 | recall: 0.13642 | ndcg: 0.06278 | hit_rate: 0.14843 | map: 0.04029
+Sat 17 Aug 2024 19:25:40 INFO Test Metrics:
+Sat 17 Aug 2024 19:25:40 INFO 5: precision: 0.02364 | recall: 0.06347 | ndcg: 0.04933 | hit_rate: 0.10393 | map: 0.03625
+Sat 17 Aug 2024 19:25:40 INFO 10: precision: 0.01815 | recall: 0.09575 | ndcg: 0.06156 | hit_rate: 0.15231 | map: 0.04129
+Sat 17 Aug 2024 19:25:40 INFO 20: precision: 0.01300 | recall: 0.13489 | ndcg: 0.07341 | hit_rate: 0.20598 | map: 0.04470
+Sat 17 Aug 2024 19:25:55 INFO Epoch 23, Loss: 383.13754
+Sat 17 Aug 2024 19:25:56 INFO Validation Metrics:
+Sat 17 Aug 2024 19:25:56 INFO 5: precision: 0.01425 | recall: 0.06107 | ndcg: 0.04088 | hit_rate: 0.06872 | map: 0.03273
+Sat 17 Aug 2024 19:25:56 INFO 10: precision: 0.01101 | recall: 0.09412 | ndcg: 0.05177 | hit_rate: 0.10393 | map: 0.03726
+Sat 17 Aug 2024 19:25:56 INFO 20: precision: 0.00816 | recall: 0.13644 | ndcg: 0.06287 | hit_rate: 0.14875 | map: 0.04035
+Sat 17 Aug 2024 19:25:56 INFO Test Metrics:
+Sat 17 Aug 2024 19:25:56 INFO 5: precision: 0.02367 | recall: 0.06369 | ndcg: 0.04958 | hit_rate: 0.10406 | map: 0.03650
+Sat 17 Aug 2024 19:25:56 INFO 10: precision: 0.01809 | recall: 0.09536 | ndcg: 0.06157 | hit_rate: 0.15160 | map: 0.04143
+Sat 17 Aug 2024 19:25:56 INFO 20: precision: 0.01300 | recall: 0.13481 | ndcg: 0.07356 | hit_rate: 0.20637 | map: 0.04489
+Sat 17 Aug 2024 19:26:11 INFO Epoch 24, Loss: 382.40062
+Sat 17 Aug 2024 19:26:13 INFO Validation Metrics:
+Sat 17 Aug 2024 19:26:13 INFO 5: precision: 0.01434 | recall: 0.06161 | ndcg: 0.04125 | hit_rate: 0.06911 | map: 0.03306
+Sat 17 Aug 2024 19:26:13 INFO 10: precision: 0.01107 | recall: 0.09466 | ndcg: 0.05214 | hit_rate: 0.10457 | map: 0.03757
+Sat 17 Aug 2024 19:26:13 INFO 20: precision: 0.00814 | recall: 0.13624 | ndcg: 0.06308 | hit_rate: 0.14830 | map: 0.04064
+Sat 17 Aug 2024 19:26:13 INFO Test Metrics:
+Sat 17 Aug 2024 19:26:13 INFO 5: precision: 0.02380 | recall: 0.06397 | ndcg: 0.04975 | hit_rate: 0.10496 | map: 0.03658
+Sat 17 Aug 2024 19:26:13 INFO 10: precision: 0.01803 | recall: 0.09509 | ndcg: 0.06154 | hit_rate: 0.15108 | map: 0.04148
+Sat 17 Aug 2024 19:26:13 INFO 20: precision: 0.01307 | recall: 0.13544 | ndcg: 0.07380 | hit_rate: 0.20753 | map: 0.04499
+Sat 17 Aug 2024 19:26:28 INFO Epoch 25, Loss: 381.95068
+Sat 17 Aug 2024 19:26:29 INFO Validation Metrics:
+Sat 17 Aug 2024 19:26:29 INFO 5: precision: 0.01433 | recall: 0.06163 | ndcg: 0.04103 | hit_rate: 0.06918 | map: 0.03276
+Sat 17 Aug 2024 19:26:29 INFO 10: precision: 0.01106 | recall: 0.09471 | ndcg: 0.05193 | hit_rate: 0.10451 | map: 0.03729
+Sat 17 Aug 2024 19:26:29 INFO 20: precision: 0.00816 | recall: 0.13623 | ndcg: 0.06290 | hit_rate: 0.14850 | map: 0.04037
+Sat 17 Aug 2024 19:26:29 INFO Test Metrics:
+Sat 17 Aug 2024 19:26:29 INFO 5: precision: 0.02389 | recall: 0.06418 | ndcg: 0.05013 | hit_rate: 0.10515 | map: 0.03692
+Sat 17 Aug 2024 19:26:29 INFO 10: precision: 0.01818 | recall: 0.09555 | ndcg: 0.06201 | hit_rate: 0.15192 | map: 0.04185
+Sat 17 Aug 2024 19:26:29 INFO 20: precision: 0.01310 | recall: 0.13567 | ndcg: 0.07420 | hit_rate: 0.20798 | map: 0.04535
+Sat 17 Aug 2024 19:26:44 INFO Epoch 26, Loss: 381.50366
+Sat 17 Aug 2024 19:26:46 INFO Validation Metrics:
+Sat 17 Aug 2024 19:26:46 INFO 5: precision: 0.01448 | recall: 0.06225 | ndcg: 0.04130 | hit_rate: 0.06982 | map: 0.03290
+Sat 17 Aug 2024 19:26:46 INFO 10: precision: 0.01114 | recall: 0.09522 | ndcg: 0.05211 | hit_rate: 0.10528 | map: 0.03736
+Sat 17 Aug 2024 19:26:46 INFO 20: precision: 0.00820 | recall: 0.13655 | ndcg: 0.06301 | hit_rate: 0.14882 | map: 0.04042
+Sat 17 Aug 2024 19:26:46 INFO Test Metrics:
+Sat 17 Aug 2024 19:26:46 INFO 5: precision: 0.02400 | recall: 0.06457 | ndcg: 0.05014 | hit_rate: 0.10586 | map: 0.03681
+Sat 17 Aug 2024 19:26:46 INFO 10: precision: 0.01805 | recall: 0.09472 | ndcg: 0.06160 | hit_rate: 0.15063 | map: 0.04159
+Sat 17 Aug 2024 19:26:46 INFO 20: precision: 0.01312 | recall: 0.13615 | ndcg: 0.07415 | hit_rate: 0.20844 | map: 0.04518
+Sat 17 Aug 2024 19:27:01 INFO Epoch 27, Loss: 381.23020
+Sat 17 Aug 2024 19:27:03 INFO Validation Metrics:
+Sat 17 Aug 2024 19:27:03 INFO 5: precision: 0.01440 | recall: 0.06186 | ndcg: 0.04119 | hit_rate: 0.06944 | map: 0.03288
+Sat 17 Aug 2024 19:27:03 INFO 10: precision: 0.01108 | recall: 0.09463 | ndcg: 0.05199 | hit_rate: 0.10470 | map: 0.03736
+Sat 17 Aug 2024 19:27:03 INFO 20: precision: 0.00823 | recall: 0.13722 | ndcg: 0.06325 | hit_rate: 0.14953 | map: 0.04054
+Sat 17 Aug 2024 19:27:03 INFO Test Metrics:
+Sat 17 Aug 2024 19:27:03 INFO 5: precision: 0.02387 | recall: 0.06407 | ndcg: 0.05000 | hit_rate: 0.10509 | map: 0.03681
+Sat 17 Aug 2024 19:27:03 INFO 10: precision: 0.01820 | recall: 0.09575 | ndcg: 0.06201 | hit_rate: 0.15224 | map: 0.04179
+Sat 17 Aug 2024 19:27:03 INFO 20: precision: 0.01309 | recall: 0.13578 | ndcg: 0.07415 | hit_rate: 0.20740 | map: 0.04528
+Sat 17 Aug 2024 19:27:18 INFO Epoch 28, Loss: 380.86543
+Sat 17 Aug 2024 19:27:19 INFO Validation Metrics:
+Sat 17 Aug 2024 19:27:19 INFO 5: precision: 0.01431 | recall: 0.06170 | ndcg: 0.04120 | hit_rate: 0.06911 | map: 0.03296
+Sat 17 Aug 2024 19:27:19 INFO 10: precision: 0.01113 | recall: 0.09485 | ndcg: 0.05220 | hit_rate: 0.10515 | map: 0.03753
+Sat 17 Aug 2024 19:27:19 INFO 20: precision: 0.00827 | recall: 0.13792 | ndcg: 0.06356 | hit_rate: 0.14992 | map: 0.04075
+Sat 17 Aug 2024 19:27:19 INFO Test Metrics:
+Sat 17 Aug 2024 19:27:19 INFO 5: precision: 0.02421 | recall: 0.06513 | ndcg: 0.05053 | hit_rate: 0.10677 | map: 0.03704
+Sat 17 Aug 2024 19:27:19 INFO 10: precision: 0.01816 | recall: 0.09545 | ndcg: 0.06203 | hit_rate: 0.15185 | map: 0.04183
+Sat 17 Aug 2024 19:27:19 INFO 20: precision: 0.01311 | recall: 0.13618 | ndcg: 0.07436 | hit_rate: 0.20831 | map: 0.04537
+Sat 17 Aug 2024 19:27:35 INFO Epoch 29, Loss: 380.82922
+Sat 17 Aug 2024 19:27:36 INFO Validation Metrics:
+Sat 17 Aug 2024 19:27:36 INFO 5: precision: 0.01426 | recall: 0.06123 | ndcg: 0.04092 | hit_rate: 0.06885 | map: 0.03271
+Sat 17 Aug 2024 19:27:36 INFO 10: precision: 0.01119 | recall: 0.09516 | ndcg: 0.05217 | hit_rate: 0.10554 | map: 0.03738
+Sat 17 Aug 2024 19:27:36 INFO 20: precision: 0.00828 | recall: 0.13792 | ndcg: 0.06344 | hit_rate: 0.14985 | map: 0.04058
+Sat 17 Aug 2024 19:27:36 INFO Test Metrics:
+Sat 17 Aug 2024 19:27:36 INFO 5: precision: 0.02409 | recall: 0.06508 | ndcg: 0.05059 | hit_rate: 0.10651 | map: 0.03718
+Sat 17 Aug 2024 19:27:36 INFO 10: precision: 0.01824 | recall: 0.09611 | ndcg: 0.06240 | hit_rate: 0.15231 | map: 0.04212
+Sat 17 Aug 2024 19:27:36 INFO 20: precision: 0.01321 | recall: 0.13722 | ndcg: 0.07482 | hit_rate: 0.20953 | map: 0.04566
+Sat 17 Aug 2024 19:27:52 INFO Epoch 30, Loss: 380.38637
+Sat 17 Aug 2024 19:27:53 INFO Validation Metrics:
+Sat 17 Aug 2024 19:27:53 INFO 5: precision: 0.01443 | recall: 0.06207 | ndcg: 0.04132 | hit_rate: 0.06976 | map: 0.03298
+Sat 17 Aug 2024 19:27:53 INFO 10: precision: 0.01129 | recall: 0.09643 | ndcg: 0.05264 | hit_rate: 0.10664 | map: 0.03766
+Sat 17 Aug 2024 19:27:53 INFO 20: precision: 0.00828 | recall: 0.13782 | ndcg: 0.06360 | hit_rate: 0.14985 | map: 0.04077
+Sat 17 Aug 2024 19:27:53 INFO Test Metrics:
+Sat 17 Aug 2024 19:27:53 INFO 5: precision: 0.02400 | recall: 0.06453 | ndcg: 0.05047 | hit_rate: 0.10625 | map: 0.03716
+Sat 17 Aug 2024 19:27:53 INFO 10: precision: 0.01821 | recall: 0.09587 | ndcg: 0.06238 | hit_rate: 0.15244 | map: 0.04215
+Sat 17 Aug 2024 19:27:53 INFO 20: precision: 0.01326 | recall: 0.13773 | ndcg: 0.07504 | hit_rate: 0.21095 | map: 0.04577
+Sat 17 Aug 2024 19:28:09 INFO Epoch 31, Loss: 380.26307
+Sat 17 Aug 2024 19:28:10 INFO Validation Metrics:
+Sat 17 Aug 2024 19:28:10 INFO 5: precision: 0.01438 | recall: 0.06153 | ndcg: 0.04119 | hit_rate: 0.06937 | map: 0.03293
+Sat 17 Aug 2024 19:28:10 INFO 10: precision: 0.01128 | recall: 0.09620 | ndcg: 0.05261 | hit_rate: 0.10625 | map: 0.03768
+Sat 17 Aug 2024 19:28:10 INFO 20: precision: 0.00831 | recall: 0.13844 | ndcg: 0.06377 | hit_rate: 0.15063 | map: 0.04083
+Sat 17 Aug 2024 19:28:10 INFO Test Metrics:
+Sat 17 Aug 2024 19:28:10 INFO 5: precision: 0.02409 | recall: 0.06490 | ndcg: 0.05049 | hit_rate: 0.10677 | map: 0.03706
+Sat 17 Aug 2024 19:28:10 INFO 10: precision: 0.01830 | recall: 0.09655 | ndcg: 0.06253 | hit_rate: 0.15321 | map: 0.04213
+Sat 17 Aug 2024 19:28:10 INFO 20: precision: 0.01324 | recall: 0.13765 | ndcg: 0.07497 | hit_rate: 0.21044 | map: 0.04567
+Sat 17 Aug 2024 19:28:25 INFO Epoch 32, Loss: 380.23271
+Sat 17 Aug 2024 19:28:27 INFO Validation Metrics:
+Sat 17 Aug 2024 19:28:27 INFO 5: precision: 0.01435 | recall: 0.06160 | ndcg: 0.04098 | hit_rate: 0.06931 | map: 0.03262
+Sat 17 Aug 2024 19:28:27 INFO 10: precision: 0.01135 | recall: 0.09650 | ndcg: 0.05250 | hit_rate: 0.10690 | map: 0.03740
+Sat 17 Aug 2024 19:28:27 INFO 20: precision: 0.00828 | recall: 0.13811 | ndcg: 0.06345 | hit_rate: 0.15030 | map: 0.04048
+Sat 17 Aug 2024 19:28:27 INFO Test Metrics:
+Sat 17 Aug 2024 19:28:27 INFO 5: precision: 0.02421 | recall: 0.06512 | ndcg: 0.05063 | hit_rate: 0.10703 | map: 0.03716
+Sat 17 Aug 2024 19:28:27 INFO 10: precision: 0.01822 | recall: 0.09614 | ndcg: 0.06242 | hit_rate: 0.15256 | map: 0.04212
+Sat 17 Aug 2024 19:28:27 INFO 20: precision: 0.01323 | recall: 0.13747 | ndcg: 0.07494 | hit_rate: 0.21011 | map: 0.04570
+Sat 17 Aug 2024 19:28:42 INFO Epoch 33, Loss: 379.96959
+Sat 17 Aug 2024 19:28:44 INFO Validation Metrics:
+Sat 17 Aug 2024 19:28:44 INFO 5: precision: 0.01444 | recall: 0.06206 | ndcg: 0.04134 | hit_rate: 0.06963 | map: 0.03297
+Sat 17 Aug 2024 19:28:44 INFO 10: precision: 0.01127 | recall: 0.09581 | ndcg: 0.05253 | hit_rate: 0.10606 | map: 0.03764
+Sat 17 Aug 2024 19:28:44 INFO 20: precision: 0.00826 | recall: 0.13760 | ndcg: 0.06358 | hit_rate: 0.14985 | map: 0.04077
+Sat 17 Aug 2024 19:28:44 INFO Test Metrics:
+Sat 17 Aug 2024 19:28:44 INFO 5: precision: 0.02426 | recall: 0.06515 | ndcg: 0.05066 | hit_rate: 0.10735 | map: 0.03717
+Sat 17 Aug 2024 19:28:44 INFO 10: precision: 0.01825 | recall: 0.09610 | ndcg: 0.06240 | hit_rate: 0.15263 | map: 0.04211
+Sat 17 Aug 2024 19:28:44 INFO 20: precision: 0.01326 | recall: 0.13769 | ndcg: 0.07501 | hit_rate: 0.21018 | map: 0.04573
+Sat 17 Aug 2024 19:28:59 INFO Epoch 34, Loss: 379.95242
+Sat 17 Aug 2024 19:29:00 INFO Validation Metrics:
+Sat 17 Aug 2024 19:29:00 INFO 5: precision: 0.01452 | recall: 0.06254 | ndcg: 0.04152 | hit_rate: 0.07008 | map: 0.03308
+Sat 17 Aug 2024 19:29:00 INFO 10: precision: 0.01134 | recall: 0.09633 | ndcg: 0.05270 | hit_rate: 0.10645 | map: 0.03772
+Sat 17 Aug 2024 19:29:00 INFO 20: precision: 0.00827 | recall: 0.13808 | ndcg: 0.06370 | hit_rate: 0.14992 | map: 0.04083
+Sat 17 Aug 2024 19:29:00 INFO Test Metrics:
+Sat 17 Aug 2024 19:29:00 INFO 5: precision: 0.02414 | recall: 0.06504 | ndcg: 0.05066 | hit_rate: 0.10677 | map: 0.03722
+Sat 17 Aug 2024 19:29:00 INFO 10: precision: 0.01816 | recall: 0.09564 | ndcg: 0.06235 | hit_rate: 0.15179 | map: 0.04216
+Sat 17 Aug 2024 19:29:00 INFO 20: precision: 0.01326 | recall: 0.13784 | ndcg: 0.07514 | hit_rate: 0.21095 | map: 0.04582
+Sat 17 Aug 2024 19:29:16 INFO Epoch 35, Loss: 379.76492
+Sat 17 Aug 2024 19:29:18 INFO Validation Metrics:
+Sat 17 Aug 2024 19:29:18 INFO 5: precision: 0.01434 | recall: 0.06180 | ndcg: 0.04119 | hit_rate: 0.06931 | map: 0.03292
+Sat 17 Aug 2024 19:29:18 INFO 10: precision: 0.01140 | recall: 0.09721 | ndcg: 0.05289 | hit_rate: 0.10729 | map: 0.03776
+Sat 17 Aug 2024 19:29:18 INFO 20: precision: 0.00825 | recall: 0.13801 | ndcg: 0.06362 | hit_rate: 0.14972 | map: 0.04078
+Sat 17 Aug 2024 19:29:18 INFO Test Metrics:
+Sat 17 Aug 2024 19:29:18 INFO 5: precision: 0.02433 | recall: 0.06530 | ndcg: 0.05091 | hit_rate: 0.10742 | map: 0.03749
+Sat 17 Aug 2024 19:29:18 INFO 10: precision: 0.01822 | recall: 0.09621 | ndcg: 0.06261 | hit_rate: 0.15269 | map: 0.04239
+Sat 17 Aug 2024 19:29:18 INFO 20: precision: 0.01317 | recall: 0.13725 | ndcg: 0.07503 | hit_rate: 0.20928 | map: 0.04596
+Sat 17 Aug 2024 19:29:33 INFO Epoch 36, Loss: 379.69673
+Sat 17 Aug 2024 19:29:35 INFO Validation Metrics:
+Sat 17 Aug 2024 19:29:35 INFO 5: precision: 0.01442 | recall: 0.06197 | ndcg: 0.04117 | hit_rate: 0.06963 | map: 0.03280
+Sat 17 Aug 2024 19:29:35 INFO 10: precision: 0.01138 | recall: 0.09688 | ndcg: 0.05269 | hit_rate: 0.10729 | map: 0.03756
+Sat 17 Aug 2024 19:29:35 INFO 20: precision: 0.00834 | recall: 0.13916 | ndcg: 0.06383 | hit_rate: 0.15121 | map: 0.04070
+Sat 17 Aug 2024 19:29:35 INFO Test Metrics:
+Sat 17 Aug 2024 19:29:35 INFO 5: precision: 0.02466 | recall: 0.06626 | ndcg: 0.05111 | hit_rate: 0.10884 | map: 0.03738
+Sat 17 Aug 2024 19:29:35 INFO 10: precision: 0.01832 | recall: 0.09647 | ndcg: 0.06258 | hit_rate: 0.15276 | map: 0.04224
+Sat 17 Aug 2024 19:29:35 INFO 20: precision: 0.01329 | recall: 0.13802 | ndcg: 0.07515 | hit_rate: 0.21102 | map: 0.04582
+Sat 17 Aug 2024 19:29:50 INFO Epoch 37, Loss: 379.63812
+Sat 17 Aug 2024 19:29:52 INFO Validation Metrics:
+Sat 17 Aug 2024 19:29:52 INFO 5: precision: 0.01456 | recall: 0.06289 | ndcg: 0.04177 | hit_rate: 0.07034 | map: 0.03333
+Sat 17 Aug 2024 19:29:52 INFO 10: precision: 0.01135 | recall: 0.09692 | ndcg: 0.05302 | hit_rate: 0.10709 | map: 0.03798
+Sat 17 Aug 2024 19:29:52 INFO 20: precision: 0.00836 | recall: 0.13998 | ndcg: 0.06433 | hit_rate: 0.15205 | map: 0.04116
+Sat 17 Aug 2024 19:29:52 INFO Test Metrics:
+Sat 17 Aug 2024 19:29:52 INFO 5: precision: 0.02447 | recall: 0.06551 | ndcg: 0.05087 | hit_rate: 0.10793 | map: 0.03727
+Sat 17 Aug 2024 19:29:52 INFO 10: precision: 0.01838 | recall: 0.09677 | ndcg: 0.06271 | hit_rate: 0.15327 | map: 0.04228
+Sat 17 Aug 2024 19:29:52 INFO 20: precision: 0.01325 | recall: 0.13771 | ndcg: 0.07508 | hit_rate: 0.21018 | map: 0.04580
+Sat 17 Aug 2024 19:30:08 INFO Epoch 38, Loss: 379.41182
+Sat 17 Aug 2024 19:30:09 INFO Validation Metrics:
+Sat 17 Aug 2024 19:30:09 INFO 5: precision: 0.01470 | recall: 0.06363 | ndcg: 0.04185 | hit_rate: 0.07111 | map: 0.03318
+Sat 17 Aug 2024 19:30:09 INFO 10: precision: 0.01136 | recall: 0.09667 | ndcg: 0.05277 | hit_rate: 0.10696 | map: 0.03769
+Sat 17 Aug 2024 19:30:09 INFO 20: precision: 0.00831 | recall: 0.13871 | ndcg: 0.06385 | hit_rate: 0.15063 | map: 0.04083
+Sat 17 Aug 2024 19:30:09 INFO Test Metrics:
+Sat 17 Aug 2024 19:30:09 INFO 5: precision: 0.02434 | recall: 0.06549 | ndcg: 0.05103 | hit_rate: 0.10722 | map: 0.03756
+Sat 17 Aug 2024 19:30:09 INFO 10: precision: 0.01835 | recall: 0.09659 | ndcg: 0.06285 | hit_rate: 0.15340 | map: 0.04251
+Sat 17 Aug 2024 19:30:09 INFO 20: precision: 0.01323 | recall: 0.13762 | ndcg: 0.07523 | hit_rate: 0.21031 | map: 0.04603
+Sat 17 Aug 2024 19:30:25 INFO Epoch 39, Loss: 379.30025
+Sat 17 Aug 2024 19:30:27 INFO Validation Metrics:
+Sat 17 Aug 2024 19:30:27 INFO 5: precision: 0.01473 | recall: 0.06348 | ndcg: 0.04206 | hit_rate: 0.07105 | map: 0.03346
+Sat 17 Aug 2024 19:30:27 INFO 10: precision: 0.01141 | recall: 0.09728 | ndcg: 0.05320 | hit_rate: 0.10754 | map: 0.03806
+Sat 17 Aug 2024 19:30:27 INFO 20: precision: 0.00833 | recall: 0.13936 | ndcg: 0.06425 | hit_rate: 0.15147 | map: 0.04116
+Sat 17 Aug 2024 19:30:27 INFO Test Metrics:
+Sat 17 Aug 2024 19:30:27 INFO 5: precision: 0.02457 | recall: 0.06633 | ndcg: 0.05128 | hit_rate: 0.10884 | map: 0.03756
+Sat 17 Aug 2024 19:30:27 INFO 10: precision: 0.01836 | recall: 0.09668 | ndcg: 0.06285 | hit_rate: 0.15379 | map: 0.04242
+Sat 17 Aug 2024 19:30:27 INFO 20: precision: 0.01324 | recall: 0.13737 | ndcg: 0.07517 | hit_rate: 0.21018 | map: 0.04596
+Sat 17 Aug 2024 19:30:42 INFO Epoch 40, Loss: 379.26570
+Sat 17 Aug 2024 19:30:43 INFO Validation Metrics:
+Sat 17 Aug 2024 19:30:43 INFO 5: precision: 0.01480 | recall: 0.06365 | ndcg: 0.04226 | hit_rate: 0.07124 | map: 0.03369
+Sat 17 Aug 2024 19:30:43 INFO 10: precision: 0.01137 | recall: 0.09715 | ndcg: 0.05333 | hit_rate: 0.10729 | map: 0.03829
+Sat 17 Aug 2024 19:30:43 INFO 20: precision: 0.00835 | recall: 0.13946 | ndcg: 0.06449 | hit_rate: 0.15160 | map: 0.04144
+Sat 17 Aug 2024 19:30:43 INFO Test Metrics:
+Sat 17 Aug 2024 19:30:43 INFO 5: precision: 0.02445 | recall: 0.06601 | ndcg: 0.05108 | hit_rate: 0.10806 | map: 0.03743
+Sat 17 Aug 2024 19:30:43 INFO 10: precision: 0.01834 | recall: 0.09666 | ndcg: 0.06277 | hit_rate: 0.15411 | map: 0.04232
+Sat 17 Aug 2024 19:30:43 INFO 20: precision: 0.01316 | recall: 0.13704 | ndcg: 0.07498 | hit_rate: 0.20940 | map: 0.04583
+Sat 17 Aug 2024 19:30:58 INFO Epoch 41, Loss: 379.10674
+Sat 17 Aug 2024 19:31:00 INFO Validation Metrics:
+Sat 17 Aug 2024 19:31:00 INFO 5: precision: 0.01477 | recall: 0.06321 | ndcg: 0.04186 | hit_rate: 0.07111 | map: 0.03324
+Sat 17 Aug 2024 19:31:00 INFO 10: precision: 0.01144 | recall: 0.09743 | ndcg: 0.05313 | hit_rate: 0.10780 | map: 0.03791
+Sat 17 Aug 2024 19:31:00 INFO 20: precision: 0.00838 | recall: 0.14012 | ndcg: 0.06432 | hit_rate: 0.15224 | map: 0.04105
+Sat 17 Aug 2024 19:31:00 INFO Test Metrics:
+Sat 17 Aug 2024 19:31:00 INFO 5: precision: 0.02445 | recall: 0.06606 | ndcg: 0.05122 | hit_rate: 0.10774 | map: 0.03761
+Sat 17 Aug 2024 19:31:00 INFO 10: precision: 0.01849 | recall: 0.09738 | ndcg: 0.06314 | hit_rate: 0.15508 | map: 0.04255
+Sat 17 Aug 2024 19:31:00 INFO 20: precision: 0.01327 | recall: 0.13780 | ndcg: 0.07539 | hit_rate: 0.21044 | map: 0.04608
+Sat 17 Aug 2024 19:31:15 INFO Epoch 42, Loss: 379.14073
+Sat 17 Aug 2024 19:31:17 INFO Validation Metrics:
+Sat 17 Aug 2024 19:31:17 INFO 5: precision: 0.01487 | recall: 0.06369 | ndcg: 0.04223 | hit_rate: 0.07150 | map: 0.03358
+Sat 17 Aug 2024 19:31:17 INFO 10: precision: 0.01146 | recall: 0.09753 | ndcg: 0.05342 | hit_rate: 0.10793 | map: 0.03824
+Sat 17 Aug 2024 19:31:17 INFO 20: precision: 0.00831 | recall: 0.13904 | ndcg: 0.06434 | hit_rate: 0.15114 | map: 0.04132
+Sat 17 Aug 2024 19:31:17 INFO Test Metrics:
+Sat 17 Aug 2024 19:31:17 INFO 5: precision: 0.02430 | recall: 0.06557 | ndcg: 0.05082 | hit_rate: 0.10735 | map: 0.03730
+Sat 17 Aug 2024 19:31:17 INFO 10: precision: 0.01839 | recall: 0.09701 | ndcg: 0.06280 | hit_rate: 0.15424 | map: 0.04232
+Sat 17 Aug 2024 19:31:17 INFO 20: precision: 0.01328 | recall: 0.13795 | ndcg: 0.07521 | hit_rate: 0.21070 | map: 0.04589
+Sat 17 Aug 2024 19:31:32 INFO Epoch 43, Loss: 379.08480
+Sat 17 Aug 2024 19:31:33 INFO Validation Metrics:
+Sat 17 Aug 2024 19:31:33 INFO 5: precision: 0.01487 | recall: 0.06381 | ndcg: 0.04231 | hit_rate: 0.07150 | map: 0.03369
+Sat 17 Aug 2024 19:31:33 INFO 10: precision: 0.01145 | recall: 0.09726 | ndcg: 0.05337 | hit_rate: 0.10761 | map: 0.03828
+Sat 17 Aug 2024 19:31:33 INFO 20: precision: 0.00837 | recall: 0.13979 | ndcg: 0.06452 | hit_rate: 0.15179 | map: 0.04140
+Sat 17 Aug 2024 19:31:33 INFO Test Metrics:
+Sat 17 Aug 2024 19:31:33 INFO 5: precision: 0.02420 | recall: 0.06512 | ndcg: 0.05077 | hit_rate: 0.10664 | map: 0.03741
+Sat 17 Aug 2024 19:31:33 INFO 10: precision: 0.01838 | recall: 0.09710 | ndcg: 0.06292 | hit_rate: 0.15405 | map: 0.04251
+Sat 17 Aug 2024 19:31:33 INFO 20: precision: 0.01323 | recall: 0.13761 | ndcg: 0.07524 | hit_rate: 0.21050 | map: 0.04605
+Sat 17 Aug 2024 19:31:48 INFO Epoch 44, Loss: 378.98710
+Sat 17 Aug 2024 19:31:50 INFO Validation Metrics:
+Sat 17 Aug 2024 19:31:50 INFO 5: precision: 0.01458 | recall: 0.06244 | ndcg: 0.04171 | hit_rate: 0.07002 | map: 0.03334
+Sat 17 Aug 2024 19:31:50 INFO 10: precision: 0.01156 | recall: 0.09836 | ndcg: 0.05358 | hit_rate: 0.10858 | map: 0.03827
+Sat 17 Aug 2024 19:31:50 INFO 20: precision: 0.00835 | recall: 0.13942 | ndcg: 0.06438 | hit_rate: 0.15172 | map: 0.04129
+Sat 17 Aug 2024 19:31:50 INFO Test Metrics:
+Sat 17 Aug 2024 19:31:50 INFO 5: precision: 0.02426 | recall: 0.06566 | ndcg: 0.05111 | hit_rate: 0.10735 | map: 0.03765
+Sat 17 Aug 2024 19:31:50 INFO 10: precision: 0.01826 | recall: 0.09659 | ndcg: 0.06290 | hit_rate: 0.15347 | map: 0.04259
+Sat 17 Aug 2024 19:31:50 INFO 20: precision: 0.01324 | recall: 0.13770 | ndcg: 0.07541 | hit_rate: 0.21044 | map: 0.04620
+Sat 17 Aug 2024 19:32:06 INFO Epoch 45, Loss: 378.70169
+Sat 17 Aug 2024 19:32:07 INFO Validation Metrics:
+Sat 17 Aug 2024 19:32:07 INFO 5: precision: 0.01461 | recall: 0.06253 | ndcg: 0.04142 | hit_rate: 0.07002 | map: 0.03294
+Sat 17 Aug 2024 19:32:07 INFO 10: precision: 0.01146 | recall: 0.09759 | ndcg: 0.05302 | hit_rate: 0.10780 | map: 0.03777
+Sat 17 Aug 2024 19:32:07 INFO 20: precision: 0.00837 | recall: 0.13969 | ndcg: 0.06409 | hit_rate: 0.15179 | map: 0.04088
+Sat 17 Aug 2024 19:32:07 INFO Test Metrics:
+Sat 17 Aug 2024 19:32:07 INFO 5: precision: 0.02430 | recall: 0.06552 | ndcg: 0.05082 | hit_rate: 0.10716 | map: 0.03734
+Sat 17 Aug 2024 19:32:07 INFO 10: precision: 0.01841 | recall: 0.09700 | ndcg: 0.06282 | hit_rate: 0.15450 | map: 0.04234
+Sat 17 Aug 2024 19:32:07 INFO 20: precision: 0.01334 | recall: 0.13845 | ndcg: 0.07539 | hit_rate: 0.21179 | map: 0.04595
+Sat 17 Aug 2024 19:32:22 INFO Epoch 46, Loss: 378.81154
+Sat 17 Aug 2024 19:32:24 INFO Validation Metrics:
+Sat 17 Aug 2024 19:32:24 INFO 5: precision: 0.01464 | recall: 0.06274 | ndcg: 0.04169 | hit_rate: 0.07060 | map: 0.03322
+Sat 17 Aug 2024 19:32:24 INFO 10: precision: 0.01154 | recall: 0.09836 | ndcg: 0.05349 | hit_rate: 0.10864 | map: 0.03815
+Sat 17 Aug 2024 19:32:24 INFO 20: precision: 0.00840 | recall: 0.14046 | ndcg: 0.06454 | hit_rate: 0.15244 | map: 0.04125
+Sat 17 Aug 2024 19:32:24 INFO Test Metrics:
+Sat 17 Aug 2024 19:32:24 INFO 5: precision: 0.02449 | recall: 0.06576 | ndcg: 0.05121 | hit_rate: 0.10806 | map: 0.03762
+Sat 17 Aug 2024 19:32:24 INFO 10: precision: 0.01856 | recall: 0.09790 | ndcg: 0.06337 | hit_rate: 0.15566 | map: 0.04270
+Sat 17 Aug 2024 19:32:24 INFO 20: precision: 0.01331 | recall: 0.13798 | ndcg: 0.07554 | hit_rate: 0.21134 | map: 0.04618
+Sat 17 Aug 2024 19:32:39 INFO Epoch 47, Loss: 378.65724
+Sat 17 Aug 2024 19:32:41 INFO Validation Metrics:
+Sat 17 Aug 2024 19:32:41 INFO 5: precision: 0.01466 | recall: 0.06261 | ndcg: 0.04188 | hit_rate: 0.07060 | map: 0.03349
+Sat 17 Aug 2024 19:32:41 INFO 10: precision: 0.01143 | recall: 0.09783 | ndcg: 0.05349 | hit_rate: 0.10780 | map: 0.03834
+Sat 17 Aug 2024 19:32:41 INFO 20: precision: 0.00842 | recall: 0.14069 | ndcg: 0.06476 | hit_rate: 0.15282 | map: 0.04149
+Sat 17 Aug 2024 19:32:41 INFO Test Metrics:
+Sat 17 Aug 2024 19:32:41 INFO 5: precision: 0.02435 | recall: 0.06557 | ndcg: 0.05108 | hit_rate: 0.10742 | map: 0.03761
+Sat 17 Aug 2024 19:32:41 INFO 10: precision: 0.01844 | recall: 0.09752 | ndcg: 0.06322 | hit_rate: 0.15515 | map: 0.04270
+Sat 17 Aug 2024 19:32:41 INFO 20: precision: 0.01329 | recall: 0.13795 | ndcg: 0.07550 | hit_rate: 0.21057 | map: 0.04625
+Sat 17 Aug 2024 19:32:56 INFO Epoch 48, Loss: 378.60300
+Sat 17 Aug 2024 19:32:57 INFO Validation Metrics:
+Sat 17 Aug 2024 19:32:57 INFO 5: precision: 0.01447 | recall: 0.06202 | ndcg: 0.04162 | hit_rate: 0.06969 | map: 0.03337
+Sat 17 Aug 2024 19:32:57 INFO 10: precision: 0.01141 | recall: 0.09780 | ndcg: 0.05345 | hit_rate: 0.10767 | map: 0.03832
+Sat 17 Aug 2024 19:32:57 INFO 20: precision: 0.00839 | recall: 0.14039 | ndcg: 0.06465 | hit_rate: 0.15256 | map: 0.04146
+Sat 17 Aug 2024 19:32:57 INFO Test Metrics:
+Sat 17 Aug 2024 19:32:57 INFO 5: precision: 0.02440 | recall: 0.06583 | ndcg: 0.05092 | hit_rate: 0.10800 | map: 0.03733
+Sat 17 Aug 2024 19:32:57 INFO 10: precision: 0.01840 | recall: 0.09720 | ndcg: 0.06285 | hit_rate: 0.15431 | map: 0.04237
+Sat 17 Aug 2024 19:32:57 INFO 20: precision: 0.01328 | recall: 0.13763 | ndcg: 0.07514 | hit_rate: 0.21044 | map: 0.04589
+Sat 17 Aug 2024 19:33:12 INFO Epoch 49, Loss: 378.53633
+Sat 17 Aug 2024 19:33:14 INFO Validation Metrics:
+Sat 17 Aug 2024 19:33:14 INFO 5: precision: 0.01484 | recall: 0.06360 | ndcg: 0.04225 | hit_rate: 0.07137 | map: 0.03368
+Sat 17 Aug 2024 19:33:14 INFO 10: precision: 0.01146 | recall: 0.09845 | ndcg: 0.05372 | hit_rate: 0.10800 | map: 0.03848
+Sat 17 Aug 2024 19:33:14 INFO 20: precision: 0.00837 | recall: 0.14000 | ndcg: 0.06467 | hit_rate: 0.15198 | map: 0.04154
+Sat 17 Aug 2024 19:33:14 INFO Test Metrics:
+Sat 17 Aug 2024 19:33:14 INFO 5: precision: 0.02462 | recall: 0.06646 | ndcg: 0.05154 | hit_rate: 0.10851 | map: 0.03789
+Sat 17 Aug 2024 19:33:14 INFO 10: precision: 0.01842 | recall: 0.09708 | ndcg: 0.06320 | hit_rate: 0.15444 | map: 0.04279
+Sat 17 Aug 2024 19:33:14 INFO 20: precision: 0.01331 | recall: 0.13801 | ndcg: 0.07561 | hit_rate: 0.21050 | map: 0.04635
+Sat 17 Aug 2024 19:33:29 INFO Epoch 50, Loss: 378.62206
+Sat 17 Aug 2024 19:33:31 INFO Validation Metrics:
+Sat 17 Aug 2024 19:33:31 INFO 5: precision: 0.01466 | recall: 0.06315 | ndcg: 0.04229 | hit_rate: 0.07047 | map: 0.03393
+Sat 17 Aug 2024 19:33:31 INFO 10: precision: 0.01154 | recall: 0.09876 | ndcg: 0.05401 | hit_rate: 0.10864 | map: 0.03877
+Sat 17 Aug 2024 19:33:31 INFO 20: precision: 0.00840 | recall: 0.14030 | ndcg: 0.06495 | hit_rate: 0.15218 | map: 0.04184
+Sat 17 Aug 2024 19:33:31 INFO Test Metrics:
+Sat 17 Aug 2024 19:33:31 INFO 5: precision: 0.02448 | recall: 0.06610 | ndcg: 0.05129 | hit_rate: 0.10774 | map: 0.03774
+Sat 17 Aug 2024 19:33:31 INFO 10: precision: 0.01843 | recall: 0.09746 | ndcg: 0.06321 | hit_rate: 0.15444 | map: 0.04273
+Sat 17 Aug 2024 19:33:31 INFO 20: precision: 0.01322 | recall: 0.13748 | ndcg: 0.07534 | hit_rate: 0.21011 | map: 0.04620
+Sat 17 Aug 2024 19:33:46 INFO Epoch 51, Loss: 378.46253
+Sat 17 Aug 2024 19:33:48 INFO Validation Metrics:
+Sat 17 Aug 2024 19:33:48 INFO 5: precision: 0.01482 | recall: 0.06341 | ndcg: 0.04241 | hit_rate: 0.07099 | map: 0.03394
+Sat 17 Aug 2024 19:33:48 INFO 10: precision: 0.01139 | recall: 0.09726 | ndcg: 0.05355 | hit_rate: 0.10709 | map: 0.03857
+Sat 17 Aug 2024 19:33:48 INFO 20: precision: 0.00835 | recall: 0.14017 | ndcg: 0.06485 | hit_rate: 0.15237 | map: 0.04176
+Sat 17 Aug 2024 19:33:48 INFO Test Metrics:
+Sat 17 Aug 2024 19:33:48 INFO 5: precision: 0.02452 | recall: 0.06589 | ndcg: 0.05151 | hit_rate: 0.10774 | map: 0.03795
+Sat 17 Aug 2024 19:33:48 INFO 10: precision: 0.01831 | recall: 0.09668 | ndcg: 0.06321 | hit_rate: 0.15366 | map: 0.04287
+Sat 17 Aug 2024 19:33:48 INFO 20: precision: 0.01323 | recall: 0.13758 | ndcg: 0.07561 | hit_rate: 0.21024 | map: 0.04644
+Sat 17 Aug 2024 19:34:03 INFO Epoch 52, Loss: 378.41621
+Sat 17 Aug 2024 19:34:04 INFO Validation Metrics:
+Sat 17 Aug 2024 19:34:04 INFO 5: precision: 0.01478 | recall: 0.06344 | ndcg: 0.04258 | hit_rate: 0.07105 | map: 0.03416
+Sat 17 Aug 2024 19:34:04 INFO 10: precision: 0.01152 | recall: 0.09887 | ndcg: 0.05421 | hit_rate: 0.10871 | map: 0.03899
+Sat 17 Aug 2024 19:34:04 INFO 20: precision: 0.00842 | recall: 0.14088 | ndcg: 0.06529 | hit_rate: 0.15315 | map: 0.04209
+Sat 17 Aug 2024 19:34:04 INFO Test Metrics:
+Sat 17 Aug 2024 19:34:04 INFO 5: precision: 0.02460 | recall: 0.06613 | ndcg: 0.05166 | hit_rate: 0.10793 | map: 0.03806
+Sat 17 Aug 2024 19:34:04 INFO 10: precision: 0.01842 | recall: 0.09718 | ndcg: 0.06347 | hit_rate: 0.15457 | map: 0.04301
+Sat 17 Aug 2024 19:34:04 INFO 20: precision: 0.01331 | recall: 0.13828 | ndcg: 0.07589 | hit_rate: 0.21141 | map: 0.04656
+Sat 17 Aug 2024 19:34:19 INFO Epoch 53, Loss: 378.15609
+Sat 17 Aug 2024 19:34:21 INFO Validation Metrics:
+Sat 17 Aug 2024 19:34:21 INFO 5: precision: 0.01493 | recall: 0.06412 | ndcg: 0.04279 | hit_rate: 0.07183 | map: 0.03421
+Sat 17 Aug 2024 19:34:21 INFO 10: precision: 0.01157 | recall: 0.09905 | ndcg: 0.05428 | hit_rate: 0.10903 | map: 0.03897
+Sat 17 Aug 2024 19:34:21 INFO 20: precision: 0.00846 | recall: 0.14129 | ndcg: 0.06541 | hit_rate: 0.15347 | map: 0.04210
+Sat 17 Aug 2024 19:34:21 INFO Test Metrics:
+Sat 17 Aug 2024 19:34:21 INFO 5: precision: 0.02454 | recall: 0.06600 | ndcg: 0.05157 | hit_rate: 0.10774 | map: 0.03802
+Sat 17 Aug 2024 19:34:21 INFO 10: precision: 0.01832 | recall: 0.09674 | ndcg: 0.06329 | hit_rate: 0.15347 | map: 0.04295
+Sat 17 Aug 2024 19:34:21 INFO 20: precision: 0.01328 | recall: 0.13798 | ndcg: 0.07578 | hit_rate: 0.21063 | map: 0.04653
+Sat 17 Aug 2024 19:34:36 INFO Epoch 54, Loss: 378.08054
+Sat 17 Aug 2024 19:34:38 INFO Validation Metrics:
+Sat 17 Aug 2024 19:34:38 INFO 5: precision: 0.01462 | recall: 0.06266 | ndcg: 0.04213 | hit_rate: 0.07021 | map: 0.03381
+Sat 17 Aug 2024 19:34:38 INFO 10: precision: 0.01157 | recall: 0.09864 | ndcg: 0.05400 | hit_rate: 0.10884 | map: 0.03874
+Sat 17 Aug 2024 19:34:38 INFO 20: precision: 0.00844 | recall: 0.14085 | ndcg: 0.06512 | hit_rate: 0.15295 | map: 0.04187
+Sat 17 Aug 2024 19:34:38 INFO Test Metrics:
+Sat 17 Aug 2024 19:34:38 INFO 5: precision: 0.02461 | recall: 0.06638 | ndcg: 0.05177 | hit_rate: 0.10819 | map: 0.03820
+Sat 17 Aug 2024 19:34:38 INFO 10: precision: 0.01823 | recall: 0.09670 | ndcg: 0.06331 | hit_rate: 0.15308 | map: 0.04305
+Sat 17 Aug 2024 19:34:38 INFO 20: precision: 0.01323 | recall: 0.13795 | ndcg: 0.07580 | hit_rate: 0.21070 | map: 0.04661
+Sat 17 Aug 2024 19:34:53 INFO Epoch 55, Loss: 377.92490
+Sat 17 Aug 2024 19:34:54 INFO Validation Metrics:
+Sat 17 Aug 2024 19:34:54 INFO 5: precision: 0.01473 | recall: 0.06308 | ndcg: 0.04195 | hit_rate: 0.07073 | map: 0.03346
+Sat 17 Aug 2024 19:34:54 INFO 10: precision: 0.01157 | recall: 0.09904 | ndcg: 0.05374 | hit_rate: 0.10909 | map: 0.03833
+Sat 17 Aug 2024 19:34:54 INFO 20: precision: 0.00843 | recall: 0.14050 | ndcg: 0.06468 | hit_rate: 0.15263 | map: 0.04140
+Sat 17 Aug 2024 19:34:54 INFO Test Metrics:
+Sat 17 Aug 2024 19:34:54 INFO 5: precision: 0.02448 | recall: 0.06619 | ndcg: 0.05185 | hit_rate: 0.10735 | map: 0.03835
+Sat 17 Aug 2024 19:34:54 INFO 10: precision: 0.01841 | recall: 0.09722 | ndcg: 0.06372 | hit_rate: 0.15444 | map: 0.04331
+Sat 17 Aug 2024 19:34:54 INFO 20: precision: 0.01321 | recall: 0.13768 | ndcg: 0.07593 | hit_rate: 0.21037 | map: 0.04679
+Sat 17 Aug 2024 19:35:09 INFO Epoch 56, Loss: 377.78309
+Sat 17 Aug 2024 19:35:11 INFO Validation Metrics:
+Sat 17 Aug 2024 19:35:11 INFO 5: precision: 0.01470 | recall: 0.06319 | ndcg: 0.04229 | hit_rate: 0.07060 | map: 0.03392
+Sat 17 Aug 2024 19:35:11 INFO 10: precision: 0.01150 | recall: 0.09838 | ndcg: 0.05390 | hit_rate: 0.10825 | map: 0.03872
+Sat 17 Aug 2024 19:35:11 INFO 20: precision: 0.00845 | recall: 0.14127 | ndcg: 0.06520 | hit_rate: 0.15360 | map: 0.04188
+Sat 17 Aug 2024 19:35:11 INFO Test Metrics:
+Sat 17 Aug 2024 19:35:11 INFO 5: precision: 0.02479 | recall: 0.06660 | ndcg: 0.05213 | hit_rate: 0.10903 | map: 0.03845
+Sat 17 Aug 2024 19:35:11 INFO 10: precision: 0.01840 | recall: 0.09753 | ndcg: 0.06383 | hit_rate: 0.15444 | map: 0.04337
+Sat 17 Aug 2024 19:35:11 INFO 20: precision: 0.01325 | recall: 0.13846 | ndcg: 0.07617 | hit_rate: 0.21089 | map: 0.04688
+Sat 17 Aug 2024 19:35:26 INFO Epoch 57, Loss: 377.64999
+Sat 17 Aug 2024 19:35:28 INFO Validation Metrics:
+Sat 17 Aug 2024 19:35:28 INFO 5: precision: 0.01478 | recall: 0.06335 | ndcg: 0.04251 | hit_rate: 0.07111 | map: 0.03411
+Sat 17 Aug 2024 19:35:28 INFO 10: precision: 0.01172 | recall: 0.10021 | ndcg: 0.05465 | hit_rate: 0.11019 | map: 0.03915
+Sat 17 Aug 2024 19:35:28 INFO 20: precision: 0.00841 | recall: 0.14089 | ndcg: 0.06534 | hit_rate: 0.15295 | map: 0.04214
+Sat 17 Aug 2024 19:35:28 INFO Test Metrics:
+Sat 17 Aug 2024 19:35:28 INFO 5: precision: 0.02466 | recall: 0.06670 | ndcg: 0.05210 | hit_rate: 0.10806 | map: 0.03846
+Sat 17 Aug 2024 19:35:28 INFO 10: precision: 0.01834 | recall: 0.09680 | ndcg: 0.06358 | hit_rate: 0.15379 | map: 0.04325
+Sat 17 Aug 2024 19:35:28 INFO 20: precision: 0.01321 | recall: 0.13742 | ndcg: 0.07589 | hit_rate: 0.20999 | map: 0.04678
+Sat 17 Aug 2024 19:35:43 INFO Epoch 58, Loss: 377.64918
+Sat 17 Aug 2024 19:35:45 INFO Validation Metrics:
+Sat 17 Aug 2024 19:35:45 INFO 5: precision: 0.01479 | recall: 0.06347 | ndcg: 0.04264 | hit_rate: 0.07118 | map: 0.03422
+Sat 17 Aug 2024 19:35:45 INFO 10: precision: 0.01167 | recall: 0.09936 | ndcg: 0.05451 | hit_rate: 0.10942 | map: 0.03917
+Sat 17 Aug 2024 19:35:45 INFO 20: precision: 0.00851 | recall: 0.14234 | ndcg: 0.06581 | hit_rate: 0.15457 | map: 0.04233
+Sat 17 Aug 2024 19:35:45 INFO Test Metrics:
+Sat 17 Aug 2024 19:35:45 INFO 5: precision: 0.02485 | recall: 0.06712 | ndcg: 0.05238 | hit_rate: 0.10935 | map: 0.03863
+Sat 17 Aug 2024 19:35:45 INFO 10: precision: 0.01838 | recall: 0.09670 | ndcg: 0.06369 | hit_rate: 0.15418 | map: 0.04337
+Sat 17 Aug 2024 19:35:45 INFO 20: precision: 0.01328 | recall: 0.13786 | ndcg: 0.07615 | hit_rate: 0.21083 | map: 0.04695
+Sat 17 Aug 2024 19:36:00 INFO Epoch 59, Loss: 377.50855
+Sat 17 Aug 2024 19:36:02 INFO Validation Metrics:
+Sat 17 Aug 2024 19:36:02 INFO 5: precision: 0.01505 | recall: 0.06461 | ndcg: 0.04306 | hit_rate: 0.07215 | map: 0.03441
+Sat 17 Aug 2024 19:36:02 INFO 10: precision: 0.01159 | recall: 0.09874 | ndcg: 0.05434 | hit_rate: 0.10864 | map: 0.03912
+Sat 17 Aug 2024 19:36:02 INFO 20: precision: 0.00845 | recall: 0.14136 | ndcg: 0.06555 | hit_rate: 0.15340 | map: 0.04226
+Sat 17 Aug 2024 19:36:02 INFO Test Metrics:
+Sat 17 Aug 2024 19:36:02 INFO 5: precision: 0.02484 | recall: 0.06724 | ndcg: 0.05231 | hit_rate: 0.10942 | map: 0.03854
+Sat 17 Aug 2024 19:36:02 INFO 10: precision: 0.01852 | recall: 0.09760 | ndcg: 0.06391 | hit_rate: 0.15476 | map: 0.04341
+Sat 17 Aug 2024 19:36:02 INFO 20: precision: 0.01331 | recall: 0.13867 | ndcg: 0.07627 | hit_rate: 0.21218 | map: 0.04690
+Sat 17 Aug 2024 19:36:17 INFO Epoch 60, Loss: 377.49708
+Sat 17 Aug 2024 19:36:19 INFO Validation Metrics:
+Sat 17 Aug 2024 19:36:19 INFO 5: precision: 0.01475 | recall: 0.06333 | ndcg: 0.04274 | hit_rate: 0.07105 | map: 0.03439
+Sat 17 Aug 2024 19:36:19 INFO 10: precision: 0.01154 | recall: 0.09864 | ndcg: 0.05440 | hit_rate: 0.10864 | map: 0.03925
+Sat 17 Aug 2024 19:36:19 INFO 20: precision: 0.00843 | recall: 0.14096 | ndcg: 0.06556 | hit_rate: 0.15308 | map: 0.04240
+Sat 17 Aug 2024 19:36:19 INFO Test Metrics:
+Sat 17 Aug 2024 19:36:19 INFO 5: precision: 0.02493 | recall: 0.06731 | ndcg: 0.05205 | hit_rate: 0.10961 | map: 0.03818
+Sat 17 Aug 2024 19:36:19 INFO 10: precision: 0.01857 | recall: 0.09770 | ndcg: 0.06364 | hit_rate: 0.15554 | map: 0.04304
+Sat 17 Aug 2024 19:36:19 INFO 20: precision: 0.01328 | recall: 0.13851 | ndcg: 0.07591 | hit_rate: 0.21102 | map: 0.04654
+Sat 17 Aug 2024 19:36:34 INFO Epoch 61, Loss: 377.17520
+Sat 17 Aug 2024 19:36:35 INFO Validation Metrics:
+Sat 17 Aug 2024 19:36:35 INFO 5: precision: 0.01480 | recall: 0.06377 | ndcg: 0.04277 | hit_rate: 0.07124 | map: 0.03429
+Sat 17 Aug 2024 19:36:35 INFO 10: precision: 0.01159 | recall: 0.09874 | ndcg: 0.05433 | hit_rate: 0.10877 | map: 0.03909
+Sat 17 Aug 2024 19:36:35 INFO 20: precision: 0.00841 | recall: 0.14044 | ndcg: 0.06532 | hit_rate: 0.15276 | map: 0.04218
+Sat 17 Aug 2024 19:36:35 INFO Test Metrics:
+Sat 17 Aug 2024 19:36:35 INFO 5: precision: 0.02489 | recall: 0.06735 | ndcg: 0.05223 | hit_rate: 0.10961 | map: 0.03842
+Sat 17 Aug 2024 19:36:35 INFO 10: precision: 0.01856 | recall: 0.09790 | ndcg: 0.06386 | hit_rate: 0.15547 | map: 0.04327
+Sat 17 Aug 2024 19:36:35 INFO 20: precision: 0.01333 | recall: 0.13874 | ndcg: 0.07618 | hit_rate: 0.21134 | map: 0.04679
+Sat 17 Aug 2024 19:36:51 INFO Epoch 62, Loss: 377.16240
+Sat 17 Aug 2024 19:36:52 INFO Validation Metrics:
+Sat 17 Aug 2024 19:36:52 INFO 5: precision: 0.01495 | recall: 0.06453 | ndcg: 0.04303 | hit_rate: 0.07215 | map: 0.03442
+Sat 17 Aug 2024 19:36:52 INFO 10: precision: 0.01163 | recall: 0.09919 | ndcg: 0.05448 | hit_rate: 0.10916 | map: 0.03917
+Sat 17 Aug 2024 19:36:52 INFO 20: precision: 0.00851 | recall: 0.14221 | ndcg: 0.06578 | hit_rate: 0.15431 | map: 0.04234
+Sat 17 Aug 2024 19:36:52 INFO Test Metrics:
+Sat 17 Aug 2024 19:36:52 INFO 5: precision: 0.02489 | recall: 0.06714 | ndcg: 0.05209 | hit_rate: 0.10935 | map: 0.03829
+Sat 17 Aug 2024 19:36:52 INFO 10: precision: 0.01852 | recall: 0.09757 | ndcg: 0.06368 | hit_rate: 0.15573 | map: 0.04312
+Sat 17 Aug 2024 19:36:52 INFO 20: precision: 0.01333 | recall: 0.13876 | ndcg: 0.07608 | hit_rate: 0.21115 | map: 0.04668
+Sat 17 Aug 2024 19:37:08 INFO Epoch 63, Loss: 377.19029
+Sat 17 Aug 2024 19:37:09 INFO Validation Metrics:
+Sat 17 Aug 2024 19:37:09 INFO 5: precision: 0.01488 | recall: 0.06388 | ndcg: 0.04292 | hit_rate: 0.07157 | map: 0.03442
+Sat 17 Aug 2024 19:37:09 INFO 10: precision: 0.01165 | recall: 0.09915 | ndcg: 0.05457 | hit_rate: 0.10935 | map: 0.03927
+Sat 17 Aug 2024 19:37:09 INFO 20: precision: 0.00848 | recall: 0.14209 | ndcg: 0.06585 | hit_rate: 0.15418 | map: 0.04244
+Sat 17 Aug 2024 19:37:09 INFO Test Metrics:
+Sat 17 Aug 2024 19:37:09 INFO 5: precision: 0.02478 | recall: 0.06672 | ndcg: 0.05235 | hit_rate: 0.10890 | map: 0.03872
+Sat 17 Aug 2024 19:37:09 INFO 10: precision: 0.01843 | recall: 0.09713 | ndcg: 0.06393 | hit_rate: 0.15515 | map: 0.04356
+Sat 17 Aug 2024 19:37:09 INFO 20: precision: 0.01330 | recall: 0.13874 | ndcg: 0.07644 | hit_rate: 0.21083 | map: 0.04716
+Sat 17 Aug 2024 19:37:25 INFO Epoch 64, Loss: 377.01269
+Sat 17 Aug 2024 19:37:26 INFO Validation Metrics:
+Sat 17 Aug 2024 19:37:26 INFO 5: precision: 0.01506 | recall: 0.06464 | ndcg: 0.04316 | hit_rate: 0.07254 | map: 0.03452
+Sat 17 Aug 2024 19:37:26 INFO 10: precision: 0.01174 | recall: 0.10028 | ndcg: 0.05488 | hit_rate: 0.11039 | map: 0.03938
+Sat 17 Aug 2024 19:37:26 INFO 20: precision: 0.00848 | recall: 0.14198 | ndcg: 0.06586 | hit_rate: 0.15399 | map: 0.04246
+Sat 17 Aug 2024 19:37:26 INFO Test Metrics:
+Sat 17 Aug 2024 19:37:26 INFO 5: precision: 0.02501 | recall: 0.06741 | ndcg: 0.05273 | hit_rate: 0.11006 | map: 0.03893
+Sat 17 Aug 2024 19:37:26 INFO 10: precision: 0.01855 | recall: 0.09763 | ndcg: 0.06422 | hit_rate: 0.15554 | map: 0.04374
+Sat 17 Aug 2024 19:37:26 INFO 20: precision: 0.01334 | recall: 0.13871 | ndcg: 0.07661 | hit_rate: 0.21167 | map: 0.04727
+Sat 17 Aug 2024 19:37:42 INFO Epoch 65, Loss: 376.90865
+Sat 17 Aug 2024 19:37:43 INFO Validation Metrics:
+Sat 17 Aug 2024 19:37:43 INFO 5: precision: 0.01484 | recall: 0.06364 | ndcg: 0.04257 | hit_rate: 0.07137 | map: 0.03404
+Sat 17 Aug 2024 19:37:43 INFO 10: precision: 0.01165 | recall: 0.09947 | ndcg: 0.05442 | hit_rate: 0.10961 | map: 0.03899
+Sat 17 Aug 2024 19:37:43 INFO 20: precision: 0.00844 | recall: 0.14147 | ndcg: 0.06550 | hit_rate: 0.15327 | map: 0.04213
+Sat 17 Aug 2024 19:37:43 INFO Test Metrics:
+Sat 17 Aug 2024 19:37:43 INFO 5: precision: 0.02506 | recall: 0.06752 | ndcg: 0.05271 | hit_rate: 0.11013 | map: 0.03890
+Sat 17 Aug 2024 19:37:43 INFO 10: precision: 0.01841 | recall: 0.09704 | ndcg: 0.06393 | hit_rate: 0.15450 | map: 0.04361
+Sat 17 Aug 2024 19:37:43 INFO 20: precision: 0.01330 | recall: 0.13850 | ndcg: 0.07646 | hit_rate: 0.21121 | map: 0.04719
+Sat 17 Aug 2024 19:37:59 INFO Epoch 66, Loss: 376.95101
+Sat 17 Aug 2024 19:38:00 INFO Validation Metrics:
+Sat 17 Aug 2024 19:38:00 INFO 5: precision: 0.01497 | recall: 0.06433 | ndcg: 0.04309 | hit_rate: 0.07189 | map: 0.03454
+Sat 17 Aug 2024 19:38:00 INFO 10: precision: 0.01160 | recall: 0.09908 | ndcg: 0.05454 | hit_rate: 0.10922 | map: 0.03929
+Sat 17 Aug 2024 19:38:00 INFO 20: precision: 0.00848 | recall: 0.14218 | ndcg: 0.06589 | hit_rate: 0.15424 | map: 0.04249
+Sat 17 Aug 2024 19:38:00 INFO Test Metrics:
+Sat 17 Aug 2024 19:38:00 INFO 5: precision: 0.02497 | recall: 0.06723 | ndcg: 0.05245 | hit_rate: 0.11000 | map: 0.03866
+Sat 17 Aug 2024 19:38:00 INFO 10: precision: 0.01847 | recall: 0.09740 | ndcg: 0.06393 | hit_rate: 0.15521 | map: 0.04348
+Sat 17 Aug 2024 19:38:00 INFO 20: precision: 0.01331 | recall: 0.13846 | ndcg: 0.07632 | hit_rate: 0.21044 | map: 0.04704
+Sat 17 Aug 2024 19:38:16 INFO Epoch 67, Loss: 376.98391
+Sat 17 Aug 2024 19:38:18 INFO Validation Metrics:
+Sat 17 Aug 2024 19:38:18 INFO 5: precision: 0.01493 | recall: 0.06424 | ndcg: 0.04301 | hit_rate: 0.07183 | map: 0.03444
+Sat 17 Aug 2024 19:38:18 INFO 10: precision: 0.01165 | recall: 0.09933 | ndcg: 0.05460 | hit_rate: 0.10948 | map: 0.03926
+Sat 17 Aug 2024 19:38:18 INFO 20: precision: 0.00850 | recall: 0.14215 | ndcg: 0.06588 | hit_rate: 0.15411 | map: 0.04244
+Sat 17 Aug 2024 19:38:18 INFO Test Metrics:
+Sat 17 Aug 2024 19:38:18 INFO 5: precision: 0.02514 | recall: 0.06803 | ndcg: 0.05304 | hit_rate: 0.11071 | map: 0.03915
+Sat 17 Aug 2024 19:38:18 INFO 10: precision: 0.01852 | recall: 0.09772 | ndcg: 0.06436 | hit_rate: 0.15547 | map: 0.04390
+Sat 17 Aug 2024 19:38:18 INFO 20: precision: 0.01333 | recall: 0.13902 | ndcg: 0.07677 | hit_rate: 0.21160 | map: 0.04744
+Sat 17 Aug 2024 19:38:36 INFO Epoch 68, Loss: 376.73559
+Sat 17 Aug 2024 19:38:38 INFO Validation Metrics:
+Sat 17 Aug 2024 19:38:38 INFO 5: precision: 0.01496 | recall: 0.06397 | ndcg: 0.04304 | hit_rate: 0.07195 | map: 0.03454
+Sat 17 Aug 2024 19:38:38 INFO 10: precision: 0.01167 | recall: 0.09950 | ndcg: 0.05480 | hit_rate: 0.10935 | map: 0.03948
+Sat 17 Aug 2024 19:38:38 INFO 20: precision: 0.00848 | recall: 0.14166 | ndcg: 0.06590 | hit_rate: 0.15379 | map: 0.04260
+Sat 17 Aug 2024 19:38:38 INFO Test Metrics:
+Sat 17 Aug 2024 19:38:38 INFO 5: precision: 0.02520 | recall: 0.06816 | ndcg: 0.05313 | hit_rate: 0.11097 | map: 0.03922
+Sat 17 Aug 2024 19:38:38 INFO 10: precision: 0.01852 | recall: 0.09803 | ndcg: 0.06446 | hit_rate: 0.15592 | map: 0.04395
+Sat 17 Aug 2024 19:38:38 INFO 20: precision: 0.01330 | recall: 0.13858 | ndcg: 0.07669 | hit_rate: 0.21070 | map: 0.04746
+Sat 17 Aug 2024 19:38:53 INFO Epoch 69, Loss: 376.57440
+Sat 17 Aug 2024 19:38:55 INFO Validation Metrics:
+Sat 17 Aug 2024 19:38:55 INFO 5: precision: 0.01500 | recall: 0.06453 | ndcg: 0.04306 | hit_rate: 0.07208 | map: 0.03443
+Sat 17 Aug 2024 19:38:55 INFO 10: precision: 0.01176 | recall: 0.09995 | ndcg: 0.05480 | hit_rate: 0.11013 | map: 0.03934
+Sat 17 Aug 2024 19:38:55 INFO 20: precision: 0.00847 | recall: 0.14099 | ndcg: 0.06564 | hit_rate: 0.15315 | map: 0.04240
+Sat 17 Aug 2024 19:38:55 INFO Test Metrics:
+Sat 17 Aug 2024 19:38:55 INFO 5: precision: 0.02498 | recall: 0.06744 | ndcg: 0.05278 | hit_rate: 0.11000 | map: 0.03905
+Sat 17 Aug 2024 19:38:55 INFO 10: precision: 0.01848 | recall: 0.09774 | ndcg: 0.06431 | hit_rate: 0.15515 | map: 0.04390
+Sat 17 Aug 2024 19:38:55 INFO 20: precision: 0.01341 | recall: 0.13971 | ndcg: 0.07694 | hit_rate: 0.21218 | map: 0.04751
+Sat 17 Aug 2024 19:39:11 INFO Epoch 70, Loss: 376.58178
+Sat 17 Aug 2024 19:39:12 INFO Validation Metrics:
+Sat 17 Aug 2024 19:39:12 INFO 5: precision: 0.01479 | recall: 0.06378 | ndcg: 0.04283 | hit_rate: 0.07124 | map: 0.03439
+Sat 17 Aug 2024 19:39:12 INFO 10: precision: 0.01165 | recall: 0.09922 | ndcg: 0.05462 | hit_rate: 0.10922 | map: 0.03934
+Sat 17 Aug 2024 19:39:12 INFO 20: precision: 0.00855 | recall: 0.14251 | ndcg: 0.06602 | hit_rate: 0.15482 | map: 0.04253
+Sat 17 Aug 2024 19:39:12 INFO Test Metrics:
+Sat 17 Aug 2024 19:39:12 INFO 5: precision: 0.02536 | recall: 0.06834 | ndcg: 0.05296 | hit_rate: 0.11136 | map: 0.03893
+Sat 17 Aug 2024 19:39:12 INFO 10: precision: 0.01854 | recall: 0.09781 | ndcg: 0.06415 | hit_rate: 0.15541 | map: 0.04364
+Sat 17 Aug 2024 19:39:12 INFO 20: precision: 0.01339 | recall: 0.13945 | ndcg: 0.07670 | hit_rate: 0.21212 | map: 0.04722
+Sat 17 Aug 2024 19:39:23 INFO Epoch 71, Loss: 376.43029
+Sat 17 Aug 2024 19:39:24 INFO Validation Metrics:
+Sat 17 Aug 2024 19:39:24 INFO 5: precision: 0.01496 | recall: 0.06399 | ndcg: 0.04294 | hit_rate: 0.07157 | map: 0.03439
+Sat 17 Aug 2024 19:39:24 INFO 10: precision: 0.01182 | recall: 0.10032 | ndcg: 0.05493 | hit_rate: 0.11064 | map: 0.03937
+Sat 17 Aug 2024 19:39:24 INFO 20: precision: 0.00851 | recall: 0.14212 | ndcg: 0.06593 | hit_rate: 0.15463 | map: 0.04246
+Sat 17 Aug 2024 19:39:24 INFO Test Metrics:
+Sat 17 Aug 2024 19:39:24 INFO 5: precision: 0.02553 | recall: 0.06894 | ndcg: 0.05351 | hit_rate: 0.11245 | map: 0.03937
+Sat 17 Aug 2024 19:39:24 INFO 10: precision: 0.01872 | recall: 0.09889 | ndcg: 0.06487 | hit_rate: 0.15702 | map: 0.04414
+Sat 17 Aug 2024 19:39:24 INFO 20: precision: 0.01336 | recall: 0.13915 | ndcg: 0.07701 | hit_rate: 0.21147 | map: 0.04762
+Sat 17 Aug 2024 19:39:37 INFO Epoch 72, Loss: 376.28055
+Sat 17 Aug 2024 19:39:38 INFO Validation Metrics:
+Sat 17 Aug 2024 19:39:38 INFO 5: precision: 0.01501 | recall: 0.06430 | ndcg: 0.04313 | hit_rate: 0.07195 | map: 0.03457
+Sat 17 Aug 2024 19:39:38 INFO 10: precision: 0.01182 | recall: 0.10051 | ndcg: 0.05506 | hit_rate: 0.11077 | map: 0.03951
+Sat 17 Aug 2024 19:39:38 INFO 20: precision: 0.00852 | recall: 0.14221 | ndcg: 0.06603 | hit_rate: 0.15444 | map: 0.04259
+Sat 17 Aug 2024 19:39:38 INFO Test Metrics:
+Sat 17 Aug 2024 19:39:38 INFO 5: precision: 0.02546 | recall: 0.06863 | ndcg: 0.05331 | hit_rate: 0.11194 | map: 0.03928
+Sat 17 Aug 2024 19:39:38 INFO 10: precision: 0.01871 | recall: 0.09864 | ndcg: 0.06470 | hit_rate: 0.15638 | map: 0.04407
+Sat 17 Aug 2024 19:39:38 INFO 20: precision: 0.01335 | recall: 0.13884 | ndcg: 0.07680 | hit_rate: 0.21095 | map: 0.04752
+Sat 17 Aug 2024 19:39:55 INFO Epoch 73, Loss: 376.25942
+Sat 17 Aug 2024 19:39:57 INFO Validation Metrics:
+Sat 17 Aug 2024 19:39:57 INFO 5: precision: 0.01489 | recall: 0.06368 | ndcg: 0.04281 | hit_rate: 0.07163 | map: 0.03432
+Sat 17 Aug 2024 19:39:57 INFO 10: precision: 0.01173 | recall: 0.09933 | ndcg: 0.05462 | hit_rate: 0.10948 | map: 0.03926
+Sat 17 Aug 2024 19:39:57 INFO 20: precision: 0.00862 | recall: 0.14323 | ndcg: 0.06619 | hit_rate: 0.15586 | map: 0.04251
+Sat 17 Aug 2024 19:39:57 INFO Test Metrics:
+Sat 17 Aug 2024 19:39:57 INFO 5: precision: 0.02538 | recall: 0.06850 | ndcg: 0.05314 | hit_rate: 0.11174 | map: 0.03907
+Sat 17 Aug 2024 19:39:57 INFO 10: precision: 0.01861 | recall: 0.09848 | ndcg: 0.06450 | hit_rate: 0.15566 | map: 0.04386
+Sat 17 Aug 2024 19:39:57 INFO 20: precision: 0.01335 | recall: 0.13881 | ndcg: 0.07672 | hit_rate: 0.21121 | map: 0.04735
+Sat 17 Aug 2024 19:40:11 INFO Epoch 74, Loss: 376.04279
+Sat 17 Aug 2024 19:40:13 INFO Validation Metrics:
+Sat 17 Aug 2024 19:40:13 INFO 5: precision: 0.01486 | recall: 0.06353 | ndcg: 0.04281 | hit_rate: 0.07118 | map: 0.03440
+Sat 17 Aug 2024 19:40:13 INFO 10: precision: 0.01177 | recall: 0.09954 | ndcg: 0.05478 | hit_rate: 0.11000 | map: 0.03939
+Sat 17 Aug 2024 19:40:13 INFO 20: precision: 0.00861 | recall: 0.14325 | ndcg: 0.06630 | hit_rate: 0.15573 | map: 0.04264
+Sat 17 Aug 2024 19:40:13 INFO Test Metrics:
+Sat 17 Aug 2024 19:40:13 INFO 5: precision: 0.02559 | recall: 0.06860 | ndcg: 0.05343 | hit_rate: 0.11239 | map: 0.03930
+Sat 17 Aug 2024 19:40:13 INFO 10: precision: 0.01865 | recall: 0.09849 | ndcg: 0.06472 | hit_rate: 0.15638 | map: 0.04406
+Sat 17 Aug 2024 19:40:13 INFO 20: precision: 0.01343 | recall: 0.13979 | ndcg: 0.07718 | hit_rate: 0.21270 | map: 0.04762
+Sat 17 Aug 2024 19:40:26 INFO Epoch 75, Loss: 376.11068
+Sat 17 Aug 2024 19:40:26 INFO Validation Metrics:
+Sat 17 Aug 2024 19:40:26 INFO 5: precision: 0.01495 | recall: 0.06405 | ndcg: 0.04306 | hit_rate: 0.07170 | map: 0.03457
+Sat 17 Aug 2024 19:40:26 INFO 10: precision: 0.01176 | recall: 0.09994 | ndcg: 0.05496 | hit_rate: 0.11032 | map: 0.03953
+Sat 17 Aug 2024 19:40:26 INFO 20: precision: 0.00853 | recall: 0.14263 | ndcg: 0.06620 | hit_rate: 0.15495 | map: 0.04271
+Sat 17 Aug 2024 19:40:26 INFO Test Metrics:
+Sat 17 Aug 2024 19:40:26 INFO 5: precision: 0.02529 | recall: 0.06764 | ndcg: 0.05308 | hit_rate: 0.11084 | map: 0.03921
+Sat 17 Aug 2024 19:40:26 INFO 10: precision: 0.01862 | recall: 0.09808 | ndcg: 0.06460 | hit_rate: 0.15625 | map: 0.04405
+Sat 17 Aug 2024 19:40:26 INFO 20: precision: 0.01337 | recall: 0.13923 | ndcg: 0.07703 | hit_rate: 0.21147 | map: 0.04765
+Sat 17 Aug 2024 19:40:38 INFO Epoch 76, Loss: 376.16435
+Sat 17 Aug 2024 19:40:39 INFO Validation Metrics:
+Sat 17 Aug 2024 19:40:39 INFO 5: precision: 0.01508 | recall: 0.06453 | ndcg: 0.04329 | hit_rate: 0.07202 | map: 0.03469
+Sat 17 Aug 2024 19:40:39 INFO 10: precision: 0.01170 | recall: 0.09933 | ndcg: 0.05479 | hit_rate: 0.10948 | map: 0.03948
+Sat 17 Aug 2024 19:40:39 INFO 20: precision: 0.00857 | recall: 0.14299 | ndcg: 0.06633 | hit_rate: 0.15547 | map: 0.04275
+Sat 17 Aug 2024 19:40:39 INFO Test Metrics:
+Sat 17 Aug 2024 19:40:39 INFO 5: precision: 0.02535 | recall: 0.06776 | ndcg: 0.05315 | hit_rate: 0.11136 | map: 0.03924
+Sat 17 Aug 2024 19:40:39 INFO 10: precision: 0.01858 | recall: 0.09791 | ndcg: 0.06458 | hit_rate: 0.15554 | map: 0.04407
+Sat 17 Aug 2024 19:40:39 INFO 20: precision: 0.01334 | recall: 0.13892 | ndcg: 0.07697 | hit_rate: 0.21083 | map: 0.04765
+Sat 17 Aug 2024 19:40:50 INFO Epoch 77, Loss: 375.92415
+Sat 17 Aug 2024 19:40:51 INFO Validation Metrics:
+Sat 17 Aug 2024 19:40:51 INFO 5: precision: 0.01493 | recall: 0.06401 | ndcg: 0.04290 | hit_rate: 0.07144 | map: 0.03439
+Sat 17 Aug 2024 19:40:51 INFO 10: precision: 0.01170 | recall: 0.09946 | ndcg: 0.05467 | hit_rate: 0.10980 | map: 0.03930
+Sat 17 Aug 2024 19:40:51 INFO 20: precision: 0.00851 | recall: 0.14153 | ndcg: 0.06577 | hit_rate: 0.15399 | map: 0.04243
+Sat 17 Aug 2024 19:40:51 INFO Test Metrics:
+Sat 17 Aug 2024 19:40:51 INFO 5: precision: 0.02545 | recall: 0.06828 | ndcg: 0.05320 | hit_rate: 0.11181 | map: 0.03920
+Sat 17 Aug 2024 19:40:51 INFO 10: precision: 0.01882 | recall: 0.09917 | ndcg: 0.06492 | hit_rate: 0.15767 | map: 0.04412
+Sat 17 Aug 2024 19:40:51 INFO 20: precision: 0.01330 | recall: 0.13856 | ndcg: 0.07682 | hit_rate: 0.21031 | map: 0.04756
+Sat 17 Aug 2024 19:41:02 INFO Epoch 78, Loss: 375.90261
+Sat 17 Aug 2024 19:41:03 INFO Validation Metrics:
+Sat 17 Aug 2024 19:41:03 INFO 5: precision: 0.01517 | recall: 0.06487 | ndcg: 0.04353 | hit_rate: 0.07279 | map: 0.03492
+Sat 17 Aug 2024 19:41:03 INFO 10: precision: 0.01169 | recall: 0.09953 | ndcg: 0.05498 | hit_rate: 0.11006 | map: 0.03967
+Sat 17 Aug 2024 19:41:03 INFO 20: precision: 0.00854 | recall: 0.14238 | ndcg: 0.06624 | hit_rate: 0.15476 | map: 0.04284
+Sat 17 Aug 2024 19:41:03 INFO Test Metrics:
+Sat 17 Aug 2024 19:41:03 INFO 5: precision: 0.02536 | recall: 0.06846 | ndcg: 0.05324 | hit_rate: 0.11168 | map: 0.03926
+Sat 17 Aug 2024 19:41:03 INFO 10: precision: 0.01869 | recall: 0.09818 | ndcg: 0.06461 | hit_rate: 0.15638 | map: 0.04404
+Sat 17 Aug 2024 19:41:03 INFO 20: precision: 0.01328 | recall: 0.13854 | ndcg: 0.07676 | hit_rate: 0.21031 | map: 0.04755
+Sat 17 Aug 2024 19:41:14 INFO Epoch 79, Loss: 375.88095
+Sat 17 Aug 2024 19:41:15 INFO Validation Metrics:
+Sat 17 Aug 2024 19:41:15 INFO 5: precision: 0.01500 | recall: 0.06441 | ndcg: 0.04330 | hit_rate: 0.07195 | map: 0.03477
+Sat 17 Aug 2024 19:41:15 INFO 10: precision: 0.01159 | recall: 0.09853 | ndcg: 0.05463 | hit_rate: 0.10909 | map: 0.03950
+Sat 17 Aug 2024 19:41:15 INFO 20: precision: 0.00855 | recall: 0.14239 | ndcg: 0.06620 | hit_rate: 0.15463 | map: 0.04278
+Sat 17 Aug 2024 19:41:15 INFO Test Metrics:
+Sat 17 Aug 2024 19:41:15 INFO 5: precision: 0.02536 | recall: 0.06845 | ndcg: 0.05325 | hit_rate: 0.11161 | map: 0.03923
+Sat 17 Aug 2024 19:41:15 INFO 10: precision: 0.01865 | recall: 0.09844 | ndcg: 0.06466 | hit_rate: 0.15625 | map: 0.04403
+Sat 17 Aug 2024 19:41:15 INFO 20: precision: 0.01334 | recall: 0.13901 | ndcg: 0.07688 | hit_rate: 0.21095 | map: 0.04753
+Sat 17 Aug 2024 19:41:26 INFO Epoch 80, Loss: 375.87941
+Sat 17 Aug 2024 19:41:27 INFO Validation Metrics:
+Sat 17 Aug 2024 19:41:27 INFO 5: precision: 0.01510 | recall: 0.06483 | ndcg: 0.04338 | hit_rate: 0.07241 | map: 0.03477
+Sat 17 Aug 2024 19:41:27 INFO 10: precision: 0.01176 | recall: 0.10005 | ndcg: 0.05503 | hit_rate: 0.11064 | map: 0.03959
+Sat 17 Aug 2024 19:41:27 INFO 20: precision: 0.00855 | recall: 0.14243 | ndcg: 0.06621 | hit_rate: 0.15476 | map: 0.04275
+Sat 17 Aug 2024 19:41:27 INFO Test Metrics:
+Sat 17 Aug 2024 19:41:27 INFO 5: precision: 0.02514 | recall: 0.06805 | ndcg: 0.05310 | hit_rate: 0.11110 | map: 0.03918
+Sat 17 Aug 2024 19:41:27 INFO 10: precision: 0.01868 | recall: 0.09843 | ndcg: 0.06469 | hit_rate: 0.15638 | map: 0.04406
+Sat 17 Aug 2024 19:41:27 INFO 20: precision: 0.01327 | recall: 0.13859 | ndcg: 0.07675 | hit_rate: 0.21011 | map: 0.04753
+Sat 17 Aug 2024 19:41:38 INFO Epoch 81, Loss: 375.71389
+Sat 17 Aug 2024 19:41:39 INFO Validation Metrics:
+Sat 17 Aug 2024 19:41:39 INFO 5: precision: 0.01517 | recall: 0.06494 | ndcg: 0.04321 | hit_rate: 0.07247 | map: 0.03452
+Sat 17 Aug 2024 19:41:39 INFO 10: precision: 0.01172 | recall: 0.09940 | ndcg: 0.05467 | hit_rate: 0.11000 | map: 0.03929
+Sat 17 Aug 2024 19:41:39 INFO 20: precision: 0.00847 | recall: 0.14129 | ndcg: 0.06574 | hit_rate: 0.15347 | map: 0.04243
+Sat 17 Aug 2024 19:41:39 INFO Test Metrics:
+Sat 17 Aug 2024 19:41:39 INFO 5: precision: 0.02510 | recall: 0.06771 | ndcg: 0.05321 | hit_rate: 0.11123 | map: 0.03934
+Sat 17 Aug 2024 19:41:39 INFO 10: precision: 0.01860 | recall: 0.09802 | ndcg: 0.06474 | hit_rate: 0.15586 | map: 0.04420
+Sat 17 Aug 2024 19:41:39 INFO 20: precision: 0.01328 | recall: 0.13837 | ndcg: 0.07688 | hit_rate: 0.21011 | map: 0.04769
+Sat 17 Aug 2024 19:41:51 INFO Epoch 82, Loss: 375.61780
+Sat 17 Aug 2024 19:41:52 INFO Validation Metrics:
+Sat 17 Aug 2024 19:41:52 INFO 5: precision: 0.01526 | recall: 0.06508 | ndcg: 0.04359 | hit_rate: 0.07260 | map: 0.03497
+Sat 17 Aug 2024 19:41:52 INFO 10: precision: 0.01186 | recall: 0.10068 | ndcg: 0.05536 | hit_rate: 0.11129 | map: 0.03984
+Sat 17 Aug 2024 19:41:52 INFO 20: precision: 0.00853 | recall: 0.14263 | ndcg: 0.06639 | hit_rate: 0.15470 | map: 0.04296
+Sat 17 Aug 2024 19:41:52 INFO Test Metrics:
+Sat 17 Aug 2024 19:41:52 INFO 5: precision: 0.02505 | recall: 0.06760 | ndcg: 0.05317 | hit_rate: 0.11071 | map: 0.03935
+Sat 17 Aug 2024 19:41:52 INFO 10: precision: 0.01856 | recall: 0.09786 | ndcg: 0.06467 | hit_rate: 0.15547 | map: 0.04421
+Sat 17 Aug 2024 19:41:52 INFO 20: precision: 0.01337 | recall: 0.13909 | ndcg: 0.07713 | hit_rate: 0.21167 | map: 0.04778
+Sat 17 Aug 2024 19:42:03 INFO Epoch 83, Loss: 375.60924
+Sat 17 Aug 2024 19:42:03 INFO Validation Metrics:
+Sat 17 Aug 2024 19:42:03 INFO 5: precision: 0.01524 | recall: 0.06511 | ndcg: 0.04365 | hit_rate: 0.07267 | map: 0.03499
+Sat 17 Aug 2024 19:42:03 INFO 10: precision: 0.01174 | recall: 0.09949 | ndcg: 0.05505 | hit_rate: 0.10968 | map: 0.03974
+Sat 17 Aug 2024 19:42:03 INFO 20: precision: 0.00853 | recall: 0.14222 | ndcg: 0.06631 | hit_rate: 0.15405 | map: 0.04294
+Sat 17 Aug 2024 19:42:03 INFO Test Metrics:
+Sat 17 Aug 2024 19:42:03 INFO 5: precision: 0.02478 | recall: 0.06688 | ndcg: 0.05276 | hit_rate: 0.11000 | map: 0.03908
+Sat 17 Aug 2024 19:42:03 INFO 10: precision: 0.01869 | recall: 0.09866 | ndcg: 0.06487 | hit_rate: 0.15631 | map: 0.04424
+Sat 17 Aug 2024 19:42:03 INFO 20: precision: 0.01341 | recall: 0.13922 | ndcg: 0.07715 | hit_rate: 0.21179 | map: 0.04775
+Sat 17 Aug 2024 19:42:15 INFO Epoch 84, Loss: 375.57813
+Sat 17 Aug 2024 19:42:16 INFO Validation Metrics:
+Sat 17 Aug 2024 19:42:16 INFO 5: precision: 0.01514 | recall: 0.06448 | ndcg: 0.04353 | hit_rate: 0.07260 | map: 0.03500
+Sat 17 Aug 2024 19:42:16 INFO 10: precision: 0.01183 | recall: 0.10031 | ndcg: 0.05544 | hit_rate: 0.11045 | map: 0.04002
+Sat 17 Aug 2024 19:42:16 INFO 20: precision: 0.00853 | recall: 0.14225 | ndcg: 0.06647 | hit_rate: 0.15437 | map: 0.04314
+Sat 17 Aug 2024 19:42:16 INFO Test Metrics:
+Sat 17 Aug 2024 19:42:16 INFO 5: precision: 0.02495 | recall: 0.06716 | ndcg: 0.05293 | hit_rate: 0.10993 | map: 0.03918
+Sat 17 Aug 2024 19:42:16 INFO 10: precision: 0.01858 | recall: 0.09821 | ndcg: 0.06471 | hit_rate: 0.15534 | map: 0.04417
+Sat 17 Aug 2024 19:42:16 INFO 20: precision: 0.01332 | recall: 0.13850 | ndcg: 0.07693 | hit_rate: 0.21018 | map: 0.04770
+Sat 17 Aug 2024 19:42:27 INFO Epoch 85, Loss: 375.76352
+Sat 17 Aug 2024 19:42:28 INFO Validation Metrics:
+Sat 17 Aug 2024 19:42:28 INFO 5: precision: 0.01518 | recall: 0.06478 | ndcg: 0.04347 | hit_rate: 0.07279 | map: 0.03484
+Sat 17 Aug 2024 19:42:28 INFO 10: precision: 0.01178 | recall: 0.09988 | ndcg: 0.05508 | hit_rate: 0.11000 | map: 0.03971
+Sat 17 Aug 2024 19:42:28 INFO 20: precision: 0.00861 | recall: 0.14379 | ndcg: 0.06659 | hit_rate: 0.15586 | map: 0.04293
+Sat 17 Aug 2024 19:42:28 INFO Test Metrics:
+Sat 17 Aug 2024 19:42:28 INFO 5: precision: 0.02505 | recall: 0.06736 | ndcg: 0.05289 | hit_rate: 0.11019 | map: 0.03911
+Sat 17 Aug 2024 19:42:28 INFO 10: precision: 0.01851 | recall: 0.09803 | ndcg: 0.06450 | hit_rate: 0.15528 | map: 0.04401
+Sat 17 Aug 2024 19:42:28 INFO 20: precision: 0.01328 | recall: 0.13780 | ndcg: 0.07662 | hit_rate: 0.20947 | map: 0.04752
+Sat 17 Aug 2024 19:42:38 INFO Epoch 86, Loss: 375.32903
+Sat 17 Aug 2024 19:42:39 INFO Validation Metrics:
+Sat 17 Aug 2024 19:42:39 INFO 5: precision: 0.01499 | recall: 0.06411 | ndcg: 0.04309 | hit_rate: 0.07215 | map: 0.03458
+Sat 17 Aug 2024 19:42:39 INFO 10: precision: 0.01170 | recall: 0.09918 | ndcg: 0.05473 | hit_rate: 0.10942 | map: 0.03946
+Sat 17 Aug 2024 19:42:39 INFO 20: precision: 0.00857 | recall: 0.14268 | ndcg: 0.06618 | hit_rate: 0.15489 | map: 0.04269
+Sat 17 Aug 2024 19:42:39 INFO Test Metrics:
+Sat 17 Aug 2024 19:42:39 INFO 5: precision: 0.02520 | recall: 0.06767 | ndcg: 0.05326 | hit_rate: 0.11110 | map: 0.03938
+Sat 17 Aug 2024 19:42:39 INFO 10: precision: 0.01852 | recall: 0.09793 | ndcg: 0.06470 | hit_rate: 0.15579 | map: 0.04420
+Sat 17 Aug 2024 19:42:39 INFO 20: precision: 0.01330 | recall: 0.13802 | ndcg: 0.07688 | hit_rate: 0.20940 | map: 0.04776
+Sat 17 Aug 2024 19:42:51 INFO Epoch 87, Loss: 375.51245
+Sat 17 Aug 2024 19:42:52 INFO Validation Metrics:
+Sat 17 Aug 2024 19:42:52 INFO 5: precision: 0.01519 | recall: 0.06518 | ndcg: 0.04368 | hit_rate: 0.07325 | map: 0.03503
+Sat 17 Aug 2024 19:42:52 INFO 10: precision: 0.01172 | recall: 0.09931 | ndcg: 0.05503 | hit_rate: 0.10961 | map: 0.03978
+Sat 17 Aug 2024 19:42:52 INFO 20: precision: 0.00855 | recall: 0.14253 | ndcg: 0.06637 | hit_rate: 0.15489 | map: 0.04297
+Sat 17 Aug 2024 19:42:52 INFO Test Metrics:
+Sat 17 Aug 2024 19:42:52 INFO 5: precision: 0.02538 | recall: 0.06853 | ndcg: 0.05332 | hit_rate: 0.11207 | map: 0.03923
+Sat 17 Aug 2024 19:42:52 INFO 10: precision: 0.01843 | recall: 0.09769 | ndcg: 0.06442 | hit_rate: 0.15521 | map: 0.04394
+Sat 17 Aug 2024 19:42:52 INFO 20: precision: 0.01328 | recall: 0.13809 | ndcg: 0.07670 | hit_rate: 0.20953 | map: 0.04752
+Sat 17 Aug 2024 19:43:03 INFO Epoch 88, Loss: 375.27625
+Sat 17 Aug 2024 19:43:03 INFO Validation Metrics:
+Sat 17 Aug 2024 19:43:03 INFO 5: precision: 0.01518 | recall: 0.06524 | ndcg: 0.04361 | hit_rate: 0.07312 | map: 0.03493
+Sat 17 Aug 2024 19:43:03 INFO 10: precision: 0.01175 | recall: 0.09960 | ndcg: 0.05501 | hit_rate: 0.10980 | map: 0.03968
+Sat 17 Aug 2024 19:43:03 INFO 20: precision: 0.00851 | recall: 0.14194 | ndcg: 0.06613 | hit_rate: 0.15392 | map: 0.04281
+Sat 17 Aug 2024 19:43:03 INFO Test Metrics:
+Sat 17 Aug 2024 19:43:03 INFO 5: precision: 0.02531 | recall: 0.06824 | ndcg: 0.05312 | hit_rate: 0.11174 | map: 0.03904
+Sat 17 Aug 2024 19:43:03 INFO 10: precision: 0.01856 | recall: 0.09851 | ndcg: 0.06456 | hit_rate: 0.15644 | map: 0.04386
+Sat 17 Aug 2024 19:43:03 INFO 20: precision: 0.01332 | recall: 0.13820 | ndcg: 0.07666 | hit_rate: 0.20986 | map: 0.04738
+Sat 17 Aug 2024 19:43:15 INFO Epoch 89, Loss: 375.31072
+Sat 17 Aug 2024 19:43:16 INFO Validation Metrics:
+Sat 17 Aug 2024 19:43:16 INFO 5: precision: 0.01530 | recall: 0.06573 | ndcg: 0.04373 | hit_rate: 0.07370 | map: 0.03491
+Sat 17 Aug 2024 19:43:16 INFO 10: precision: 0.01172 | recall: 0.09918 | ndcg: 0.05488 | hit_rate: 0.10935 | map: 0.03959
+Sat 17 Aug 2024 19:43:16 INFO 20: precision: 0.00852 | recall: 0.14199 | ndcg: 0.06614 | hit_rate: 0.15399 | map: 0.04277
+Sat 17 Aug 2024 19:43:16 INFO Test Metrics:
+Sat 17 Aug 2024 19:43:16 INFO 5: precision: 0.02522 | recall: 0.06803 | ndcg: 0.05315 | hit_rate: 0.11097 | map: 0.03915
+Sat 17 Aug 2024 19:43:16 INFO 10: precision: 0.01873 | recall: 0.09913 | ndcg: 0.06493 | hit_rate: 0.15747 | map: 0.04408
+Sat 17 Aug 2024 19:43:16 INFO 20: precision: 0.01326 | recall: 0.13777 | ndcg: 0.07667 | hit_rate: 0.20915 | map: 0.04749
+Sat 17 Aug 2024 19:43:27 INFO Epoch 90, Loss: 375.19800
+Sat 17 Aug 2024 19:43:28 INFO Validation Metrics:
+Sat 17 Aug 2024 19:43:28 INFO 5: precision: 0.01540 | recall: 0.06602 | ndcg: 0.04418 | hit_rate: 0.07402 | map: 0.03541
+Sat 17 Aug 2024 19:43:28 INFO 10: precision: 0.01164 | recall: 0.09872 | ndcg: 0.05507 | hit_rate: 0.10884 | map: 0.03999
+Sat 17 Aug 2024 19:43:28 INFO 20: precision: 0.00855 | recall: 0.14267 | ndcg: 0.06662 | hit_rate: 0.15476 | map: 0.04324
+Sat 17 Aug 2024 19:43:28 INFO Test Metrics:
+Sat 17 Aug 2024 19:43:28 INFO 5: precision: 0.02537 | recall: 0.06846 | ndcg: 0.05332 | hit_rate: 0.11161 | map: 0.03927
+Sat 17 Aug 2024 19:43:28 INFO 10: precision: 0.01867 | recall: 0.09887 | ndcg: 0.06480 | hit_rate: 0.15631 | map: 0.04409
+Sat 17 Aug 2024 19:43:28 INFO 20: precision: 0.01331 | recall: 0.13842 | ndcg: 0.07681 | hit_rate: 0.20953 | map: 0.04757
+Sat 17 Aug 2024 19:43:39 INFO Epoch 91, Loss: 375.23565
+Sat 17 Aug 2024 19:43:40 INFO Validation Metrics:
+Sat 17 Aug 2024 19:43:40 INFO 5: precision: 0.01524 | recall: 0.06532 | ndcg: 0.04364 | hit_rate: 0.07318 | map: 0.03490
+Sat 17 Aug 2024 19:43:40 INFO 10: precision: 0.01164 | recall: 0.09885 | ndcg: 0.05476 | hit_rate: 0.10903 | map: 0.03955
+Sat 17 Aug 2024 19:43:40 INFO 20: precision: 0.00845 | recall: 0.14115 | ndcg: 0.06593 | hit_rate: 0.15315 | map: 0.04272
+Sat 17 Aug 2024 19:43:40 INFO Test Metrics:
+Sat 17 Aug 2024 19:43:40 INFO 5: precision: 0.02541 | recall: 0.06846 | ndcg: 0.05311 | hit_rate: 0.11187 | map: 0.03900
+Sat 17 Aug 2024 19:43:40 INFO 10: precision: 0.01871 | recall: 0.09881 | ndcg: 0.06462 | hit_rate: 0.15644 | map: 0.04387
+Sat 17 Aug 2024 19:43:40 INFO 20: precision: 0.01325 | recall: 0.13800 | ndcg: 0.07650 | hit_rate: 0.20940 | map: 0.04729
+Sat 17 Aug 2024 19:43:51 INFO Epoch 92, Loss: 375.17156
+Sat 17 Aug 2024 19:43:52 INFO Validation Metrics:
+Sat 17 Aug 2024 19:43:52 INFO 5: precision: 0.01528 | recall: 0.06552 | ndcg: 0.04374 | hit_rate: 0.07325 | map: 0.03496
+Sat 17 Aug 2024 19:43:52 INFO 10: precision: 0.01163 | recall: 0.09869 | ndcg: 0.05474 | hit_rate: 0.10897 | map: 0.03954
+Sat 17 Aug 2024 19:43:52 INFO 20: precision: 0.00847 | recall: 0.14160 | ndcg: 0.06603 | hit_rate: 0.15353 | map: 0.04274
+Sat 17 Aug 2024 19:43:52 INFO Test Metrics:
+Sat 17 Aug 2024 19:43:52 INFO 5: precision: 0.02520 | recall: 0.06786 | ndcg: 0.05285 | hit_rate: 0.11084 | map: 0.03894
+Sat 17 Aug 2024 19:43:52 INFO 10: precision: 0.01867 | recall: 0.09884 | ndcg: 0.06456 | hit_rate: 0.15592 | map: 0.04387
+Sat 17 Aug 2024 19:43:52 INFO 20: precision: 0.01325 | recall: 0.13803 | ndcg: 0.07647 | hit_rate: 0.20986 | map: 0.04730
+Sat 17 Aug 2024 19:44:03 INFO Epoch 93, Loss: 375.15885
+Sat 17 Aug 2024 19:44:04 INFO Validation Metrics:
+Sat 17 Aug 2024 19:44:04 INFO 5: precision: 0.01537 | recall: 0.06600 | ndcg: 0.04404 | hit_rate: 0.07396 | map: 0.03520
+Sat 17 Aug 2024 19:44:04 INFO 10: precision: 0.01176 | recall: 0.09949 | ndcg: 0.05514 | hit_rate: 0.10987 | map: 0.03983
+Sat 17 Aug 2024 19:44:04 INFO 20: precision: 0.00851 | recall: 0.14198 | ndcg: 0.06630 | hit_rate: 0.15405 | map: 0.04297
+Sat 17 Aug 2024 19:44:04 INFO Test Metrics:
+Sat 17 Aug 2024 19:44:04 INFO 5: precision: 0.02540 | recall: 0.06814 | ndcg: 0.05303 | hit_rate: 0.11168 | map: 0.03897
+Sat 17 Aug 2024 19:44:04 INFO 10: precision: 0.01869 | recall: 0.09878 | ndcg: 0.06460 | hit_rate: 0.15676 | map: 0.04386
+Sat 17 Aug 2024 19:44:04 INFO 20: precision: 0.01327 | recall: 0.13811 | ndcg: 0.07655 | hit_rate: 0.20979 | map: 0.04732
+Sat 17 Aug 2024 19:44:15 INFO Epoch 94, Loss: 375.08941
+Sat 17 Aug 2024 19:44:15 INFO Validation Metrics:
+Sat 17 Aug 2024 19:44:15 INFO 5: precision: 0.01523 | recall: 0.06567 | ndcg: 0.04382 | hit_rate: 0.07331 | map: 0.03508
+Sat 17 Aug 2024 19:44:15 INFO 10: precision: 0.01174 | recall: 0.09945 | ndcg: 0.05507 | hit_rate: 0.10980 | map: 0.03977
+Sat 17 Aug 2024 19:44:15 INFO 20: precision: 0.00856 | recall: 0.14269 | ndcg: 0.06641 | hit_rate: 0.15508 | map: 0.04294
+Sat 17 Aug 2024 19:44:15 INFO Test Metrics:
+Sat 17 Aug 2024 19:44:15 INFO 5: precision: 0.02529 | recall: 0.06767 | ndcg: 0.05285 | hit_rate: 0.11103 | map: 0.03888
+Sat 17 Aug 2024 19:44:15 INFO 10: precision: 0.01872 | recall: 0.09845 | ndcg: 0.06452 | hit_rate: 0.15663 | map: 0.04382
+Sat 17 Aug 2024 19:44:15 INFO 20: precision: 0.01328 | recall: 0.13805 | ndcg: 0.07653 | hit_rate: 0.21031 | map: 0.04728
+Sat 17 Aug 2024 19:44:15 INFO Best Test Metrics:
+Sat 17 Aug 2024 19:44:15 INFO 5: precision: 0.02559 | recall: 0.06860 | ndcg: 0.05343 | hit_rate: 0.11239 | map: 0.03930
+Sat 17 Aug 2024 19:44:15 INFO 10: precision: 0.01865 | recall: 0.09849 | ndcg: 0.06472 | hit_rate: 0.15638 | map: 0.04406
+Sat 17 Aug 2024 19:44:15 INFO 20: precision: 0.01343 | recall: 0.13979 | ndcg: 0.07718 | hit_rate: 0.21270 | map: 0.04762
+Sat 17 Aug 2024 19:44:15 INFO Best performance: 0.13979
+Sat 17 Aug 2024 19:44:15 INFO Best parameters: {'learning_rate': 0.001, 'ssl_alpha': 0.5, 'ssl_temp': 0.2, 'reg_weight': 0.001, 'n_layers': 1, 'dropout': 0.1}
+Sat 17 Aug 2024 19:44:15 INFO Best metrics:
+Sat 17 Aug 2024 19:44:15 INFO 5: precision: 0.02559 | recall: 0.06860 | ndcg: 0.05343 | hit_rate: 0.11239 | map: 0.03930
+Sat 17 Aug 2024 19:44:15 INFO 10: precision: 0.01865 | recall: 0.09849 | ndcg: 0.06472 | hit_rate: 0.15638 | map: 0.04406
+Sat 17 Aug 2024 19:44:15 INFO 20: precision: 0.01343 | recall: 0.13979 | ndcg: 0.07718 | hit_rate: 0.21270 | map: 0.04762

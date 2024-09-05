@@ -18,11 +18,3 @@ def mad_value(in_arr, mask_arr, distance_metric='cosine', digt_num=4):
     mad = np.mean(node_dist)
     mad = np.round(mad, digt_num)
     return mad
-
-
-    # 生成掩码
-    # self.mask_rate = 0.05
-    # image_mask = torch.rand_like(temp_features) < self.mask_rate
-    # temp_features.data.masked_fill_(image_mask, 0)
-    # text_mask = torch.rand_like(self.t_feat) < self.mask_rate
-    # self.t_feat.data.masked_fill_(text_mask, 0)

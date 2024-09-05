@@ -7,6 +7,7 @@ from Model.BPR import BPRMF
 from Model.DCCF import DCCF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
+from Model.DHCF import DHCF
 from Model.DRAGON import DRAGON
 from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
@@ -278,6 +279,8 @@ if __name__ == '__main__':
                                      args.reg_weight, args.n_layers, args.n_mca, device),
             'LightGODE': lambda: LightGODE(num_user, num_item, train_data, user_item_dict, dim_E,
                                  args.gamma, args.t, device),
+            'DHCF': lambda: DHCF(num_user, num_item, train_data, user_item_dict, dim_E,
+                                           args.reg_weight, args.n_layers, args.dropout, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

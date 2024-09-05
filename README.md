@@ -24,6 +24,10 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - XSimGCL(2023): Towards Extremely Simple Graph Contrastive Learning for Recommendation
 - GraphAug(2024): Graph Augmentation for Recommendation
 - SelfCF(2023): A Simple Framework for Self-supervised Collaborative Filtering
+- DHCF(2020): Dual Channel Hypergraph Collaborative Filtering
+- LightGODE(2024): Do We Really Need Graph Convolution During Training? Light Post-Training Graph-ODE for Efficient Recommendation
+- FKAN-GCF(2024): FourierKAN-GCF: Fourier Kolmogorov-Arnold Network - An Effective and Efficient Feature Transformation for Graph Collaborative Filtering
+
 
 目前的多模态推荐模型有：
 
@@ -46,5 +50,6 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - MMSSL(2023): Multi-Modal Self-Supervised Learning for Recommendation
 - LGMRec(2024): Local and Global Graph Learning for Multimodal Recommendation
 - MENTOR(2024): Multi-level Self-supervised Learning for Multimodal Recommendation
+- MCLN(2023): Multimodal Counterfactual Learning Network for Multimedia-based Recommendation
 
 现有模型大部分按照原作者代码进行改写，如果发现有错误欢迎指正！
