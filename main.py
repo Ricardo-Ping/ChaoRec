@@ -9,6 +9,7 @@ from Model.DDRec import DDRec
 from Model.DGCF import DGCF
 from Model.DHCF import DHCF
 from Model.DRAGON import DRAGON
+from Model.DiffMM import DiffMM
 from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
 from Model.FKAN_GCF import FKAN_GCF
@@ -139,6 +140,10 @@ if __name__ == '__main__':
     # LightGode
     gamma = args.gamma
     t = args.t
+    # DiffMM
+    e_loss = args.e_loss
+    ris_lambda = args.ris_lambda
+    rebuild_k = args.rebuild_k
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -149,6 +154,13 @@ if __name__ == '__main__':
     # ------------LightGT模型需要--------------------
     eval_dataset = dataload.EvalDataset(num_user, num_item, user_item_dict)
     eval_dataloader = DataLoader(eval_dataset, 2000, shuffle=False, num_workers=num_workers)
+
+    # ------------DiffMM模型需要--------------------
+    diffusionData = dataload.DiffusionData(num_user, num_item, train_data)
+    diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+
+    args.num_user = num_user
+    args.num_item = num_item
     # ----------------------------------------------
 
     # 网格搜索
@@ -262,25 +274,30 @@ if __name__ == '__main__':
                                      args.ssl_temp, args.ssl_alpha, device),
             'XSimGCL': lambda: XSimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.n_layers, args.ssl_temp, args.ssl_alpha, device),
-            'GraphAug': lambda: GraphAug(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
-                                 args.ssl_temp, args.ssl_alpha, device),
+            'GraphAug': lambda: GraphAug(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                         args.n_layers,
+                                         args.ssl_temp, args.ssl_alpha, device),
             'LGMRec': lambda: LGMRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                   args.reg_weight, args.n_layers, args.ssl_alpha, device),
+                                     args.reg_weight, args.n_layers, args.ssl_alpha, device),
             'SelfCF': lambda: SelfCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                      args.n_layers, args.dropout, device),
             'MENTOR': lambda: MENTOR(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                      args.mm_layers, args.reg_weight, args.ssl_temp, args.dropout, args.align_weight,
                                      args.mask_weight_g, args.mask_weight_f, device),
             'LightGT': lambda: LightGT(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                     args.reg_weight, args.n_layers, device),
+                                       args.reg_weight, args.n_layers, device),
             'FKAN_GCF': lambda: FKAN_GCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                                         args.n_layers, args.node_dropout, args.message_dropout, args.grid_size, device),
+                                         args.n_layers, args.node_dropout, args.message_dropout, args.grid_size,
+                                         device),
             'MCLN': lambda: MCLN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                     args.reg_weight, args.n_layers, args.n_mca, device),
+                                 args.reg_weight, args.n_layers, args.n_mca, device),
             'LightGODE': lambda: LightGODE(num_user, num_item, train_data, user_item_dict, dim_E,
-                                 args.gamma, args.t, device),
+                                           args.gamma, args.t, device),
             'DHCF': lambda: DHCF(num_user, num_item, train_data, user_item_dict, dim_E,
-                                           args.reg_weight, args.n_layers, args.dropout, device),
+                                 args.reg_weight, args.n_layers, args.dropout, device),
+            'DiffMM': lambda: DiffMM(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                     args.reg_weight, args.n_layers, args.ssl_alpha, args.ssl_temp, args.ris_lambda,
+                                     args.e_loss, args.rebuild_k, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
@@ -295,10 +312,15 @@ if __name__ == '__main__':
 
         # 定义优化器
         optimizer = torch.optim.Adam([{'params': model.parameters(), 'lr': args.learning_rate}])
-
         # 训练和评估
-        current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
-                                                  eval_dataloader)
+        if args.Model in ["LightGT"]:
+            current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+                                                      eval_dataloader=eval_dataloader, diffusionLoader=None)
+        elif args.Model in ["DiffMM"]:
+            current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+                                                      diffusionLoader=diffusionLoader)
+        else:
+            current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs)
 
         current_best_recall = current_best_metrics[20]['recall']
         if best_performance is None or current_best_recall > best_performance:

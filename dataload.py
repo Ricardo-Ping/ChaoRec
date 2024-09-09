@@ -13,6 +13,7 @@ from torch.utils.data import DataLoader
 import numpy as np
 from arg_parser import parse_args
 import logging
+import scipy.sparse as sp
 
 args = parse_args()
 
@@ -95,7 +96,7 @@ class TrainingDataset(Dataset):
             user_item = torch.tensor(temp) - self.num_user
             user_item = torch.cat((torch.tensor([-1]), user_item))
 
-            return [torch.LongTensor([user,user]), torch.LongTensor([pos_item, neg_item]), mask, user_item]
+            return [torch.LongTensor([user, user]), torch.LongTensor([pos_item, neg_item]), mask, user_item]
         elif self.model_name in ["MCLN"]:
             return [int(user), int(pos_item), int(neg_item), int(int_items)]
         else:
@@ -142,3 +143,30 @@ class EvalDataset(Dataset):
 
         return torch.LongTensor([user]), user_item, mask
 
+
+# --------------DiffMM---------------------
+class DiffusionData(Dataset):
+    def __init__(self, num_user, num_item, edge_index):
+        self.edge_index = edge_index
+        self.num_user = num_user
+        self.num_item = num_item
+        self.edge_index = edge_index
+
+        adjusted_item_ids = self.edge_index[:, 1] - self.num_user
+
+        # 创建COO格式的稀疏矩阵
+        self.interaction_matrix = sp.coo_matrix(
+            (np.ones(len(self.edge_index)),
+             (self.edge_index[:, 0], adjusted_item_ids)),
+            shape=(self.num_user, self.num_item), dtype=np.float32
+        )
+        # 将稀疏矩阵转换为稠密矩阵
+        self.data = torch.FloatTensor(self.interaction_matrix.A)
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+
+        item = self.data[index]
+        return item, index

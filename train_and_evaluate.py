@@ -8,6 +8,8 @@
 """
 import time
 import logging
+
+import numpy as np
 import torch
 from tqdm import tqdm
 from utils import EarlyStopping, gene_metrics
@@ -18,7 +20,7 @@ args = parse_args()
 topk = args.topk
 
 
-def train(model, train_loader, optimizer):
+def train(model, train_loader, optimizer, diffusionLoader=None):
     model.train()
     sum_loss = 0.0
     if args.Model in ["MMGCN", "GRCN"]:
@@ -129,6 +131,108 @@ def train(model, train_loader, optimizer):
             loss.backward()
             optimizer.step()
             sum_loss += loss.item()
+    elif args.Model in ["DiffMM"]:
+
+        epDiLoss_image, epDiLoss_text = 0, 0
+        denoise_opt_image = torch.optim.Adam(model.denoise_model_image.parameters(), lr=args.learning_rate, weight_decay=0)
+        denoise_opt_text = torch.optim.Adam(model.denoise_model_text.parameters(), lr=args.learning_rate, weight_decay=0)
+
+        for i, batch in enumerate(diffusionLoader):
+            batch_item, batch_index = batch
+            batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
+
+            iEmbeds = model.getItemEmbeds().detach()
+            # uEmbeds = model.getUserEmbeds().detach()
+
+            image_feats = model.getImageFeats().detach()
+            text_feats = model.getTextFeats().detach()
+
+            denoise_opt_image.zero_grad()
+            denoise_opt_text.zero_grad()
+
+            diff_loss_image, gc_loss_image = model.diffusion_model.training_losses(model.denoise_model_image,
+                                                                                     batch_item,
+                                                                                     iEmbeds, batch_index, image_feats)
+            diff_loss_text, gc_loss_text = model.diffusion_model.training_losses(model.denoise_model_text, batch_item,
+                                                                                   iEmbeds, batch_index, text_feats)
+
+            loss_image = diff_loss_image.mean() + gc_loss_image.mean() * model.e_loss
+            loss_text = diff_loss_text.mean() + gc_loss_text.mean() * model.e_loss
+
+            epDiLoss_image += loss_image.item()
+            epDiLoss_text += loss_text.item()
+
+            loss = loss_image + loss_text
+            loss.backward()
+            denoise_opt_image.step()
+            denoise_opt_text.step()
+
+            logging.info('Diffusion Step %d/%d; Diffusion Loss %.6f' % (
+            i, diffusionLoader.dataset.__len__() // args.batch_size, loss.item()))
+
+        logging.info('')  # 空行
+        logging.info('Start to re-build UI matrix')
+
+        with torch.no_grad():
+            u_list_image = []
+            i_list_image = []
+            edge_list_image = []
+
+            u_list_text = []
+            i_list_text = []
+            edge_list_text = []
+
+            sampling_noise = False
+            sampling_steps = 0
+
+            for _, batch in enumerate(diffusionLoader):
+                batch_item, batch_index = batch
+                batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
+
+                # image
+                denoised_batch = model.diffusion_model.p_sample(model.denoise_model_image, batch_item,
+                                                                  sampling_steps, sampling_noise)
+                top_item, indices_ = torch.topk(denoised_batch, k=model.rebuild_k)
+
+                for i in range(batch_index.shape[0]):
+                    for j in range(indices_[i].shape[0]):
+                        u_list_image.append(int(batch_index[i].cpu().numpy()))
+                        i_list_image.append(int(indices_[i][j].cpu().numpy()))
+                        edge_list_image.append(1.0)
+
+                # text
+                denoised_batch = model.diffusion_model.p_sample(model.denoise_model_text, batch_item,
+                                                                  sampling_steps, sampling_noise)
+                top_item, indices_ = torch.topk(denoised_batch, k=model.rebuild_k)
+
+                for i in range(batch_index.shape[0]):
+                    for j in range(indices_[i].shape[0]):
+                        u_list_text.append(int(batch_index[i].cpu().numpy()))
+                        i_list_text.append(int(indices_[i][j].cpu().numpy()))
+                        edge_list_text.append(1.0)
+
+            # image
+            u_list_image = np.array(u_list_image)
+            i_list_image = np.array(i_list_image)
+            edge_list_image = np.array(edge_list_image)
+            image_UI_matrix = model.buildUIMatrix(u_list_image, i_list_image, edge_list_image)
+            image_UI_matrix = model.edgeDropper(image_UI_matrix)
+
+            # text
+            u_list_text = np.array(u_list_text)
+            i_list_text = np.array(i_list_text)
+            edge_list_text = np.array(edge_list_text)
+            text_UI_matrix = model.buildUIMatrix(u_list_text, i_list_text, edge_list_text)
+            text_UI_matrix = model.edgeDropper(text_UI_matrix)
+
+        logging.info('UI matrix built!')
+
+        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
+            optimizer.zero_grad()
+            loss = model.loss(users, pos_items, neg_items, image_UI_matrix, text_UI_matrix)
+            loss.backward()
+            optimizer.step()
+            sum_loss += loss.item()
     return sum_loss
 
 
@@ -139,7 +243,8 @@ def evaluate(model, data, ranklist, topk):
     return metrics
 
 
-def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader):
+def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader=None,
+                       diffusionLoader=None):
     model.train()
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
@@ -148,7 +253,10 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         if args.Model in ["DualGNN", "DRAGON", "FREEDOM", 'POWERec', 'LayerGCN']:
             # 在每个epoch开始时，调用pre_epoch_processing方法
             model.pre_epoch_processing()
-        loss = train(model, train_loader, optimizer)
+        if args.Model in ["DiffMM"]:
+            loss = train(model, train_loader, optimizer, diffusionLoader)
+        else:
+            loss = train(model, train_loader, optimizer)
         logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
 
         if args.Model in ["LightGT"]:

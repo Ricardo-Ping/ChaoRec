@@ -13,9 +13,9 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='DHCF', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='DiffMM', help='Model name')
     # 数据集：baby,clothing,sports,beauty,electronics
-    parser.add_argument('--data_path', nargs='?', default='clothing', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
@@ -55,6 +55,9 @@ def parse_args():
     parser.add_argument('--n_mca', type=int, default=2, help='MCLN counterfactual layer.')
     parser.add_argument('--gamma', type=float, default=0.5, help='LightGODE uniformity weight.')
     parser.add_argument('--t', type=float, default=1.8, help='LightGODE time step.')
+    parser.add_argument('--e_loss', type=float, default=0.1, help='DiffMM e_loss(lamba0).')
+    parser.add_argument('--ris_lambda', type=float, default=0.5, help='DiffMM (eq23-𝜔).')
+    parser.add_argument('--rebuild_k', type=int, default=1, help='DiffMM rebuild top-k.')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')
