@@ -51,6 +51,9 @@ def data_load(dataset, has_v=True, has_t=True):
     if dataset == 'electronics':
         num_user = 150179
         num_item = 51901
+    if dataset == 'microlens':
+        num_user = 46420
+        num_item = 14079
 
     return train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat
 

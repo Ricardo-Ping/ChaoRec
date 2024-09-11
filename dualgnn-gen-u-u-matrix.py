@@ -68,6 +68,8 @@ if __name__ == '__main__':
         num_user = 28940
     elif dataset == 'beauty':
         num_user = 15482
+    elif dataset == 'microlens':
+        num_user = 46420
     user_graph_matrix = gen_user_matrix(train_data, num_user)
 
     user_graph = user_graph_matrix
