@@ -8,7 +8,7 @@
 """
 import time
 import logging
-
+import torch.nn as nn
 import numpy as np
 import torch
 from tqdm import tqdm
@@ -231,6 +231,20 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items, image_UI_matrix, text_UI_matrix)
             loss.backward()
+            optimizer.step()
+            sum_loss += loss.item()
+    elif args.Model in ["GFormer"]:
+        fixSteps = 10  # steps to train on the same sampled graph
+        encoderAdj, decoderAdj, sub, cmp = None, None, None, None
+        for i, (users, pos_items, neg_items) in enumerate(tqdm(train_loader, desc="Training")):
+            if i % fixSteps == 0:
+                # 每 fixSteps 次进行一次操作
+                att_edge, add_adj = model.sampler(model.adj, model.getEgoEmbeds())
+                encoderAdj, decoderAdj, sub, cmp = model.masker(add_adj, att_edge)
+            optimizer.zero_grad()
+            loss = model.loss(users, pos_items, neg_items, encoderAdj, decoderAdj, sub, cmp)
+            loss.backward()
+            nn.utils.clip_grad_norm_(model.parameters(), max_norm=20, norm_type=2)  # 梯度裁剪
             optimizer.step()
             sum_loss += loss.item()
     return sum_loss

@@ -14,6 +14,7 @@ from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
 from Model.FKAN_GCF import FKAN_GCF
 from Model.FREEDOM import FREEDOM
+from Model.GFormer import GFormer
 from Model.GRCN import GRCN
 from Model.GraphAug import GraphAug
 from Model.HCCF import HCCF
@@ -144,6 +145,10 @@ if __name__ == '__main__':
     e_loss = args.e_loss
     ris_lambda = args.ris_lambda
     rebuild_k = args.rebuild_k
+    # GFormer
+    pnn_layer = args.pnn_layer
+    b2 = args.b2
+    ctra = args.ctra
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -219,25 +224,20 @@ if __name__ == '__main__':
                                        feature_embedding, args.reg_weight, args.dropout, args.n_layers, args.mm_layers,
                                        args.ii_topk, args.lambda_coeff, device),
             'SLMRec': lambda: SLMRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                     args.n_layers,
-                                     args.ssl_temp, args.ssl_alpha, device),
+                                     args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'MGAT': lambda: MGAT(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  device),
             'MICRO': lambda: MICRO(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.n_layers,
                                    args.reg_weight, args.ii_topk, args.mm_layers, args.ssl_temp, args.lambda_coeff,
                                    args.ssl_alpha, aggr_mode, device),
             'MMGCL': lambda: MMGCL(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                   args.reg_weight, args.n_layers, args.ssl_alpha, args.ssl_temp,
-                                   args.dropout, device),
+                                   args.reg_weight, args.n_layers, args.ssl_alpha, args.ssl_temp, args.dropout, device),
             'DDRec': lambda: DDRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                   feature_embedding,
-                                   args.reg_weight, args.n_layers, args.ssl_temp,
-                                   args.ssl_alpha, args.threshold,
-                                   aggr_mode, device),
+                                   feature_embedding, args.reg_weight, args.n_layers, args.ssl_temp, args.ssl_alpha,
+                                   args.threshold, aggr_mode, device),
             'SGL': lambda: SGL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
-            'MultVAE': lambda: MultVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                                       device),
+            'MultVAE': lambda: MultVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, device),
             'NCL': lambda: NCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             'MacridVAE': lambda: MacridVAE(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
@@ -252,11 +252,10 @@ if __name__ == '__main__':
             'MGCN': lambda: MGCN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E, args.reg_weight,
                                  args.n_layers, aggr_mode, args.ssl_temp, args.ssl_alpha, device),
             'POWERec': lambda: POWERec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                       args.reg_weight,
-                                       args.n_layers, args.prompt_num, args.neg_weight, args.dropout, device),
+                                       args.reg_weight, args.n_layers, args.prompt_num, args.neg_weight, args.dropout,
+                                       device),
             'MVGAE': lambda: MVGAE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
-                                   args.reg_weight,
-                                   args.n_layers, device),
+                                   args.reg_weight, args.n_layers, device),
             'LayerGCN': lambda: LayerGCN(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                          args.n_layers, args.dropout, device),
             'DCCF': lambda: DCCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
@@ -270,8 +269,7 @@ if __name__ == '__main__':
             'VGCL': lambda: VGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
                                  args.ssl_temp, args.ssl_alpha, device),
             'SimGCL': lambda: SimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
-                                     args.n_layers,
-                                     args.ssl_temp, args.ssl_alpha, device),
+                                     args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'XSimGCL': lambda: XSimGCL(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.n_layers, args.ssl_temp, args.ssl_alpha, device),
             'GraphAug': lambda: GraphAug(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
@@ -291,13 +289,15 @@ if __name__ == '__main__':
                                          device),
             'MCLN': lambda: MCLN(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                  args.reg_weight, args.n_layers, args.n_mca, device),
-            'LightGODE': lambda: LightGODE(num_user, num_item, train_data, user_item_dict, dim_E,
-                                           args.gamma, args.t, device),
-            'DHCF': lambda: DHCF(num_user, num_item, train_data, user_item_dict, dim_E,
-                                 args.reg_weight, args.n_layers, args.dropout, device),
+            'LightGODE': lambda: LightGODE(num_user, num_item, train_data, user_item_dict, dim_E, args.gamma, args.t,
+                                           device),
+            'DHCF': lambda: DHCF(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight, args.n_layers,
+                                 args.dropout, device),
             'DiffMM': lambda: DiffMM(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                      args.reg_weight, args.n_layers, args.ssl_alpha, args.ssl_temp, args.ris_lambda,
                                      args.e_loss, args.rebuild_k, device),
+            'GFormer': lambda: GFormer(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
+                                       args.n_layers, args.pnn_layer, args.ssl_alpha, args.b2, args.ctra, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

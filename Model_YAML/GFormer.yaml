@@ -1,0 +1,9 @@
+learning_rate: [0.001]
+reg_weight : [0.0001]  # 0.001, 0.0001, 0.00001
+n_layers : [1, 2, 3]
+pnn_layer : [1]
+ssl_alpha : [1, 0.1]  #  1, 0.1, 0.01, 0.001
+b2 : [1, 0.1, 0.01]  # 0.5, 1, 2, 4, 8
+ctra : [0.01, 0.001, 0.0001]
+
+hyper_parameters: ["n_layers","pnn_layer", "reg_weight", "ssl_alpha", 'b2', 'ctra', 'learning_rate']

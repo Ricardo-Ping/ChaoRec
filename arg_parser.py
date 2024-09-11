@@ -13,7 +13,7 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='DiffMM', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='GFormer', help='Model name')
     # 数据集：baby,clothing,sports,beauty,electronics
     parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
@@ -58,6 +58,9 @@ def parse_args():
     parser.add_argument('--e_loss', type=float, default=0.1, help='DiffMM e_loss(lamba0).')
     parser.add_argument('--ris_lambda', type=float, default=0.5, help='DiffMM (eq23-𝜔).')
     parser.add_argument('--rebuild_k', type=int, default=1, help='DiffMM rebuild top-k.')
+    parser.add_argument('--pnn_layer', type=int, default=1, help='GFormer pnn_layer.')
+    parser.add_argument('--b2', type=float, default=1, help='GFormer b2.')
+    parser.add_argument('--ctra', type=float, default=0.001, help='GFormer ctra.')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')
