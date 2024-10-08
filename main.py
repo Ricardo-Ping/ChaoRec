@@ -16,6 +16,7 @@ from Model.FKAN_GCF import FKAN_GCF
 from Model.FREEDOM import FREEDOM
 from Model.GFormer import GFormer
 from Model.GRCN import GRCN
+from Model.Grade import Grade
 from Model.GraphAug import GraphAug
 from Model.HCCF import HCCF
 from Model.LATTICE import LATTICE
@@ -149,6 +150,9 @@ if __name__ == '__main__':
     pnn_layer = args.pnn_layer
     b2 = args.b2
     ctra = args.ctra
+    # Grade
+    noise_alpha = args.noise_alpha
+    ssl_temp2 = args.ssl_temp2
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -298,6 +302,9 @@ if __name__ == '__main__':
                                      args.e_loss, args.rebuild_k, device),
             'GFormer': lambda: GFormer(num_user, num_item, train_data, user_item_dict, dim_E, args.reg_weight,
                                        args.n_layers, args.pnn_layer, args.ssl_alpha, args.b2, args.ctra, device),
+            'Grade': lambda: Grade(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.reg_weight, args.n_layers, args.ssl_temp, args.ssl_alpha, args.ssl_temp2,
+                                   args.noise_alpha, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

@@ -134,8 +134,10 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
     elif args.Model in ["DiffMM"]:
 
         epDiLoss_image, epDiLoss_text = 0, 0
-        denoise_opt_image = torch.optim.Adam(model.denoise_model_image.parameters(), lr=args.learning_rate, weight_decay=0)
-        denoise_opt_text = torch.optim.Adam(model.denoise_model_text.parameters(), lr=args.learning_rate, weight_decay=0)
+        denoise_opt_image = torch.optim.Adam(model.denoise_model_image.parameters(), lr=args.learning_rate,
+                                             weight_decay=0)
+        denoise_opt_text = torch.optim.Adam(model.denoise_model_text.parameters(), lr=args.learning_rate,
+                                            weight_decay=0)
 
         for i, batch in enumerate(diffusionLoader):
             batch_item, batch_index = batch
@@ -151,10 +153,10 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
             denoise_opt_text.zero_grad()
 
             diff_loss_image, gc_loss_image = model.diffusion_model.training_losses(model.denoise_model_image,
-                                                                                     batch_item,
-                                                                                     iEmbeds, batch_index, image_feats)
+                                                                                   batch_item,
+                                                                                   iEmbeds, batch_index, image_feats)
             diff_loss_text, gc_loss_text = model.diffusion_model.training_losses(model.denoise_model_text, batch_item,
-                                                                                   iEmbeds, batch_index, text_feats)
+                                                                                 iEmbeds, batch_index, text_feats)
 
             loss_image = diff_loss_image.mean() + gc_loss_image.mean() * model.e_loss
             loss_text = diff_loss_text.mean() + gc_loss_text.mean() * model.e_loss
@@ -168,7 +170,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
             denoise_opt_text.step()
 
             logging.info('Diffusion Step %d/%d; Diffusion Loss %.6f' % (
-            i, diffusionLoader.dataset.__len__() // args.batch_size, loss.item()))
+                i, diffusionLoader.dataset.__len__() // args.batch_size, loss.item()))
 
         logging.info('')  # 空行
         logging.info('Start to re-build UI matrix')
@@ -191,7 +193,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
 
                 # image
                 denoised_batch = model.diffusion_model.p_sample(model.denoise_model_image, batch_item,
-                                                                  sampling_steps, sampling_noise)
+                                                                sampling_steps, sampling_noise)
                 top_item, indices_ = torch.topk(denoised_batch, k=model.rebuild_k)
 
                 for i in range(batch_index.shape[0]):
@@ -202,7 +204,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
 
                 # text
                 denoised_batch = model.diffusion_model.p_sample(model.denoise_model_text, batch_item,
-                                                                  sampling_steps, sampling_noise)
+                                                                sampling_steps, sampling_noise)
                 top_item, indices_ = torch.topk(denoised_batch, k=model.rebuild_k)
 
                 for i in range(batch_index.shape[0]):
@@ -246,6 +248,32 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
             loss.backward()
             nn.utils.clip_grad_norm_(model.parameters(), max_norm=20, norm_type=2)  # 梯度裁剪
             optimizer.step()
+            sum_loss += loss.item()
+    elif args.Model in ['Grade']:
+        opt = torch.optim.Adam(model.parameters(), lr=args.learning_rate, weight_decay=0)
+        opt_gen_1 = torch.optim.Adam(model.generator_1.parameters(), lr=args.learning_rate, weight_decay=0)
+        opt_gen_2 = torch.optim.Adam(model.generator_2.parameters(), lr=args.learning_rate, weight_decay=0)
+        opt_gen_3 = torch.optim.Adam(model.generator_3.parameters(), lr=args.learning_rate, weight_decay=0)
+        for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
+            opt.zero_grad()
+            loss_1 = model.loss_1(users, pos_items, neg_items)
+            loss_1.backward()
+            opt.step()
+
+            opt.zero_grad()
+            bpr_reg_loss = model.bpr_reg_loss(users, pos_items, neg_items)
+            bpr_reg_loss.backward()
+            opt.step()
+
+            opt_gen_1.zero_grad()
+            opt_gen_2.zero_grad()
+            opt_gen_3.zero_grad()
+            gen_loss = model.gen_loss(users, pos_items, neg_items)
+            gen_loss.backward()
+            opt_gen_1.step()
+            opt_gen_2.step()
+            opt_gen_3.step()
+            loss = loss_1 + bpr_reg_loss + gen_loss
             sum_loss += loss.item()
     return sum_loss
 

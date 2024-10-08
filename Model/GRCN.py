@@ -159,6 +159,7 @@ class GRCN(torch.nn.Module):
         self.device = device
 
         self.edge_index = torch.tensor(edge_index, dtype=torch.long).t().contiguous().cuda()
+
         # 初始化了一个ID的图卷积网络（EGCN）
         self.id_gcn = EGCN(num_user, num_item, dim_E, aggr_mode)
         self.v_feat = v_feat

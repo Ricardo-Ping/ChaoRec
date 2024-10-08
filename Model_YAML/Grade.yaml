@@ -1,0 +1,9 @@
+n_layers : [4]  # 1,2
+learning_rate: [0.001]
+reg_weight : [0.1]
+ssl_alpha : [0.1]  # 0.1
+ssl_temp : [0.3]
+noise_alpha : [0.2]  # 0.2
+ssl_temp2: [0.3]  # 0.3
+
+hyper_parameters: ["n_layers","learning_rate", "reg_weight","ssl_alpha","ssl_temp", "ssl_temp2", 'noise_alpha']
