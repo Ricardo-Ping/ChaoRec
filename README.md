@@ -4,7 +4,7 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 
 主要包括一般推荐和多模态推荐。
 
-目前的一般推荐模型有24个：
+目前的一般推荐模型有25个：
 
 - BPR(2016): Bayesian Personalized Ranking with Multi-Channel User Feedback
 - DGCF(2020): Disentangled Graph Collaborative Filtering
