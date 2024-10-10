@@ -23,6 +23,8 @@ topk = args.topk
 def train(model, train_loader, optimizer, diffusionLoader=None):
     model.train()
     sum_loss = 0.0
+    all_ratings = None  # 用于BSPM模型的预测结果
+
     if args.Model in ["MMGCN", "GRCN"]:
         for user_tensor, item_tensor in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
@@ -275,6 +277,25 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
             opt_gen_3.step()
             loss = loss_1 + bpr_reg_loss + gen_loss
             sum_loss += loss.item()
+    elif args.Model in ["BSPM"]:
+        all_ratings = []
+        # 生成从 0 到 num_user - 1 的用户序列
+        user_ids = torch.arange(model.num_user).long().to(model.device)
+
+        # 将用户序列划分为多个小批次，避免显存不足
+        batch_size = 1024  # 可以根据实际情况调整批次大小
+        num_batches = (model.num_user + batch_size - 1) // batch_size  # 计算批次数量
+
+        for batch_id in tqdm(range(num_batches), desc="Training"):
+            # 获取当前批次的用户 ID
+            batch_users = user_ids[batch_id * batch_size: (batch_id + 1) * batch_size]
+            # 获取当前批次用户的评分预测
+            ret = model.getUsersRating(batch_users)  # 获取当前批次用户的评分预测
+            # 将当前批次的预测结果添加到列表中
+            all_ratings.append(ret)
+        # 将所有批次的预测结果拼接成一个完整的评分矩阵
+        all_ratings = torch.cat(all_ratings, dim=0)
+        return all_ratings
     return sum_loss
 
 
@@ -290,6 +311,30 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
     model.train()
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
+    all_ratings = None
+
+    # 如果模型是 BSPM，只跑一次 epoch
+    if args.Model == "BSPM":
+        all_ratings = train(model, train_loader, optimizer)
+        rank_list = model.gene_ranklist(all_ratings)
+        val_metrics = evaluate(model, val_data, rank_list, topk)
+        test_metrics = evaluate(model, test_data, rank_list, topk)
+
+        # 输出验证集的评价指标
+        logging.info('Validation Metrics:')
+        for k, metrics in val_metrics.items():
+            metrics_strs = [f"{metric}: {value:.5f}" for metric, value in metrics.items()]
+            logging.info(f"{k}: {' | '.join(metrics_strs)}")
+
+        # 输出测试集的评价指标
+        logging.info('Test Metrics:')
+        for k, metrics in test_metrics.items():
+            metrics_strs = [f"{metric}: {value:.5f}" for metric, value in metrics.items()]
+            logging.info(f"{k}: {' | '.join(metrics_strs)}")
+
+        # BSPM 不需要多次循环，可以直接返回
+        best_metrics = test_metrics
+        return best_metrics
 
     for epoch in range(epochs):
         if args.Model in ["DualGNN", "DRAGON", "FREEDOM", 'POWERec', 'LayerGCN']:
@@ -337,3 +382,4 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         logging.info(f"{k}: {' | '.join(metrics_strs)}")
 
     return early_stopping.best_metrics
+

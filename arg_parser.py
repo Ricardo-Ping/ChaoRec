@@ -13,9 +13,9 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='Grade', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='AdaGCL', help='Model name')
     # 数据集：baby,clothing,sports,beauty, microlens
-    parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='sports', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
@@ -63,6 +63,11 @@ def parse_args():
     parser.add_argument('--ctra', type=float, default=0.001, help='GFormer ctra.')
     parser.add_argument('--noise_alpha', type=int, default=0.3, help='Grade noise weight')
     parser.add_argument('--ssl_temp2', type=float, default=0.2, help='Grade temperature coefficient.')
+    parser.add_argument('--K_s', type=int, default=1, help='BSPM T_s / \tau')
+    parser.add_argument('--T_s', type=float, default=1, help='BSPM T_s')
+    parser.add_argument('--K_b', type=int, default=1, help='BSPM T_b / \tau')
+    parser.add_argument('--T_b', type=float, default=1, help='BSPM T_b')
+    parser.add_argument('--idl_beta', type=float, default=1, help='BSPM idl_beta')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')

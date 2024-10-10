@@ -547,9 +547,12 @@ class DenoisingNet(nn.Module):
         if layer == 0:
             nb_layer = self.nblayers_0  # 第一层邻居层
             selflayer = self.selflayers_0  # 第一层自注意力层
-        if layer == 1:
+        elif layer == 1:
             nb_layer = self.nblayers_1  # 第二层邻居层
             selflayer = self.selflayers_1  # 第二层自注意力层
+        else:
+            raise ValueError("Invalid layer value, must be 0 or 1")  # 添加防护，防止传递无效的层数
+
 
         input1 = input1.to(self.device)
         input2 = input2.to(self.device)

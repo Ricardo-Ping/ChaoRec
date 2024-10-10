@@ -1,4 +1,4 @@
-n_layers : [4]  # 1,2
+n_layers : [2]  # 1,2
 learning_rate: [0.001]
 reg_weight : [0.5]  # 0.1, 0.01, 0.001
 ssl_alpha : [1]  # 0.1,0.01,0.2

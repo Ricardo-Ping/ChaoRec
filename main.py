@@ -4,6 +4,7 @@ from itertools import product
 from Model.AdaGCL import AdaGCL
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
+from Model.BSPM import BSPM
 from Model.DCCF import DCCF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
@@ -153,6 +154,13 @@ if __name__ == '__main__':
     # Grade
     noise_alpha = args.noise_alpha
     ssl_temp2 = args.ssl_temp2
+    # BSPM
+    K_s = args.K_s
+    T_s = args.T_s
+    K_b = args.K_b
+    T_b = args.T_b
+    idl_beta = args.idl_beta
+
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -305,6 +313,8 @@ if __name__ == '__main__':
             'Grade': lambda: Grade(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    args.reg_weight, args.n_layers, args.ssl_temp, args.ssl_alpha, args.ssl_temp2,
                                    args.noise_alpha, device),
+            'BSPM': lambda: BSPM(num_user, num_item, train_data, user_item_dict, args.K_s, args.T_s, args.K_b, args.K_s,
+                                 args.idl_beta, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
