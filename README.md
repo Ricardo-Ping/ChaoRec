@@ -4,7 +4,7 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 
 主要包括一般推荐和多模态推荐。
 
-目前的一般推荐模型有24个：
+目前的一般推荐模型有26个：
 
 - BPR(2016): Bayesian Personalized Ranking with Multi-Channel User Feedback
 - DGCF(2020): Disentangled Graph Collaborative Filtering
@@ -30,7 +30,8 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - DualVAE(2024): Dual Disentangled Variational AutoEncoder for Recommendation
 - GFormer(2023): Graph Transformer for Recommendation
 - LightGODE(2024): Do We Really Need Graph Convolution During Training? Light Post-Training Graph-ODE for Efficient Recommendation
-
+- BSPM(2023)：Blurring-Sharpening Process Models for Collaborative Filtering (源代码使用的不是留一法预测,并且直接预测交互，所以在我们框架内性能较差)
+- DiffRec(2023)：Diffusion Recommender Model (源代码使用的不是留一法预测,并且直接预测交互，所以在我们框架内性能较差)
 
 目前的多模态推荐模型有22个：
 
@@ -55,6 +56,6 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - MENTOR(2024): Multi-level Self-supervised Learning for Multimodal Recommendation
 - MCLN(2023): Multimodal Counterfactual Learning Network for Multimedia-based Recommendation
 - DiffMM(2024): Multi-Modal Diffusion Model for Recommendation
-- LightGT(2023): A Light Graph Transformer for Multimedia Recommendation
+- LightGT(2023): A Light Graph Transformer for Multimedia Recommendation (受限于数据集中的交互项目长度，性能也不足)
 
 现有模型大部分按照原作者代码进行改写，如果发现有错误欢迎指正！
