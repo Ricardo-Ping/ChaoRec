@@ -296,6 +296,20 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
         # 将所有批次的预测结果拼接成一个完整的评分矩阵
         all_ratings = torch.cat(all_ratings, dim=0)
         return all_ratings
+    elif args.Model in ["DiffRec"]:
+        reweight = True
+        optimizer_dnn = torch.optim.AdamW(model.dnn.parameters(), lr=args.learning_rate, weight_decay=0)
+        # param_num = sum([param.nelement() for param in model.parameters()])  # 扩散模型的参数数量
+        # print("Number of all parameters:", param_num)
+        for i, batch in enumerate(diffusionLoader):
+            batch_item, batch_index = batch
+            batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
+            optimizer_dnn.zero_grad()
+            losses = model.training_losses(model.dnn, batch_item, reweight)  # 计算损失
+            loss = losses["loss"].mean()
+            loss.backward()
+            optimizer_dnn.step()
+            sum_loss += loss.item()
     return sum_loss
 
 
@@ -307,11 +321,10 @@ def evaluate(model, data, ranklist, topk):
 
 
 def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader=None,
-                       diffusionLoader=None):
+                       diffusionLoader=None, test_diffusionLoader= None):
     model.train()
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
-    all_ratings = None
 
     # 如果模型是 BSPM，只跑一次 epoch
     if args.Model == "BSPM":
@@ -340,7 +353,7 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         if args.Model in ["DualGNN", "DRAGON", "FREEDOM", 'POWERec', 'LayerGCN']:
             # 在每个epoch开始时，调用pre_epoch_processing方法
             model.pre_epoch_processing()
-        if args.Model in ["DiffMM"]:
+        if args.Model in ["DiffMM", "DiffRec"]:
             loss = train(model, train_loader, optimizer, diffusionLoader)
         else:
             loss = train(model, train_loader, optimizer)
@@ -350,6 +363,30 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
             rank_list = model.gene_ranklist(eval_dataloader)
             val_metrics = evaluate(model, val_data, rank_list, topk)
             test_metrics = evaluate(model, test_data, rank_list, topk)
+        elif args.Model in ["DiffRec"]:
+            predict_items = []
+            with torch.no_grad():
+                for i, batch in enumerate(test_diffusionLoader):
+                    batch_item, batch_index = batch
+                    batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
+                    prediction = model.p_sample(model.dnn, batch_item, args.sampling_steps, args.sampling_noise)
+
+                    # **将用户历史交互过的物品设为极小值**
+                    for user_idx in range(batch_index.shape[0]):
+                        user_id = batch_index[user_idx].item()  # 获取当前的用户 ID
+                        interacted_items = model.user_item_dict.get(user_id, [])  # 获取用户交互过的物品
+                        if len(interacted_items) > 0:
+                            interacted_items_tensor = torch.tensor(interacted_items, dtype=torch.long).to(
+                                batch_item.device)
+                            interacted_items_tensor = interacted_items_tensor - model.num_user
+                            prediction[user_idx, interacted_items_tensor] = -np.inf  # 或者设置为一个极小的值，如 1e-6
+
+                        _, indices = torch.topk(prediction[user_idx], 50)
+                        indices = (indices + model.num_user).cpu().tolist()  # 将张量转换为列表
+                        predict_items.append(indices)
+            predict_items = np.array(predict_items)
+            val_metrics = evaluate(model, val_data, predict_items, topk)
+            test_metrics = evaluate(model, test_data, predict_items, topk)
         else:
             model.eval()  # 设置为评估模式
             rank_list = model.gene_ranklist()
@@ -382,4 +419,3 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         logging.info(f"{k}: {' | '.join(metrics_strs)}")
 
     return early_stopping.best_metrics
-

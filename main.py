@@ -11,6 +11,7 @@ from Model.DGCF import DGCF
 from Model.DHCF import DHCF
 from Model.DRAGON import DRAGON
 from Model.DiffMM import DiffMM
+from Model.DiffRec import DiffRec
 from Model.DualGNN import DualGNN
 from Model.DualVAE import DualVAE
 from Model.FKAN_GCF import FKAN_GCF
@@ -160,7 +161,12 @@ if __name__ == '__main__':
     K_b = args.K_b
     T_b = args.T_b
     idl_beta = args.idl_beta
-
+    # DiffRec
+    noise_scale = args.noise_scale
+    noise_min = args.noise_min
+    noise_max = args.noise_max
+    steps = args.steps
+    dims = args.dims
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -178,6 +184,8 @@ if __name__ == '__main__':
 
     args.num_user = num_user
     args.num_item = num_item
+    # ------------DiffRec模型需要--------------------
+    test_diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=False, num_workers=num_workers)
     # ----------------------------------------------
 
     # 网格搜索
@@ -315,6 +323,8 @@ if __name__ == '__main__':
                                    args.noise_alpha, device),
             'BSPM': lambda: BSPM(num_user, num_item, train_data, user_item_dict, args.K_s, args.T_s, args.K_b, args.K_s,
                                  args.idl_beta, device),
+            'DiffRec': lambda: DiffRec(num_user, num_item, user_item_dict, args.noise_scale, args.noise_min,
+                                       args.noise_max, args.steps, args.dims, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
@@ -332,10 +342,14 @@ if __name__ == '__main__':
         # 训练和评估
         if args.Model in ["LightGT"]:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
-                                                      eval_dataloader=eval_dataloader, diffusionLoader=None)
+                                                      eval_dataloader=eval_dataloader, diffusionLoader=None,
+                                                      test_diffusionLoader=None)
         elif args.Model in ["DiffMM"]:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
-                                                      diffusionLoader=diffusionLoader)
+                                                      diffusionLoader=diffusionLoader, test_diffusionLoader=None)
+        elif args.Model in ["DiffRec"]:
+            current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+                                                      diffusionLoader=diffusionLoader, test_diffusionLoader=test_diffusionLoader)
         else:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs)
 
