@@ -31,7 +31,7 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - GFormer(2023): Graph Transformer for Recommendation
 - LightGODE(2024): Do We Really Need Graph Convolution During Training? Light Post-Training Graph-ODE for Efficient Recommendation
 - BSPM(2023)：Blurring-Sharpening Process Models for Collaborative Filtering (源代码使用的不是留一法预测,并且直接预测交互，所以在我们框架内性能较差)
-- DiffRec(2023)：Diffusion Recommender Model (源代码使用的不是留一法预测,并且直接预测交互，所以在我们框架内性能较差)
+- DiffRec(2023)：Diffusion Recommender Model
 
 目前的多模态推荐模型有22个：
 
