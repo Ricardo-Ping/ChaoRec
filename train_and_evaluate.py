@@ -297,16 +297,14 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
         all_ratings = torch.cat(all_ratings, dim=0)
         return all_ratings
     elif args.Model in ["DiffRec"]:
-        reweight = True
-        optimizer_dnn = torch.optim.AdamW(model.dnn.parameters(), lr=args.learning_rate, weight_decay=0)
+        optimizer_dnn = torch.optim.AdamW(model.dnn.parameters(), lr=model.learning_rate, weight_decay=0)
         # param_num = sum([param.nelement() for param in model.parameters()])  # 扩散模型的参数数量
         # print("Number of all parameters:", param_num)
         for i, batch in enumerate(diffusionLoader):
             batch_item, batch_index = batch
             batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
             optimizer_dnn.zero_grad()
-            losses = model.training_losses(model.dnn, batch_item, reweight)  # 计算损失
-            loss = losses["loss"].mean()
+            loss = model.training_losses(batch_item)  # 计算损失
             loss.backward()
             optimizer_dnn.step()
             sum_loss += loss.item()
@@ -360,16 +358,18 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
 
         if args.Model in ["LightGT"]:
+            model.eval()  # 设置为评估模式
             rank_list = model.gene_ranklist(eval_dataloader)
             val_metrics = evaluate(model, val_data, rank_list, topk)
             test_metrics = evaluate(model, test_data, rank_list, topk)
         elif args.Model in ["DiffRec"]:
+            model.eval()  # 设置为评估模式
             predict_items = []
             with torch.no_grad():
                 for i, batch in enumerate(test_diffusionLoader):
-                    batch_item, batch_index = batch
+                    batch_item, batch_index = batch  # [batchsize, num_item],[batchsize]
                     batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
-                    prediction = model.p_sample(model.dnn, batch_item, args.sampling_steps, args.sampling_noise)
+                    prediction = model.p_sample(batch_item)  # [batchsize, num_item]
 
                     # **将用户历史交互过的物品设为极小值**
                     for user_idx in range(batch_index.shape[0]):
@@ -380,10 +380,10 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
                                 batch_item.device)
                             interacted_items_tensor = interacted_items_tensor - model.num_user
                             prediction[user_idx, interacted_items_tensor] = -np.inf  # 或者设置为一个极小的值，如 1e-6
-
                         _, indices = torch.topk(prediction[user_idx], 50)
                         indices = (indices + model.num_user).cpu().tolist()  # 将张量转换为列表
                         predict_items.append(indices)
+
             predict_items = np.array(predict_items)
             val_metrics = evaluate(model, val_data, predict_items, topk)
             test_metrics = evaluate(model, test_data, predict_items, topk)

@@ -69,7 +69,8 @@ def parse_args():
     parser.add_argument('--T_b', type=float, default=1, help='BSPM T_b')
     parser.add_argument('--idl_beta', type=float, default=1, help='BSPM idl_beta')
     parser.add_argument('--sampling_noise', type=bool, default=False, help='DiffRec sampling with noise or not')
-    parser.add_argument('--sampling_steps', type=int, default=0, help='DiffRec steps of the forward process during inference')
+    parser.add_argument('--sampling_steps', type=int, default=0, help='DiffRec steps of the forward process during '
+                                                                      'inference')
     parser.add_argument('--steps', type=int, default=100, help='DiffRec diffusion steps')
     parser.add_argument('--noise_scale', type=float, default=0.1, help='DiffRec noise scale for noise generating')
     parser.add_argument('--noise_min', type=float, default=0.0001, help='DiffRec noise lower bound for noise generating')

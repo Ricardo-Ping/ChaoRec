@@ -116,18 +116,25 @@ class DNN(nn.Module):
 
 class DiffRec(nn.Module):
     def __init__(self, num_user, num_item, user_item_dict, noise_scale, noise_min,
-                 noise_max, steps, dims, device):
+                 noise_max, steps, dims, learning_rate, device):
         super(DiffRec, self).__init__()
         self.num_user = num_user
         self.num_item = num_item
         self.user_item_dict = user_item_dict
         self.device = device
+        self.learning_rate = learning_rate
 
-        self.noise_schedule = "linear-var"
+        self.noise_schedule = "linear"
         self.noise_scale = noise_scale
         self.noise_min = noise_min
         self.noise_max = noise_max
         self.steps = steps
+        self.sampling_steps = 0
+        self.sampling_noise = False
+
+        self.reweight = True  # reweight the loss for different timesteps
+        if self.noise_scale == 0.0:
+            self.reweight = False
 
         self.mean_type = 'x0'  # x0, eps
 
@@ -137,7 +144,7 @@ class DiffRec(nn.Module):
         self.Lt_history = torch.zeros(steps, self.history_num_per_term, dtype=torch.float64).to(device)  # 每一步存储的历史损失
         self.Lt_count = torch.zeros(steps, dtype=torch.long).to(device)  # 每一步的计数器
 
-        if noise_scale != 0.:  # 如果噪声缩放不为0，则生成 beta 序列
+        if noise_scale != 0.0:  # 如果噪声缩放不为0，则生成 beta 序列
             self.betas = torch.tensor(self.get_betas(), dtype=torch.float64).to(self.device)
             if self.beta_fixed:
                 self.betas[0] = 0.00001  # 修复第一个 beta 的值，防止过拟合
@@ -253,17 +260,13 @@ class DiffRec(nn.Module):
             betas.append(min(1 - alpha_bar(t2) / alpha_bar(t1), max_beta))
         return np.array(betas)
 
-    def p_sample(self, model, x_start, steps, sampling_noise=False):
+    def p_sample(self, x_start):
         """
             通过扩散模型进行采样，推断从 x_0 到 x_t 的过程。
-
-            :param model: 模型，用于预测噪声或 x_0
             :param x_start: 初始输入 x_0
-            :param steps: 推断的步骤数
-            :param sampling_noise: 是否在采样过程中添加噪声
             :return: 经过多步扩散后生成的 x_t
             """
-        assert steps <= self.steps, "Too much steps in inference."
+        steps = self.sampling_steps
         if steps == 0:
             x_t = x_start
         else:
@@ -279,15 +282,15 @@ class DiffRec(nn.Module):
         if self.noise_scale == 0.:
             for i in indices:
                 t = torch.tensor([i] * x_t.shape[0]).to(x_start.device)
-                x_t = model(x_t, t)
+                x_t = self.dnn(x_t, t)
             return x_t  # 返回生成的 x_t
 
         # 正常的扩散过程，每一步都计算 x_t 并逐步推断到初始状态
         for i in indices:
             t = torch.tensor([i] * x_t.shape[0]).to(x_start.device)
-            out = self.p_mean_variance(model, x_t, t)
+            out = self.p_mean_variance(x_t, t)
             # 如果启用了噪声采样，则在采样过程中添加随机噪声
-            if sampling_noise:
+            if self.sampling_noise:
                 noise = torch.randn_like(x_t)
                 nonzero_mask = (
                     (t != 0).float().view(-1, *([1] * (len(x_t.shape) - 1)))
@@ -347,7 +350,7 @@ class DiffRec(nn.Module):
         )
         return posterior_mean, posterior_variance, posterior_log_variance_clipped
 
-    def p_mean_variance(self, model, x, t):
+    def p_mean_variance(self, x, t):
         """
             使用模型预测 p(x_{t-1} | x_t)，并预测初始状态 x_0。
 
@@ -361,7 +364,7 @@ class DiffRec(nn.Module):
         # 确保时间步 t 的形状与批量大小一致
         assert t.shape == (B,)
         # 使用模型生成输出，模型输入为 x_t 和时间步 t
-        model_output = model(x, t)
+        model_output = self.dnn(x, t)
 
         model_variance = self.posterior_variance
         model_log_variance = self.posterior_log_variance_clipped
@@ -419,7 +422,7 @@ class DiffRec(nn.Module):
             res = res[..., None]
         return res.expand(broadcast_shape)
 
-    def training_losses(self, model, x_start, reweight=False):
+    def training_losses(self, x_start):
         """
             计算扩散模型的训练损失。
 
@@ -434,13 +437,12 @@ class DiffRec(nn.Module):
         # 生成与 x_start 相同形状的噪声
         noise = torch.randn_like(x_start)
         # 如果噪声缩放不为 0，则将噪声注入 x_t 中
-        if self.noise_scale != 0.:
+        if self.noise_scale != 0.0:
             x_t = self.q_sample(x_start, ts, noise)
         else:
             x_t = x_start
 
-        terms = {}
-        model_output = model(x_t, ts)
+        model_output = self.dnn(x_t, ts)
         target = {
             'x0': x_start,
             'eps': noise,
@@ -451,35 +453,48 @@ class DiffRec(nn.Module):
         # 计算模型输出与目标之间的均方误差 (MSE)
         mse = self.mean_flat((target - model_output) ** 2)
 
-        # 如果启用了重加权，则根据不同时间步对损失进行加权
-        if reweight == True:
+        reloss = self.reweight_loss(x_start, x_t, mse, ts, target, model_output, device)
+        self.update_Lt_history(ts, reloss)
+
+        # importance sampling
+        reloss /= pt
+        mean_loss = reloss.mean()
+
+        return mean_loss
+
+    def reweight_loss(self, x_start, x_t, mse, ts, target, model_output, device):
+        if self.reweight:
             if self.mean_type == 'x0':
-                # 如果预测的是 x_0，使用信噪比 (SNR) 差异进行加权
+                # Eq.11
                 weight = self.SNR(ts - 1) - self.SNR(ts)
+                # Eq.12
                 weight = torch.where((ts == 0), 1.0, weight)
                 loss = mse
-            elif self.mean_type == 'eps':
-                # 如果预测的是噪声 epsilon，根据 alpha_cumprod 和 beta 进行加权
+            elif self.mean_type == "eps":
                 weight = (1 - self.alphas_cumprod[ts]) / (
-                        (1 - self.alphas_cumprod_prev[ts]) ** 2 * (1 - self.betas[ts]))
+                        (1 - self.alphas_cumprod_prev[ts]) ** 2 * (1 - self.betas[ts])
+                )
                 weight = torch.where((ts == 0), 1.0, weight)
-                likelihood = self.mean_flat((x_start - self._predict_xstart_from_eps(x_t, ts, model_output)) ** 2 / 2.0)
+                likelihood = self.mean_flat(
+                    (x_start - self._predict_xstart_from_eps(x_t, ts, model_output))
+                    ** 2
+                    / 2.0
+                )
                 loss = torch.where((ts == 0), likelihood, mse)
         else:
-            # 如果没有加权，则损失权重为 1
             weight = torch.tensor([1.0] * len(target)).to(device)
+            loss = mse
+        reloss = weight * loss
+        return reloss
 
-        terms["loss"] = weight * loss
-
-        # 更新 Lt_history 和 Lt_count（用于重要性采样）
-        for t, loss in zip(ts, terms["loss"]):
+    def update_Lt_history(self, ts, reloss):
+        # update Lt_history & Lt_count
+        for t, loss in zip(ts, reloss):
             if self.Lt_count[t] == self.history_num_per_term:
-                # 当历史计数满时，将历史记录左移，丢弃最旧的损失
                 Lt_history_old = self.Lt_history.clone()
                 self.Lt_history[t, :-1] = Lt_history_old[t, 1:]
                 self.Lt_history[t, -1] = loss.detach()
             else:
-                # 否则，记录新的损失
                 try:
                     self.Lt_history[t, self.Lt_count[t]] = loss.detach()
                     self.Lt_count[t] += 1
@@ -488,9 +503,6 @@ class DiffRec(nn.Module):
                     print(self.Lt_count[t])
                     print(loss)
                     raise ValueError
-        # 使用采样权重 pt 对损失进行归一化处理
-        terms["loss"] /= pt
-        return terms
 
     def sample_timesteps(self, batch_size, device, method='uniform', uniform_prob=0.001):
         """

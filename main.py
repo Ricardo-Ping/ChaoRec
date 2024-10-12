@@ -176,7 +176,7 @@ if __name__ == '__main__':
 
     # ------------LightGT模型需要--------------------
     eval_dataset = dataload.EvalDataset(num_user, num_item, user_item_dict)
-    eval_dataloader = DataLoader(eval_dataset, 2000, shuffle=False, num_workers=num_workers)
+    eval_dataloader = DataLoader(eval_dataset, 2000, shuffle=False)
 
     # ------------DiffMM模型需要--------------------
     diffusionData = dataload.DiffusionData(num_user, num_item, train_data)
@@ -185,7 +185,9 @@ if __name__ == '__main__':
     args.num_user = num_user
     args.num_item = num_item
     # ------------DiffRec模型需要--------------------
-    test_diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+    if args.Model in ["DiffRec"]:
+        diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, pin_memory=True, shuffle=True, num_workers=num_workers)
+    test_diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=False)
     # ----------------------------------------------
 
     # 网格搜索
@@ -324,7 +326,7 @@ if __name__ == '__main__':
             'BSPM': lambda: BSPM(num_user, num_item, train_data, user_item_dict, args.K_s, args.T_s, args.K_b, args.K_s,
                                  args.idl_beta, device),
             'DiffRec': lambda: DiffRec(num_user, num_item, user_item_dict, args.noise_scale, args.noise_min,
-                                       args.noise_max, args.steps, args.dims, device),
+                                       args.noise_max, args.steps, args.dims, args.learning_rate, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
