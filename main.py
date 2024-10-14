@@ -5,6 +5,7 @@ from Model.AdaGCL import AdaGCL
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
 from Model.BSPM import BSPM
+from Model.CF_Diff import CF_Diff
 from Model.DCCF import DCCF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
@@ -186,8 +187,16 @@ if __name__ == '__main__':
     args.num_item = num_item
     # ------------DiffRec模型需要--------------------
     if args.Model in ["DiffRec"]:
-        diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, pin_memory=True, shuffle=True, num_workers=num_workers)
+        diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, pin_memory=True, shuffle=True,
+                                     num_workers=num_workers)
     test_diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=False)
+    # ------------DiffRec模型需要--------------------
+    if args.Model in ["CF_Diff"]:
+        multi_hop = dataload.DiffusionData_sec_hop(num_user, num_item, train_data)
+        train_loader_sec_hop = DataLoader(multi_hop, batch_size=batch_size, pin_memory=True, shuffle=True,
+                                          num_workers=num_workers)
+        test_diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=4)
+        test_loader_sec_hop = DataLoader(multi_hop, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=4)
     # ----------------------------------------------
 
     # 网格搜索
@@ -327,6 +336,8 @@ if __name__ == '__main__':
                                  args.idl_beta, device),
             'DiffRec': lambda: DiffRec(num_user, num_item, user_item_dict, args.noise_scale, args.noise_min,
                                        args.noise_max, args.steps, args.dims, args.learning_rate, device),
+            'CF_Diff': lambda: CF_Diff(num_user, num_item, user_item_dict, args.noise_scale, args.noise_min,
+                                       args.noise_max, args.steps, args.learning_rate, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
@@ -351,7 +362,15 @@ if __name__ == '__main__':
                                                       diffusionLoader=diffusionLoader, test_diffusionLoader=None)
         elif args.Model in ["DiffRec"]:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
-                                                      diffusionLoader=diffusionLoader, test_diffusionLoader=test_diffusionLoader)
+                                                      diffusionLoader=diffusionLoader,
+                                                      test_diffusionLoader=test_diffusionLoader)
+        elif args.Model in ["CF_Diff"]:
+            current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+                                                      diffusionLoader=diffusionLoader,
+                                                      test_diffusionLoader=test_diffusionLoader,
+                                                      train_loader_sec_hop=train_loader_sec_hop,
+                                                      test_loader_sec_hop=test_loader_sec_hop
+                                                      )
         else:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs)
 

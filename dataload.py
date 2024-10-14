@@ -147,7 +147,7 @@ class EvalDataset(Dataset):
         return torch.LongTensor([user]), user_item, mask
 
 
-# --------------DiffMM---------------------
+# --------------DiffMM/DiffRec---------------------
 class DiffusionData(Dataset):
     def __init__(self, num_user, num_item, edge_index):
         self.edge_index = edge_index
@@ -170,6 +170,58 @@ class DiffusionData(Dataset):
         return len(self.data)
 
     def __getitem__(self, index):
+        item = self.data[index]
+        return item, index
 
+
+# --------------CF-Diff---------------------
+class DiffusionData_sec_hop(Dataset):
+    def __init__(self, num_user, num_item, edge_index):
+        self.num_user = num_user
+        self.num_item = num_item
+        self.edge_index = edge_index
+
+        adjusted_item_ids = self.edge_index[:, 1] - self.num_user
+
+        self.interaction_matrix = sp.csr_matrix(
+            (np.ones(len(self.edge_index)),
+             (self.edge_index[:, 0], adjusted_item_ids)),
+            shape=(self.num_user, self.num_item), dtype=np.float32
+        )
+
+        # 将稀疏矩阵转换为密集矩阵形式
+        data = self.interaction_matrix.todense()
+
+        # 计算每个用户的二跳信息
+        hop2 = self.get_2hop_item_based(torch.tensor(data, dtype=torch.float32))
+
+        # 将 hop2 信息转换为 FloatTensor
+        self.data = torch.FloatTensor(hop2)
+
+    def get_2hop_item_based(self, data):
+        # 初始化空张量
+        sec_hop_infos = torch.empty(len(data), len(data[0]))  # [n_user, n_item]
+
+        # 对所有用户的物品交互信息按列求和，得到一个物品的交互总数向量，然后除以用户数 n_user
+        sec_hop_inters = torch.sum(data, dim=0) / self.num_user
+
+        for i, row in enumerate(data):
+            # 找到当前用户未交互的物品索引（交互数接近0）
+            zero_indices = torch.nonzero(row < 0.000001).squeeze()
+            if i % 1000 == 0:
+                print(f"Processing user {i}")
+
+            # 将二跳交互信息赋给当前用户
+            sec_hop_infos[i] = sec_hop_inters
+            # 将用户未交互过的物品信息置为 0
+            sec_hop_infos[i][zero_indices] = 0
+
+        return sec_hop_infos
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        # 返回用户的二跳交互信息
         item = self.data[index]
         return item, index

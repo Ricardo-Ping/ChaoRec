@@ -20,7 +20,7 @@ args = parse_args()
 topk = args.topk
 
 
-def train(model, train_loader, optimizer, diffusionLoader=None):
+def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec_hop=None):
     model.train()
     sum_loss = 0.0
     all_ratings = None  # 用于BSPM模型的预测结果
@@ -308,6 +308,21 @@ def train(model, train_loader, optimizer, diffusionLoader=None):
             loss.backward()
             optimizer_dnn.step()
             sum_loss += loss.item()
+    elif args.Model in ["CF_Diff"]:
+        optimizer_CAM_AE = torch.optim.AdamW(model.CAM_AE.parameters(), lr=model.learning_rate, weight_decay=0)
+        # param_num = sum([param.nelement() for param in model.parameters()])  # 扩散模型的参数数量
+        # print("Number of all parameters:", param_num)
+        for (batch_idx, batch), (batch_idx_2, batch_2) in zip(enumerate(diffusionLoader),
+                                                              enumerate(train_loader_sec_hop)):
+            batch_item, batch_index = batch
+            batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
+            batch_item_2, batch_index_2 = batch_2
+            batch_item_2, batch_index_2 = batch_item_2.cuda(), batch_index_2.cuda()
+            optimizer_CAM_AE.zero_grad()
+            loss = model.training_losses(batch_item, batch_item_2)  # 计算损失
+            loss.backward()
+            optimizer_CAM_AE.step()
+            sum_loss += loss.item()
     return sum_loss
 
 
@@ -319,7 +334,8 @@ def evaluate(model, data, ranklist, topk):
 
 
 def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader=None,
-                       diffusionLoader=None, test_diffusionLoader= None):
+                       diffusionLoader=None, test_diffusionLoader=None, train_loader_sec_hop=None,
+                       test_loader_sec_hop=None):
     model.train()
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
@@ -353,6 +369,8 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
             model.pre_epoch_processing()
         if args.Model in ["DiffMM", "DiffRec"]:
             loss = train(model, train_loader, optimizer, diffusionLoader)
+        elif args.Model in ["CF_Diff"]:
+            loss = train(model, train_loader, optimizer, diffusionLoader, train_loader_sec_hop)
         else:
             loss = train(model, train_loader, optimizer)
         logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
@@ -371,18 +389,70 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
                     batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
                     prediction = model.p_sample(batch_item)  # [batchsize, num_item]
 
-                    # **将用户历史交互过的物品设为极小值**
-                    for user_idx in range(batch_index.shape[0]):
-                        user_id = batch_index[user_idx].item()  # 获取当前的用户 ID
-                        interacted_items = model.user_item_dict.get(user_id, [])  # 获取用户交互过的物品
+                    # **批量处理用户的交互历史，将交互物品设为极小值**
+                    user_ids = batch_index.cpu().numpy()  # 获取当前批次的用户 ID
+                    mask = torch.zeros_like(prediction, dtype=torch.bool)  # 初始化掩码张量为 False
+
+                    # 为每个用户构建掩码
+                    for user_idx, user_id in enumerate(user_ids):
+                        interacted_items = model.user_item_dict.get(user_id, [])  # 获取用户的交互物品
                         if len(interacted_items) > 0:
+                            # 将交互物品索引转为张量
                             interacted_items_tensor = torch.tensor(interacted_items, dtype=torch.long).to(
                                 batch_item.device)
-                            interacted_items_tensor = interacted_items_tensor - model.num_user
-                            prediction[user_idx, interacted_items_tensor] = -np.inf  # 或者设置为一个极小的值，如 1e-6
-                        _, indices = torch.topk(prediction[user_idx], 50)
-                        indices = (indices + model.num_user).cpu().tolist()  # 将张量转换为列表
-                        predict_items.append(indices)
+                            interacted_items_tensor = interacted_items_tensor - model.num_user  # 调整物品 ID 到索引范围
+
+                            # 设置该用户的掩码为 True 表示这些物品应设为极小值
+                            mask[user_idx, interacted_items_tensor] = True
+
+                    # 将掩码应用到 prediction，将掩码为 True 的位置设为极小值
+                    prediction.masked_fill_(mask, -np.inf)
+
+                    # 使用 torch.topk 获取前50个物品
+                    _, indices = torch.topk(prediction, 50, dim=1)
+                    indices = (indices + model.num_user).cpu().tolist()  # 将张量转换为列表
+                    predict_items.extend(indices)  # 添加结果
+
+            predict_items = np.array(predict_items)
+            val_metrics = evaluate(model, val_data, predict_items, topk)
+            test_metrics = evaluate(model, test_data, predict_items, topk)
+        elif args.Model in ["CF_Diff"]:
+            model.eval()  # 设置为评估模式
+            predict_items = []
+            # 预先加载所有数据到内存中
+            all_test_batches = list(test_diffusionLoader)
+            all_test_sec_hop_batches = list(test_loader_sec_hop)
+            with torch.no_grad():
+                for (batch, batch_2) in zip(all_test_batches, all_test_sec_hop_batches):
+                    batch_item, batch_index = batch
+                    batch_item_2, batch_index_2 = batch_2
+                    batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
+                    batch_item_2, batch_index_2 = batch_item_2.cuda(), batch_index_2.cuda()
+                    prediction = model.p_sample(batch_item, batch_item_2)  # [batchsize, num_item]
+
+                    # **批量处理用户的交互历史，将交互物品设为极小值**
+                    user_ids = batch_index.cpu().numpy()  # 获取当前批次的用户 ID
+                    mask = torch.zeros_like(prediction, dtype=torch.bool)  # 初始化掩码张量为 False
+
+                    # 为每个用户构建掩码
+                    for user_idx, user_id in enumerate(user_ids):
+                        interacted_items = model.user_item_dict.get(user_id, [])  # 获取用户的交互物品
+                        if len(interacted_items) > 0:
+                            # 将交互物品索引转为张量
+                            interacted_items_tensor = torch.tensor(interacted_items, dtype=torch.long).to(
+                                batch_item.device)
+                            interacted_items_tensor = interacted_items_tensor - model.num_user  # 调整物品 ID 到索引范围
+
+                            # 设置该用户的掩码为 True 表示这些物品应设为极小值
+                            mask[user_idx, interacted_items_tensor] = True
+
+                    # 将掩码应用到 prediction，将掩码为 True 的位置设为极小值
+                    prediction.masked_fill_(mask, -np.inf)
+
+                    # 使用 torch.topk 获取前50个物品
+                    _, indices = torch.topk(prediction, 50, dim=1)
+                    indices = (indices + model.num_user).cpu().tolist()  # 将张量转换为列表
+                    predict_items.extend(indices)  # 添加结果
 
             predict_items = np.array(predict_items)
             val_metrics = evaluate(model, val_data, predict_items, topk)
