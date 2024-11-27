@@ -59,17 +59,17 @@ if __name__ == '__main__':
 
     num_user = None
     if dataset == 'yelp':
-        num_user = 28974
+        num_user = 11123  # max 1889,min 6
     elif dataset == 'clothing':
-        num_user = 18072
+        num_user = 18072  # max 979, min 4
     elif dataset == 'baby':
         num_user = 12351
     elif dataset == 'sports':
-        num_user = 28940
+        num_user = 28940  # max 6356, min 4
     elif dataset == 'beauty':
-        num_user = 15482
+        num_user = 15482  # max 2279, min 2
     elif dataset == 'microlens':
-        num_user = 46420
+        num_user = 46420  # max 2038, min 6
     user_graph_matrix = gen_user_matrix(train_data, num_user)
 
     user_graph = user_graph_matrix
@@ -105,3 +105,23 @@ if __name__ == '__main__':
     # 保存user_graph_dict
     file_path = os.path.join(dir_str, 'user_graph_dict.npy')
     np.save(file_path, user_graph_dict, allow_pickle=True)
+
+    # 初始化用于存储最大和最小相似用户数的变量
+    max_similar_users = 0
+    min_similar_users = float('inf')  # 无穷大，方便初始比较
+
+    # 统计每个用户的相似用户数
+    for i in range(num_user):
+        similar_users_count = len(torch.nonzero(user_graph[i]))  # 统计非零值（相似用户）的数量
+
+        # 更新最大相似用户数
+        if similar_users_count > max_similar_users:
+            max_similar_users = similar_users_count
+
+        # 更新最小相似用户数
+        if similar_users_count < min_similar_users:
+            min_similar_users = similar_users_count
+
+    # 打印出所有用户中最大和最小的相似用户数
+    print(f'Maximum number of similar users: {max_similar_users}')
+    print(f'Minimum number of similar users: {min_similar_users}')

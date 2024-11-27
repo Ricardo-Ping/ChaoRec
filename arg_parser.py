@@ -13,9 +13,9 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='CF_Diff', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='MHRec', help='Model name')
     # 数据集：baby,clothing,sports,beauty, microlens
-    parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='yelp', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
@@ -32,7 +32,7 @@ def parse_args():
     parser.add_argument('--cl_weight', type=float, default=2.0, help='the number of cl_loss_weight.')
     parser.add_argument('--mm_layers', type=int, default=2, help='the number of multimodal layer.')
     parser.add_argument('--ii_topk', type=int, default=10, help='the number of item-item graph topk.')
-    parser.add_argument('--uu_topk', type=int, default=40, help='the number of user-user graph topk.')
+    parser.add_argument('--uu_topk', type=int, default=10, help='the number of user-user graph topk.')
     parser.add_argument('--lambda_coeff', type=float, default=0.9, help='the number of jump connection factor.')
     parser.add_argument('--ssl_temp', type=float, default=0.9, help='temperature coefficient.')
     parser.add_argument('--ssl_alpha', type=float, default=0.9, help='ssl coefficient.')
@@ -76,6 +76,11 @@ def parse_args():
     parser.add_argument('--noise_min', type=float, default=0.0001, help='DiffRec noise lower bound for noise generating')
     parser.add_argument('--noise_max', type=float, default=0.02, help='DiffRec noise upper bound for noise generating')
     parser.add_argument('--dims', type=str, default='[1000]', help='DiffRec the dims for the DNN')
+    # MHRec
+    parser.add_argument('--h_layers', type=int, default=2, help='hypergraph layers.')
+    parser.add_argument('--num_hypernodes', type=int, default=10, help='hypergraph num_hypernodes.')
+    parser.add_argument('--beta1', type=float, default=0.5, help='MHRec beta1')
+    parser.add_argument('--beta2', type=float, default=0.5, help='MHRec beta2')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')

@@ -1,6 +1,8 @@
 import os
 from itertools import product
 
+import numpy as np
+
 from Model.AdaGCL import AdaGCL
 from Model.BM3 import BM3
 from Model.BPR import BPRMF
@@ -34,6 +36,7 @@ from Model.MENTOR import MENTOR
 from Model.MGAT import MGAT
 from Model.MGCL import MGCL
 from Model.MGCN import MGCN
+from Model.MHRec import MHRec
 from Model.MICRO import MICRO
 from Model.MMGCL import MMGCL
 from Model.MMSSL import MMSSL
@@ -168,6 +171,11 @@ if __name__ == '__main__':
     noise_max = args.noise_max
     steps = args.steps
     dims = args.dims
+    # MHRec
+    h_layers = args.h_layers
+    num_hypernodes = args.num_hypernodes
+    beta1 = args.beta1
+    beta2 = args.beta2
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -197,6 +205,20 @@ if __name__ == '__main__':
                                           num_workers=num_workers)
         test_diffusionLoader = DataLoader(diffusionData, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=4)
         test_loader_sec_hop = DataLoader(multi_hop, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=4)
+    # ------------MHRec模型需要--------------------
+    if args.Model in ["MHRec"]:
+        # 加载保存的超边序列文件
+        dir_str = './Data/' + args.data_path
+        # 这里的uu_topk和ii_topk和arg_parser.py中的一样，而不是yaml文件
+        visual_file_path = os.path.join(dir_str, 'hyperedges_visual_u{}_i{}.npy'.format(args.uu_topk, args.ii_topk))
+        textual_file_path = os.path.join(dir_str, 'hyperedges_textual_u{}_i{}.npy'.format(args.uu_topk, args.ii_topk))
+        # 加载超边序列
+        hyperedges_visual = np.load(visual_file_path, allow_pickle=True).tolist()
+        hyperedges_textual = np.load(visual_file_path, allow_pickle=True).tolist()
+        diffusion_hyperedges_visual = dataload.HyperDiffusionData(num_user, num_item, hyperedges_visual)
+        diffusion_hyperedges_textual = dataload.HyperDiffusionData(num_user, num_item, hyperedges_textual)
+        diffusionLoader_visual = DataLoader(diffusion_hyperedges_visual, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+        diffusionLoader_textual = DataLoader(diffusion_hyperedges_textual, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     # ----------------------------------------------
 
     # 网格搜索
@@ -338,6 +360,9 @@ if __name__ == '__main__':
                                        args.noise_max, args.steps, args.dims, args.learning_rate, device),
             'CF_Diff': lambda: CF_Diff(num_user, num_item, user_item_dict, args.noise_scale, args.noise_min,
                                        args.noise_max, args.steps, args.learning_rate, device),
+            'MHRec': lambda: MHRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.reg_weight, args.ii_topk, args.uu_topk, args.num_hypernodes, args.n_layers,
+                                   args.h_layers, args.ssl_temp, args.ssl_alpha, args.beta1, args.beta2, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型
@@ -371,6 +396,10 @@ if __name__ == '__main__':
                                                       train_loader_sec_hop=train_loader_sec_hop,
                                                       test_loader_sec_hop=test_loader_sec_hop
                                                       )
+        elif args.Model in ["MHRec"]:
+            current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+                                                      diffusionLoader_visual=diffusionLoader_visual,
+                                                      diffusionLoader_textual=diffusionLoader_textual)
         else:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs)
 

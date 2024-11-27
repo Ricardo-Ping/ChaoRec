@@ -458,7 +458,7 @@ class Denoise(nn.Module):
         if mess_dropout:
             x = self.drop(x)
 
-        # 将输入 x 和时间嵌入 emb 进行拼接，作为输入层的输入  [batchsize, num_item + 64]
+        # 将输入 x 和时间嵌入 emb 进行拼接，作为输入层的输入  [batchsize,   + 64]
         h = torch.cat([x, emb], dim=-1)
         # 依次通过每一层输入层的线性变换，并使用 tanh 激活函数
         for i, layer in enumerate(self.in_layers):

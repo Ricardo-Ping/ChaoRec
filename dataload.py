@@ -34,8 +34,8 @@ def data_load(dataset, has_v=True, has_t=True):
     t_feat = torch.tensor(t_feat, dtype=torch.float).cuda() if has_t else None
 
     if dataset == 'yelp':
-        num_user = 28974
-        num_item = 1922
+        num_user = 11123
+        num_item = 8128
     if dataset == 'clothing':
         num_user = 18072
         num_item = 11384
@@ -170,6 +170,43 @@ class DiffusionData(Dataset):
         return len(self.data)
 
     def __getitem__(self, index):
+        item = self.data[index]
+        return item, index
+
+
+class HyperDiffusionData(Dataset):
+    def __init__(self, num_user, num_item, hypergraph_seq):
+        self.hypergraph_seq = hypergraph_seq
+        self.num_user = num_user
+        self.num_item = num_item
+
+        # 创建超边与节点的稀疏矩阵
+        # 行表示超边，列表示节点，矩阵中的值为1表示该节点属于该超边
+        row_indices = []
+        col_indices = []
+        data_values = []
+
+        for hyperedge_idx, hyperedge in enumerate(hypergraph_seq):
+            for node in hyperedge:
+                row_indices.append(hyperedge_idx)
+                col_indices.append(node)
+                data_values.append(1)
+
+        # 创建COO格式的稀疏矩阵，shape是 (num_hyperedges, num_user + num_item)
+        self.hyperedges_matrix = sp.coo_matrix(
+            (data_values, (row_indices, col_indices)),
+            shape=(len(hypergraph_seq), num_user + num_item),
+            dtype=np.float32
+        )
+
+        # 将稀疏矩阵转换为稠密矩阵
+        self.data = torch.FloatTensor(self.hyperedges_matrix.toarray())
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        # 返回指定超边对应的节点交互信息
         item = self.data[index]
         return item, index
 

@@ -1,94 +1,140 @@
-Thu 10 Oct 2024 15:46:29 INFO ============Arguments==============
-Thu 10 Oct 2024 15:46:29 INFO Model: DiffMM
-Thu 10 Oct 2024 15:46:29 INFO data_path: beauty
-Thu 10 Oct 2024 15:46:29 INFO learning_rate: 0.001
-Thu 10 Oct 2024 15:46:29 INFO feature_embed: 64
-Thu 10 Oct 2024 15:46:29 INFO batch_size: 1024
-Thu 10 Oct 2024 15:46:29 INFO aggr_mode: add
-Thu 10 Oct 2024 15:46:29 INFO reg_weight: 0.001
-Thu 10 Oct 2024 15:46:29 INFO dim_E: 64
-Thu 10 Oct 2024 15:46:29 INFO num_epoch: 1000
-Thu 10 Oct 2024 15:46:29 INFO dropout: 0.2
-Thu 10 Oct 2024 15:46:29 INFO n_layers: 2
-Thu 10 Oct 2024 15:46:29 INFO corDecay: 0.001
-Thu 10 Oct 2024 15:46:29 INFO n_factors: 4
-Thu 10 Oct 2024 15:46:29 INFO n_iterations: 3
-Thu 10 Oct 2024 15:46:29 INFO cl_weight: 2.0
-Thu 10 Oct 2024 15:46:29 INFO mm_layers: 2
-Thu 10 Oct 2024 15:46:29 INFO ii_topk: 10
-Thu 10 Oct 2024 15:46:29 INFO uu_topk: 40
-Thu 10 Oct 2024 15:46:29 INFO lambda_coeff: 0.9
-Thu 10 Oct 2024 15:46:29 INFO ssl_temp: 0.9
-Thu 10 Oct 2024 15:46:29 INFO ssl_alpha: 0.9
-Thu 10 Oct 2024 15:46:29 INFO ae_weight: 0.1
-Thu 10 Oct 2024 15:46:29 INFO threshold: 0.1
-Thu 10 Oct 2024 15:46:29 INFO prompt_num: 0.1
-Thu 10 Oct 2024 15:46:29 INFO neg_weight: 0.1
-Thu 10 Oct 2024 15:46:29 INFO cen_reg: 0.005
-Thu 10 Oct 2024 15:46:29 INFO n_intents: 128
-Thu 10 Oct 2024 15:46:29 INFO G_rate: 0.0001
-Thu 10 Oct 2024 15:46:29 INFO align_weight: 0.1
-Thu 10 Oct 2024 15:46:29 INFO mask_weight_f: 1.5
-Thu 10 Oct 2024 15:46:29 INFO mask_weight_g: 0.001
-Thu 10 Oct 2024 15:46:29 INFO leaky: 0.5
-Thu 10 Oct 2024 15:46:29 INFO keepRate: 1.0
-Thu 10 Oct 2024 15:46:29 INFO mult: 0.1
-Thu 10 Oct 2024 15:46:29 INFO grid_size: 1
-Thu 10 Oct 2024 15:46:29 INFO node_dropout: 0.1
-Thu 10 Oct 2024 15:46:29 INFO message_dropout: 0.1
-Thu 10 Oct 2024 15:46:29 INFO n_mca: 2
-Thu 10 Oct 2024 15:46:29 INFO gamma: 0.5
-Thu 10 Oct 2024 15:46:29 INFO t: 1.8
-Thu 10 Oct 2024 15:46:29 INFO e_loss: 0.1
-Thu 10 Oct 2024 15:46:29 INFO ris_lambda: 0.5
-Thu 10 Oct 2024 15:46:29 INFO rebuild_k: 1
-Thu 10 Oct 2024 15:46:29 INFO pnn_layer: 1
-Thu 10 Oct 2024 15:46:29 INFO b2: 1
-Thu 10 Oct 2024 15:46:29 INFO ctra: 0.001
-Thu 10 Oct 2024 15:46:29 INFO noise_alpha: 0.3
-Thu 10 Oct 2024 15:46:29 INFO ssl_temp2: 0.2
-Thu 10 Oct 2024 15:46:29 INFO K_s: 1
-Thu 10 Oct 2024 15:46:29 INFO T_s: 1
-Thu 10 Oct 2024 15:46:29 INFO K_b: 1
-Thu 10 Oct 2024 15:46:29 INFO T_b: 1
-Thu 10 Oct 2024 15:46:29 INFO idl_beta: 1
-Thu 10 Oct 2024 15:46:29 INFO sampling_noise: False
-Thu 10 Oct 2024 15:46:29 INFO sampling_steps: 0
-Thu 10 Oct 2024 15:46:29 INFO steps: 100
-Thu 10 Oct 2024 15:46:29 INFO noise_scale: 0.1
-Thu 10 Oct 2024 15:46:29 INFO noise_min: 0.0001
-Thu 10 Oct 2024 15:46:29 INFO noise_max: 0.02
-Thu 10 Oct 2024 15:46:29 INFO dims: [1000]
-Thu 10 Oct 2024 15:46:29 INFO seed: 42
-Thu 10 Oct 2024 15:46:29 INFO num_workers: 1
-Thu 10 Oct 2024 15:46:29 INFO topk: [5, 10, 20]
-Thu 10 Oct 2024 15:46:29 INFO local time£ºOct-10-2024-15-46-29
-Thu 10 Oct 2024 15:46:29 INFO =========1/1: Parameters:{'e_loss': 0.1, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'ssl_alpha': 0.01, 'ris_lambda': 0.5, 'ssl_temp': 0.1, 'rebuild_k': 1}=========
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 0/15; Diffusion Loss 23.426418
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 1/15; Diffusion Loss 1507.944239
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 2/15; Diffusion Loss 4474.936677
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 3/15; Diffusion Loss 813.761007
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 4/15; Diffusion Loss 594.639289
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 5/15; Diffusion Loss 1019.851323
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 6/15; Diffusion Loss 754.102305
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 7/15; Diffusion Loss 721.809161
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 8/15; Diffusion Loss 757.563980
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 9/15; Diffusion Loss 527.169889
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 10/15; Diffusion Loss 382.774048
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 11/15; Diffusion Loss 358.669374
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 12/15; Diffusion Loss 418.784290
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 13/15; Diffusion Loss 314.935953
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 14/15; Diffusion Loss 405.817172
-Thu 10 Oct 2024 15:46:33 INFO Diffusion Step 15/15; Diffusion Loss 938.348852
-Thu 10 Oct 2024 15:46:34 INFO 
-Thu 10 Oct 2024 15:46:34 INFO Start to re-build UI matrix
-Thu 10 Oct 2024 15:46:40 INFO UI matrix built!
-Thu 10 Oct 2024 15:46:52 INFO Epoch 1, Loss: 39.06865
-Thu 10 Oct 2024 15:47:12 INFO Validation Metrics:
-Thu 10 Oct 2024 15:47:12 INFO 5: precision: 0.01048 | recall: 0.04550 | ndcg: 0.02968 | hit_rate: 0.05045 | map: 0.02352
-Thu 10 Oct 2024 15:47:12 INFO 10: precision: 0.00811 | recall: 0.07088 | ndcg: 0.03799 | hit_rate: 0.07744 | map: 0.02692
-Thu 10 Oct 2024 15:47:12 INFO 20: precision: 0.00619 | recall: 0.10786 | ndcg: 0.04759 | hit_rate: 0.11717 | map: 0.02954
-Thu 10 Oct 2024 15:47:12 INFO Test Metrics:
-Thu 10 Oct 2024 15:47:12 INFO 5: precision: 0.01722 | recall: 0.04627 | ndcg: 0.03570 | hit_rate: 0.07693 | map: 0.02611
-Thu 10 Oct 2024 15:47:12 INFO 10: precision: 0.01374 | recall: 0.07294 | ndcg: 0.04580 | hit_rate: 0.11852 | map: 0.03015
-Thu 10 Oct 2024 15:47:12 INFO 20: precision: 0.01057 | recall: 0.11206 | ndcg: 0.05756 | hit_rate: 0.17536 | map: 0.03338
+Sat 19 Oct 2024 21:51:50 INFO ============Arguments==============
+Sat 19 Oct 2024 21:51:50 INFO Model: DiffMM
+Sat 19 Oct 2024 21:51:50 INFO data_path: beauty
+Sat 19 Oct 2024 21:51:50 INFO learning_rate: 0.001
+Sat 19 Oct 2024 21:51:50 INFO feature_embed: 64
+Sat 19 Oct 2024 21:51:50 INFO batch_size: 1024
+Sat 19 Oct 2024 21:51:50 INFO aggr_mode: add
+Sat 19 Oct 2024 21:51:50 INFO reg_weight: 0.001
+Sat 19 Oct 2024 21:51:50 INFO dim_E: 64
+Sat 19 Oct 2024 21:51:50 INFO num_epoch: 1000
+Sat 19 Oct 2024 21:51:50 INFO dropout: 0.2
+Sat 19 Oct 2024 21:51:50 INFO n_layers: 2
+Sat 19 Oct 2024 21:51:50 INFO corDecay: 0.001
+Sat 19 Oct 2024 21:51:50 INFO n_factors: 4
+Sat 19 Oct 2024 21:51:50 INFO n_iterations: 3
+Sat 19 Oct 2024 21:51:50 INFO cl_weight: 2.0
+Sat 19 Oct 2024 21:51:50 INFO mm_layers: 2
+Sat 19 Oct 2024 21:51:50 INFO ii_topk: 10
+Sat 19 Oct 2024 21:51:50 INFO uu_topk: 10
+Sat 19 Oct 2024 21:51:50 INFO lambda_coeff: 0.9
+Sat 19 Oct 2024 21:51:50 INFO ssl_temp: 0.9
+Sat 19 Oct 2024 21:51:50 INFO ssl_alpha: 0.9
+Sat 19 Oct 2024 21:51:50 INFO ae_weight: 0.1
+Sat 19 Oct 2024 21:51:50 INFO threshold: 0.1
+Sat 19 Oct 2024 21:51:50 INFO prompt_num: 0.1
+Sat 19 Oct 2024 21:51:50 INFO neg_weight: 0.1
+Sat 19 Oct 2024 21:51:50 INFO cen_reg: 0.005
+Sat 19 Oct 2024 21:51:50 INFO n_intents: 128
+Sat 19 Oct 2024 21:51:50 INFO G_rate: 0.0001
+Sat 19 Oct 2024 21:51:50 INFO align_weight: 0.1
+Sat 19 Oct 2024 21:51:50 INFO mask_weight_f: 1.5
+Sat 19 Oct 2024 21:51:50 INFO mask_weight_g: 0.001
+Sat 19 Oct 2024 21:51:50 INFO leaky: 0.5
+Sat 19 Oct 2024 21:51:50 INFO keepRate: 1.0
+Sat 19 Oct 2024 21:51:50 INFO mult: 0.1
+Sat 19 Oct 2024 21:51:50 INFO grid_size: 1
+Sat 19 Oct 2024 21:51:50 INFO node_dropout: 0.1
+Sat 19 Oct 2024 21:51:50 INFO message_dropout: 0.1
+Sat 19 Oct 2024 21:51:50 INFO n_mca: 2
+Sat 19 Oct 2024 21:51:50 INFO gamma: 0.5
+Sat 19 Oct 2024 21:51:50 INFO t: 1.8
+Sat 19 Oct 2024 21:51:50 INFO e_loss: 0.1
+Sat 19 Oct 2024 21:51:50 INFO ris_lambda: 0.5
+Sat 19 Oct 2024 21:51:50 INFO rebuild_k: 1
+Sat 19 Oct 2024 21:51:50 INFO pnn_layer: 1
+Sat 19 Oct 2024 21:51:50 INFO b2: 1
+Sat 19 Oct 2024 21:51:50 INFO ctra: 0.001
+Sat 19 Oct 2024 21:51:50 INFO noise_alpha: 0.3
+Sat 19 Oct 2024 21:51:50 INFO ssl_temp2: 0.2
+Sat 19 Oct 2024 21:51:50 INFO K_s: 1
+Sat 19 Oct 2024 21:51:50 INFO T_s: 1
+Sat 19 Oct 2024 21:51:50 INFO K_b: 1
+Sat 19 Oct 2024 21:51:50 INFO T_b: 1
+Sat 19 Oct 2024 21:51:50 INFO idl_beta: 1
+Sat 19 Oct 2024 21:51:50 INFO sampling_noise: False
+Sat 19 Oct 2024 21:51:50 INFO sampling_steps: 0
+Sat 19 Oct 2024 21:51:50 INFO steps: 100
+Sat 19 Oct 2024 21:51:50 INFO noise_scale: 0.1
+Sat 19 Oct 2024 21:51:50 INFO noise_min: 0.0001
+Sat 19 Oct 2024 21:51:50 INFO noise_max: 0.02
+Sat 19 Oct 2024 21:51:50 INFO dims: [1000]
+Sat 19 Oct 2024 21:51:50 INFO seed: 42
+Sat 19 Oct 2024 21:51:50 INFO num_workers: 1
+Sat 19 Oct 2024 21:51:50 INFO topk: [5, 10, 20]
+Sat 19 Oct 2024 21:51:50 INFO local time£ºOct-19-2024-21-51-50
+Sat 19 Oct 2024 21:51:50 INFO =========1/1: Parameters:{'e_loss': 0.1, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'ssl_alpha': 0.01, 'ris_lambda': 0.5, 'ssl_temp': 0.1, 'rebuild_k': 1}=========
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 0/15; Diffusion Loss 23.426418
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 1/15; Diffusion Loss 1507.944239
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 2/15; Diffusion Loss 4474.936677
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 3/15; Diffusion Loss 813.761007
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 4/15; Diffusion Loss 594.639289
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 5/15; Diffusion Loss 1019.851323
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 6/15; Diffusion Loss 754.102305
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 7/15; Diffusion Loss 721.809161
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 8/15; Diffusion Loss 757.563980
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 9/15; Diffusion Loss 527.169889
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 10/15; Diffusion Loss 382.774048
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 11/15; Diffusion Loss 358.669374
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 12/15; Diffusion Loss 418.784290
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 13/15; Diffusion Loss 314.935953
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 14/15; Diffusion Loss 405.817172
+Sat 19 Oct 2024 21:51:53 INFO Diffusion Step 15/15; Diffusion Loss 938.348852
+Sat 19 Oct 2024 21:51:53 INFO 
+Sat 19 Oct 2024 21:51:53 INFO Start to re-build UI matrix
+Sat 19 Oct 2024 21:51:57 INFO UI matrix built!
+Sat 19 Oct 2024 21:52:07 INFO Epoch 1, Loss: 39.06865
+Sat 19 Oct 2024 21:52:08 INFO Validation Metrics:
+Sat 19 Oct 2024 21:52:08 INFO 5: precision: 0.01048 | recall: 0.04550 | ndcg: 0.02968 | hit_rate: 0.05045 | map: 0.02352
+Sat 19 Oct 2024 21:52:08 INFO 10: precision: 0.00811 | recall: 0.07088 | ndcg: 0.03799 | hit_rate: 0.07744 | map: 0.02692
+Sat 19 Oct 2024 21:52:08 INFO 20: precision: 0.00619 | recall: 0.10786 | ndcg: 0.04759 | hit_rate: 0.11717 | map: 0.02954
+Sat 19 Oct 2024 21:52:08 INFO Test Metrics:
+Sat 19 Oct 2024 21:52:08 INFO 5: precision: 0.01722 | recall: 0.04627 | ndcg: 0.03570 | hit_rate: 0.07693 | map: 0.02611
+Sat 19 Oct 2024 21:52:08 INFO 10: precision: 0.01374 | recall: 0.07294 | ndcg: 0.04580 | hit_rate: 0.11852 | map: 0.03015
+Sat 19 Oct 2024 21:52:08 INFO 20: precision: 0.01057 | recall: 0.11206 | ndcg: 0.05756 | hit_rate: 0.17536 | map: 0.03338
+Sat 19 Oct 2024 21:52:09 INFO Diffusion Step 0/15; Diffusion Loss 197.300920
+Sat 19 Oct 2024 21:52:09 INFO Diffusion Step 1/15; Diffusion Loss 2500.484404
+Sat 19 Oct 2024 21:52:09 INFO Diffusion Step 2/15; Diffusion Loss 318.797574
+Sat 19 Oct 2024 21:52:09 INFO Diffusion Step 3/15; Diffusion Loss 812.908972
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 4/15; Diffusion Loss 734.773873
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 5/15; Diffusion Loss 834.579914
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 6/15; Diffusion Loss 491.856250
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 7/15; Diffusion Loss 367.222228
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 8/15; Diffusion Loss 430.995804
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 9/15; Diffusion Loss 399.515400
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 10/15; Diffusion Loss 282.357318
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 11/15; Diffusion Loss 306.568614
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 12/15; Diffusion Loss 278.940021
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 13/15; Diffusion Loss 244.564475
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 14/15; Diffusion Loss 201.126435
+Sat 19 Oct 2024 21:52:10 INFO Diffusion Step 15/15; Diffusion Loss 230.004899
+Sat 19 Oct 2024 21:52:10 INFO 
+Sat 19 Oct 2024 21:52:10 INFO Start to re-build UI matrix
+Sat 19 Oct 2024 21:52:14 INFO UI matrix built!
+Sat 19 Oct 2024 21:52:25 INFO Epoch 2, Loss: 29.80419
+Sat 19 Oct 2024 21:52:25 INFO Validation Metrics:
+Sat 19 Oct 2024 21:52:25 INFO 5: precision: 0.01169 | recall: 0.05114 | ndcg: 0.03349 | hit_rate: 0.05645 | map: 0.02666
+Sat 19 Oct 2024 21:52:25 INFO 10: precision: 0.00900 | recall: 0.07885 | ndcg: 0.04265 | hit_rate: 0.08578 | map: 0.03047
+Sat 19 Oct 2024 21:52:25 INFO 20: precision: 0.00683 | recall: 0.11903 | ndcg: 0.05306 | hit_rate: 0.12860 | map: 0.03333
+Sat 19 Oct 2024 21:52:25 INFO Test Metrics:
+Sat 19 Oct 2024 21:52:25 INFO 5: precision: 0.01945 | recall: 0.05273 | ndcg: 0.04068 | hit_rate: 0.08694 | map: 0.02985
+Sat 19 Oct 2024 21:52:25 INFO 10: precision: 0.01533 | recall: 0.08179 | ndcg: 0.05169 | hit_rate: 0.13093 | map: 0.03435
+Sat 19 Oct 2024 21:52:25 INFO 20: precision: 0.01159 | recall: 0.12334 | ndcg: 0.06412 | hit_rate: 0.19080 | map: 0.03778
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 0/15; Diffusion Loss 145.960986
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 1/15; Diffusion Loss 1418.980170
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 2/15; Diffusion Loss 254.321818
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 3/15; Diffusion Loss 329.675725
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 4/15; Diffusion Loss 404.988226
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 5/15; Diffusion Loss 414.614937
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 6/15; Diffusion Loss 306.974848
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 7/15; Diffusion Loss 215.558757
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 8/15; Diffusion Loss 224.482070
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 9/15; Diffusion Loss 250.388627
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 10/15; Diffusion Loss 204.179087
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 11/15; Diffusion Loss 155.184335
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 12/15; Diffusion Loss 133.479689
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 13/15; Diffusion Loss 149.812281
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 14/15; Diffusion Loss 119.749961
+Sat 19 Oct 2024 21:52:27 INFO Diffusion Step 15/15; Diffusion Loss 90.569632
+Sat 19 Oct 2024 21:52:27 INFO 
+Sat 19 Oct 2024 21:52:27 INFO Start to re-build UI matrix
