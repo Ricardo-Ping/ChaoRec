@@ -1,7 +1,7 @@
-n_layers : [3]
+n_layers : [2,3]
 learning_rate: [0.001]
 reg_weight : [0.00001]
 ssl_alpha : [0.00001]  # 0.01, 0.05, 0.1, 0.5, 1.0
-ssl_temp : [0.05]
+ssl_temp : [0.01, 0.05, 0.1, 0.5, 1.0]
 
 hyper_parameters: ["n_layers","learning_rate", "reg_weight","ssl_alpha","ssl_temp"]

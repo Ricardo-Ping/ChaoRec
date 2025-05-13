@@ -1,52 +1,1298 @@
-Wed 25 Sep 2024 10:38:04 INFO ============Arguments==============
-Wed 25 Sep 2024 10:38:04 INFO Model: DiffMM
-Wed 25 Sep 2024 10:38:04 INFO data_path: microlens
-Wed 25 Sep 2024 10:38:04 INFO learning_rate: 0.001
-Wed 25 Sep 2024 10:38:04 INFO feature_embed: 64
-Wed 25 Sep 2024 10:38:04 INFO batch_size: 1024
-Wed 25 Sep 2024 10:38:04 INFO aggr_mode: add
-Wed 25 Sep 2024 10:38:04 INFO reg_weight: 0.001
-Wed 25 Sep 2024 10:38:04 INFO dim_E: 64
-Wed 25 Sep 2024 10:38:04 INFO num_epoch: 1000
-Wed 25 Sep 2024 10:38:04 INFO dropout: 0.2
-Wed 25 Sep 2024 10:38:04 INFO n_layers: 2
-Wed 25 Sep 2024 10:38:04 INFO corDecay: 0.001
-Wed 25 Sep 2024 10:38:04 INFO n_factors: 4
-Wed 25 Sep 2024 10:38:04 INFO n_iterations: 3
-Wed 25 Sep 2024 10:38:04 INFO cl_weight: 2.0
-Wed 25 Sep 2024 10:38:04 INFO mm_layers: 2
-Wed 25 Sep 2024 10:38:04 INFO ii_topk: 10
-Wed 25 Sep 2024 10:38:04 INFO uu_topk: 40
-Wed 25 Sep 2024 10:38:04 INFO lambda_coeff: 0.9
-Wed 25 Sep 2024 10:38:04 INFO ssl_temp: 0.9
-Wed 25 Sep 2024 10:38:04 INFO ssl_alpha: 0.9
-Wed 25 Sep 2024 10:38:04 INFO ae_weight: 0.1
-Wed 25 Sep 2024 10:38:04 INFO threshold: 0.1
-Wed 25 Sep 2024 10:38:04 INFO prompt_num: 0.1
-Wed 25 Sep 2024 10:38:04 INFO neg_weight: 0.1
-Wed 25 Sep 2024 10:38:04 INFO cen_reg: 0.005
-Wed 25 Sep 2024 10:38:04 INFO n_intents: 128
-Wed 25 Sep 2024 10:38:04 INFO G_rate: 0.0001
-Wed 25 Sep 2024 10:38:04 INFO align_weight: 0.1
-Wed 25 Sep 2024 10:38:04 INFO mask_weight_f: 1.5
-Wed 25 Sep 2024 10:38:04 INFO mask_weight_g: 0.001
-Wed 25 Sep 2024 10:38:04 INFO leaky: 0.5
-Wed 25 Sep 2024 10:38:04 INFO keepRate: 1.0
-Wed 25 Sep 2024 10:38:04 INFO mult: 0.1
-Wed 25 Sep 2024 10:38:04 INFO grid_size: 1
-Wed 25 Sep 2024 10:38:04 INFO node_dropout: 0.1
-Wed 25 Sep 2024 10:38:04 INFO message_dropout: 0.1
-Wed 25 Sep 2024 10:38:04 INFO n_mca: 2
-Wed 25 Sep 2024 10:38:04 INFO gamma: 0.5
-Wed 25 Sep 2024 10:38:04 INFO t: 1.8
-Wed 25 Sep 2024 10:38:04 INFO e_loss: 0.1
-Wed 25 Sep 2024 10:38:04 INFO ris_lambda: 0.5
-Wed 25 Sep 2024 10:38:04 INFO rebuild_k: 1
-Wed 25 Sep 2024 10:38:04 INFO pnn_layer: 1
-Wed 25 Sep 2024 10:38:04 INFO b2: 1
-Wed 25 Sep 2024 10:38:04 INFO ctra: 0.001
-Wed 25 Sep 2024 10:38:04 INFO seed: 42
-Wed 25 Sep 2024 10:38:04 INFO num_workers: 1
-Wed 25 Sep 2024 10:38:04 INFO topk: [5, 10, 20]
-Wed 25 Sep 2024 10:38:04 INFO local time£ºSep-25-2024-10-38-04
-Wed 25 Sep 2024 10:38:05 INFO =========1/1: Parameters:{'e_loss': 0.1, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'ssl_alpha': 0.01, 'ris_lambda': 0.5, 'ssl_temp': 0.1, 'rebuild_k': 1}=========
+Sun 26 Jan 2025 23:31:39 INFO ============Arguments==============
+Sun 26 Jan 2025 23:31:39 INFO Model: DiffMM
+Sun 26 Jan 2025 23:31:39 INFO data_path: microlens
+Sun 26 Jan 2025 23:31:39 INFO learning_rate: 0.001
+Sun 26 Jan 2025 23:31:39 INFO feature_embed: 64
+Sun 26 Jan 2025 23:31:39 INFO batch_size: 1024
+Sun 26 Jan 2025 23:31:39 INFO aggr_mode: add
+Sun 26 Jan 2025 23:31:39 INFO reg_weight: 0.001
+Sun 26 Jan 2025 23:31:39 INFO dim_E: 64
+Sun 26 Jan 2025 23:31:39 INFO num_epoch: 1000
+Sun 26 Jan 2025 23:31:39 INFO dropout: 0.2
+Sun 26 Jan 2025 23:31:39 INFO n_layers: 2
+Sun 26 Jan 2025 23:31:39 INFO corDecay: 0.001
+Sun 26 Jan 2025 23:31:39 INFO n_factors: 4
+Sun 26 Jan 2025 23:31:39 INFO n_iterations: 3
+Sun 26 Jan 2025 23:31:39 INFO cl_weight: 2.0
+Sun 26 Jan 2025 23:31:39 INFO mm_layers: 2
+Sun 26 Jan 2025 23:31:39 INFO ii_topk: 10
+Sun 26 Jan 2025 23:31:39 INFO uu_topk: 10
+Sun 26 Jan 2025 23:31:39 INFO lambda_coeff: 0.9
+Sun 26 Jan 2025 23:31:39 INFO ssl_temp: 0.9
+Sun 26 Jan 2025 23:31:39 INFO ssl_alpha: 0.9
+Sun 26 Jan 2025 23:31:39 INFO ae_weight: 0.1
+Sun 26 Jan 2025 23:31:39 INFO threshold: 0.1
+Sun 26 Jan 2025 23:31:39 INFO prompt_num: 0.1
+Sun 26 Jan 2025 23:31:39 INFO neg_weight: 0.1
+Sun 26 Jan 2025 23:31:39 INFO cen_reg: 0.005
+Sun 26 Jan 2025 23:31:39 INFO n_intents: 128
+Sun 26 Jan 2025 23:31:39 INFO G_rate: 0.0001
+Sun 26 Jan 2025 23:31:39 INFO align_weight: 0.1
+Sun 26 Jan 2025 23:31:39 INFO mask_weight_f: 1.5
+Sun 26 Jan 2025 23:31:39 INFO mask_weight_g: 0.001
+Sun 26 Jan 2025 23:31:39 INFO leaky: 0.5
+Sun 26 Jan 2025 23:31:39 INFO keepRate: 1.0
+Sun 26 Jan 2025 23:31:39 INFO mult: 0.1
+Sun 26 Jan 2025 23:31:39 INFO grid_size: 1
+Sun 26 Jan 2025 23:31:39 INFO node_dropout: 0.1
+Sun 26 Jan 2025 23:31:39 INFO message_dropout: 0.1
+Sun 26 Jan 2025 23:31:39 INFO n_mca: 2
+Sun 26 Jan 2025 23:31:39 INFO gamma: 0.5
+Sun 26 Jan 2025 23:31:39 INFO t: 1.8
+Sun 26 Jan 2025 23:31:39 INFO e_loss: 0.1
+Sun 26 Jan 2025 23:31:39 INFO ris_lambda: 0.5
+Sun 26 Jan 2025 23:31:39 INFO rebuild_k: 1
+Sun 26 Jan 2025 23:31:39 INFO pnn_layer: 1
+Sun 26 Jan 2025 23:31:39 INFO b2: 1
+Sun 26 Jan 2025 23:31:39 INFO ctra: 0.001
+Sun 26 Jan 2025 23:31:39 INFO noise_alpha: 0.3
+Sun 26 Jan 2025 23:31:39 INFO ssl_temp2: 0.2
+Sun 26 Jan 2025 23:31:39 INFO K_s: 1
+Sun 26 Jan 2025 23:31:39 INFO T_s: 1
+Sun 26 Jan 2025 23:31:39 INFO K_b: 1
+Sun 26 Jan 2025 23:31:39 INFO T_b: 1
+Sun 26 Jan 2025 23:31:39 INFO idl_beta: 1
+Sun 26 Jan 2025 23:31:39 INFO sampling_noise: False
+Sun 26 Jan 2025 23:31:39 INFO sampling_steps: 0
+Sun 26 Jan 2025 23:31:39 INFO steps: 100
+Sun 26 Jan 2025 23:31:39 INFO noise_scale: 0.1
+Sun 26 Jan 2025 23:31:39 INFO noise_min: 0.0001
+Sun 26 Jan 2025 23:31:39 INFO noise_max: 0.02
+Sun 26 Jan 2025 23:31:39 INFO dims: [1000]
+Sun 26 Jan 2025 23:31:39 INFO h_layers: 2
+Sun 26 Jan 2025 23:31:39 INFO num_hypernodes: 10
+Sun 26 Jan 2025 23:31:39 INFO beta1: 0.5
+Sun 26 Jan 2025 23:31:39 INFO beta2: 0.5
+Sun 26 Jan 2025 23:31:39 INFO seed: 42
+Sun 26 Jan 2025 23:31:39 INFO num_workers: 1
+Sun 26 Jan 2025 23:31:39 INFO topk: [5, 10, 20]
+Sun 26 Jan 2025 23:31:39 INFO local time£ºJan-26-2025-23-31-39
+Sun 26 Jan 2025 23:31:40 INFO =========1/1: Parameters:{'e_loss': 0.01, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'ssl_alpha': 0.01, 'ris_lambda': 0.5, 'ssl_temp': 0.1, 'rebuild_k': 1}=========
+Sun 26 Jan 2025 23:31:42 INFO Diffusion Step 0/45; Diffusion Loss 2.748920
+Sun 26 Jan 2025 23:31:42 INFO Diffusion Step 1/45; Diffusion Loss 79.934794
+Sun 26 Jan 2025 23:31:42 INFO Diffusion Step 2/45; Diffusion Loss 190.630249
+Sun 26 Jan 2025 23:31:42 INFO Diffusion Step 3/45; Diffusion Loss 115.727896
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 4/45; Diffusion Loss 45.515047
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 5/45; Diffusion Loss 63.801346
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 6/45; Diffusion Loss 94.053012
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 7/45; Diffusion Loss 59.459748
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 8/45; Diffusion Loss 28.868618
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 9/45; Diffusion Loss 35.584469
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 10/45; Diffusion Loss 49.471118
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 11/45; Diffusion Loss 39.560643
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 12/45; Diffusion Loss 46.339705
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 13/45; Diffusion Loss 40.763676
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 14/45; Diffusion Loss 31.466320
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 15/45; Diffusion Loss 22.075579
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 16/45; Diffusion Loss 17.619322
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 17/45; Diffusion Loss 26.018032
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 18/45; Diffusion Loss 30.201106
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 19/45; Diffusion Loss 25.452831
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 20/45; Diffusion Loss 26.971735
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 21/45; Diffusion Loss 21.443375
+Sun 26 Jan 2025 23:31:43 INFO Diffusion Step 22/45; Diffusion Loss 13.996238
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 23/45; Diffusion Loss 11.547209
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 24/45; Diffusion Loss 14.346630
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 25/45; Diffusion Loss 17.066373
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 26/45; Diffusion Loss 13.445617
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 27/45; Diffusion Loss 13.428647
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 28/45; Diffusion Loss 14.153450
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 29/45; Diffusion Loss 13.932550
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 30/45; Diffusion Loss 11.767618
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 31/45; Diffusion Loss 9.439726
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 32/45; Diffusion Loss 7.900991
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 33/45; Diffusion Loss 8.676754
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 34/45; Diffusion Loss 10.328144
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 35/45; Diffusion Loss 9.720941
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 36/45; Diffusion Loss 8.321172
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 37/45; Diffusion Loss 8.348947
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 38/45; Diffusion Loss 9.962165
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 39/45; Diffusion Loss 6.854519
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 40/45; Diffusion Loss 6.991295
+Sun 26 Jan 2025 23:31:44 INFO Diffusion Step 41/45; Diffusion Loss 6.644274
+Sun 26 Jan 2025 23:31:45 INFO Diffusion Step 42/45; Diffusion Loss 5.281397
+Sun 26 Jan 2025 23:31:45 INFO Diffusion Step 43/45; Diffusion Loss 4.077800
+Sun 26 Jan 2025 23:31:45 INFO Diffusion Step 44/45; Diffusion Loss 5.538277
+Sun 26 Jan 2025 23:31:45 INFO Diffusion Step 45/45; Diffusion Loss 5.945430
+Sun 26 Jan 2025 23:31:45 INFO 
+Sun 26 Jan 2025 23:31:45 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:31:53 INFO UI matrix built!
+Sun 26 Jan 2025 23:31:58 INFO Epoch 1, Loss: 3.26093
+Sun 26 Jan 2025 23:32:00 INFO Validation Metrics:
+Sun 26 Jan 2025 23:32:00 INFO 5: precision: 0.00026 | recall: 0.00103 | ndcg: 0.00065 | hit_rate: 0.00129 | map: 0.00048
+Sun 26 Jan 2025 23:32:00 INFO 10: precision: 0.00023 | recall: 0.00187 | ndcg: 0.00093 | hit_rate: 0.00228 | map: 0.00059
+Sun 26 Jan 2025 23:32:00 INFO 20: precision: 0.00019 | recall: 0.00316 | ndcg: 0.00126 | hit_rate: 0.00373 | map: 0.00068
+Sun 26 Jan 2025 23:32:00 INFO Test Metrics:
+Sun 26 Jan 2025 23:32:00 INFO 5: precision: 0.00030 | recall: 0.00077 | ndcg: 0.00051 | hit_rate: 0.00146 | map: 0.00032
+Sun 26 Jan 2025 23:32:00 INFO 10: precision: 0.00037 | recall: 0.00185 | ndcg: 0.00094 | hit_rate: 0.00334 | map: 0.00048
+Sun 26 Jan 2025 23:32:00 INFO 20: precision: 0.00033 | recall: 0.00342 | ndcg: 0.00139 | hit_rate: 0.00573 | map: 0.00060
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 0/45; Diffusion Loss 4.038097
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 1/45; Diffusion Loss 398.411495
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 2/45; Diffusion Loss 65.938235
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 3/45; Diffusion Loss 154.862446
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 4/45; Diffusion Loss 171.661639
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 5/45; Diffusion Loss 114.527624
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 6/45; Diffusion Loss 75.320651
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 7/45; Diffusion Loss 70.619513
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 8/45; Diffusion Loss 58.679982
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 9/45; Diffusion Loss 57.362359
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 10/45; Diffusion Loss 54.248908
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 11/45; Diffusion Loss 53.955690
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 12/45; Diffusion Loss 48.291831
+Sun 26 Jan 2025 23:32:01 INFO Diffusion Step 13/45; Diffusion Loss 41.535311
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 14/45; Diffusion Loss 42.837324
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 15/45; Diffusion Loss 40.163084
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 16/45; Diffusion Loss 33.928733
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 17/45; Diffusion Loss 25.156516
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 18/45; Diffusion Loss 24.267789
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 19/45; Diffusion Loss 25.986761
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 20/45; Diffusion Loss 19.670825
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 21/45; Diffusion Loss 18.381223
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 22/45; Diffusion Loss 18.697110
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 23/45; Diffusion Loss 17.857587
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 24/45; Diffusion Loss 16.485946
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 25/45; Diffusion Loss 16.953529
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 26/45; Diffusion Loss 15.942230
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 27/45; Diffusion Loss 12.650369
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 28/45; Diffusion Loss 11.324623
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 29/45; Diffusion Loss 11.080790
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 30/45; Diffusion Loss 8.571334
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 31/45; Diffusion Loss 8.396921
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 32/45; Diffusion Loss 10.129062
+Sun 26 Jan 2025 23:32:02 INFO Diffusion Step 33/45; Diffusion Loss 8.382209
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 34/45; Diffusion Loss 8.351745
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 35/45; Diffusion Loss 7.329817
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 36/45; Diffusion Loss 6.428468
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 37/45; Diffusion Loss 5.666802
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 38/45; Diffusion Loss 6.153011
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 39/45; Diffusion Loss 6.210817
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 40/45; Diffusion Loss 5.385654
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 41/45; Diffusion Loss 5.092145
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 42/45; Diffusion Loss 4.420245
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 43/45; Diffusion Loss 3.534028
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 44/45; Diffusion Loss 3.536338
+Sun 26 Jan 2025 23:32:03 INFO Diffusion Step 45/45; Diffusion Loss 3.768573
+Sun 26 Jan 2025 23:32:03 INFO 
+Sun 26 Jan 2025 23:32:03 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:32:12 INFO UI matrix built!
+Sun 26 Jan 2025 23:32:16 INFO Epoch 2, Loss: 2.48802
+Sun 26 Jan 2025 23:32:18 INFO Validation Metrics:
+Sun 26 Jan 2025 23:32:18 INFO 5: precision: 0.00031 | recall: 0.00125 | ndcg: 0.00081 | hit_rate: 0.00157 | map: 0.00061
+Sun 26 Jan 2025 23:32:18 INFO 10: precision: 0.00026 | recall: 0.00212 | ndcg: 0.00110 | hit_rate: 0.00254 | map: 0.00073
+Sun 26 Jan 2025 23:32:18 INFO 20: precision: 0.00021 | recall: 0.00337 | ndcg: 0.00142 | hit_rate: 0.00396 | map: 0.00081
+Sun 26 Jan 2025 23:32:18 INFO Test Metrics:
+Sun 26 Jan 2025 23:32:18 INFO 5: precision: 0.00039 | recall: 0.00103 | ndcg: 0.00075 | hit_rate: 0.00187 | map: 0.00051
+Sun 26 Jan 2025 23:32:18 INFO 10: precision: 0.00034 | recall: 0.00170 | ndcg: 0.00102 | hit_rate: 0.00308 | map: 0.00061
+Sun 26 Jan 2025 23:32:18 INFO 20: precision: 0.00030 | recall: 0.00303 | ndcg: 0.00142 | hit_rate: 0.00513 | map: 0.00072
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 0/45; Diffusion Loss 4.329448
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 1/45; Diffusion Loss 1823.868590
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 2/45; Diffusion Loss 141.390956
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 3/45; Diffusion Loss 604.322951
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 4/45; Diffusion Loss 837.221785
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 5/45; Diffusion Loss 552.354253
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 6/45; Diffusion Loss 220.662541
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 7/45; Diffusion Loss 173.005711
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 8/45; Diffusion Loss 248.267965
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 9/45; Diffusion Loss 274.036764
+Sun 26 Jan 2025 23:32:19 INFO Diffusion Step 10/45; Diffusion Loss 250.664115
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 11/45; Diffusion Loss 172.706032
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 12/45; Diffusion Loss 157.325391
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 13/45; Diffusion Loss 156.450556
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 14/45; Diffusion Loss 156.670867
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 15/45; Diffusion Loss 139.413372
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 16/45; Diffusion Loss 99.446955
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 17/45; Diffusion Loss 74.959610
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 18/45; Diffusion Loss 66.813765
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 19/45; Diffusion Loss 82.497583
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 20/45; Diffusion Loss 77.101435
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 21/45; Diffusion Loss 49.179186
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 22/45; Diffusion Loss 47.767783
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 23/45; Diffusion Loss 63.697251
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 24/45; Diffusion Loss 65.110569
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 25/45; Diffusion Loss 36.437509
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 26/45; Diffusion Loss 29.553694
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 27/45; Diffusion Loss 43.479858
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 28/45; Diffusion Loss 41.177504
+Sun 26 Jan 2025 23:32:20 INFO Diffusion Step 29/45; Diffusion Loss 27.596436
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 30/45; Diffusion Loss 23.686708
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 31/45; Diffusion Loss 26.949626
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 32/45; Diffusion Loss 29.354736
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 33/45; Diffusion Loss 23.104286
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 34/45; Diffusion Loss 16.631775
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 35/45; Diffusion Loss 15.086320
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 36/45; Diffusion Loss 15.966711
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 37/45; Diffusion Loss 14.981075
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 38/45; Diffusion Loss 10.907096
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 39/45; Diffusion Loss 9.336842
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 40/45; Diffusion Loss 12.875829
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 41/45; Diffusion Loss 12.626032
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 42/45; Diffusion Loss 8.271433
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 43/45; Diffusion Loss 7.666040
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 44/45; Diffusion Loss 9.105702
+Sun 26 Jan 2025 23:32:21 INFO Diffusion Step 45/45; Diffusion Loss 7.558112
+Sun 26 Jan 2025 23:32:21 INFO 
+Sun 26 Jan 2025 23:32:21 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:32:30 INFO UI matrix built!
+Sun 26 Jan 2025 23:32:34 INFO Epoch 3, Loss: 2.18157
+Sun 26 Jan 2025 23:32:36 INFO Validation Metrics:
+Sun 26 Jan 2025 23:32:36 INFO 5: precision: 0.00029 | recall: 0.00116 | ndcg: 0.00077 | hit_rate: 0.00142 | map: 0.00059
+Sun 26 Jan 2025 23:32:36 INFO 10: precision: 0.00025 | recall: 0.00203 | ndcg: 0.00105 | hit_rate: 0.00243 | map: 0.00070
+Sun 26 Jan 2025 23:32:36 INFO 20: precision: 0.00021 | recall: 0.00342 | ndcg: 0.00141 | hit_rate: 0.00396 | map: 0.00079
+Sun 26 Jan 2025 23:32:36 INFO Test Metrics:
+Sun 26 Jan 2025 23:32:36 INFO 5: precision: 0.00035 | recall: 0.00089 | ndcg: 0.00068 | hit_rate: 0.00172 | map: 0.00047
+Sun 26 Jan 2025 23:32:36 INFO 10: precision: 0.00034 | recall: 0.00176 | ndcg: 0.00101 | hit_rate: 0.00312 | map: 0.00060
+Sun 26 Jan 2025 23:32:36 INFO 20: precision: 0.00032 | recall: 0.00316 | ndcg: 0.00145 | hit_rate: 0.00556 | map: 0.00071
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 0/45; Diffusion Loss 6.979298
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 1/45; Diffusion Loss 2330.856347
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 2/45; Diffusion Loss 145.249425
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 3/45; Diffusion Loss 562.026038
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 4/45; Diffusion Loss 1168.977728
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 5/45; Diffusion Loss 1021.733492
+Sun 26 Jan 2025 23:32:37 INFO Diffusion Step 6/45; Diffusion Loss 330.816668
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 7/45; Diffusion Loss 119.328494
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 8/45; Diffusion Loss 218.324808
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 9/45; Diffusion Loss 447.778131
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 10/45; Diffusion Loss 461.808205
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 11/45; Diffusion Loss 367.210110
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 12/45; Diffusion Loss 209.436882
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 13/45; Diffusion Loss 137.179766
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 14/45; Diffusion Loss 151.481114
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 15/45; Diffusion Loss 190.452638
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 16/45; Diffusion Loss 242.176364
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 17/45; Diffusion Loss 180.635529
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 18/45; Diffusion Loss 129.725321
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 19/45; Diffusion Loss 69.264478
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 20/45; Diffusion Loss 66.819110
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 21/45; Diffusion Loss 93.245702
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 22/45; Diffusion Loss 125.595819
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 23/45; Diffusion Loss 120.525568
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 24/45; Diffusion Loss 75.033876
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 25/45; Diffusion Loss 29.490541
+Sun 26 Jan 2025 23:32:38 INFO Diffusion Step 26/45; Diffusion Loss 25.666776
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 27/45; Diffusion Loss 63.733224
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 28/45; Diffusion Loss 85.172228
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 29/45; Diffusion Loss 71.260926
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 30/45; Diffusion Loss 31.240754
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 31/45; Diffusion Loss 10.842625
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 32/45; Diffusion Loss 19.836499
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 33/45; Diffusion Loss 42.423591
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 34/45; Diffusion Loss 45.838371
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 35/45; Diffusion Loss 33.072086
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 36/45; Diffusion Loss 15.555685
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 37/45; Diffusion Loss 8.101447
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 38/45; Diffusion Loss 13.504864
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 39/45; Diffusion Loss 20.530912
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 40/45; Diffusion Loss 21.973420
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 41/45; Diffusion Loss 14.697174
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 42/45; Diffusion Loss 9.199877
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 43/45; Diffusion Loss 6.674930
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 44/45; Diffusion Loss 8.529939
+Sun 26 Jan 2025 23:32:39 INFO Diffusion Step 45/45; Diffusion Loss 11.422117
+Sun 26 Jan 2025 23:32:40 INFO 
+Sun 26 Jan 2025 23:32:40 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:32:48 INFO UI matrix built!
+Sun 26 Jan 2025 23:32:52 INFO Epoch 4, Loss: 2.06345
+Sun 26 Jan 2025 23:32:54 INFO Validation Metrics:
+Sun 26 Jan 2025 23:32:54 INFO 5: precision: 0.00018 | recall: 0.00058 | ndcg: 0.00041 | hit_rate: 0.00082 | map: 0.00031
+Sun 26 Jan 2025 23:32:54 INFO 10: precision: 0.00016 | recall: 0.00113 | ndcg: 0.00060 | hit_rate: 0.00151 | map: 0.00038
+Sun 26 Jan 2025 23:32:54 INFO 20: precision: 0.00013 | recall: 0.00189 | ndcg: 0.00080 | hit_rate: 0.00246 | map: 0.00043
+Sun 26 Jan 2025 23:32:54 INFO Test Metrics:
+Sun 26 Jan 2025 23:32:54 INFO 5: precision: 0.00031 | recall: 0.00081 | ndcg: 0.00056 | hit_rate: 0.00151 | map: 0.00036
+Sun 26 Jan 2025 23:32:54 INFO 10: precision: 0.00026 | recall: 0.00137 | ndcg: 0.00077 | hit_rate: 0.00252 | map: 0.00044
+Sun 26 Jan 2025 23:32:54 INFO 20: precision: 0.00023 | recall: 0.00227 | ndcg: 0.00105 | hit_rate: 0.00407 | map: 0.00051
+Sun 26 Jan 2025 23:32:55 INFO Diffusion Step 0/45; Diffusion Loss 10.344448
+Sun 26 Jan 2025 23:32:55 INFO Diffusion Step 1/45; Diffusion Loss 1287.287394
+Sun 26 Jan 2025 23:32:55 INFO Diffusion Step 2/45; Diffusion Loss 221.289960
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 3/45; Diffusion Loss 341.133597
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 4/45; Diffusion Loss 446.808555
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 5/45; Diffusion Loss 500.440988
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 6/45; Diffusion Loss 349.893868
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 7/45; Diffusion Loss 193.137769
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 8/45; Diffusion Loss 94.546476
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 9/45; Diffusion Loss 136.798723
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 10/45; Diffusion Loss 217.130613
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 11/45; Diffusion Loss 227.296875
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 12/45; Diffusion Loss 210.178815
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 13/45; Diffusion Loss 105.756183
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 14/45; Diffusion Loss 37.201677
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 15/45; Diffusion Loss 50.310275
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 16/45; Diffusion Loss 103.852589
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 17/45; Diffusion Loss 134.603812
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 18/45; Diffusion Loss 134.881147
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 19/45; Diffusion Loss 71.305321
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 20/45; Diffusion Loss 31.463852
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 21/45; Diffusion Loss 37.503918
+Sun 26 Jan 2025 23:32:56 INFO Diffusion Step 22/45; Diffusion Loss 56.411517
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 23/45; Diffusion Loss 74.807591
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 24/45; Diffusion Loss 53.682657
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 25/45; Diffusion Loss 38.113636
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 26/45; Diffusion Loss 27.655866
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 27/45; Diffusion Loss 25.460197
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 28/45; Diffusion Loss 34.872282
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 29/45; Diffusion Loss 42.174874
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 30/45; Diffusion Loss 34.003509
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 31/45; Diffusion Loss 16.803144
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 32/45; Diffusion Loss 9.976663
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 33/45; Diffusion Loss 14.131045
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 34/45; Diffusion Loss 20.860783
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 35/45; Diffusion Loss 21.976748
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 36/45; Diffusion Loss 16.668870
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 37/45; Diffusion Loss 10.824316
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 38/45; Diffusion Loss 8.107810
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 39/45; Diffusion Loss 11.034359
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 40/45; Diffusion Loss 13.525049
+Sun 26 Jan 2025 23:32:57 INFO Diffusion Step 41/45; Diffusion Loss 11.148642
+Sun 26 Jan 2025 23:32:58 INFO Diffusion Step 42/45; Diffusion Loss 8.073732
+Sun 26 Jan 2025 23:32:58 INFO Diffusion Step 43/45; Diffusion Loss 5.612590
+Sun 26 Jan 2025 23:32:58 INFO Diffusion Step 44/45; Diffusion Loss 4.599724
+Sun 26 Jan 2025 23:32:58 INFO Diffusion Step 45/45; Diffusion Loss 5.572357
+Sun 26 Jan 2025 23:32:58 INFO 
+Sun 26 Jan 2025 23:32:58 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:33:06 INFO UI matrix built!
+Sun 26 Jan 2025 23:33:10 INFO Epoch 5, Loss: 2.00103
+Sun 26 Jan 2025 23:33:12 INFO Validation Metrics:
+Sun 26 Jan 2025 23:33:12 INFO 5: precision: 0.00028 | recall: 0.00105 | ndcg: 0.00070 | hit_rate: 0.00136 | map: 0.00053
+Sun 26 Jan 2025 23:33:12 INFO 10: precision: 0.00024 | recall: 0.00191 | ndcg: 0.00098 | hit_rate: 0.00233 | map: 0.00064
+Sun 26 Jan 2025 23:33:12 INFO 20: precision: 0.00020 | recall: 0.00316 | ndcg: 0.00131 | hit_rate: 0.00377 | map: 0.00073
+Sun 26 Jan 2025 23:33:12 INFO Test Metrics:
+Sun 26 Jan 2025 23:33:12 INFO 5: precision: 0.00040 | recall: 0.00107 | ndcg: 0.00083 | hit_rate: 0.00194 | map: 0.00059
+Sun 26 Jan 2025 23:33:12 INFO 10: precision: 0.00034 | recall: 0.00175 | ndcg: 0.00108 | hit_rate: 0.00315 | map: 0.00068
+Sun 26 Jan 2025 23:33:12 INFO 20: precision: 0.00029 | recall: 0.00301 | ndcg: 0.00146 | hit_rate: 0.00511 | map: 0.00078
+Sun 26 Jan 2025 23:33:13 INFO Diffusion Step 0/45; Diffusion Loss 8.051835
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 1/45; Diffusion Loss 717.499036
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 2/45; Diffusion Loss 70.955206
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 3/45; Diffusion Loss 174.731390
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 4/45; Diffusion Loss 348.641769
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 5/45; Diffusion Loss 257.049271
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 6/45; Diffusion Loss 114.778881
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 7/45; Diffusion Loss 38.585069
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 8/45; Diffusion Loss 92.598081
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 9/45; Diffusion Loss 153.006630
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 10/45; Diffusion Loss 157.639878
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 11/45; Diffusion Loss 84.403700
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 12/45; Diffusion Loss 43.753310
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 13/45; Diffusion Loss 40.700028
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 14/45; Diffusion Loss 64.657770
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 15/45; Diffusion Loss 73.969866
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 16/45; Diffusion Loss 68.406133
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 17/45; Diffusion Loss 39.279884
+Sun 26 Jan 2025 23:33:14 INFO Diffusion Step 18/45; Diffusion Loss 27.050543
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 19/45; Diffusion Loss 32.452508
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 20/45; Diffusion Loss 41.384431
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 21/45; Diffusion Loss 38.306949
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 22/45; Diffusion Loss 27.246783
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 23/45; Diffusion Loss 17.640671
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 24/45; Diffusion Loss 19.482380
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 25/45; Diffusion Loss 29.663603
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 26/45; Diffusion Loss 27.688406
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 27/45; Diffusion Loss 14.703997
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 28/45; Diffusion Loss 9.169796
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 29/45; Diffusion Loss 12.722420
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 30/45; Diffusion Loss 18.646503
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 31/45; Diffusion Loss 17.098973
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 32/45; Diffusion Loss 11.654877
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 33/45; Diffusion Loss 7.673181
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 34/45; Diffusion Loss 8.615875
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 35/45; Diffusion Loss 11.346010
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 36/45; Diffusion Loss 9.726593
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 37/45; Diffusion Loss 7.460436
+Sun 26 Jan 2025 23:33:15 INFO Diffusion Step 38/45; Diffusion Loss 5.837835
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 39/45; Diffusion Loss 7.027765
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 40/45; Diffusion Loss 7.721538
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 41/45; Diffusion Loss 7.515340
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 42/45; Diffusion Loss 4.277248
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 43/45; Diffusion Loss 3.425807
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 44/45; Diffusion Loss 4.627430
+Sun 26 Jan 2025 23:33:16 INFO Diffusion Step 45/45; Diffusion Loss 5.149496
+Sun 26 Jan 2025 23:33:16 INFO 
+Sun 26 Jan 2025 23:33:16 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:33:24 INFO UI matrix built!
+Sun 26 Jan 2025 23:33:29 INFO Epoch 6, Loss: 1.89552
+Sun 26 Jan 2025 23:33:31 INFO Validation Metrics:
+Sun 26 Jan 2025 23:33:31 INFO 5: precision: 0.00019 | recall: 0.00064 | ndcg: 0.00044 | hit_rate: 0.00090 | map: 0.00032
+Sun 26 Jan 2025 23:33:31 INFO 10: precision: 0.00014 | recall: 0.00096 | ndcg: 0.00055 | hit_rate: 0.00136 | map: 0.00036
+Sun 26 Jan 2025 23:33:31 INFO 20: precision: 0.00013 | recall: 0.00182 | ndcg: 0.00078 | hit_rate: 0.00243 | map: 0.00042
+Sun 26 Jan 2025 23:33:31 INFO Test Metrics:
+Sun 26 Jan 2025 23:33:31 INFO 5: precision: 0.00019 | recall: 0.00044 | ndcg: 0.00031 | hit_rate: 0.00095 | map: 0.00019
+Sun 26 Jan 2025 23:33:31 INFO 10: precision: 0.00019 | recall: 0.00092 | ndcg: 0.00049 | hit_rate: 0.00181 | map: 0.00026
+Sun 26 Jan 2025 23:33:31 INFO 20: precision: 0.00018 | recall: 0.00175 | ndcg: 0.00075 | hit_rate: 0.00332 | map: 0.00032
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 0/45; Diffusion Loss 5.127729
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 1/45; Diffusion Loss 778.089213
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 2/45; Diffusion Loss 136.879452
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 3/45; Diffusion Loss 274.655117
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 4/45; Diffusion Loss 321.958089
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 5/45; Diffusion Loss 261.238554
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 6/45; Diffusion Loss 154.339431
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 7/45; Diffusion Loss 116.957101
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 8/45; Diffusion Loss 91.373722
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 9/45; Diffusion Loss 116.124346
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 10/45; Diffusion Loss 139.718122
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 11/45; Diffusion Loss 134.367530
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 12/45; Diffusion Loss 85.467384
+Sun 26 Jan 2025 23:33:32 INFO Diffusion Step 13/45; Diffusion Loss 38.542424
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 14/45; Diffusion Loss 30.464212
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 15/45; Diffusion Loss 54.431639
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 16/45; Diffusion Loss 76.219011
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 17/45; Diffusion Loss 75.714889
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 18/45; Diffusion Loss 46.638274
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 19/45; Diffusion Loss 20.823849
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 20/45; Diffusion Loss 20.845256
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 21/45; Diffusion Loss 36.769019
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 22/45; Diffusion Loss 40.258303
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 23/45; Diffusion Loss 40.831297
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 24/45; Diffusion Loss 25.496942
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 25/45; Diffusion Loss 15.840750
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 26/45; Diffusion Loss 13.879556
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 27/45; Diffusion Loss 19.731628
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 28/45; Diffusion Loss 25.566954
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 29/45; Diffusion Loss 23.724757
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 30/45; Diffusion Loss 16.747173
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 31/45; Diffusion Loss 8.888220
+Sun 26 Jan 2025 23:33:33 INFO Diffusion Step 32/45; Diffusion Loss 6.378063
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 33/45; Diffusion Loss 12.168361
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 34/45; Diffusion Loss 15.860177
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 35/45; Diffusion Loss 13.387409
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 36/45; Diffusion Loss 8.410658
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 37/45; Diffusion Loss 4.700031
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 38/45; Diffusion Loss 4.854696
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 39/45; Diffusion Loss 7.825077
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 40/45; Diffusion Loss 9.938963
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 41/45; Diffusion Loss 8.256496
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 42/45; Diffusion Loss 4.592171
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 43/45; Diffusion Loss 2.740606
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 44/45; Diffusion Loss 3.596574
+Sun 26 Jan 2025 23:33:34 INFO Diffusion Step 45/45; Diffusion Loss 5.259585
+Sun 26 Jan 2025 23:33:34 INFO 
+Sun 26 Jan 2025 23:33:34 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:33:43 INFO UI matrix built!
+Sun 26 Jan 2025 23:33:47 INFO Epoch 7, Loss: 1.83827
+Sun 26 Jan 2025 23:33:49 INFO Validation Metrics:
+Sun 26 Jan 2025 23:33:49 INFO 5: precision: 0.00022 | recall: 0.00077 | ndcg: 0.00050 | hit_rate: 0.00103 | map: 0.00036
+Sun 26 Jan 2025 23:33:49 INFO 10: precision: 0.00021 | recall: 0.00166 | ndcg: 0.00079 | hit_rate: 0.00205 | map: 0.00047
+Sun 26 Jan 2025 23:33:49 INFO 20: precision: 0.00017 | recall: 0.00262 | ndcg: 0.00105 | hit_rate: 0.00323 | map: 0.00054
+Sun 26 Jan 2025 23:33:49 INFO Test Metrics:
+Sun 26 Jan 2025 23:33:49 INFO 5: precision: 0.00034 | recall: 0.00082 | ndcg: 0.00059 | hit_rate: 0.00157 | map: 0.00039
+Sun 26 Jan 2025 23:33:49 INFO 10: precision: 0.00032 | recall: 0.00158 | ndcg: 0.00089 | hit_rate: 0.00299 | map: 0.00050
+Sun 26 Jan 2025 23:33:49 INFO 20: precision: 0.00029 | recall: 0.00288 | ndcg: 0.00128 | hit_rate: 0.00521 | map: 0.00059
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 0/45; Diffusion Loss 6.130348
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 1/45; Diffusion Loss 537.544303
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 2/45; Diffusion Loss 116.209940
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 3/45; Diffusion Loss 130.070580
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 4/45; Diffusion Loss 201.160618
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 5/45; Diffusion Loss 233.328681
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 6/45; Diffusion Loss 135.283127
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 7/45; Diffusion Loss 55.602607
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 8/45; Diffusion Loss 30.795368
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 9/45; Diffusion Loss 71.685022
+Sun 26 Jan 2025 23:33:50 INFO Diffusion Step 10/45; Diffusion Loss 113.700263
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 11/45; Diffusion Loss 125.562689
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 12/45; Diffusion Loss 68.852720
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 13/45; Diffusion Loss 19.136918
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 14/45; Diffusion Loss 12.808049
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 15/45; Diffusion Loss 42.848216
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 16/45; Diffusion Loss 68.730724
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 17/45; Diffusion Loss 61.172098
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 18/45; Diffusion Loss 36.151926
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 19/45; Diffusion Loss 13.214576
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 20/45; Diffusion Loss 10.166570
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 21/45; Diffusion Loss 21.586968
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 22/45; Diffusion Loss 33.058819
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 23/45; Diffusion Loss 37.291008
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 24/45; Diffusion Loss 25.914315
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 25/45; Diffusion Loss 11.298827
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 26/45; Diffusion Loss 7.660893
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 27/45; Diffusion Loss 14.036492
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 28/45; Diffusion Loss 20.644650
+Sun 26 Jan 2025 23:33:51 INFO Diffusion Step 29/45; Diffusion Loss 19.629655
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 30/45; Diffusion Loss 13.594369
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 31/45; Diffusion Loss 6.414529
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 32/45; Diffusion Loss 5.180475
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 33/45; Diffusion Loss 9.515466
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 34/45; Diffusion Loss 12.567444
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 35/45; Diffusion Loss 10.308218
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 36/45; Diffusion Loss 5.859850
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 37/45; Diffusion Loss 3.354393
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 38/45; Diffusion Loss 3.956261
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 39/45; Diffusion Loss 6.025686
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 40/45; Diffusion Loss 7.382155
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 41/45; Diffusion Loss 5.563815
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 42/45; Diffusion Loss 3.587854
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 43/45; Diffusion Loss 2.945098
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 44/45; Diffusion Loss 3.007908
+Sun 26 Jan 2025 23:33:52 INFO Diffusion Step 45/45; Diffusion Loss 4.215460
+Sun 26 Jan 2025 23:33:52 INFO 
+Sun 26 Jan 2025 23:33:52 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:34:01 INFO UI matrix built!
+Sun 26 Jan 2025 23:34:05 INFO Epoch 8, Loss: 1.80233
+Sun 26 Jan 2025 23:34:07 INFO Validation Metrics:
+Sun 26 Jan 2025 23:34:07 INFO 5: precision: 0.00023 | recall: 0.00091 | ndcg: 0.00062 | hit_rate: 0.00114 | map: 0.00049
+Sun 26 Jan 2025 23:34:07 INFO 10: precision: 0.00019 | recall: 0.00143 | ndcg: 0.00081 | hit_rate: 0.00183 | map: 0.00056
+Sun 26 Jan 2025 23:34:07 INFO 20: precision: 0.00016 | recall: 0.00259 | ndcg: 0.00111 | hit_rate: 0.00317 | map: 0.00064
+Sun 26 Jan 2025 23:34:07 INFO Test Metrics:
+Sun 26 Jan 2025 23:34:07 INFO 5: precision: 0.00039 | recall: 0.00103 | ndcg: 0.00079 | hit_rate: 0.00190 | map: 0.00056
+Sun 26 Jan 2025 23:34:07 INFO 10: precision: 0.00032 | recall: 0.00163 | ndcg: 0.00102 | hit_rate: 0.00302 | map: 0.00064
+Sun 26 Jan 2025 23:34:07 INFO 20: precision: 0.00027 | recall: 0.00280 | ndcg: 0.00137 | hit_rate: 0.00504 | map: 0.00072
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 0/45; Diffusion Loss 4.028823
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 1/45; Diffusion Loss 419.771817
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 2/45; Diffusion Loss 93.423888
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 3/45; Diffusion Loss 65.290504
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 4/45; Diffusion Loss 175.743099
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 5/45; Diffusion Loss 196.172629
+Sun 26 Jan 2025 23:34:08 INFO Diffusion Step 6/45; Diffusion Loss 97.192398
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 7/45; Diffusion Loss 25.507409
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 8/45; Diffusion Loss 25.055424
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 9/45; Diffusion Loss 68.458527
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 10/45; Diffusion Loss 116.977893
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 11/45; Diffusion Loss 85.972555
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 12/45; Diffusion Loss 36.033098
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 13/45; Diffusion Loss 8.127925
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 14/45; Diffusion Loss 20.405200
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 15/45; Diffusion Loss 52.877126
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 16/45; Diffusion Loss 57.915676
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 17/45; Diffusion Loss 41.458734
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 18/45; Diffusion Loss 16.190281
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 19/45; Diffusion Loss 6.997279
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 20/45; Diffusion Loss 18.908730
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 21/45; Diffusion Loss 32.453479
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 22/45; Diffusion Loss 30.636159
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 23/45; Diffusion Loss 19.290793
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 24/45; Diffusion Loss 8.084035
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 25/45; Diffusion Loss 8.816369
+Sun 26 Jan 2025 23:34:09 INFO Diffusion Step 26/45; Diffusion Loss 18.536342
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 27/45; Diffusion Loss 21.762547
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 28/45; Diffusion Loss 14.714520
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 29/45; Diffusion Loss 6.400587
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 30/45; Diffusion Loss 5.208467
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 31/45; Diffusion Loss 9.514324
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 32/45; Diffusion Loss 12.233374
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 33/45; Diffusion Loss 9.887463
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 34/45; Diffusion Loss 5.574690
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 35/45; Diffusion Loss 3.822931
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 36/45; Diffusion Loss 5.231120
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 37/45; Diffusion Loss 7.690170
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 38/45; Diffusion Loss 7.366467
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 39/45; Diffusion Loss 4.598915
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 40/45; Diffusion Loss 2.877438
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 41/45; Diffusion Loss 3.375697
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 42/45; Diffusion Loss 4.468254
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 43/45; Diffusion Loss 5.040636
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 44/45; Diffusion Loss 3.978246
+Sun 26 Jan 2025 23:34:10 INFO Diffusion Step 45/45; Diffusion Loss 2.497784
+Sun 26 Jan 2025 23:34:11 INFO 
+Sun 26 Jan 2025 23:34:11 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:34:19 INFO UI matrix built!
+Sun 26 Jan 2025 23:34:23 INFO Epoch 9, Loss: 1.70184
+Sun 26 Jan 2025 23:34:25 INFO Validation Metrics:
+Sun 26 Jan 2025 23:34:25 INFO 5: precision: 0.00018 | recall: 0.00058 | ndcg: 0.00036 | hit_rate: 0.00084 | map: 0.00025
+Sun 26 Jan 2025 23:34:25 INFO 10: precision: 0.00014 | recall: 0.00095 | ndcg: 0.00049 | hit_rate: 0.00136 | map: 0.00029
+Sun 26 Jan 2025 23:34:25 INFO 20: precision: 0.00013 | recall: 0.00185 | ndcg: 0.00073 | hit_rate: 0.00250 | map: 0.00035
+Sun 26 Jan 2025 23:34:25 INFO Test Metrics:
+Sun 26 Jan 2025 23:34:25 INFO 5: precision: 0.00020 | recall: 0.00052 | ndcg: 0.00035 | hit_rate: 0.00099 | map: 0.00023
+Sun 26 Jan 2025 23:34:25 INFO 10: precision: 0.00018 | recall: 0.00084 | ndcg: 0.00048 | hit_rate: 0.00164 | map: 0.00027
+Sun 26 Jan 2025 23:34:25 INFO 20: precision: 0.00017 | recall: 0.00166 | ndcg: 0.00072 | hit_rate: 0.00304 | map: 0.00033
+Sun 26 Jan 2025 23:34:26 INFO Diffusion Step 0/45; Diffusion Loss 2.777456
+Sun 26 Jan 2025 23:34:26 INFO Diffusion Step 1/45; Diffusion Loss 490.836262
+Sun 26 Jan 2025 23:34:26 INFO Diffusion Step 2/45; Diffusion Loss 105.354822
+Sun 26 Jan 2025 23:34:26 INFO Diffusion Step 3/45; Diffusion Loss 187.454741
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 4/45; Diffusion Loss 167.927281
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 5/45; Diffusion Loss 150.129967
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 6/45; Diffusion Loss 117.216990
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 7/45; Diffusion Loss 82.981985
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 8/45; Diffusion Loss 58.165997
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 9/45; Diffusion Loss 69.254608
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 10/45; Diffusion Loss 90.017610
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 11/45; Diffusion Loss 79.009778
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 12/45; Diffusion Loss 42.912423
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 13/45; Diffusion Loss 25.075716
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 14/45; Diffusion Loss 39.098073
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 15/45; Diffusion Loss 60.963567
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 16/45; Diffusion Loss 48.679607
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 17/45; Diffusion Loss 31.099187
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 18/45; Diffusion Loss 20.319535
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 19/45; Diffusion Loss 16.711059
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 20/45; Diffusion Loss 23.437748
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 21/45; Diffusion Loss 27.239633
+Sun 26 Jan 2025 23:34:27 INFO Diffusion Step 22/45; Diffusion Loss 26.364912
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 23/45; Diffusion Loss 20.074269
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 24/45; Diffusion Loss 11.835485
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 25/45; Diffusion Loss 11.764335
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 26/45; Diffusion Loss 16.012976
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 27/45; Diffusion Loss 16.789826
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 28/45; Diffusion Loss 11.526826
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 29/45; Diffusion Loss 7.985663
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 30/45; Diffusion Loss 6.926702
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 31/45; Diffusion Loss 8.018934
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 32/45; Diffusion Loss 11.066993
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 33/45; Diffusion Loss 10.586848
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 34/45; Diffusion Loss 7.214283
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 35/45; Diffusion Loss 4.072999
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 36/45; Diffusion Loss 4.140007
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 37/45; Diffusion Loss 5.499565
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 38/45; Diffusion Loss 6.662533
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 39/45; Diffusion Loss 5.707591
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 40/45; Diffusion Loss 4.203878
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 41/45; Diffusion Loss 3.268696
+Sun 26 Jan 2025 23:34:28 INFO Diffusion Step 42/45; Diffusion Loss 3.639671
+Sun 26 Jan 2025 23:34:29 INFO Diffusion Step 43/45; Diffusion Loss 3.680766
+Sun 26 Jan 2025 23:34:29 INFO Diffusion Step 44/45; Diffusion Loss 4.026101
+Sun 26 Jan 2025 23:34:29 INFO Diffusion Step 45/45; Diffusion Loss 3.551687
+Sun 26 Jan 2025 23:34:29 INFO 
+Sun 26 Jan 2025 23:34:29 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:34:37 INFO UI matrix built!
+Sun 26 Jan 2025 23:34:42 INFO Epoch 10, Loss: 1.69008
+Sun 26 Jan 2025 23:34:43 INFO Validation Metrics:
+Sun 26 Jan 2025 23:34:43 INFO 5: precision: 0.00031 | recall: 0.00119 | ndcg: 0.00079 | hit_rate: 0.00149 | map: 0.00060
+Sun 26 Jan 2025 23:34:43 INFO 10: precision: 0.00025 | recall: 0.00197 | ndcg: 0.00105 | hit_rate: 0.00241 | map: 0.00070
+Sun 26 Jan 2025 23:34:43 INFO 20: precision: 0.00021 | recall: 0.00325 | ndcg: 0.00138 | hit_rate: 0.00401 | map: 0.00079
+Sun 26 Jan 2025 23:34:43 INFO Test Metrics:
+Sun 26 Jan 2025 23:34:43 INFO 5: precision: 0.00038 | recall: 0.00098 | ndcg: 0.00074 | hit_rate: 0.00185 | map: 0.00051
+Sun 26 Jan 2025 23:34:43 INFO 10: precision: 0.00034 | recall: 0.00169 | ndcg: 0.00102 | hit_rate: 0.00315 | map: 0.00061
+Sun 26 Jan 2025 23:34:43 INFO 20: precision: 0.00029 | recall: 0.00287 | ndcg: 0.00138 | hit_rate: 0.00508 | map: 0.00070
+Sun 26 Jan 2025 23:34:44 INFO Diffusion Step 0/45; Diffusion Loss 2.404674
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 1/45; Diffusion Loss 467.585512
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 2/45; Diffusion Loss 82.585759
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 3/45; Diffusion Loss 172.505365
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 4/45; Diffusion Loss 209.041429
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 5/45; Diffusion Loss 146.244360
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 6/45; Diffusion Loss 82.736665
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 7/45; Diffusion Loss 86.327019
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 8/45; Diffusion Loss 96.356511
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 9/45; Diffusion Loss 79.392791
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 10/45; Diffusion Loss 70.674203
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 11/45; Diffusion Loss 51.916047
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 12/45; Diffusion Loss 53.261018
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 13/45; Diffusion Loss 51.296612
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 14/45; Diffusion Loss 54.544435
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 15/45; Diffusion Loss 42.302405
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 16/45; Diffusion Loss 29.366491
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 17/45; Diffusion Loss 22.324021
+Sun 26 Jan 2025 23:34:45 INFO Diffusion Step 18/45; Diffusion Loss 34.109112
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 19/45; Diffusion Loss 40.816859
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 20/45; Diffusion Loss 33.035366
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 21/45; Diffusion Loss 17.644349
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 22/45; Diffusion Loss 12.399608
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 23/45; Diffusion Loss 14.525350
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 24/45; Diffusion Loss 20.183953
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 25/45; Diffusion Loss 21.998371
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 26/45; Diffusion Loss 18.368708
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 27/45; Diffusion Loss 12.275685
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 28/45; Diffusion Loss 9.956384
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 29/45; Diffusion Loss 9.534623
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 30/45; Diffusion Loss 10.000387
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 31/45; Diffusion Loss 10.696058
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 32/45; Diffusion Loss 11.038303
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 33/45; Diffusion Loss 8.288392
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 34/45; Diffusion Loss 6.022129
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 35/45; Diffusion Loss 6.095975
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 36/45; Diffusion Loss 6.191809
+Sun 26 Jan 2025 23:34:46 INFO Diffusion Step 37/45; Diffusion Loss 6.807744
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 38/45; Diffusion Loss 6.287351
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 39/45; Diffusion Loss 4.790131
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 40/45; Diffusion Loss 4.429993
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 41/45; Diffusion Loss 3.856236
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 42/45; Diffusion Loss 4.112999
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 43/45; Diffusion Loss 4.880733
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 44/45; Diffusion Loss 4.376938
+Sun 26 Jan 2025 23:34:47 INFO Diffusion Step 45/45; Diffusion Loss 3.102289
+Sun 26 Jan 2025 23:34:47 INFO 
+Sun 26 Jan 2025 23:34:47 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:34:55 INFO UI matrix built!
+Sun 26 Jan 2025 23:35:00 INFO Epoch 11, Loss: 1.67074
+Sun 26 Jan 2025 23:35:02 INFO Validation Metrics:
+Sun 26 Jan 2025 23:35:02 INFO 5: precision: 0.00015 | recall: 0.00047 | ndcg: 0.00029 | hit_rate: 0.00069 | map: 0.00019
+Sun 26 Jan 2025 23:35:02 INFO 10: precision: 0.00013 | recall: 0.00083 | ndcg: 0.00042 | hit_rate: 0.00123 | map: 0.00024
+Sun 26 Jan 2025 23:35:02 INFO 20: precision: 0.00013 | recall: 0.00190 | ndcg: 0.00070 | hit_rate: 0.00252 | map: 0.00031
+Sun 26 Jan 2025 23:35:02 INFO Test Metrics:
+Sun 26 Jan 2025 23:35:02 INFO 5: precision: 0.00017 | recall: 0.00044 | ndcg: 0.00032 | hit_rate: 0.00082 | map: 0.00023
+Sun 26 Jan 2025 23:35:02 INFO 10: precision: 0.00018 | recall: 0.00095 | ndcg: 0.00051 | hit_rate: 0.00172 | map: 0.00029
+Sun 26 Jan 2025 23:35:02 INFO 20: precision: 0.00020 | recall: 0.00203 | ndcg: 0.00084 | hit_rate: 0.00373 | map: 0.00037
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 0/45; Diffusion Loss 3.080603
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 1/45; Diffusion Loss 414.826253
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 2/45; Diffusion Loss 96.780707
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 3/45; Diffusion Loss 98.425556
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 4/45; Diffusion Loss 169.384310
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 5/45; Diffusion Loss 151.699746
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 6/45; Diffusion Loss 123.342935
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 7/45; Diffusion Loss 63.899947
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 8/45; Diffusion Loss 48.804182
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 9/45; Diffusion Loss 52.612293
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 10/45; Diffusion Loss 71.619904
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 11/45; Diffusion Loss 77.247107
+Sun 26 Jan 2025 23:35:03 INFO Diffusion Step 12/45; Diffusion Loss 57.161769
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 13/45; Diffusion Loss 35.910131
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 14/45; Diffusion Loss 28.034290
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 15/45; Diffusion Loss 32.235839
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 16/45; Diffusion Loss 35.718781
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 17/45; Diffusion Loss 33.272942
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 18/45; Diffusion Loss 30.463450
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 19/45; Diffusion Loss 27.011127
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 20/45; Diffusion Loss 22.171395
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 21/45; Diffusion Loss 17.192010
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 22/45; Diffusion Loss 14.019692
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 23/45; Diffusion Loss 17.737137
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 24/45; Diffusion Loss 17.832504
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 25/45; Diffusion Loss 16.411474
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 26/45; Diffusion Loss 13.146117
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 27/45; Diffusion Loss 9.581084
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 28/45; Diffusion Loss 9.644924
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 29/45; Diffusion Loss 10.799091
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 30/45; Diffusion Loss 10.456564
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 31/45; Diffusion Loss 9.204251
+Sun 26 Jan 2025 23:35:04 INFO Diffusion Step 32/45; Diffusion Loss 7.951908
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 33/45; Diffusion Loss 5.969329
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 34/45; Diffusion Loss 5.069934
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 35/45; Diffusion Loss 6.235409
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 36/45; Diffusion Loss 6.549788
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 37/45; Diffusion Loss 5.583765
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 38/45; Diffusion Loss 4.342483
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 39/45; Diffusion Loss 3.998285
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 40/45; Diffusion Loss 3.933624
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 41/45; Diffusion Loss 3.732141
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 42/45; Diffusion Loss 3.760976
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 43/45; Diffusion Loss 3.579136
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 44/45; Diffusion Loss 3.115680
+Sun 26 Jan 2025 23:35:05 INFO Diffusion Step 45/45; Diffusion Loss 2.582893
+Sun 26 Jan 2025 23:35:05 INFO 
+Sun 26 Jan 2025 23:35:05 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:35:14 INFO UI matrix built!
+Sun 26 Jan 2025 23:35:18 INFO Epoch 12, Loss: 1.63315
+Sun 26 Jan 2025 23:35:20 INFO Validation Metrics:
+Sun 26 Jan 2025 23:35:20 INFO 5: precision: 0.00032 | recall: 0.00126 | ndcg: 0.00084 | hit_rate: 0.00155 | map: 0.00064
+Sun 26 Jan 2025 23:35:20 INFO 10: precision: 0.00026 | recall: 0.00207 | ndcg: 0.00111 | hit_rate: 0.00252 | map: 0.00075
+Sun 26 Jan 2025 23:35:20 INFO 20: precision: 0.00023 | recall: 0.00369 | ndcg: 0.00154 | hit_rate: 0.00439 | map: 0.00086
+Sun 26 Jan 2025 23:35:20 INFO Test Metrics:
+Sun 26 Jan 2025 23:35:20 INFO 5: precision: 0.00042 | recall: 0.00109 | ndcg: 0.00080 | hit_rate: 0.00196 | map: 0.00054
+Sun 26 Jan 2025 23:35:20 INFO 10: precision: 0.00039 | recall: 0.00204 | ndcg: 0.00116 | hit_rate: 0.00353 | map: 0.00067
+Sun 26 Jan 2025 23:35:20 INFO 20: precision: 0.00033 | recall: 0.00338 | ndcg: 0.00156 | hit_rate: 0.00569 | map: 0.00078
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 0/45; Diffusion Loss 2.943609
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 1/45; Diffusion Loss 472.696232
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 2/45; Diffusion Loss 91.338365
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 3/45; Diffusion Loss 166.580261
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 4/45; Diffusion Loss 179.672514
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 5/45; Diffusion Loss 126.677003
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 6/45; Diffusion Loss 117.895627
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 7/45; Diffusion Loss 119.695997
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 8/45; Diffusion Loss 88.636922
+Sun 26 Jan 2025 23:35:21 INFO Diffusion Step 9/45; Diffusion Loss 56.187464
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 10/45; Diffusion Loss 38.233502
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 11/45; Diffusion Loss 60.278257
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 12/45; Diffusion Loss 74.712171
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 13/45; Diffusion Loss 77.862207
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 14/45; Diffusion Loss 45.396828
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 15/45; Diffusion Loss 28.944238
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 16/45; Diffusion Loss 26.052960
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 17/45; Diffusion Loss 29.994485
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 18/45; Diffusion Loss 33.716071
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 19/45; Diffusion Loss 31.147782
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 20/45; Diffusion Loss 27.488331
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 21/45; Diffusion Loss 25.947139
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 22/45; Diffusion Loss 24.467019
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 23/45; Diffusion Loss 17.892624
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 24/45; Diffusion Loss 14.735463
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 25/45; Diffusion Loss 13.758913
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 26/45; Diffusion Loss 14.744077
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 27/45; Diffusion Loss 14.450881
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 28/45; Diffusion Loss 15.820596
+Sun 26 Jan 2025 23:35:22 INFO Diffusion Step 29/45; Diffusion Loss 12.994210
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 30/45; Diffusion Loss 8.923765
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 31/45; Diffusion Loss 6.736510
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 32/45; Diffusion Loss 5.725434
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 33/45; Diffusion Loss 9.042512
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 34/45; Diffusion Loss 9.253924
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 35/45; Diffusion Loss 8.352283
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 36/45; Diffusion Loss 6.517529
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 37/45; Diffusion Loss 4.687081
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 38/45; Diffusion Loss 4.477524
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 39/45; Diffusion Loss 4.096042
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 40/45; Diffusion Loss 5.346727
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 41/45; Diffusion Loss 5.248053
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 42/45; Diffusion Loss 5.063933
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 43/45; Diffusion Loss 3.909238
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 44/45; Diffusion Loss 2.333623
+Sun 26 Jan 2025 23:35:23 INFO Diffusion Step 45/45; Diffusion Loss 2.579964
+Sun 26 Jan 2025 23:35:23 INFO 
+Sun 26 Jan 2025 23:35:23 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:35:32 INFO UI matrix built!
+Sun 26 Jan 2025 23:35:36 INFO Epoch 13, Loss: 1.57050
+Sun 26 Jan 2025 23:35:38 INFO Validation Metrics:
+Sun 26 Jan 2025 23:35:38 INFO 5: precision: 0.00019 | recall: 0.00062 | ndcg: 0.00042 | hit_rate: 0.00088 | map: 0.00030
+Sun 26 Jan 2025 23:35:38 INFO 10: precision: 0.00015 | recall: 0.00106 | ndcg: 0.00057 | hit_rate: 0.00146 | map: 0.00036
+Sun 26 Jan 2025 23:35:38 INFO 20: precision: 0.00013 | recall: 0.00182 | ndcg: 0.00077 | hit_rate: 0.00248 | map: 0.00041
+Sun 26 Jan 2025 23:35:38 INFO Test Metrics:
+Sun 26 Jan 2025 23:35:38 INFO 5: precision: 0.00018 | recall: 0.00047 | ndcg: 0.00032 | hit_rate: 0.00086 | map: 0.00020
+Sun 26 Jan 2025 23:35:38 INFO 10: precision: 0.00017 | recall: 0.00087 | ndcg: 0.00047 | hit_rate: 0.00164 | map: 0.00026
+Sun 26 Jan 2025 23:35:38 INFO 20: precision: 0.00016 | recall: 0.00169 | ndcg: 0.00071 | hit_rate: 0.00312 | map: 0.00032
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 0/45; Diffusion Loss 3.411331
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 1/45; Diffusion Loss 408.252924
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 2/45; Diffusion Loss 58.522617
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 3/45; Diffusion Loss 110.593024
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 4/45; Diffusion Loss 173.078785
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 5/45; Diffusion Loss 151.457727
+Sun 26 Jan 2025 23:35:39 INFO Diffusion Step 6/45; Diffusion Loss 84.704199
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 7/45; Diffusion Loss 54.944379
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 8/45; Diffusion Loss 62.587110
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 9/45; Diffusion Loss 66.554417
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 10/45; Diffusion Loss 59.410606
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 11/45; Diffusion Loss 52.485616
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 12/45; Diffusion Loss 47.187134
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 13/45; Diffusion Loss 59.904604
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 14/45; Diffusion Loss 47.521183
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 15/45; Diffusion Loss 28.585763
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 16/45; Diffusion Loss 17.174892
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 17/45; Diffusion Loss 20.780012
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 18/45; Diffusion Loss 35.539983
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 19/45; Diffusion Loss 44.120765
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 20/45; Diffusion Loss 33.803580
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 21/45; Diffusion Loss 14.731960
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 22/45; Diffusion Loss 7.037448
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 23/45; Diffusion Loss 13.870207
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 24/45; Diffusion Loss 23.334550
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 25/45; Diffusion Loss 24.986419
+Sun 26 Jan 2025 23:35:40 INFO Diffusion Step 26/45; Diffusion Loss 14.761691
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 27/45; Diffusion Loss 9.110621
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 28/45; Diffusion Loss 7.883350
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 29/45; Diffusion Loss 10.917250
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 30/45; Diffusion Loss 10.610465
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 31/45; Diffusion Loss 9.495250
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 32/45; Diffusion Loss 7.958192
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 33/45; Diffusion Loss 8.070224
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 34/45; Diffusion Loss 7.059322
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 35/45; Diffusion Loss 5.808181
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 36/45; Diffusion Loss 4.594616
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 37/45; Diffusion Loss 4.967168
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 38/45; Diffusion Loss 5.838967
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 39/45; Diffusion Loss 5.898869
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 40/45; Diffusion Loss 4.788687
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 41/45; Diffusion Loss 3.658713
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 42/45; Diffusion Loss 3.201681
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 43/45; Diffusion Loss 3.636338
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 44/45; Diffusion Loss 3.776558
+Sun 26 Jan 2025 23:35:41 INFO Diffusion Step 45/45; Diffusion Loss 3.557298
+Sun 26 Jan 2025 23:35:42 INFO 
+Sun 26 Jan 2025 23:35:42 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:35:50 INFO UI matrix built!
+Sun 26 Jan 2025 23:35:54 INFO Epoch 14, Loss: 1.55450
+Sun 26 Jan 2025 23:35:56 INFO Validation Metrics:
+Sun 26 Jan 2025 23:35:56 INFO 5: precision: 0.00015 | recall: 0.00049 | ndcg: 0.00032 | hit_rate: 0.00071 | map: 0.00022
+Sun 26 Jan 2025 23:35:56 INFO 10: precision: 0.00014 | recall: 0.00098 | ndcg: 0.00049 | hit_rate: 0.00136 | map: 0.00029
+Sun 26 Jan 2025 23:35:56 INFO 20: precision: 0.00012 | recall: 0.00174 | ndcg: 0.00070 | hit_rate: 0.00237 | map: 0.00034
+Sun 26 Jan 2025 23:35:56 INFO Test Metrics:
+Sun 26 Jan 2025 23:35:56 INFO 5: precision: 0.00019 | recall: 0.00046 | ndcg: 0.00032 | hit_rate: 0.00088 | map: 0.00020
+Sun 26 Jan 2025 23:35:56 INFO 10: precision: 0.00019 | recall: 0.00085 | ndcg: 0.00048 | hit_rate: 0.00177 | map: 0.00025
+Sun 26 Jan 2025 23:35:56 INFO 20: precision: 0.00017 | recall: 0.00171 | ndcg: 0.00073 | hit_rate: 0.00325 | map: 0.00031
+Sun 26 Jan 2025 23:35:57 INFO Diffusion Step 0/45; Diffusion Loss 3.177890
+Sun 26 Jan 2025 23:35:57 INFO Diffusion Step 1/45; Diffusion Loss 248.898695
+Sun 26 Jan 2025 23:35:57 INFO Diffusion Step 2/45; Diffusion Loss 94.403824
+Sun 26 Jan 2025 23:35:57 INFO Diffusion Step 3/45; Diffusion Loss 69.196170
+Sun 26 Jan 2025 23:35:57 INFO Diffusion Step 4/45; Diffusion Loss 75.643309
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 5/45; Diffusion Loss 103.696744
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 6/45; Diffusion Loss 83.712776
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 7/45; Diffusion Loss 41.724635
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 8/45; Diffusion Loss 27.145598
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 9/45; Diffusion Loss 33.629462
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 10/45; Diffusion Loss 44.004510
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 11/45; Diffusion Loss 39.196309
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 12/45; Diffusion Loss 33.524516
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 13/45; Diffusion Loss 27.773632
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 14/45; Diffusion Loss 25.647954
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 15/45; Diffusion Loss 23.063382
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 16/45; Diffusion Loss 17.128500
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 17/45; Diffusion Loss 19.343574
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 18/45; Diffusion Loss 17.264726
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 19/45; Diffusion Loss 17.497946
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 20/45; Diffusion Loss 17.521702
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 21/45; Diffusion Loss 15.736057
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 22/45; Diffusion Loss 11.139010
+Sun 26 Jan 2025 23:35:58 INFO Diffusion Step 23/45; Diffusion Loss 8.953224
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 24/45; Diffusion Loss 9.442820
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 25/45; Diffusion Loss 11.444619
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 26/45; Diffusion Loss 10.823907
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 27/45; Diffusion Loss 9.109876
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 28/45; Diffusion Loss 7.604079
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 29/45; Diffusion Loss 5.693709
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 30/45; Diffusion Loss 5.322585
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 31/45; Diffusion Loss 6.418190
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 32/45; Diffusion Loss 6.801233
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 33/45; Diffusion Loss 6.114797
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 34/45; Diffusion Loss 4.674020
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 35/45; Diffusion Loss 3.802648
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 36/45; Diffusion Loss 3.755059
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 37/45; Diffusion Loss 3.539954
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 38/45; Diffusion Loss 4.102123
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 39/45; Diffusion Loss 4.251282
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 40/45; Diffusion Loss 3.306162
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 41/45; Diffusion Loss 2.576279
+Sun 26 Jan 2025 23:35:59 INFO Diffusion Step 42/45; Diffusion Loss 2.436912
+Sun 26 Jan 2025 23:36:00 INFO Diffusion Step 43/45; Diffusion Loss 2.634845
+Sun 26 Jan 2025 23:36:00 INFO Diffusion Step 44/45; Diffusion Loss 2.824941
+Sun 26 Jan 2025 23:36:00 INFO Diffusion Step 45/45; Diffusion Loss 2.947841
+Sun 26 Jan 2025 23:36:00 INFO 
+Sun 26 Jan 2025 23:36:00 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:36:08 INFO UI matrix built!
+Sun 26 Jan 2025 23:36:12 INFO Epoch 15, Loss: 1.55924
+Sun 26 Jan 2025 23:36:14 INFO Validation Metrics:
+Sun 26 Jan 2025 23:36:14 INFO 5: precision: 0.00023 | recall: 0.00090 | ndcg: 0.00061 | hit_rate: 0.00112 | map: 0.00047
+Sun 26 Jan 2025 23:36:14 INFO 10: precision: 0.00020 | recall: 0.00146 | ndcg: 0.00081 | hit_rate: 0.00190 | map: 0.00055
+Sun 26 Jan 2025 23:36:14 INFO 20: precision: 0.00017 | recall: 0.00254 | ndcg: 0.00109 | hit_rate: 0.00319 | map: 0.00062
+Sun 26 Jan 2025 23:36:14 INFO Test Metrics:
+Sun 26 Jan 2025 23:36:14 INFO 5: precision: 0.00028 | recall: 0.00072 | ndcg: 0.00053 | hit_rate: 0.00140 | map: 0.00034
+Sun 26 Jan 2025 23:36:14 INFO 10: precision: 0.00028 | recall: 0.00138 | ndcg: 0.00078 | hit_rate: 0.00261 | map: 0.00044
+Sun 26 Jan 2025 23:36:14 INFO 20: precision: 0.00027 | recall: 0.00270 | ndcg: 0.00118 | hit_rate: 0.00472 | map: 0.00054
+Sun 26 Jan 2025 23:36:15 INFO Diffusion Step 0/45; Diffusion Loss 2.440243
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 1/45; Diffusion Loss 257.237399
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 2/45; Diffusion Loss 100.810526
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 3/45; Diffusion Loss 93.981456
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 4/45; Diffusion Loss 68.291103
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 5/45; Diffusion Loss 81.128437
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 6/45; Diffusion Loss 94.360441
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 7/45; Diffusion Loss 73.443468
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 8/45; Diffusion Loss 43.991032
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 9/45; Diffusion Loss 28.362497
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 10/45; Diffusion Loss 23.475570
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 11/45; Diffusion Loss 34.185487
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 12/45; Diffusion Loss 40.029638
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 13/45; Diffusion Loss 47.163628
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 14/45; Diffusion Loss 30.090602
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 15/45; Diffusion Loss 23.420555
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 16/45; Diffusion Loss 16.835493
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 17/45; Diffusion Loss 13.579751
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 18/45; Diffusion Loss 15.911251
+Sun 26 Jan 2025 23:36:16 INFO Diffusion Step 19/45; Diffusion Loss 21.887304
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 20/45; Diffusion Loss 19.472349
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 21/45; Diffusion Loss 20.117188
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 22/45; Diffusion Loss 12.642337
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 23/45; Diffusion Loss 5.898600
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 24/45; Diffusion Loss 8.012866
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 25/45; Diffusion Loss 10.340102
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 26/45; Diffusion Loss 10.468432
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 27/45; Diffusion Loss 10.306004
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 28/45; Diffusion Loss 8.807396
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 29/45; Diffusion Loss 8.104369
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 30/45; Diffusion Loss 5.155721
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 31/45; Diffusion Loss 3.297109
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 32/45; Diffusion Loss 5.137469
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 33/45; Diffusion Loss 6.884690
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 34/45; Diffusion Loss 7.095374
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 35/45; Diffusion Loss 5.362490
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 36/45; Diffusion Loss 2.879389
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 37/45; Diffusion Loss 3.523064
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 38/45; Diffusion Loss 3.977866
+Sun 26 Jan 2025 23:36:17 INFO Diffusion Step 39/45; Diffusion Loss 3.618905
+Sun 26 Jan 2025 23:36:18 INFO Diffusion Step 40/45; Diffusion Loss 4.017110
+Sun 26 Jan 2025 23:36:18 INFO Diffusion Step 41/45; Diffusion Loss 3.989959
+Sun 26 Jan 2025 23:36:18 INFO Diffusion Step 42/45; Diffusion Loss 3.184978
+Sun 26 Jan 2025 23:36:18 INFO Diffusion Step 43/45; Diffusion Loss 2.430402
+Sun 26 Jan 2025 23:36:18 INFO Diffusion Step 44/45; Diffusion Loss 2.118319
+Sun 26 Jan 2025 23:36:18 INFO Diffusion Step 45/45; Diffusion Loss 2.386734
+Sun 26 Jan 2025 23:36:18 INFO 
+Sun 26 Jan 2025 23:36:18 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:36:26 INFO UI matrix built!
+Sun 26 Jan 2025 23:36:31 INFO Epoch 16, Loss: 1.49440
+Sun 26 Jan 2025 23:36:32 INFO Validation Metrics:
+Sun 26 Jan 2025 23:36:32 INFO 5: precision: 0.00016 | recall: 0.00053 | ndcg: 0.00031 | hit_rate: 0.00078 | map: 0.00019
+Sun 26 Jan 2025 23:36:32 INFO 10: precision: 0.00016 | recall: 0.00112 | ndcg: 0.00051 | hit_rate: 0.00153 | map: 0.00027
+Sun 26 Jan 2025 23:36:32 INFO 20: precision: 0.00013 | recall: 0.00184 | ndcg: 0.00070 | hit_rate: 0.00250 | map: 0.00032
+Sun 26 Jan 2025 23:36:32 INFO Test Metrics:
+Sun 26 Jan 2025 23:36:32 INFO 5: precision: 0.00033 | recall: 0.00083 | ndcg: 0.00059 | hit_rate: 0.00162 | map: 0.00038
+Sun 26 Jan 2025 23:36:32 INFO 10: precision: 0.00028 | recall: 0.00143 | ndcg: 0.00082 | hit_rate: 0.00269 | map: 0.00046
+Sun 26 Jan 2025 23:36:32 INFO 20: precision: 0.00022 | recall: 0.00230 | ndcg: 0.00107 | hit_rate: 0.00422 | map: 0.00052
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 0/45; Diffusion Loss 3.211161
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 1/45; Diffusion Loss 420.382543
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 2/45; Diffusion Loss 74.951999
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 3/45; Diffusion Loss 147.165393
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 4/45; Diffusion Loss 173.134540
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 5/45; Diffusion Loss 127.146821
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 6/45; Diffusion Loss 79.949312
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 7/45; Diffusion Loss 77.271856
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 8/45; Diffusion Loss 91.655061
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 9/45; Diffusion Loss 87.271108
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 10/45; Diffusion Loss 57.986150
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 11/45; Diffusion Loss 36.245503
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 12/45; Diffusion Loss 33.802494
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 13/45; Diffusion Loss 45.619266
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 14/45; Diffusion Loss 51.352096
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 15/45; Diffusion Loss 52.284577
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 16/45; Diffusion Loss 41.057958
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 17/45; Diffusion Loss 20.847926
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 18/45; Diffusion Loss 18.749704
+Sun 26 Jan 2025 23:36:34 INFO Diffusion Step 19/45; Diffusion Loss 24.153463
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 20/45; Diffusion Loss 27.271359
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 21/45; Diffusion Loss 23.758810
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 22/45; Diffusion Loss 20.863193
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 23/45; Diffusion Loss 19.218773
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 24/45; Diffusion Loss 19.576631
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 25/45; Diffusion Loss 15.398044
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 26/45; Diffusion Loss 11.156493
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 27/45; Diffusion Loss 8.009114
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 28/45; Diffusion Loss 9.619108
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 29/45; Diffusion Loss 15.584296
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 30/45; Diffusion Loss 12.425546
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 31/45; Diffusion Loss 8.603820
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 32/45; Diffusion Loss 5.284358
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 33/45; Diffusion Loss 4.779269
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 34/45; Diffusion Loss 6.383348
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 35/45; Diffusion Loss 7.160499
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 36/45; Diffusion Loss 7.284725
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 37/45; Diffusion Loss 6.115619
+Sun 26 Jan 2025 23:36:35 INFO Diffusion Step 38/45; Diffusion Loss 4.332077
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 39/45; Diffusion Loss 3.557721
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 40/45; Diffusion Loss 4.486554
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 41/45; Diffusion Loss 4.598525
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 42/45; Diffusion Loss 4.395275
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 43/45; Diffusion Loss 3.616141
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 44/45; Diffusion Loss 3.538060
+Sun 26 Jan 2025 23:36:36 INFO Diffusion Step 45/45; Diffusion Loss 3.992504
+Sun 26 Jan 2025 23:36:36 INFO 
+Sun 26 Jan 2025 23:36:36 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:36:44 INFO UI matrix built!
+Sun 26 Jan 2025 23:36:49 INFO Epoch 17, Loss: 1.46715
+Sun 26 Jan 2025 23:36:51 INFO Validation Metrics:
+Sun 26 Jan 2025 23:36:51 INFO 5: precision: 0.00016 | recall: 0.00051 | ndcg: 0.00032 | hit_rate: 0.00078 | map: 0.00020
+Sun 26 Jan 2025 23:36:51 INFO 10: precision: 0.00014 | recall: 0.00092 | ndcg: 0.00045 | hit_rate: 0.00131 | map: 0.00026
+Sun 26 Jan 2025 23:36:51 INFO 20: precision: 0.00014 | recall: 0.00194 | ndcg: 0.00072 | hit_rate: 0.00261 | map: 0.00032
+Sun 26 Jan 2025 23:36:51 INFO Test Metrics:
+Sun 26 Jan 2025 23:36:51 INFO 5: precision: 0.00022 | recall: 0.00058 | ndcg: 0.00037 | hit_rate: 0.00108 | map: 0.00023
+Sun 26 Jan 2025 23:36:51 INFO 10: precision: 0.00019 | recall: 0.00089 | ndcg: 0.00050 | hit_rate: 0.00179 | map: 0.00027
+Sun 26 Jan 2025 23:36:51 INFO 20: precision: 0.00016 | recall: 0.00159 | ndcg: 0.00071 | hit_rate: 0.00304 | map: 0.00032
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 0/45; Diffusion Loss 3.689936
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 1/45; Diffusion Loss 456.620104
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 2/45; Diffusion Loss 65.665046
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 3/45; Diffusion Loss 119.750740
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 4/45; Diffusion Loss 202.183020
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 5/45; Diffusion Loss 170.883785
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 6/45; Diffusion Loss 78.461250
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 7/45; Diffusion Loss 56.985312
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 8/45; Diffusion Loss 70.639267
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 9/45; Diffusion Loss 72.492508
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 10/45; Diffusion Loss 76.991575
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 11/45; Diffusion Loss 61.257477
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 12/45; Diffusion Loss 39.812288
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 13/45; Diffusion Loss 49.175005
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 14/45; Diffusion Loss 59.209956
+Sun 26 Jan 2025 23:36:52 INFO Diffusion Step 15/45; Diffusion Loss 43.974502
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 16/45; Diffusion Loss 26.458586
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 17/45; Diffusion Loss 20.538224
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 18/45; Diffusion Loss 31.844552
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 19/45; Diffusion Loss 37.691650
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 20/45; Diffusion Loss 34.980791
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 21/45; Diffusion Loss 19.817316
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 22/45; Diffusion Loss 11.734339
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 23/45; Diffusion Loss 15.636039
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 24/45; Diffusion Loss 21.876441
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 25/45; Diffusion Loss 22.762543
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 26/45; Diffusion Loss 16.474426
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 27/45; Diffusion Loss 9.575156
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 28/45; Diffusion Loss 9.149151
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 29/45; Diffusion Loss 11.797999
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 30/45; Diffusion Loss 12.611022
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 31/45; Diffusion Loss 11.822313
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 32/45; Diffusion Loss 7.321261
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 33/45; Diffusion Loss 6.079125
+Sun 26 Jan 2025 23:36:53 INFO Diffusion Step 34/45; Diffusion Loss 6.687673
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 35/45; Diffusion Loss 8.055719
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 36/45; Diffusion Loss 7.233125
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 37/45; Diffusion Loss 5.749865
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 38/45; Diffusion Loss 4.518122
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 39/45; Diffusion Loss 4.367769
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 40/45; Diffusion Loss 4.980767
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 41/45; Diffusion Loss 4.642466
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 42/45; Diffusion Loss 4.103219
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 43/45; Diffusion Loss 3.717998
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 44/45; Diffusion Loss 3.639783
+Sun 26 Jan 2025 23:36:54 INFO Diffusion Step 45/45; Diffusion Loss 3.426480
+Sun 26 Jan 2025 23:36:54 INFO 
+Sun 26 Jan 2025 23:36:54 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:37:02 INFO UI matrix built!
+Sun 26 Jan 2025 23:37:07 INFO Epoch 18, Loss: 1.54019
+Sun 26 Jan 2025 23:37:09 INFO Validation Metrics:
+Sun 26 Jan 2025 23:37:09 INFO 5: precision: 0.00012 | recall: 0.00035 | ndcg: 0.00025 | hit_rate: 0.00056 | map: 0.00017
+Sun 26 Jan 2025 23:37:09 INFO 10: precision: 0.00011 | recall: 0.00063 | ndcg: 0.00035 | hit_rate: 0.00101 | map: 0.00021
+Sun 26 Jan 2025 23:37:09 INFO 20: precision: 0.00011 | recall: 0.00146 | ndcg: 0.00058 | hit_rate: 0.00213 | map: 0.00027
+Sun 26 Jan 2025 23:37:09 INFO Test Metrics:
+Sun 26 Jan 2025 23:37:09 INFO 5: precision: 0.00016 | recall: 0.00041 | ndcg: 0.00027 | hit_rate: 0.00078 | map: 0.00017
+Sun 26 Jan 2025 23:37:09 INFO 10: precision: 0.00016 | recall: 0.00077 | ndcg: 0.00041 | hit_rate: 0.00153 | map: 0.00022
+Sun 26 Jan 2025 23:37:09 INFO 20: precision: 0.00016 | recall: 0.00158 | ndcg: 0.00065 | hit_rate: 0.00299 | map: 0.00027
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 0/45; Diffusion Loss 3.247489
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 1/45; Diffusion Loss 404.846670
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 2/45; Diffusion Loss 72.083916
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 3/45; Diffusion Loss 85.939161
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 4/45; Diffusion Loss 205.658725
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 5/45; Diffusion Loss 171.779734
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 6/45; Diffusion Loss 66.546254
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 7/45; Diffusion Loss 38.939751
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 8/45; Diffusion Loss 66.788323
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 9/45; Diffusion Loss 87.594438
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 10/45; Diffusion Loss 84.019617
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 11/45; Diffusion Loss 56.301650
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 12/45; Diffusion Loss 27.348025
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 13/45; Diffusion Loss 35.019790
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 14/45; Diffusion Loss 50.697444
+Sun 26 Jan 2025 23:37:10 INFO Diffusion Step 15/45; Diffusion Loss 56.264607
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 16/45; Diffusion Loss 46.175128
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 17/45; Diffusion Loss 18.527350
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 18/45; Diffusion Loss 15.597900
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 19/45; Diffusion Loss 31.061940
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 20/45; Diffusion Loss 38.530628
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 21/45; Diffusion Loss 31.326491
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 22/45; Diffusion Loss 16.896556
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 23/45; Diffusion Loss 11.450607
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 24/45; Diffusion Loss 14.780502
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 25/45; Diffusion Loss 19.887464
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 26/45; Diffusion Loss 18.961135
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 27/45; Diffusion Loss 14.538485
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 28/45; Diffusion Loss 10.393567
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 29/45; Diffusion Loss 9.962387
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 30/45; Diffusion Loss 10.115058
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 31/45; Diffusion Loss 10.332864
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 32/45; Diffusion Loss 7.770721
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 33/45; Diffusion Loss 7.078384
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 34/45; Diffusion Loss 7.332830
+Sun 26 Jan 2025 23:37:11 INFO Diffusion Step 35/45; Diffusion Loss 7.872522
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 36/45; Diffusion Loss 6.315977
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 37/45; Diffusion Loss 4.538468
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 38/45; Diffusion Loss 4.061921
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 39/45; Diffusion Loss 4.702843
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 40/45; Diffusion Loss 6.467190
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 41/45; Diffusion Loss 5.491656
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 42/45; Diffusion Loss 3.525809
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 43/45; Diffusion Loss 2.663510
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 44/45; Diffusion Loss 3.431341
+Sun 26 Jan 2025 23:37:12 INFO Diffusion Step 45/45; Diffusion Loss 4.027247
+Sun 26 Jan 2025 23:37:12 INFO 
+Sun 26 Jan 2025 23:37:12 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:37:20 INFO UI matrix built!
+Sun 26 Jan 2025 23:37:25 INFO Epoch 19, Loss: 1.49313
+Sun 26 Jan 2025 23:37:27 INFO Validation Metrics:
+Sun 26 Jan 2025 23:37:27 INFO 5: precision: 0.00012 | recall: 0.00032 | ndcg: 0.00025 | hit_rate: 0.00056 | map: 0.00018
+Sun 26 Jan 2025 23:37:27 INFO 10: precision: 0.00012 | recall: 0.00071 | ndcg: 0.00038 | hit_rate: 0.00112 | map: 0.00023
+Sun 26 Jan 2025 23:37:27 INFO 20: precision: 0.00010 | recall: 0.00134 | ndcg: 0.00056 | hit_rate: 0.00196 | map: 0.00027
+Sun 26 Jan 2025 23:37:27 INFO Test Metrics:
+Sun 26 Jan 2025 23:37:27 INFO 5: precision: 0.00012 | recall: 0.00030 | ndcg: 0.00020 | hit_rate: 0.00060 | map: 0.00012
+Sun 26 Jan 2025 23:37:27 INFO 10: precision: 0.00013 | recall: 0.00061 | ndcg: 0.00033 | hit_rate: 0.00129 | map: 0.00016
+Sun 26 Jan 2025 23:37:27 INFO 20: precision: 0.00014 | recall: 0.00148 | ndcg: 0.00058 | hit_rate: 0.00276 | map: 0.00022
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 0/45; Diffusion Loss 3.740488
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 1/45; Diffusion Loss 324.818922
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 2/45; Diffusion Loss 87.540995
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 3/45; Diffusion Loss 75.191809
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 4/45; Diffusion Loss 146.975548
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 5/45; Diffusion Loss 126.893005
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 6/45; Diffusion Loss 62.346858
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 7/45; Diffusion Loss 57.398949
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 8/45; Diffusion Loss 48.221289
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 9/45; Diffusion Loss 52.764607
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 10/45; Diffusion Loss 48.853891
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 11/45; Diffusion Loss 46.271875
+Sun 26 Jan 2025 23:37:28 INFO Diffusion Step 12/45; Diffusion Loss 45.140893
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 13/45; Diffusion Loss 39.320374
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 14/45; Diffusion Loss 28.120849
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 15/45; Diffusion Loss 27.316047
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 16/45; Diffusion Loss 27.565069
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 17/45; Diffusion Loss 25.149778
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 18/45; Diffusion Loss 23.486828
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 19/45; Diffusion Loss 19.985241
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 20/45; Diffusion Loss 20.849398
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 21/45; Diffusion Loss 17.482903
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 22/45; Diffusion Loss 17.019661
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 23/45; Diffusion Loss 13.354810
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 24/45; Diffusion Loss 9.493020
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 25/45; Diffusion Loss 9.914077
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 26/45; Diffusion Loss 13.370391
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 27/45; Diffusion Loss 14.003851
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 28/45; Diffusion Loss 11.786796
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 29/45; Diffusion Loss 6.139496
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 30/45; Diffusion Loss 5.111256
+Sun 26 Jan 2025 23:37:29 INFO Diffusion Step 31/45; Diffusion Loss 7.275600
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 32/45; Diffusion Loss 8.922366
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 33/45; Diffusion Loss 8.543023
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 34/45; Diffusion Loss 6.174122
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 35/45; Diffusion Loss 4.085776
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 36/45; Diffusion Loss 4.423631
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 37/45; Diffusion Loss 4.917065
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 38/45; Diffusion Loss 4.711058
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 39/45; Diffusion Loss 4.520947
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 40/45; Diffusion Loss 3.936603
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 41/45; Diffusion Loss 3.683938
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 42/45; Diffusion Loss 3.930036
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 43/45; Diffusion Loss 2.736932
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 44/45; Diffusion Loss 2.578837
+Sun 26 Jan 2025 23:37:30 INFO Diffusion Step 45/45; Diffusion Loss 2.912194
+Sun 26 Jan 2025 23:37:30 INFO 
+Sun 26 Jan 2025 23:37:30 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:37:39 INFO UI matrix built!
+Sun 26 Jan 2025 23:37:43 INFO Epoch 20, Loss: 1.50027
+Sun 26 Jan 2025 23:37:45 INFO Validation Metrics:
+Sun 26 Jan 2025 23:37:45 INFO 5: precision: 0.00019 | recall: 0.00065 | ndcg: 0.00050 | hit_rate: 0.00088 | map: 0.00040
+Sun 26 Jan 2025 23:37:45 INFO 10: precision: 0.00016 | recall: 0.00116 | ndcg: 0.00067 | hit_rate: 0.00149 | map: 0.00047
+Sun 26 Jan 2025 23:37:45 INFO 20: precision: 0.00013 | recall: 0.00184 | ndcg: 0.00086 | hit_rate: 0.00250 | map: 0.00051
+Sun 26 Jan 2025 23:37:45 INFO Test Metrics:
+Sun 26 Jan 2025 23:37:45 INFO 5: precision: 0.00021 | recall: 0.00058 | ndcg: 0.00041 | hit_rate: 0.00101 | map: 0.00029
+Sun 26 Jan 2025 23:37:45 INFO 10: precision: 0.00018 | recall: 0.00087 | ndcg: 0.00053 | hit_rate: 0.00170 | map: 0.00033
+Sun 26 Jan 2025 23:37:45 INFO 20: precision: 0.00015 | recall: 0.00153 | ndcg: 0.00073 | hit_rate: 0.00291 | map: 0.00037
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 0/45; Diffusion Loss 3.019815
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 1/45; Diffusion Loss 264.318480
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 2/45; Diffusion Loss 72.619987
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 3/45; Diffusion Loss 76.216559
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 4/45; Diffusion Loss 99.712906
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 5/45; Diffusion Loss 81.529641
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 6/45; Diffusion Loss 68.361620
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 7/45; Diffusion Loss 68.121737
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 8/45; Diffusion Loss 41.733211
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 9/45; Diffusion Loss 34.257255
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 10/45; Diffusion Loss 24.555041
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 11/45; Diffusion Loss 29.500980
+Sun 26 Jan 2025 23:37:46 INFO Diffusion Step 12/45; Diffusion Loss 48.566832
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 13/45; Diffusion Loss 38.269980
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 14/45; Diffusion Loss 31.130136
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 15/45; Diffusion Loss 18.095140
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 16/45; Diffusion Loss 11.821858
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 17/45; Diffusion Loss 14.739561
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 18/45; Diffusion Loss 22.055035
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 19/45; Diffusion Loss 23.152805
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 20/45; Diffusion Loss 23.141010
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 21/45; Diffusion Loss 14.455731
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 22/45; Diffusion Loss 8.964868
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 23/45; Diffusion Loss 7.216975
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 24/45; Diffusion Loss 9.095232
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 25/45; Diffusion Loss 13.608280
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 26/45; Diffusion Loss 13.218287
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 27/45; Diffusion Loss 11.339006
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 28/45; Diffusion Loss 7.159776
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 29/45; Diffusion Loss 4.816669
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 30/45; Diffusion Loss 4.920739
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 31/45; Diffusion Loss 7.268128
+Sun 26 Jan 2025 23:37:47 INFO Diffusion Step 32/45; Diffusion Loss 8.518236
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 33/45; Diffusion Loss 7.094255
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 34/45; Diffusion Loss 5.346729
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 35/45; Diffusion Loss 4.156084
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 36/45; Diffusion Loss 3.569354
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 37/45; Diffusion Loss 3.755049
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 38/45; Diffusion Loss 4.635151
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 39/45; Diffusion Loss 4.519370
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 40/45; Diffusion Loss 4.241817
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 41/45; Diffusion Loss 2.918417
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 42/45; Diffusion Loss 2.147431
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 43/45; Diffusion Loss 2.243751
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 44/45; Diffusion Loss 3.206064
+Sun 26 Jan 2025 23:37:48 INFO Diffusion Step 45/45; Diffusion Loss 3.654180
+Sun 26 Jan 2025 23:37:48 INFO 
+Sun 26 Jan 2025 23:37:48 INFO Start to re-build UI matrix
+Sun 26 Jan 2025 23:37:57 INFO UI matrix built!
+Sun 26 Jan 2025 23:38:01 INFO Epoch 21, Loss: 1.40880
+Sun 26 Jan 2025 23:38:03 INFO Validation Metrics:
+Sun 26 Jan 2025 23:38:03 INFO 5: precision: 0.00018 | recall: 0.00065 | ndcg: 0.00042 | hit_rate: 0.00086 | map: 0.00030
+Sun 26 Jan 2025 23:38:03 INFO 10: precision: 0.00015 | recall: 0.00108 | ndcg: 0.00056 | hit_rate: 0.00144 | map: 0.00036
+Sun 26 Jan 2025 23:38:03 INFO 20: precision: 0.00014 | recall: 0.00200 | ndcg: 0.00081 | hit_rate: 0.00267 | map: 0.00042
+Sun 26 Jan 2025 23:38:03 INFO Test Metrics:
+Sun 26 Jan 2025 23:38:03 INFO 5: precision: 0.00028 | recall: 0.00068 | ndcg: 0.00048 | hit_rate: 0.00138 | map: 0.00030
+Sun 26 Jan 2025 23:38:03 INFO 10: precision: 0.00024 | recall: 0.00119 | ndcg: 0.00067 | hit_rate: 0.00235 | map: 0.00036
+Sun 26 Jan 2025 23:38:03 INFO 20: precision: 0.00019 | recall: 0.00191 | ndcg: 0.00088 | hit_rate: 0.00358 | map: 0.00042
+Sun 26 Jan 2025 23:38:03 INFO Best Test Metrics:
+Sun 26 Jan 2025 23:38:03 INFO 5: precision: 0.00030 | recall: 0.00077 | ndcg: 0.00051 | hit_rate: 0.00146 | map: 0.00032
+Sun 26 Jan 2025 23:38:03 INFO 10: precision: 0.00037 | recall: 0.00185 | ndcg: 0.00094 | hit_rate: 0.00334 | map: 0.00048
+Sun 26 Jan 2025 23:38:03 INFO 20: precision: 0.00033 | recall: 0.00342 | ndcg: 0.00139 | hit_rate: 0.00573 | map: 0.00060
+Sun 26 Jan 2025 23:38:03 INFO Best performance: 0.00342
+Sun 26 Jan 2025 23:38:03 INFO Best parameters: {'e_loss': 0.01, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'ssl_alpha': 0.01, 'ris_lambda': 0.5, 'ssl_temp': 0.1, 'rebuild_k': 1}
+Sun 26 Jan 2025 23:38:03 INFO Best metrics:
+Sun 26 Jan 2025 23:38:03 INFO 5: precision: 0.00030 | recall: 0.00077 | ndcg: 0.00051 | hit_rate: 0.00146 | map: 0.00032
+Sun 26 Jan 2025 23:38:03 INFO 10: precision: 0.00037 | recall: 0.00185 | ndcg: 0.00094 | hit_rate: 0.00334 | map: 0.00048
+Sun 26 Jan 2025 23:38:03 INFO 20: precision: 0.00033 | recall: 0.00342 | ndcg: 0.00139 | hit_rate: 0.00573 | map: 0.00060

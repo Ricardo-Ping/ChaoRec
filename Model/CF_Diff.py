@@ -37,7 +37,7 @@ class CAM_AE(nn.Module):
         # 多层前馈层
         self.forward_layers = nn.ModuleList([nn.Linear(d_model, d_model) for i in range(num_layers)])
         # 内部维度定义，用于编码用户-物品交互
-        self.dim_inters = 650
+        self.dim_inters = 1024
 
         # 一跳邻居嵌入和解码层
         self.first_hop_embedding = nn.Linear(1, d_model)  # Expend dimension
@@ -190,7 +190,7 @@ class CF_Diff(nn.Module):
         # CAM_AE
         self.emb_size = 10
         # d_model, num_heads, num_layers, in_dims, emb_size
-        self.CAM_AE = CAM_AE(16, 2, 2, num_item, self.emb_size).to(device)
+        self.CAM_AE = CAM_AE(16, 4, 2, num_item, self.emb_size).to(device)
 
     def get_betas(self):
         """

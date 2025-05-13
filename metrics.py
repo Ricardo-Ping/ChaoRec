@@ -32,6 +32,10 @@ def ndcg_at_k(ranked_list, test_list, k):
     for i, item in enumerate(ranked_list[:k]):
         if item in test_list:
             dcg += 1.0 / np.log(i + 2)
+    # idcg = sum([1.0 / np.log2(i + 2) for i in range(min(len(test_list), k))])
+    # for i, item in enumerate(ranked_list[:k]):
+    #     if item in test_list:
+    #         dcg += 1.0 / np.log2(i + 2)
     return dcg / idcg
 
 

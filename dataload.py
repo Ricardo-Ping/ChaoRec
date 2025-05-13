@@ -33,9 +33,9 @@ def data_load(dataset, has_v=True, has_t=True):
     v_feat = torch.tensor(v_feat, dtype=torch.float).cuda() if has_v else None
     t_feat = torch.tensor(t_feat, dtype=torch.float).cuda() if has_t else None
 
-    if dataset == 'yelp':
-        num_user = 11123
-        num_item = 8128
+    if dataset == 'netfilx':
+        num_user = 14971
+        num_item = 7444
     if dataset == 'clothing':
         num_user = 18072
         num_item = 11384
@@ -84,7 +84,7 @@ class TrainingDataset(Dataset):
                 break
 
         # (tensor([0, 0]), tensor([769, 328]))
-        if self.model_name in ["MMGCN", "GRCN"]:
+        if self.model_name in ["GRCN"]:
             return torch.LongTensor([user, user]), torch.LongTensor([pos_item, neg_item])
         elif self.model_name in ["LightGT"]:
             temp = list(self.user_item_dict[user])
@@ -260,5 +260,86 @@ class DiffusionData_sec_hop(Dataset):
 
     def __getitem__(self, index):
         # 返回用户的二跳交互信息
+        item = self.data[index]
+        return item, index
+
+
+class UserHomographData(Dataset):
+    """
+    用户同构图数据集
+    只需要用户数 num_user 和 user_user_k_graph 即可。
+    每个用户对应一行特征向量，长度为 num_user。
+    向量中对应相似用户的索引位置为1，其余为0。
+    """
+    def __init__(self, num_user, user_user_k_graph):
+        self.num_user = num_user
+        self.user_user_k_graph = user_user_k_graph
+
+        row_indices = []
+        col_indices = []
+        data_values = []
+
+        # 为每个用户构建与相似用户的连接
+        for u in range(num_user):
+            neighbors = self.user_user_k_graph[u]  # [uu_topk]
+            for nbr in neighbors:
+                row_indices.append(u)
+                col_indices.append(nbr)
+                data_values.append(1.0)
+
+        # 构建 [num_user, num_user] 的稀疏矩阵
+        user_homo_matrix = sp.coo_matrix(
+            (data_values, (row_indices, col_indices)),
+            shape=(num_user, num_user),
+            dtype=np.float32
+        )
+
+        # 转换为稠密张量
+        self.data = torch.FloatTensor(user_homo_matrix.toarray())
+
+    def __len__(self):
+        return self.num_user
+
+    def __getitem__(self, index):
+        # 对应用户 index 的一行特征
+        uesr = self.data[index]
+        return uesr, index
+
+
+class ItemHomographData(Dataset):
+    """
+    项目同构图数据集（可用于视觉或文本模态）
+    每个项目对应一行特征向量，长度为 num_item。
+    向量中对应相似项目的索引位置为1，其余为0。
+    """
+    def __init__(self, num_item, item_item_k_graph):
+        self.num_item = num_item
+        self.item_item_k_graph = item_item_k_graph
+
+        row_indices = []
+        col_indices = []
+        data_values = []
+
+        for i in range(num_item):
+            neighbors = self.item_item_k_graph[i]
+            for nbr in neighbors:
+                row_indices.append(i)
+                col_indices.append(nbr)
+                data_values.append(1.0)
+
+        # 构建 [num_item, num_item] 的稀疏矩阵
+        item_homo_matrix = sp.coo_matrix(
+            (data_values, (row_indices, col_indices)),
+            shape=(num_item, num_item),
+            dtype=np.float32
+        )
+
+        # 转换为稠密张量
+        self.data = torch.FloatTensor(item_homo_matrix.toarray())
+
+    def __len__(self):
+        return self.num_item
+
+    def __getitem__(self, index):
         item = self.data[index]
         return item, index

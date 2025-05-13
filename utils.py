@@ -148,3 +148,31 @@ def convert_to_dict(data):
             user_item_dict[user] = []
         user_item_dict[user].extend(items)
     return user_item_dict
+
+
+# 用户-用户图topk采样
+def topk_sample(k, user_graph_dict, num_user):
+    # 保存每个用户的最多k个相邻用户的索引
+    user_graph_index = []
+    count_num = 0
+    # 如果某个用户没有足够的邻居，这个列表将被用作占位符
+    tasike = [0] * k
+
+    for i in range(num_user):
+        if len(user_graph_dict[i][0]) < k:
+            count_num += 1
+            if len(user_graph_dict[i][0]) == 0:
+                user_graph_index.append(tasike)
+                continue
+            user_graph_sample = user_graph_dict[i][0][:k]
+            while len(user_graph_sample) < k:
+                rand_index = np.random.randint(0, len(user_graph_sample))
+                user_graph_sample.append(user_graph_sample[rand_index])
+            user_graph_index.append(user_graph_sample)
+            continue
+
+        # 如果邻居数大于等于k，直接取前k个邻居
+        user_graph_sample = user_graph_dict[i][0][:k]
+        user_graph_index.append(user_graph_sample)
+
+    return user_graph_index

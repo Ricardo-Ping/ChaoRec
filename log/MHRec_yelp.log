@@ -1,157 +1,157 @@
-Wed 27 Nov 2024 22:07:41 INFO ============Arguments==============
-Wed 27 Nov 2024 22:07:41 INFO Model: MHRec
-Wed 27 Nov 2024 22:07:41 INFO data_path: yelp
-Wed 27 Nov 2024 22:07:41 INFO learning_rate: 0.001
-Wed 27 Nov 2024 22:07:41 INFO feature_embed: 64
-Wed 27 Nov 2024 22:07:41 INFO batch_size: 1024
-Wed 27 Nov 2024 22:07:41 INFO aggr_mode: add
-Wed 27 Nov 2024 22:07:41 INFO reg_weight: 0.001
-Wed 27 Nov 2024 22:07:41 INFO dim_E: 64
-Wed 27 Nov 2024 22:07:41 INFO num_epoch: 1000
-Wed 27 Nov 2024 22:07:41 INFO dropout: 0.2
-Wed 27 Nov 2024 22:07:41 INFO n_layers: 2
-Wed 27 Nov 2024 22:07:41 INFO corDecay: 0.001
-Wed 27 Nov 2024 22:07:41 INFO n_factors: 4
-Wed 27 Nov 2024 22:07:41 INFO n_iterations: 3
-Wed 27 Nov 2024 22:07:41 INFO cl_weight: 2.0
-Wed 27 Nov 2024 22:07:41 INFO mm_layers: 2
-Wed 27 Nov 2024 22:07:41 INFO ii_topk: 10
-Wed 27 Nov 2024 22:07:41 INFO uu_topk: 10
-Wed 27 Nov 2024 22:07:41 INFO lambda_coeff: 0.9
-Wed 27 Nov 2024 22:07:41 INFO ssl_temp: 0.9
-Wed 27 Nov 2024 22:07:41 INFO ssl_alpha: 0.9
-Wed 27 Nov 2024 22:07:41 INFO ae_weight: 0.1
-Wed 27 Nov 2024 22:07:41 INFO threshold: 0.1
-Wed 27 Nov 2024 22:07:41 INFO prompt_num: 0.1
-Wed 27 Nov 2024 22:07:41 INFO neg_weight: 0.1
-Wed 27 Nov 2024 22:07:41 INFO cen_reg: 0.005
-Wed 27 Nov 2024 22:07:41 INFO n_intents: 128
-Wed 27 Nov 2024 22:07:41 INFO G_rate: 0.0001
-Wed 27 Nov 2024 22:07:41 INFO align_weight: 0.1
-Wed 27 Nov 2024 22:07:41 INFO mask_weight_f: 1.5
-Wed 27 Nov 2024 22:07:41 INFO mask_weight_g: 0.001
-Wed 27 Nov 2024 22:07:41 INFO leaky: 0.5
-Wed 27 Nov 2024 22:07:41 INFO keepRate: 1.0
-Wed 27 Nov 2024 22:07:41 INFO mult: 0.1
-Wed 27 Nov 2024 22:07:41 INFO grid_size: 1
-Wed 27 Nov 2024 22:07:41 INFO node_dropout: 0.1
-Wed 27 Nov 2024 22:07:41 INFO message_dropout: 0.1
-Wed 27 Nov 2024 22:07:41 INFO n_mca: 2
-Wed 27 Nov 2024 22:07:41 INFO gamma: 0.5
-Wed 27 Nov 2024 22:07:41 INFO t: 1.8
-Wed 27 Nov 2024 22:07:41 INFO e_loss: 0.1
-Wed 27 Nov 2024 22:07:41 INFO ris_lambda: 0.5
-Wed 27 Nov 2024 22:07:41 INFO rebuild_k: 1
-Wed 27 Nov 2024 22:07:41 INFO pnn_layer: 1
-Wed 27 Nov 2024 22:07:41 INFO b2: 1
-Wed 27 Nov 2024 22:07:41 INFO ctra: 0.001
-Wed 27 Nov 2024 22:07:41 INFO noise_alpha: 0.3
-Wed 27 Nov 2024 22:07:41 INFO ssl_temp2: 0.2
-Wed 27 Nov 2024 22:07:41 INFO K_s: 1
-Wed 27 Nov 2024 22:07:41 INFO T_s: 1
-Wed 27 Nov 2024 22:07:41 INFO K_b: 1
-Wed 27 Nov 2024 22:07:41 INFO T_b: 1
-Wed 27 Nov 2024 22:07:41 INFO idl_beta: 1
-Wed 27 Nov 2024 22:07:41 INFO sampling_noise: False
-Wed 27 Nov 2024 22:07:41 INFO sampling_steps: 0
-Wed 27 Nov 2024 22:07:41 INFO steps: 100
-Wed 27 Nov 2024 22:07:41 INFO noise_scale: 0.1
-Wed 27 Nov 2024 22:07:41 INFO noise_min: 0.0001
-Wed 27 Nov 2024 22:07:41 INFO noise_max: 0.02
-Wed 27 Nov 2024 22:07:41 INFO dims: [1000]
-Wed 27 Nov 2024 22:07:41 INFO h_layers: 2
-Wed 27 Nov 2024 22:07:41 INFO num_hypernodes: 10
-Wed 27 Nov 2024 22:07:41 INFO beta1: 0.5
-Wed 27 Nov 2024 22:07:41 INFO beta2: 0.5
-Wed 27 Nov 2024 22:07:41 INFO seed: 42
-Wed 27 Nov 2024 22:07:41 INFO num_workers: 1
-Wed 27 Nov 2024 22:07:41 INFO topk: [5, 10, 20]
-Wed 27 Nov 2024 22:07:41 INFO local time£ºNov-27-2024-22-07-41
-Wed 27 Nov 2024 22:07:43 INFO =========1/9: Parameters:{'n_layers': 5, 'h_layers': 2, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'uu_topk': 10, 'ii_topk': 10, 'num_hypernodes': 5, 'ssl_alpha': 1, 'ssl_temp': 0.1, 'beta1': 0.5, 'beta2': 0.5}=========
-Wed 27 Nov 2024 22:07:45 INFO Start to visual hyperedges diffusion
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 0/84; Diffusion Loss 2.208574
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 1/84; Diffusion Loss 2.206197
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 2/84; Diffusion Loss 2.021465
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 3/84; Diffusion Loss 2.254890
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 4/84; Diffusion Loss 2.034731
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 5/84; Diffusion Loss 2.022680
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 6/84; Diffusion Loss 1.869234
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 7/84; Diffusion Loss 1.776062
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 8/84; Diffusion Loss 1.918160
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 9/84; Diffusion Loss 1.802965
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 10/84; Diffusion Loss 1.803507
-Wed 27 Nov 2024 22:07:49 INFO Diffusion Step 11/84; Diffusion Loss 1.924142
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 12/84; Diffusion Loss 1.707511
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 13/84; Diffusion Loss 1.620968
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 14/84; Diffusion Loss 1.558237
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 15/84; Diffusion Loss 1.641336
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 16/84; Diffusion Loss 1.587188
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 17/84; Diffusion Loss 1.407057
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 18/84; Diffusion Loss 1.639404
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 19/84; Diffusion Loss 1.488838
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 20/84; Diffusion Loss 1.350055
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 21/84; Diffusion Loss 1.389317
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 22/84; Diffusion Loss 1.293269
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 23/84; Diffusion Loss 1.373138
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 24/84; Diffusion Loss 1.373746
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 25/84; Diffusion Loss 1.438050
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 26/84; Diffusion Loss 1.381464
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 27/84; Diffusion Loss 1.391456
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 28/84; Diffusion Loss 1.367013
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 29/84; Diffusion Loss 1.252062
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 30/84; Diffusion Loss 1.330272
-Wed 27 Nov 2024 22:07:50 INFO Diffusion Step 31/84; Diffusion Loss 1.339219
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 32/84; Diffusion Loss 1.169777
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 33/84; Diffusion Loss 1.193447
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 34/84; Diffusion Loss 1.339500
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 35/84; Diffusion Loss 1.319949
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 36/84; Diffusion Loss 1.243272
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 37/84; Diffusion Loss 1.306100
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 38/84; Diffusion Loss 1.204560
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 39/84; Diffusion Loss 1.304113
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 40/84; Diffusion Loss 1.218898
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 41/84; Diffusion Loss 1.407421
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 42/84; Diffusion Loss 1.151949
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 43/84; Diffusion Loss 1.276181
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 44/84; Diffusion Loss 1.269395
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 45/84; Diffusion Loss 1.165755
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 46/84; Diffusion Loss 1.333687
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 47/84; Diffusion Loss 1.318983
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 48/84; Diffusion Loss 1.206845
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 49/84; Diffusion Loss 1.174211
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 50/84; Diffusion Loss 1.283554
-Wed 27 Nov 2024 22:07:51 INFO Diffusion Step 51/84; Diffusion Loss 1.172450
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 52/84; Diffusion Loss 1.162668
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 53/84; Diffusion Loss 1.215690
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 54/84; Diffusion Loss 1.309559
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 55/84; Diffusion Loss 1.295422
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 56/84; Diffusion Loss 1.198461
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 57/84; Diffusion Loss 1.240424
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 58/84; Diffusion Loss 1.213148
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 59/84; Diffusion Loss 1.219519
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 60/84; Diffusion Loss 1.161008
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 61/84; Diffusion Loss 1.144079
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 62/84; Diffusion Loss 1.130308
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 63/84; Diffusion Loss 1.069666
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 64/84; Diffusion Loss 1.217858
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 65/84; Diffusion Loss 1.219920
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 66/84; Diffusion Loss 1.134900
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 67/84; Diffusion Loss 1.142123
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 68/84; Diffusion Loss 1.177624
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 69/84; Diffusion Loss 1.205513
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 70/84; Diffusion Loss 1.152832
-Wed 27 Nov 2024 22:07:52 INFO Diffusion Step 71/84; Diffusion Loss 1.125048
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 72/84; Diffusion Loss 1.201441
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 73/84; Diffusion Loss 1.224446
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 74/84; Diffusion Loss 1.165200
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 75/84; Diffusion Loss 1.222206
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 76/84; Diffusion Loss 1.186166
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 77/84; Diffusion Loss 1.068627
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 78/84; Diffusion Loss 1.114587
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 79/84; Diffusion Loss 1.294062
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 80/84; Diffusion Loss 1.231187
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 81/84; Diffusion Loss 1.287333
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 82/84; Diffusion Loss 1.181877
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 83/84; Diffusion Loss 1.141164
-Wed 27 Nov 2024 22:07:53 INFO Diffusion Step 84/84; Diffusion Loss 1.318254
-Wed 27 Nov 2024 22:07:54 INFO Start to textual hyperedges diffusion
+Sun 01 Dec 2024 20:45:33 INFO ============Arguments==============
+Sun 01 Dec 2024 20:45:33 INFO Model: MHRec
+Sun 01 Dec 2024 20:45:33 INFO data_path: yelp
+Sun 01 Dec 2024 20:45:33 INFO learning_rate: 0.001
+Sun 01 Dec 2024 20:45:33 INFO feature_embed: 64
+Sun 01 Dec 2024 20:45:33 INFO batch_size: 1024
+Sun 01 Dec 2024 20:45:33 INFO aggr_mode: add
+Sun 01 Dec 2024 20:45:33 INFO reg_weight: 0.001
+Sun 01 Dec 2024 20:45:33 INFO dim_E: 64
+Sun 01 Dec 2024 20:45:33 INFO num_epoch: 1000
+Sun 01 Dec 2024 20:45:33 INFO dropout: 0.2
+Sun 01 Dec 2024 20:45:33 INFO n_layers: 2
+Sun 01 Dec 2024 20:45:33 INFO corDecay: 0.001
+Sun 01 Dec 2024 20:45:33 INFO n_factors: 4
+Sun 01 Dec 2024 20:45:33 INFO n_iterations: 3
+Sun 01 Dec 2024 20:45:33 INFO cl_weight: 2.0
+Sun 01 Dec 2024 20:45:33 INFO mm_layers: 2
+Sun 01 Dec 2024 20:45:33 INFO ii_topk: 10
+Sun 01 Dec 2024 20:45:33 INFO uu_topk: 10
+Sun 01 Dec 2024 20:45:33 INFO lambda_coeff: 0.9
+Sun 01 Dec 2024 20:45:33 INFO ssl_temp: 0.9
+Sun 01 Dec 2024 20:45:33 INFO ssl_alpha: 0.9
+Sun 01 Dec 2024 20:45:33 INFO ae_weight: 0.1
+Sun 01 Dec 2024 20:45:33 INFO threshold: 0.1
+Sun 01 Dec 2024 20:45:33 INFO prompt_num: 0.1
+Sun 01 Dec 2024 20:45:33 INFO neg_weight: 0.1
+Sun 01 Dec 2024 20:45:33 INFO cen_reg: 0.005
+Sun 01 Dec 2024 20:45:33 INFO n_intents: 128
+Sun 01 Dec 2024 20:45:33 INFO G_rate: 0.0001
+Sun 01 Dec 2024 20:45:33 INFO align_weight: 0.1
+Sun 01 Dec 2024 20:45:33 INFO mask_weight_f: 1.5
+Sun 01 Dec 2024 20:45:33 INFO mask_weight_g: 0.001
+Sun 01 Dec 2024 20:45:33 INFO leaky: 0.5
+Sun 01 Dec 2024 20:45:33 INFO keepRate: 1.0
+Sun 01 Dec 2024 20:45:33 INFO mult: 0.1
+Sun 01 Dec 2024 20:45:33 INFO grid_size: 1
+Sun 01 Dec 2024 20:45:33 INFO node_dropout: 0.1
+Sun 01 Dec 2024 20:45:33 INFO message_dropout: 0.1
+Sun 01 Dec 2024 20:45:33 INFO n_mca: 2
+Sun 01 Dec 2024 20:45:33 INFO gamma: 0.5
+Sun 01 Dec 2024 20:45:33 INFO t: 1.8
+Sun 01 Dec 2024 20:45:33 INFO e_loss: 0.1
+Sun 01 Dec 2024 20:45:33 INFO ris_lambda: 0.5
+Sun 01 Dec 2024 20:45:33 INFO rebuild_k: 1
+Sun 01 Dec 2024 20:45:33 INFO pnn_layer: 1
+Sun 01 Dec 2024 20:45:33 INFO b2: 1
+Sun 01 Dec 2024 20:45:33 INFO ctra: 0.001
+Sun 01 Dec 2024 20:45:33 INFO noise_alpha: 0.3
+Sun 01 Dec 2024 20:45:33 INFO ssl_temp2: 0.2
+Sun 01 Dec 2024 20:45:33 INFO K_s: 1
+Sun 01 Dec 2024 20:45:33 INFO T_s: 1
+Sun 01 Dec 2024 20:45:33 INFO K_b: 1
+Sun 01 Dec 2024 20:45:33 INFO T_b: 1
+Sun 01 Dec 2024 20:45:33 INFO idl_beta: 1
+Sun 01 Dec 2024 20:45:33 INFO sampling_noise: False
+Sun 01 Dec 2024 20:45:33 INFO sampling_steps: 0
+Sun 01 Dec 2024 20:45:33 INFO steps: 100
+Sun 01 Dec 2024 20:45:33 INFO noise_scale: 0.1
+Sun 01 Dec 2024 20:45:33 INFO noise_min: 0.0001
+Sun 01 Dec 2024 20:45:33 INFO noise_max: 0.02
+Sun 01 Dec 2024 20:45:33 INFO dims: [1000]
+Sun 01 Dec 2024 20:45:33 INFO h_layers: 2
+Sun 01 Dec 2024 20:45:33 INFO num_hypernodes: 10
+Sun 01 Dec 2024 20:45:33 INFO beta1: 0.5
+Sun 01 Dec 2024 20:45:33 INFO beta2: 0.5
+Sun 01 Dec 2024 20:45:33 INFO seed: 42
+Sun 01 Dec 2024 20:45:33 INFO num_workers: 1
+Sun 01 Dec 2024 20:45:33 INFO topk: [5, 10, 20]
+Sun 01 Dec 2024 20:45:33 INFO local time£ºDec-01-2024-20-45-33
+Sun 01 Dec 2024 20:45:35 INFO =========1/1: Parameters:{'n_layers': 5, 'h_layers': 2, 'learning_rate': 0.001, 'reg_weight': 0.0001, 'uu_topk': 10, 'ii_topk': 10, 'num_hypernodes': 10, 'ssl_alpha': 0.01, 'ssl_temp': 0.1, 'beta1': 0.5, 'beta2': 0.5}=========
+Sun 01 Dec 2024 20:45:36 INFO Start to visual hyperedges diffusion
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 0/84; Diffusion Loss 2.208574
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 1/84; Diffusion Loss 2.206197
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 2/84; Diffusion Loss 2.021465
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 3/84; Diffusion Loss 2.254890
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 4/84; Diffusion Loss 2.034731
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 5/84; Diffusion Loss 2.022680
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 6/84; Diffusion Loss 1.869234
+Sun 01 Dec 2024 20:45:39 INFO Diffusion Step 7/84; Diffusion Loss 1.776062
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 8/84; Diffusion Loss 1.918160
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 9/84; Diffusion Loss 1.802965
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 10/84; Diffusion Loss 1.803507
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 11/84; Diffusion Loss 1.924142
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 12/84; Diffusion Loss 1.707511
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 13/84; Diffusion Loss 1.620968
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 14/84; Diffusion Loss 1.558237
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 15/84; Diffusion Loss 1.641336
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 16/84; Diffusion Loss 1.587188
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 17/84; Diffusion Loss 1.407057
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 18/84; Diffusion Loss 1.639404
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 19/84; Diffusion Loss 1.488838
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 20/84; Diffusion Loss 1.350055
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 21/84; Diffusion Loss 1.389317
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 22/84; Diffusion Loss 1.293269
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 23/84; Diffusion Loss 1.373138
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 24/84; Diffusion Loss 1.373746
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 25/84; Diffusion Loss 1.438050
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 26/84; Diffusion Loss 1.381464
+Sun 01 Dec 2024 20:45:40 INFO Diffusion Step 27/84; Diffusion Loss 1.391456
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 28/84; Diffusion Loss 1.367013
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 29/84; Diffusion Loss 1.252062
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 30/84; Diffusion Loss 1.330272
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 31/84; Diffusion Loss 1.339219
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 32/84; Diffusion Loss 1.169777
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 33/84; Diffusion Loss 1.193447
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 34/84; Diffusion Loss 1.339500
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 35/84; Diffusion Loss 1.319949
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 36/84; Diffusion Loss 1.243272
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 37/84; Diffusion Loss 1.306100
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 38/84; Diffusion Loss 1.204560
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 39/84; Diffusion Loss 1.304113
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 40/84; Diffusion Loss 1.218898
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 41/84; Diffusion Loss 1.407421
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 42/84; Diffusion Loss 1.151949
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 43/84; Diffusion Loss 1.276181
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 44/84; Diffusion Loss 1.269395
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 45/84; Diffusion Loss 1.165755
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 46/84; Diffusion Loss 1.333687
+Sun 01 Dec 2024 20:45:41 INFO Diffusion Step 47/84; Diffusion Loss 1.318983
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 48/84; Diffusion Loss 1.206845
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 49/84; Diffusion Loss 1.174211
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 50/84; Diffusion Loss 1.283554
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 51/84; Diffusion Loss 1.172450
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 52/84; Diffusion Loss 1.162668
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 53/84; Diffusion Loss 1.215690
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 54/84; Diffusion Loss 1.309559
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 55/84; Diffusion Loss 1.295422
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 56/84; Diffusion Loss 1.198461
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 57/84; Diffusion Loss 1.240424
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 58/84; Diffusion Loss 1.213148
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 59/84; Diffusion Loss 1.219519
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 60/84; Diffusion Loss 1.161008
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 61/84; Diffusion Loss 1.144079
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 62/84; Diffusion Loss 1.130308
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 63/84; Diffusion Loss 1.069666
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 64/84; Diffusion Loss 1.217858
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 65/84; Diffusion Loss 1.219920
+Sun 01 Dec 2024 20:45:42 INFO Diffusion Step 66/84; Diffusion Loss 1.134900
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 67/84; Diffusion Loss 1.142123
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 68/84; Diffusion Loss 1.177624
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 69/84; Diffusion Loss 1.205513
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 70/84; Diffusion Loss 1.152832
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 71/84; Diffusion Loss 1.125048
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 72/84; Diffusion Loss 1.201441
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 73/84; Diffusion Loss 1.224446
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 74/84; Diffusion Loss 1.165200
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 75/84; Diffusion Loss 1.222206
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 76/84; Diffusion Loss 1.186166
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 77/84; Diffusion Loss 1.068627
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 78/84; Diffusion Loss 1.114587
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 79/84; Diffusion Loss 1.294062
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 80/84; Diffusion Loss 1.231187
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 81/84; Diffusion Loss 1.287333
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 82/84; Diffusion Loss 1.181877
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 83/84; Diffusion Loss 1.141164
+Sun 01 Dec 2024 20:45:43 INFO Diffusion Step 84/84; Diffusion Loss 1.318254
+Sun 01 Dec 2024 20:45:44 INFO Start to textual hyperedges diffusion

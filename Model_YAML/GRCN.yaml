@@ -1,6 +1,6 @@
 learning_rate: [0.001]  # 0.001
 reg_weight : [0.001]
-dropout : [0.5] # 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9
-n_iterations : [1] # 1, 2, 3
+dropout : [0.1] # 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9
+n_iterations : [2] # 1, 2, 3
 
 hyper_parameters: ["n_iterations","learning_rate", "reg_weight", "dropout"]

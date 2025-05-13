@@ -132,7 +132,7 @@ if __name__ == '__main__':
             num_similar_users = random.randint(min_similar_users, max_similar_users)
             # 随机采样相似用户
             similar_users = user_user_k_graph[u]
-            similar_users = random.sample(similar_users, min(len(similar_users), num_similar_users))
+            similar_users = similar_users[:num_similar_users]
 
             # 随机选择相似项目的数量
             num_similar_items = random.randint(min_similar_items, max_similar_items)

@@ -58,8 +58,8 @@ if __name__ == '__main__':
     train_data = np.load(dir_str + '/train.npy', allow_pickle=True)
 
     num_user = None
-    if dataset == 'yelp':
-        num_user = 11123  # max 1889,min 6
+    if dataset == 'netfilx':
+        num_user = 14971  # max 9599 min 7
     elif dataset == 'clothing':
         num_user = 18072  # max 979, min 4
     elif dataset == 'baby':

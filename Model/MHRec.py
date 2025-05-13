@@ -458,7 +458,9 @@ class MHRec(nn.Module):
         self.denoise_model_image = Denoise(in_dims, out_dims, d_emb_size, norm=norm).to(self.device)
         self.denoise_model_text = Denoise(in_dims, out_dims, d_emb_size, norm=norm).to(self.device)
 
-        self.diffusion_model = GaussianDiffusion(self.noise_scale, self.noise_min, self.noise_max, self.steps).to(
+        self.image_diffusion_model = GaussianDiffusion(self.noise_scale, self.noise_min, self.noise_max, self.steps).to(
+            self.device)
+        self.text_diffusion_model = GaussianDiffusion(self.noise_scale, self.noise_min, self.noise_max, self.steps).to(
             self.device)
 
     def get_norm_adj_mat(self):
@@ -691,6 +693,14 @@ class MHRec(nn.Module):
     def getTextFeats(self):
         t_embedding = self.text_trs(self.text_embedding.weight)
         return t_embedding
+
+    # 将 Scipy 稀疏矩阵转换为 PyTorch 稀疏张量
+    def convert_scipy_to_torch_sparse(self, coo_matrix):
+        coo = coo_matrix.tocoo()
+        indices = torch.from_numpy(np.vstack((coo.row, coo.col))).long()
+        values = torch.from_numpy(coo.data).float()
+        shape = coo.shape
+        return torch.sparse_coo_tensor(indices, values, torch.Size(shape)).to(self.device)
 
     def forward(self):
         # 获取项目的模态嵌入

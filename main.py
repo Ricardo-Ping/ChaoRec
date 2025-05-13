@@ -54,7 +54,7 @@ from Model.VBPR import VBPR
 from Model.VGCL import VGCL
 from Model.XSimGCL import XSimGCL
 from arg_parser import parse_args, load_yaml_config
-from utils import setup_seed, gpu, get_local_time, convert_to_dict
+from utils import setup_seed, gpu, get_local_time, topk_sample
 import torch
 import logging
 import dataload
@@ -64,6 +64,7 @@ from train_and_evaluate import train_and_evaluate
 
 torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
+
 
 if __name__ == '__main__':
     # 输出参数信息
@@ -400,6 +401,10 @@ if __name__ == '__main__':
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
                                                       diffusionLoader_visual=diffusionLoader_visual,
                                                       diffusionLoader_textual=diffusionLoader_textual)
+            # current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
+            #                                           user_homo_loader=user_homo_loader,
+            #                                           visual_item_homo_loader=visual_item_homo_loader,
+            #                                           textual_item_homo_loader=textual_item_homo_loader)
         else:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs)
 

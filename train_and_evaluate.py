@@ -6,6 +6,7 @@
 @File : train_and_evaluate.py
 @function :
 """
+import random
 import time
 import logging
 import torch.nn as nn
@@ -21,7 +22,8 @@ topk = args.topk
 
 
 def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec_hop=None, diffusionLoader_visual=None,
-          diffusionLoader_textual=None):
+          diffusionLoader_textual=None, user_homo_loader=None, visual_item_homo_loader=None,
+          textual_item_homo_loader=None):
     model.train()
     sum_loss = 0.0
     all_ratings = None  # 用于BSPM模型的预测结果
@@ -275,7 +277,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
             opt_gen_1.step()
             opt_gen_2.step()
             opt_gen_3.step()
-            loss = loss_1 + bpr_reg_loss + gen_loss
+            loss = loss_1 + gen_loss + bpr_reg_loss
             sum_loss += loss.item()
     elif args.Model in ["BSPM"]:
         all_ratings = []
@@ -344,7 +346,9 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
                                                dim=0)  # [num_users + num_items, embedding_dim]
 
             denoise_opt_image.zero_grad()
-            diff_loss_image = model.diffusion_model.training_losses(model.denoise_model_image, batch_item, combined_node_embeds, combined_visual_embeds)
+            diff_loss_image = model.image_diffusion_model.training_losses(model.denoise_model_image, batch_item,
+                                                                          combined_node_embeds,
+                                                                          combined_visual_embeds)
             # loss_image = diff_loss_image.mean() + gc_loss_image.mean() * model.e_loss
             loss_image = diff_loss_image.mean()
             epDiLoss_image += loss_image.item()
@@ -366,10 +370,12 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
 
             combined_node_embeds = torch.cat([uEmbeds, iEmbeds], dim=0)  # [num_users + num_items, embedding_dim]
             combined_textual_embeds = torch.cat([uEmbeds_textual, textual_feats],
-                                               dim=0)  # [num_users + num_items, embedding_dim]
+                                                dim=0)  # [num_users + num_items, embedding_dim]
 
             denoise_opt_text.zero_grad()
-            diff_loss_text = model.diffusion_model.training_losses(model.denoise_model_text, batch_item, combined_node_embeds, combined_textual_embeds)
+            diff_loss_text = model.text_diffusion_model.training_losses(model.denoise_model_text, batch_item,
+                                                                        combined_node_embeds,
+                                                                        combined_textual_embeds)
             # loss_text = diff_loss_text.mean() + gc_loss_text.mean() * model.e_loss
             loss_text = diff_loss_text.mean()
             epDiLoss_text += loss_text.item()
@@ -397,7 +403,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
                 batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
 
                 # visual
-                denoised_batch_visual = model.diffusion_model.p_sample(
+                denoised_batch_visual = model.image_diffusion_model.p_sample(
                     model.denoise_model_image, batch_item,
                     sampling_steps, sampling_noise
                 )
@@ -438,6 +444,8 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
             shape = H_visual.shape
             H_visual = torch.sparse_coo_tensor(indices, values, torch.Size(shape)).to(model.device)
 
+            del rows_visual, cols_visual, data_visual
+
             # 对 textual 模态进行同样的处理
             rows_textual = []
             cols_textual = []
@@ -449,7 +457,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
                 batch_item, batch_index = batch_item.cuda(), batch_index.cuda()
 
                 # textual
-                denoised_batch_textual = model.diffusion_model.p_sample(
+                denoised_batch_textual = model.text_diffusion_model.p_sample(
                     model.denoise_model_text, batch_item,
                     sampling_steps, sampling_noise
                 )
@@ -485,6 +493,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
             shape = H_textual.shape
             H_textual = torch.sparse_coo_tensor(indices, values, torch.Size(shape)).to(model.device)
 
+            del rows_textual, cols_textual, data_textual
 
         logging.info('hypergraph matrix built!')
 
@@ -510,7 +519,8 @@ def evaluate(model, data, ranklist, topk):
 
 def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epochs, eval_dataloader=None,
                        diffusionLoader=None, test_diffusionLoader=None, train_loader_sec_hop=None,
-                       test_loader_sec_hop=None, diffusionLoader_visual=None, diffusionLoader_textual=None):
+                       test_loader_sec_hop=None, diffusionLoader_visual=None, diffusionLoader_textual=None,
+                       user_homo_loader=None, visual_item_homo_loader=None, textual_item_homo_loader=None):
     model.train()
     # 早停
     early_stopping = EarlyStopping(patience=20, verbose=True)
@@ -550,6 +560,9 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         elif args.Model in ["MHRec"]:
             loss = train(model, train_loader, optimizer, diffusionLoader_visual=diffusionLoader_visual,
                          diffusionLoader_textual=diffusionLoader_textual)
+            # loss = train(model, train_loader, optimizer, user_homo_loader=user_homo_loader,
+            #              visual_item_homo_loader=visual_item_homo_loader,
+            #              textual_item_homo_loader=textual_item_homo_loader)
         else:
             loss = train(model, train_loader, optimizer)
         logging.info("Epoch {}, Loss: {:.5f}".format(epoch + 1, loss))
