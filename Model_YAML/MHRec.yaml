@@ -4,7 +4,7 @@ n_layers : [6]
 h_layers : [2]
 uu_topk : [10]  # 1,5,10
 ii_topk : [10]  # 1,5,10
-num_hypernodes : [10]  # 2, 5, 10
+num_hypernodes : [2]                              # 2, 5, 10
 ssl_alpha : [0.01]  # lambda1:  1, 0.1, 0.01
 ssl_temp : [0.1]  # 𝜏: 0.1, 0.2, 0.5
 beta1: [1]  # 0.1, 0.5, 1

@@ -13,9 +13,9 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='Grade', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='GRCN', help='Model name')
     # 数据集：baby,clothing,sports,beauty, microlens, netfilx
-    parser.add_argument('--data_path', nargs='?', default='sports', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
@@ -81,6 +81,11 @@ def parse_args():
     parser.add_argument('--num_hypernodes', type=int, default=10, help='hypergraph num_hypernodes.')
     parser.add_argument('--beta1', type=float, default=0.5, help='MHRec beta1')
     parser.add_argument('--beta2', type=float, default=0.5, help='MHRec beta2')
+    # SMORE
+    parser.add_argument('--n_ui_layers', type=int, default=3, help='n_ui layers.')
+    # GUME
+    parser.add_argument('--um_loss', type=float, default=0.1, help='um_loss.')
+    parser.add_argument('--vt_loss', type=float, default=0.1, help='vt_loss.')
     # 一些默认参数
     parser.add_argument('--seed', type=int, default=42, help='Number of seed')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')

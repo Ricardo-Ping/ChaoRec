@@ -34,7 +34,7 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - DiffRec(2023)：Diffusion Recommender Model
 - CF-Diff(2024)：Collaborative Filtering Based on Diffusion Models: Unveiling the Potential of High-Order Connectivity
 
-目前的多模态推荐模型有22个：
+目前的多模态推荐模型有23个：
 
 - VBPR(2016): Visual Bayesian Personalized Ranking from Implicit Feedback
 - MMGCN(2019): Multi-modal Graph Convolution Network for Personalized Recommendation of Micro-video
@@ -58,5 +58,6 @@ ChaoRec 是基于 Python 和 PyTorch 开发的，用于在统一、全面和高�
 - MCLN(2023): Multimodal Counterfactual Learning Network for Multimedia-based Recommendation
 - DiffMM(2024): Multi-Modal Diffusion Model for Recommendation
 - LightGT(2023): A Light Graph Transformer for Multimedia Recommendation (受限于数据集中的交互项目长度，性能也不足)
+- SMORE(2025): Spectrum-based Modality Representation Fusion Graph Convolutional Network for Multimodal Recommendation
 
 现有模型大部分按照原作者代码进行改写，如果发现有错误欢迎指正！

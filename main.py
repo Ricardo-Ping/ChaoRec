@@ -1,4 +1,5 @@
 import os
+import random
 from itertools import product
 
 import numpy as np
@@ -21,6 +22,7 @@ from Model.FKAN_GCF import FKAN_GCF
 from Model.FREEDOM import FREEDOM
 from Model.GFormer import GFormer
 from Model.GRCN import GRCN
+from Model.GUME import GUME
 from Model.Grade import Grade
 from Model.GraphAug import GraphAug
 from Model.HCCF import HCCF
@@ -48,6 +50,7 @@ from Model.NGCF import NGCF
 from Model.POWERec import POWERec
 from Model.SGL import SGL
 from Model.SLMRec import SLMRec
+from Model.SMORE import SMORE
 from Model.SelfCF import SelfCF
 from Model.SimGCL import SimGCL
 from Model.VBPR import VBPR
@@ -177,6 +180,12 @@ if __name__ == '__main__':
     num_hypernodes = args.num_hypernodes
     beta1 = args.beta1
     beta2 = args.beta2
+    # SMORE
+    n_ui_layers = args.n_ui_layers
+    dataset = args.data_path
+    # GUME
+    um_loss = args.um_loss
+    vt_loss = args.vt_loss
 
     # 加载训练数据
     train_data, val_data, test_data, user_item_dict, num_user, num_item, v_feat, t_feat = dataload.data_load(
@@ -364,6 +373,10 @@ if __name__ == '__main__':
             'MHRec': lambda: MHRec(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    args.reg_weight, args.ii_topk, args.uu_topk, args.num_hypernodes, args.n_layers,
                                    args.h_layers, args.ssl_temp, args.ssl_alpha, args.beta1, args.beta2, device),
+            'SMORE': lambda: SMORE(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.reg_weight, args.n_ui_layers, args.ii_topk, args.dropout, dataset, device),
+            'GUME': lambda: GUME(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                   args.n_layers, args.n_ui_layers, args.um_loss, args.vt_loss, dataset, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

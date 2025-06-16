@@ -1,0 +1,9 @@
+learning_rate: [0.001]
+n_ui_layers : [3,4] # [3,4]
+reg_weight : [1e-5,1e-4] # [1e-5,1e-4]
+#image_knn_k : [10] # [10,15,20,40]
+#text_knn_k : [10] # [10,15,20,40]
+ii_topk : [10,15,20,40] # [10,15,20,40]
+dropout : [0,0.1] # [0,0.1]
+
+hyper_parameters: ["learning_rate", 'ii_topk', "reg_weight", "n_ui_layers", "dropout"]

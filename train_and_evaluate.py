@@ -16,6 +16,7 @@ from tqdm import tqdm
 from utils import EarlyStopping, gene_metrics
 import scipy.sparse as sp
 from arg_parser import parse_args
+from collections import defaultdict
 
 args = parse_args()
 topk = args.topk
@@ -38,7 +39,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT", 'MMGCL', 'DDRec', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
                         'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE', 'SimGCL', 'XSimGCL', 'GraphAug',
-                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF", 'LightGODE', 'DHCF']:
+                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF", 'LightGODE', 'DHCF', 'SMORE', 'GUME']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -221,6 +222,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
             u_list_image = np.array(u_list_image)
             i_list_image = np.array(i_list_image)
             edge_list_image = np.array(edge_list_image)
+
             image_UI_matrix = model.buildUIMatrix(u_list_image, i_list_image, edge_list_image)
             image_UI_matrix = model.edgeDropper(image_UI_matrix)
 
@@ -228,6 +230,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
             u_list_text = np.array(u_list_text)
             i_list_text = np.array(i_list_text)
             edge_list_text = np.array(edge_list_text)
+
             text_UI_matrix = model.buildUIMatrix(u_list_text, i_list_text, edge_list_text)
             text_UI_matrix = model.edgeDropper(text_UI_matrix)
 
@@ -390,7 +393,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
 
         with torch.no_grad():
             sampling_noise = False
-            sampling_steps = 0
+            sampling_steps = 10
 
             # 初始化超图构建所需的列表
             rows_visual = []

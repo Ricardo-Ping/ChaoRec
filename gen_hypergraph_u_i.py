@@ -169,3 +169,10 @@ if __name__ == '__main__':
         np.save(textual_file_path, hyperedges_textual_array, allow_pickle=True)
 
 
+        # 构造文件名
+        visual_tsv_path = os.path.join(dir_str, 'hyperedges_visual_u{}_i{}.tsv'.format(args.uu_topk, args.ii_topk))
+        textual_tsv_path = os.path.join(dir_str, 'hyperedges_textual_u{}_i{}.tsv'.format(args.uu_topk, args.ii_topk))
+
+        # 调用保存函数
+        save_hyperedges_tsv(hyperedges_visual, visual_tsv_path)
+        save_hyperedges_tsv(hyperedges_textual, textual_tsv_path)

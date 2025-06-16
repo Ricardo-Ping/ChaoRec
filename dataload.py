@@ -84,7 +84,7 @@ class TrainingDataset(Dataset):
                 break
 
         # (tensor([0, 0]), tensor([769, 328]))
-        if self.model_name in ["GRCN"]:
+        if self.model_name in ["MMGCN", "GRCN"]:
             return torch.LongTensor([user, user]), torch.LongTensor([pos_item, neg_item])
         elif self.model_name in ["LightGT"]:
             temp = list(self.user_item_dict[user])

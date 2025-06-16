@@ -1,0 +1,7 @@
+learning_rate: [0.001]
+n_ui_layers : [3]
+n_layers : [1, 2]  # 1, 2
+um_loss : [0.1, 0.2] # 0.1, 0.2
+vt_loss : [0.1, 0.01, 0.001] # 0.1, 0.01, 0.001
+
+hyper_parameters: ["learning_rate", 'n_ui_layers', "n_layers", "um_loss", "vt_loss"]
