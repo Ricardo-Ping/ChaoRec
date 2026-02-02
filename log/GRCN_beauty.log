@@ -1,0 +1,100 @@
+Mon 16 Jun 2025 11:18:02 INFO ============Arguments==============
+Mon 16 Jun 2025 11:18:02 INFO Model: GRCN
+Mon 16 Jun 2025 11:18:02 INFO data_path: beauty
+Mon 16 Jun 2025 11:18:02 INFO learning_rate: 0.001
+Mon 16 Jun 2025 11:18:02 INFO feature_embed: 64
+Mon 16 Jun 2025 11:18:02 INFO batch_size: 1024
+Mon 16 Jun 2025 11:18:02 INFO aggr_mode: add
+Mon 16 Jun 2025 11:18:02 INFO reg_weight: 0.001
+Mon 16 Jun 2025 11:18:02 INFO dim_E: 64
+Mon 16 Jun 2025 11:18:02 INFO num_epoch: 1000
+Mon 16 Jun 2025 11:18:02 INFO dropout: 0.2
+Mon 16 Jun 2025 11:18:02 INFO n_layers: 2
+Mon 16 Jun 2025 11:18:02 INFO corDecay: 0.001
+Mon 16 Jun 2025 11:18:02 INFO n_factors: 4
+Mon 16 Jun 2025 11:18:02 INFO n_iterations: 3
+Mon 16 Jun 2025 11:18:02 INFO cl_weight: 2.0
+Mon 16 Jun 2025 11:18:02 INFO mm_layers: 2
+Mon 16 Jun 2025 11:18:02 INFO ii_topk: 10
+Mon 16 Jun 2025 11:18:02 INFO uu_topk: 10
+Mon 16 Jun 2025 11:18:02 INFO lambda_coeff: 0.9
+Mon 16 Jun 2025 11:18:02 INFO ssl_temp: 0.9
+Mon 16 Jun 2025 11:18:02 INFO ssl_alpha: 0.9
+Mon 16 Jun 2025 11:18:02 INFO ae_weight: 0.1
+Mon 16 Jun 2025 11:18:02 INFO threshold: 0.1
+Mon 16 Jun 2025 11:18:02 INFO prompt_num: 0.1
+Mon 16 Jun 2025 11:18:02 INFO neg_weight: 0.1
+Mon 16 Jun 2025 11:18:02 INFO cen_reg: 0.005
+Mon 16 Jun 2025 11:18:02 INFO n_intents: 128
+Mon 16 Jun 2025 11:18:02 INFO G_rate: 0.0001
+Mon 16 Jun 2025 11:18:02 INFO align_weight: 0.1
+Mon 16 Jun 2025 11:18:02 INFO mask_weight_f: 1.5
+Mon 16 Jun 2025 11:18:02 INFO mask_weight_g: 0.001
+Mon 16 Jun 2025 11:18:02 INFO leaky: 0.5
+Mon 16 Jun 2025 11:18:02 INFO keepRate: 1.0
+Mon 16 Jun 2025 11:18:02 INFO mult: 0.1
+Mon 16 Jun 2025 11:18:02 INFO grid_size: 1
+Mon 16 Jun 2025 11:18:02 INFO node_dropout: 0.1
+Mon 16 Jun 2025 11:18:02 INFO message_dropout: 0.1
+Mon 16 Jun 2025 11:18:02 INFO n_mca: 2
+Mon 16 Jun 2025 11:18:02 INFO gamma: 0.5
+Mon 16 Jun 2025 11:18:02 INFO t: 1.8
+Mon 16 Jun 2025 11:18:02 INFO e_loss: 0.1
+Mon 16 Jun 2025 11:18:02 INFO ris_lambda: 0.5
+Mon 16 Jun 2025 11:18:02 INFO rebuild_k: 1
+Mon 16 Jun 2025 11:18:02 INFO pnn_layer: 1
+Mon 16 Jun 2025 11:18:02 INFO b2: 1
+Mon 16 Jun 2025 11:18:02 INFO ctra: 0.001
+Mon 16 Jun 2025 11:18:02 INFO noise_alpha: 0.3
+Mon 16 Jun 2025 11:18:02 INFO ssl_temp2: 0.2
+Mon 16 Jun 2025 11:18:02 INFO K_s: 1
+Mon 16 Jun 2025 11:18:02 INFO T_s: 1
+Mon 16 Jun 2025 11:18:02 INFO K_b: 1
+Mon 16 Jun 2025 11:18:02 INFO T_b: 1
+Mon 16 Jun 2025 11:18:02 INFO idl_beta: 1
+Mon 16 Jun 2025 11:18:02 INFO sampling_noise: False
+Mon 16 Jun 2025 11:18:02 INFO sampling_steps: 0
+Mon 16 Jun 2025 11:18:02 INFO steps: 100
+Mon 16 Jun 2025 11:18:02 INFO noise_scale: 0.1
+Mon 16 Jun 2025 11:18:02 INFO noise_min: 0.0001
+Mon 16 Jun 2025 11:18:02 INFO noise_max: 0.02
+Mon 16 Jun 2025 11:18:02 INFO dims: [1000]
+Mon 16 Jun 2025 11:18:02 INFO h_layers: 2
+Mon 16 Jun 2025 11:18:02 INFO num_hypernodes: 10
+Mon 16 Jun 2025 11:18:02 INFO beta1: 0.5
+Mon 16 Jun 2025 11:18:02 INFO beta2: 0.5
+Mon 16 Jun 2025 11:18:02 INFO n_ui_layers: 3
+Mon 16 Jun 2025 11:18:02 INFO um_loss: 0.1
+Mon 16 Jun 2025 11:18:02 INFO vt_loss: 0.1
+Mon 16 Jun 2025 11:18:02 INFO seed: 42
+Mon 16 Jun 2025 11:18:02 INFO num_workers: 1
+Mon 16 Jun 2025 11:18:02 INFO topk: [5, 10, 20]
+Mon 16 Jun 2025 11:18:02 INFO local time£ºJun-16-2025-11-18-02
+Mon 16 Jun 2025 11:18:02 INFO =========1/1: Parameters:{'n_iterations': 2, 'learning_rate': 0.001, 'reg_weight': 0.001, 'dropout': 0.1}=========
+Mon 16 Jun 2025 11:18:19 INFO Epoch 1, Loss: 34.01983
+Mon 16 Jun 2025 11:18:20 INFO Validation Metrics:
+Mon 16 Jun 2025 11:18:20 INFO 5: precision: 0.00439 | recall: 0.01779 | ndcg: 0.01165 | hit_rate: 0.02144 | map: 0.00896
+Mon 16 Jun 2025 11:18:20 INFO 10: precision: 0.00369 | recall: 0.03007 | ndcg: 0.01571 | hit_rate: 0.03481 | map: 0.01063
+Mon 16 Jun 2025 11:18:20 INFO 20: precision: 0.00322 | recall: 0.05155 | ndcg: 0.02137 | hit_rate: 0.05852 | map: 0.01218
+Mon 16 Jun 2025 11:18:20 INFO Test Metrics:
+Mon 16 Jun 2025 11:18:20 INFO 5: precision: 0.00725 | recall: 0.01884 | ndcg: 0.01403 | hit_rate: 0.03230 | map: 0.00992
+Mon 16 Jun 2025 11:18:20 INFO 10: precision: 0.00601 | recall: 0.03037 | ndcg: 0.01843 | hit_rate: 0.05213 | map: 0.01159
+Mon 16 Jun 2025 11:18:20 INFO 20: precision: 0.00512 | recall: 0.05125 | ndcg: 0.02475 | hit_rate: 0.08449 | map: 0.01327
+Mon 16 Jun 2025 11:18:27 INFO Epoch 2, Loss: 19.01041
+Mon 16 Jun 2025 11:18:28 INFO Validation Metrics:
+Mon 16 Jun 2025 11:18:28 INFO 5: precision: 0.00566 | recall: 0.02346 | ndcg: 0.01520 | hit_rate: 0.02739 | map: 0.01171
+Mon 16 Jun 2025 11:18:28 INFO 10: precision: 0.00504 | recall: 0.04148 | ndcg: 0.02118 | hit_rate: 0.04709 | map: 0.01415
+Mon 16 Jun 2025 11:18:28 INFO 20: precision: 0.00410 | recall: 0.06667 | ndcg: 0.02780 | hit_rate: 0.07460 | map: 0.01599
+Mon 16 Jun 2025 11:18:28 INFO Test Metrics:
+Mon 16 Jun 2025 11:18:28 INFO 5: precision: 0.00959 | recall: 0.02516 | ndcg: 0.01911 | hit_rate: 0.04373 | map: 0.01359
+Mon 16 Jun 2025 11:18:28 INFO 10: precision: 0.00808 | recall: 0.04136 | ndcg: 0.02532 | hit_rate: 0.07034 | map: 0.01603
+Mon 16 Jun 2025 11:18:28 INFO 20: precision: 0.00661 | recall: 0.06677 | ndcg: 0.03308 | hit_rate: 0.10832 | map: 0.01817
+Mon 16 Jun 2025 11:18:34 INFO Epoch 3, Loss: 14.71219
+Mon 16 Jun 2025 11:18:35 INFO Validation Metrics:
+Mon 16 Jun 2025 11:18:35 INFO 5: precision: 0.00698 | recall: 0.02900 | ndcg: 0.01901 | hit_rate: 0.03339 | map: 0.01482
+Mon 16 Jun 2025 11:18:35 INFO 10: precision: 0.00585 | recall: 0.04865 | ndcg: 0.02553 | hit_rate: 0.05523 | map: 0.01750
+Mon 16 Jun 2025 11:18:35 INFO 20: precision: 0.00476 | recall: 0.07925 | ndcg: 0.03349 | hit_rate: 0.08784 | map: 0.01969
+Mon 16 Jun 2025 11:18:35 INFO Test Metrics:
+Mon 16 Jun 2025 11:18:35 INFO 5: precision: 0.01125 | recall: 0.03033 | ndcg: 0.02291 | hit_rate: 0.05161 | map: 0.01638
+Mon 16 Jun 2025 11:18:35 INFO 10: precision: 0.00964 | recall: 0.05158 | ndcg: 0.03090 | hit_rate: 0.08384 | map: 0.01958
+Mon 16 Jun 2025 11:18:35 INFO 20: precision: 0.00760 | recall: 0.07887 | ndcg: 0.03924 | hit_rate: 0.12447 | map: 0.02188

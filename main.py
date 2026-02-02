@@ -406,7 +406,7 @@ if __name__ == '__main__':
         elif args.Model in ["CF_Diff"]:
             current_best_metrics = train_and_evaluate(model, train_dataloader, val_data, test_data, optimizer, epochs,
                                                       diffusionLoader=diffusionLoader,
-                                                      test_diffusionLoader=test_diffusionLoader,
+                                                      test_diffusionLoader=test_diffusionLoader ,
                                                       train_loader_sec_hop=train_loader_sec_hop,
                                                       test_loader_sec_hop=test_loader_sec_hop
                                                       )

@@ -168,11 +168,19 @@ if __name__ == '__main__':
         np.save(visual_file_path, hyperedges_visual_array, allow_pickle=True)
         np.save(textual_file_path, hyperedges_textual_array, allow_pickle=True)
 
+        # ======================== 保存为TSV格式 =============================
+        # def save_hyperedges_tsv(hyperedges, file_path_tsv):
+        #     with open(file_path_tsv, 'w') as f:
+        #         for idx, hyperedge in enumerate(hyperedges):
+        #             node_str = " ".join(map(str, hyperedge))
+        #             f.write(f"{idx}\t{node_str}\n")
+        #     print(f"已保存TSV格式超边序列到 {file_path_tsv}")
+
 
         # 构造文件名
-        visual_tsv_path = os.path.join(dir_str, 'hyperedges_visual_u{}_i{}.tsv'.format(args.uu_topk, args.ii_topk))
-        textual_tsv_path = os.path.join(dir_str, 'hyperedges_textual_u{}_i{}.tsv'.format(args.uu_topk, args.ii_topk))
+        # visual_tsv_path = os.path.join(dir_str, 'hyperedges_visual_u{}_i{}.tsv'.format(args.uu_topk, args.ii_topk))
+        # textual_tsv_path = os.path.join(dir_str, 'hyperedges_textual_u{}_i{}.tsv'.format(args.uu_topk, args.ii_topk))
 
         # 调用保存函数
-        save_hyperedges_tsv(hyperedges_visual, visual_tsv_path)
-        save_hyperedges_tsv(hyperedges_textual, textual_tsv_path)
+        # save_hyperedges_tsv(hyperedges_visual, visual_tsv_path)
+        # save_hyperedges_tsv(hyperedges_textual, textual_tsv_path)

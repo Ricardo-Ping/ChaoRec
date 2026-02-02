@@ -13,9 +13,9 @@ import yaml
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ChaoRec.")
     # 模型和数据集选择
-    parser.add_argument('--Model', nargs='?', default='GRCN', help='Model name')
+    parser.add_argument('--Model', nargs='?', default='MHRec', help='Model name')
     # 数据集：baby,clothing,sports,beauty, microlens, netfilx
-    parser.add_argument('--data_path', nargs='?', default='beauty', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='microlens', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
@@ -71,7 +71,7 @@ def parse_args():
     parser.add_argument('--sampling_noise', type=bool, default=False, help='DiffRec sampling with noise or not')
     parser.add_argument('--sampling_steps', type=int, default=0, help='DiffRec steps of the forward process during '
                                                                       'inference')
-    parser.add_argument('--steps', type=int, default=100, help='DiffRec diffusion steps')
+    parser.add_argument('--steps', type=int, default=5, help='DiffRec diffusion steps')
     parser.add_argument('--noise_scale', type=float, default=0.1, help='DiffRec noise scale for noise generating')
     parser.add_argument('--noise_min', type=float, default=0.0001, help='DiffRec noise lower bound for noise generating')
     parser.add_argument('--noise_max', type=float, default=0.02, help='DiffRec noise upper bound for noise generating')

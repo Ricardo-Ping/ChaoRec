@@ -393,7 +393,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
 
         with torch.no_grad():
             sampling_noise = False
-            sampling_steps = 10
+            sampling_steps = 5
 
             # 初始化超图构建所需的列表
             rows_visual = []

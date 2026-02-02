@@ -392,7 +392,7 @@ class MHRec(nn.Module):
         self.beta1 = beta1  # 超图嵌入+图卷积嵌入的系数
         self.beta2 = beta2  # 多模态嵌入融合的系数
         # 扩散模型参数
-        self.steps = 5
+        self.steps = 20
         self.noise_scale = 0.1
         self.noise_min = 0.0001
         self.noise_max = 0.02
@@ -457,6 +457,9 @@ class MHRec(nn.Module):
         d_emb_size = 10
         self.denoise_model_image = Denoise(in_dims, out_dims, d_emb_size, norm=norm).to(self.device)
         self.denoise_model_text = Denoise(in_dims, out_dims, d_emb_size, norm=norm).to(self.device)
+        # d_emb_size = 24
+        # self.denoise_model_image = DenoiseTransformer(in_dims, out_dims, d_emb_size, norm=norm).to(self.device)
+        # self.denoise_model_text = DenoiseTransformer(in_dims, out_dims, d_emb_size, norm=norm).to(self.device)
 
         self.image_diffusion_model = GaussianDiffusion(self.noise_scale, self.noise_min, self.noise_max, self.steps).to(
             self.device)
@@ -886,3 +889,5 @@ class MHRec(nn.Module):
 
         # 返回三个推荐列表
         return all_index_of_rank_list
+
+
