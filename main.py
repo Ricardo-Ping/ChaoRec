@@ -9,6 +9,7 @@ from Model.BM3 import BM3
 from Model.BPR import BPRMF
 from Model.BSPM import BSPM
 from Model.CF_Diff import CF_Diff
+from Model.COHESION import COHESION
 from Model.DCCF import DCCF
 from Model.DDRec import DDRec
 from Model.DGCF import DGCF
@@ -377,6 +378,9 @@ if __name__ == '__main__':
                                    args.reg_weight, args.n_ui_layers, args.ii_topk, args.dropout, dataset, device),
             'GUME': lambda: GUME(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
                                    args.n_layers, args.n_ui_layers, args.um_loss, args.vt_loss, dataset, device),
+            'COHESION': lambda: COHESION(num_user, num_item, train_data, user_item_dict, v_feat, t_feat, dim_E,
+                                         args.reg_weight, args.dropout, args.n_layers, args.mm_layers, args.ii_topk,
+                                         args.mm_image_weight, device),
             # ... 其他模型构造函数 ...
         }
         # 实例化模型

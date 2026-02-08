@@ -39,7 +39,7 @@ def train(model, train_loader, optimizer, diffusionLoader=None, train_loader_sec
     elif args.Model in ["BPR", "VBPR", "NGCF", "LightGCN", "DGCF", "DualGNN", "BM3", "DRAGON", "FREEDOM", "SLMRec",
                         "MGAT", 'MMGCL', 'DDRec', 'SGL', 'MultVAE', 'MacridVAE', 'LightGCL', 'HCCF', 'MGCL',
                         'MGCN', 'POWERec', 'MVGAE', 'LayerGCN', 'DCCF', 'DualVAE', 'SimGCL', 'XSimGCL', 'GraphAug',
-                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF", 'LightGODE', 'DHCF', 'SMORE', 'GUME']:
+                        'LGMRec', 'SelfCF', 'MENTOR', "FKAN_GCF", 'LightGODE', 'DHCF', 'SMORE', 'GUME','COHESION']:
         for users, pos_items, neg_items in tqdm(train_loader, desc="Training"):
             optimizer.zero_grad()
             loss = model.loss(users, pos_items, neg_items)
@@ -552,7 +552,7 @@ def train_and_evaluate(model, train_loader, val_data, test_data, optimizer, epoc
         return best_metrics
 
     for epoch in range(epochs):
-        if args.Model in ["DualGNN", "DRAGON", "FREEDOM", 'POWERec', 'LayerGCN']:
+        if args.Model in ["DualGNN", "DRAGON", "FREEDOM", 'POWERec', 'LayerGCN','COHESION']:
             # 在每个epoch开始时，调用pre_epoch_processing方法
             model.pre_epoch_processing()
         if args.Model in ["DiffMM", "DiffRec"]:
