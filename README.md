@@ -142,7 +142,6 @@ python gen_hypergraph_u_i.py --data_path microlens --uu_topk 10 --ii_topk 10
 | FKAN-GCF | 2024 | FourierKAN-GCF: Fourier Kolmogorov-Arnold Network - An Effective and Efficient Feature Transformation for Graph Collaborative Filtering | [论文链接](https://arxiv.org/abs/2406.01034) |
 | DualVAE | 2024 | Dual Disentangled Variational AutoEncoder for Recommendation | [论文链接](https://doi.org/10.1137/1.9781611978032.66) |
 | GFormer | 2023 | Graph Transformer for Recommendation | [论文链接](http://arxiv.org/abs/2306.02330v1) |
-| LightGODE（原README重复） | 2024 | Do We Really Need Graph Convolution During Training? Light Post-Training Graph-ODE for Efficient Recommendation | [论文链接](https://doi.org/10.1145/3627673.3679773) |
 | BSPM | 2023 | Blurring-Sharpening Process Models for Collaborative Filtering | [论文链接](https://doi.org/10.1145/3539618.3591645) |
 | DiffRec | 2023 | Diffusion Recommender Model | [论文链接](https://doi.org/10.1145/3696410.3714873) |
 | CF-Diff | 2024 | Collaborative Filtering Based on Diffusion Models: Unveiling the Potential of High-Order Connectivity | [论文链接](https://doi.org/10.1145/3626772.3657742) |
@@ -172,6 +171,10 @@ python gen_hypergraph_u_i.py --data_path microlens --uu_topk 10 --ii_topk 10
 | MENTOR | 2024 | Multi-level Self-supervised Learning for Multimodal Recommendation | [论文链接](https://doi.org/10.1609/aaai.v39i12.33408) |
 | MCLN | 2023 | Multimodal Counterfactual Learning Network for Multimedia-based Recommendation | [论文链接](https://doi.org/10.1145/3539618.3591739) |
 | DiffMM | 2024 | Multi-Modal Diffusion Model for Recommendation | [论文链接](https://doi.org/10.1145/3664647.3681498) |
+| COHESION | 2025 | Composite Graph Convolutional Network with Dual-Stage Fusion for Multimodal Recommendation | [论文链接](https://arxiv.org/abs/2504.04452) |
+| DDRec | 2024 | Dual Denoising Multimodal Graph Recommendation | [论文链接](https://ieeexplore.ieee.org/document/10768190) |
+| Grade | 2025 | Generative Graph Contrastive Learning for Multimodal Recommendation | [论文链接](https://www.sciencedirect.com/science/article/pii/S0925231225023021) |
+| GUME | 2024 | Graphs and User Modalities Enhancement for Long-Tail Multimodal Recommendation | [论文链接](https://arxiv.org/abs/2407.12338) |
 | LightGT | 2023 | A Light Graph Transformer for Multimedia Recommendation | [论文链接](https://doi.org/10.1145/3539618.3591716) |
 | SMORE | 2025 | Spectrum-based Modality Representation Fusion Graph Convolutional Network for Multimodal Recommendation | [论文链接](https://doi.org/10.1145/3701551.3703561) |
 
