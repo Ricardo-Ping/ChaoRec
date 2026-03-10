@@ -113,11 +113,9 @@ python dualgnn-gen-u-u-matrix.py --data_path microlens
 python gen_hypergraph_u_i.py --data_path microlens --uu_topk 10 --ii_topk 10
 ```
 
-## 7. 原始模型论文表
+## 7. 模型与论文
 
-以下两个表格对应你原 README 里列出的“一般推荐模型”和“多模态推荐模型”，并补充了论文检索链接。
-
-### 7.1 一般推荐模型（原列表）
+### 7.1 一般推荐模型
 
 | 模型 | 年份 | 论文 | 链接 |
 |---|---:|---|---|
