@@ -189,5 +189,3 @@ python gen_hypergraph_u_i.py --data_path microlens --uu_topk 10 --ii_topk 10
 除放置 `.npy` 文件外，还需要在 `dataload.py` 中补充该数据集的 `num_user` 与 `num_item`。
 
 ---
-
-如果你希望，我可以继续帮你补一版「按模型分类（CF/多模态/扩散）」的对照表，并附上每个模型的推荐启动参数模板。
