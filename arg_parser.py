@@ -15,7 +15,7 @@ def parse_args():
     # 模型和数据集选择
     parser.add_argument('--Model', nargs='?', default='COHESION', help='Model name')
     # 数据集：baby,clothing,sports,beauty, microlens, netfilx
-    parser.add_argument('--data_path', nargs='?', default='sports', help='Input data path.')
+    parser.add_argument('--data_path', nargs='?', default='microlens', help='Input data path.')
     # 超参数选择(具体模型参数需要到yaml文件中进行调整)
     parser.add_argument('--learning_rate', type=float, nargs='+', default=1e-3, help='Learning rates')
     parser.add_argument('--feature_embed', type=int, default=64, help='Feature Embedding size')
