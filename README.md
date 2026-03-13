@@ -20,37 +20,17 @@ ChaoRec/
 
 ### Figure 1. ChaoRec 系统架构图
 
-![ChaoRec System Architecture](docs/figures/chao_rec_architecture.png)
+![ChaoRec System Architecture](docs/figures/chao_rec_architecture_paper.png)
 
-矢量版本（论文排版优先）：
-[chao_rec_architecture.svg](docs/figures/chao_rec_architecture.svg)
+论文版本：
+[PDF](docs/figures/chao_rec_architecture_paper.pdf) | [SVG](docs/figures/chao_rec_architecture_paper.svg)
 
 ### Figure 2. ChaoRec 训练与评估流程图
 
-![ChaoRec Training and Evaluation Pipeline](docs/figures/chao_rec_training_pipeline.png)
+![ChaoRec Training and Evaluation Pipeline](docs/figures/chao_rec_training_pipeline_paper.png)
 
-矢量版本（论文排版优先）：
-[chao_rec_training_pipeline.svg](docs/figures/chao_rec_training_pipeline.svg)
-
-### SIGIR 版
-
-Figure 1（SIGIR）：
-
-![ChaoRec Architecture SIGIR](docs/figures/sigir/chao_rec_architecture_sigir.png)
-
-[PDF](docs/figures/sigir/chao_rec_architecture_sigir.pdf) | [SVG](docs/figures/sigir/chao_rec_architecture_sigir.svg)
-
-Figure 2（SIGIR）：
-
-![ChaoRec Training Pipeline SIGIR](docs/figures/sigir/chao_rec_training_pipeline_sigir.png)
-
-[PDF](docs/figures/sigir/chao_rec_training_pipeline_sigir.pdf) | [SVG](docs/figures/sigir/chao_rec_training_pipeline_sigir.svg)
-
-如需根据最新代码结构重新生成图：
-
-```bash
-python scripts/generate_readme_figures.py
-```
+论文版本：
+[PDF](docs/figures/chao_rec_training_pipeline_paper.pdf) | [SVG](docs/figures/chao_rec_training_pipeline_paper.svg)
 
 ## 2. 环境要求
 
