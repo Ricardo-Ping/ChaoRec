@@ -16,6 +16,49 @@ ChaoRec/
 └─ arg_parser.py         # 通用参数
 ```
 
+## 1.1 项目结构图（论文可用）
+
+### Figure 1. ChaoRec 系统架构图
+
+![ChaoRec System Architecture](docs/figures/chao_rec_architecture.png)
+
+矢量版本（论文排版优先）：
+[chao_rec_architecture.svg](docs/figures/chao_rec_architecture.svg)
+
+### Figure 2. ChaoRec 训练与评估流程图
+
+![ChaoRec Training and Evaluation Pipeline](docs/figures/chao_rec_training_pipeline.png)
+
+矢量版本（论文排版优先）：
+[chao_rec_training_pipeline.svg](docs/figures/chao_rec_training_pipeline.svg)
+
+### SIGIR 版（双栏论文友好）
+
+这套图面向 SIGIR 论文排版场景进行了优化：
+
+- 画幅按双栏论文常用宽度设计（适合整栏/跨栏放置）
+- 使用低饱和配色增强可读性，打印时仍保持结构区分
+- 去除装饰性 icon，避免干扰正文信息表达
+- 同时提供 `PDF`（投稿优先）和 `SVG`（后期编辑友好）
+
+Figure 1（SIGIR）：
+
+![ChaoRec Architecture SIGIR](docs/figures/sigir/chao_rec_architecture_sigir.png)
+
+[PDF](docs/figures/sigir/chao_rec_architecture_sigir.pdf) | [SVG](docs/figures/sigir/chao_rec_architecture_sigir.svg)
+
+Figure 2（SIGIR）：
+
+![ChaoRec Training Pipeline SIGIR](docs/figures/sigir/chao_rec_training_pipeline_sigir.png)
+
+[PDF](docs/figures/sigir/chao_rec_training_pipeline_sigir.pdf) | [SVG](docs/figures/sigir/chao_rec_training_pipeline_sigir.svg)
+
+如需根据最新代码结构重新生成图：
+
+```bash
+python scripts/generate_readme_figures.py
+```
+
 ## 2. 环境要求
 
 - Python 3.8（项目依赖按 `requirements.txt` 固定）
