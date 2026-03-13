@@ -32,14 +32,7 @@ ChaoRec/
 矢量版本（论文排版优先）：
 [chao_rec_training_pipeline.svg](docs/figures/chao_rec_training_pipeline.svg)
 
-### SIGIR 版（双栏论文友好）
-
-这套图面向 SIGIR 论文排版场景进行了优化：
-
-- 画幅按双栏论文常用宽度设计（适合整栏/跨栏放置）
-- 使用低饱和配色增强可读性，打印时仍保持结构区分
-- 去除装饰性 icon，避免干扰正文信息表达
-- 同时提供 `PDF`（投稿优先）和 `SVG`（后期编辑友好）
+### SIGIR 版
 
 Figure 1（SIGIR）：
 
