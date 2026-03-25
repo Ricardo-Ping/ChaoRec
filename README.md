@@ -16,7 +16,7 @@ ChaoRec/
 └─ arg_parser.py         # 通用参数
 ```
 
-## 1.1 项目结构图（论文可用）
+## 1.1 项目结构图
 
 ### Figure 1. ChaoRec 系统架构图
 
