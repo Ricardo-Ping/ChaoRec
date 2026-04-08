@@ -162,7 +162,7 @@ python gen_hypergraph_u_i.py --data_path microlens --uu_topk 10 --ii_topk 10
 | DiffRec | 2023 | Diffusion Recommender Model | [论文链接](https://doi.org/10.1145/3696410.3714873) |
 | CF-Diff | 2024 | Collaborative Filtering Based on Diffusion Models: Unveiling the Potential of High-Order Connectivity | [论文链接](https://doi.org/10.1145/3626772.3657742) |
 
-### 7.2 多模态推荐模型（原列表）
+### 7.2 多模态推荐模型
 
 | 模型 | 年份 | 论文 | 链接 |
 |---|---:|---|---|
@@ -191,6 +191,7 @@ python gen_hypergraph_u_i.py --data_path microlens --uu_topk 10 --ii_topk 10
 | DDRec | 2024 | Dual Denoising Multimodal Graph Recommendation | [论文链接](https://ieeexplore.ieee.org/document/10768190) |
 | Grade | 2025 | Generative Graph Contrastive Learning for Multimodal Recommendation | [论文链接](https://www.sciencedirect.com/science/article/pii/S0925231225023021) |
 | GUME | 2024 | Graphs and User Modalities Enhancement for Long-Tail Multimodal Recommendation | [论文链接](https://arxiv.org/abs/2407.12338) |
+| MHRec | 2026 | Modality-aware Hypergraph Edge Diffusion for Multimodal Recommendation | [论文链接](https://www.sciencedirect.com/science/article/pii/S0957417426012248) |
 | LightGT | 2023 | A Light Graph Transformer for Multimedia Recommendation | [论文链接](https://doi.org/10.1145/3539618.3591716) |
 | SMORE | 2025 | Spectrum-based Modality Representation Fusion Graph Convolutional Network for Multimodal Recommendation | [论文链接](https://doi.org/10.1145/3701551.3703561) |
 
